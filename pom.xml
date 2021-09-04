@@ -1,3 +1,4 @@
+<!-- JavaFX configuration: https://github.com/openjfx/samples/blob/master/HelloFX/Maven/hellofx/pom.xml -->
 <project
     xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -38,7 +39,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>${javafx.maven.plugin.version}</version>
                 <configuration>
-                    <mainClass>main.java.andioopp.AndIOOPP</mainClass>
+                    <mainClass>andioopp.AndIOOPP</mainClass>
                 </configuration>
             </plugin>
         </plugins>
