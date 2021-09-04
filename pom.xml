@@ -7,18 +7,40 @@
     <groupId>andioopp</groupId>
     <artifactId>andioopp</artifactId>
     <version>1.0.0</version>
+    <name>andioopp</name>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <javafx.version>16</javafx.version>
+        <javafx.maven.plugin.version>0.0.6</javafx.maven.plugin.version>
     </properties>
 
     <dependencies>
         <dependency>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-          <version>4.8.1</version>
-          <scope>test</scope>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
         </dependency>
-      </dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>${javafx.maven.plugin.version}</version>
+                <configuration>
+                    <mainClass>main.java.andioopp.AndIOOPP</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
