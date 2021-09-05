@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 
-public class AndIOOPP extends Application {
+public class AndIOOPP extends Application implements GfxProgram {
 	public static void main(String[] args) {
 		AndIOOPP.launch(args);
 	}
@@ -22,7 +22,8 @@ public class AndIOOPP extends Application {
 		run(builder.build());
 	}
 
-	<S extends Sprite<?>, R extends Renderer<S>> void run(Window<R> window) {
+	@Override
+	public <S extends Sprite<?>, R extends Renderer<S>> void run(Window<R> window) {
 		Renderer<S> renderer = window.getRenderer();
 		SpriteFactory<S> f = renderer.getSpriteFactory();
 	}
