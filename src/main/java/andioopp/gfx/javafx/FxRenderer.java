@@ -1,7 +1,7 @@
 package andioopp.gfx.javafx;
 
 import andioopp.gfx.Renderer;
-import andioopp.gfx.Sprite;
+import andioopp.gfx.SpriteFactory;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -17,6 +17,11 @@ public class FxRenderer implements Renderer<FxSprite> {
     public void drawSprite(FxSprite sprite) {
         Point2D p = sprite.getPosition();
         getCtx().drawImage(sprite.getImage(),  p.getX(), p.getY());
+    }
+
+    @Override
+    public SpriteFactory<FxSprite> getSpriteFactory() {
+        return FxSprite::load;
     }
 
     private GraphicsContext getCtx() {
