@@ -5,6 +5,9 @@ import andioopp.gfx.SpriteFactory;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 
+/**
+ * {@link Renderer} implementation for JavaFX.
+ */
 public class FxRenderer implements Renderer<FxSprite> {
 
     private final GraphicsContext ctx;

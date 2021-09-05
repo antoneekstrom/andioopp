@@ -3,7 +3,7 @@ package andioopp.gfx;
 import java.awt.*;
 
 /**
- * Creates windows.
+ * Builds {@link Window} objects.
  * @param <W> Describes the type of window that is created by the builder
  */
 public interface WindowBuilder<W extends Window<?>> {

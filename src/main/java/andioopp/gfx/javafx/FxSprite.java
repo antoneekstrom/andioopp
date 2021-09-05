@@ -4,6 +4,9 @@ import andioopp.gfx.Sprite;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
+/**
+ * {@link Sprite} implementation for JavaFX.
+ */
 public class FxSprite implements Sprite<Image> {
 
     private final Image image;

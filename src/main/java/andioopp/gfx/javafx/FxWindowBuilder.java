@@ -8,6 +8,10 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 
+/**
+ * Builds {@link FxWindow} objects.
+ * Configures the JavaFX stage and adds a {@link Canvas} to the root which is used to render the graphics.
+ */
 public class FxWindowBuilder implements WindowBuilder<FxWindow> {
 
     private final Stage stage;

@@ -4,6 +4,9 @@ import andioopp.gfx.Window;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
 
+/**
+ * {@link Window} implementation for JavaFX. Encapsulates a {@link Stage} and {@link Canvas} instance.
+ */
 public class FxWindow implements Window<FxRenderer> {
 
     private final Stage stage;
