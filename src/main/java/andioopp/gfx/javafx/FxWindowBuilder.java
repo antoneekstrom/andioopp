@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 
-public class FxWindowBuilder implements WindowBuilder {
+public class FxWindowBuilder implements WindowBuilder<FxWindow> {
 
     private final Stage stage;
 

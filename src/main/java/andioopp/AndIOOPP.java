@@ -1,11 +1,13 @@
 package andioopp;
 
-import andioopp.gfx.WindowBuilder;
-import andioopp.gfx.javafx.FxWindowBuilder;
+import andioopp.gfx.Renderer;
+import andioopp.gfx.Sprite;
+import andioopp.gfx.SpriteFactory;
+import andioopp.gfx.Window;
+import andioopp.gfx.javafx.*;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
-import java.awt.*;
 
 public class AndIOOPP extends Application {
 	public static void main(String[] args) {
@@ -14,9 +16,14 @@ public class AndIOOPP extends Application {
 
 	@Override
 	public void start(Stage stage) {
-		WindowBuilder builder = new FxWindowBuilder(stage);
-		builder.setTitle("and I OOPP");
-		builder.setSize(new Dimension(128, 128));
-		builder.build();
+		Window<FxRenderer> window = new FxWindow(stage, null);
+		SpriteFactory<? extends Sprite<Image>> f = new FxSpriteFactory();
+		Sprite<Image> s = f.create("", null);
+
+		window.getRenderer().drawSprite(s);
+	}
+
+	<S extends Sprite<?>> void run(SpriteFactory<S> f) {
+
 	}
 }

@@ -1,11 +1,10 @@
 package andioopp.gfx.javafx;
 
-import andioopp.gfx.Renderer;
 import andioopp.gfx.Window;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
 
-public class FxWindow implements Window {
+public class FxWindow implements Window<FxRenderer> {
 
     private final Stage stage;
     private final Canvas canvas;
@@ -16,7 +15,7 @@ public class FxWindow implements Window {
     }
 
     @Override
-    public Renderer getRenderer() {
+    public FxRenderer getRenderer() {
         return new FxRenderer(getCanvas().getGraphicsContext2D());
     }
 

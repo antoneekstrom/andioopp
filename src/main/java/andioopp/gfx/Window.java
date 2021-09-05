@@ -1,5 +1,5 @@
 package andioopp.gfx;
 
-public interface Window {
-    Renderer getRenderer();
+public interface Window<R extends Renderer<?>> {
+    R getRenderer();
 }
