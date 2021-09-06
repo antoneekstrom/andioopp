@@ -21,19 +21,19 @@ public class FxSpriteTest extends ApplicationTest {
     }
 
     @Test
-    public void loadReturnsSprite() {
+    public void loadShouldReturnSprite() {
         FxSprite sprite = FxSprite.load(SPRITE_PATH, SPRITE_POSITION);
         assertNotNull(sprite);
     }
 
     @Test
-    public void getImageReturnsImage() {
+    public void getImageShouldReturnImage() {
         Image image = sprite.getImage();
         assertNotNull(image);
     }
 
     @Test
-    public void getPositionReturnsExpectedPosition() {
+    public void getPositionShouldReturnExpectedPosition() {
         Point2D position = sprite.getPosition();
         assertEquals(position, SPRITE_POSITION);
     }
