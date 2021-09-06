@@ -10,4 +10,10 @@ public interface Window<R extends Renderer<?>> {
      * @return The {@link Renderer}
      */
     R getRenderer();
+
+    /**
+     * Maximizes the window so that it fills the entire screen.
+     * @param isMaximized If the window is maximized
+     */
+    void setMaximized(boolean isMaximized);
 }

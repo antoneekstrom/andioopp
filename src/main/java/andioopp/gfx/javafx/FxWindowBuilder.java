@@ -4,9 +4,11 @@ import andioopp.gfx.WindowBuilder;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * Builds {@link FxWindow} objects.
@@ -16,9 +18,16 @@ public class FxWindowBuilder implements WindowBuilder<FxWindow> {
 
     private final Stage stage;
 
-    private String title;
-    private Dimension size;
+    private String title = "Window";
+    private Dimension size = new Dimension(256, 256);
+    private boolean isResizable = true;
+    private Image icon;
 
+    /**
+     * Instantiates a windowbuilder.
+     *
+     * @param stage JavaFX {@link Stage} to use
+     */
     public FxWindowBuilder(Stage stage) {
         this.stage = stage;
     }
@@ -26,14 +35,42 @@ public class FxWindowBuilder implements WindowBuilder<FxWindow> {
     @Override
     public FxWindow build() {
         Canvas canvas = createCanvas();
-        configureStage(getStage(), createScene(canvas));
+        configureStageWithScene(createScene(canvas));
+        return createWindowWithCanvas(canvas);
+    }
+
+    private void configureStageWithScene(Scene scene) {
+        setSceneOnStage(scene);
+        setTitleOnStage();
+        setResizableOnStage();
+        setIconOnStage();
+        showStage();
+    }
+
+    private FxWindow createWindowWithCanvas(Canvas canvas) {
         return new FxWindow(getStage(), canvas);
     }
 
-    private void configureStage(Stage stage, Scene scene) {
-        stage.setTitle(getTitle());
-        stage.setScene(scene);
-        stage.show();
+    private void setIconOnStage() {
+        if (Objects.nonNull(getIcon())) {
+            getStage().getIcons().add(getIcon());
+        }
+    }
+
+    private void setResizableOnStage() {
+        getStage().setResizable(isResizable());
+    }
+
+    private void showStage() {
+        getStage().show();
+    }
+
+    private void setSceneOnStage(Scene scene) {
+        getStage().setScene(scene);
+    }
+
+    private void setTitleOnStage() {
+        getStage().setTitle(getTitle());
     }
 
     private Canvas createCanvas() {
@@ -52,15 +89,35 @@ public class FxWindowBuilder implements WindowBuilder<FxWindow> {
         return size;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
+    @Override
     public void setSize(Dimension size) {
         this.size = size;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Image getIcon() {
+        return icon;
+    }
+
+    @Override
+    public void setIcon(String path) {
+        icon = new Image(path);
+    }
+
+    public boolean isResizable() {
+        return isResizable;
+    }
+
+    @Override
+    public void setResizable(boolean isResizable) {
+        this.isResizable = isResizable;
     }
 }
