@@ -22,11 +22,11 @@ public class FxWindow implements Window<FxRenderer> {
         return new FxRenderer(getCanvas().getGraphicsContext2D());
     }
 
-    private Canvas getCanvas() {
+    public Canvas getCanvas() {
         return canvas;
     }
 
-    private Stage getStage() {
+    public Stage getStage() {
         return stage;
     }
 }
