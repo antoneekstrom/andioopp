@@ -24,4 +24,16 @@ public interface WindowBuilder<W extends Window<?>> {
      * @param title Title of the {@link Window}
      */
     void setTitle(String title);
+
+    /**
+     * Sets the icon of the {@link Window}.
+     * @param path Location of the image file
+     */
+    void setIcon(String path);
+
+    /**
+     * Sets if the window should be resizable.
+     * @param isResizable If the window should be resizable
+     */
+    void setResizable(boolean isResizable);
 }

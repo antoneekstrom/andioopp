@@ -18,6 +18,11 @@ public class FxWindow implements Window<FxRenderer> {
     }
 
     @Override
+    public void setMaximized(boolean isMaximized) {
+        getStage().setMaximized(isMaximized);
+    }
+
+    @Override
     public FxRenderer getRenderer() {
         return new FxRenderer(getCanvas().getGraphicsContext2D());
     }
