@@ -8,7 +8,7 @@ import javafx.geometry.Point2D;
  */
 public class FxSpriteFactory implements SpriteFactory<FxSprite> {
     @Override
-    public FxSprite create(String path, Point2D position) {
-        return FxSprite.load(path, position);
+    public FxSprite create(String path) {
+        return FxSprite.load(path);
     }
 }

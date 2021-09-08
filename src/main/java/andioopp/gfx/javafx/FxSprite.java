@@ -10,24 +10,17 @@ import javafx.scene.image.Image;
 public class FxSprite implements Sprite<Image> {
 
     private final Image image;
-    private final Point2D position;
 
-    public FxSprite(Image image, Point2D position) {
+    public FxSprite(Image image) {
         this.image = image;
-        this.position = position;
     }
 
-    public static FxSprite load(String path, Point2D position) {
-        return new FxSprite(new Image(path), position);
+    public static FxSprite load(String path) {
+        return new FxSprite(new Image(path));
     }
 
     @Override
     public Image getImage() {
         return image;
-    }
-
-    @Override
-    public Point2D getPosition() {
-        return position;
     }
 }

@@ -1,7 +1,7 @@
 package andioopp.example;
 
+import andioopp.common.ConcreteTransform;
 import andioopp.gfx.*;
-import javafx.geometry.Point2D;
 
 public class App implements GfxProgram {
     @Override
@@ -9,7 +9,7 @@ public class App implements GfxProgram {
         window.setMaximized(true);
         Renderer<S> r = window.getRenderer();
         SpriteFactory<S> spriteFactory = r.getSpriteFactory();
-        S mario = spriteFactory.create("mario_run.png", new Point2D(0 ,0));
-        r.drawSprite(mario);
+        S mario = spriteFactory.create("mario_run.png");
+        r.drawSprite(mario, new ConcreteTransform());
     }
 }
