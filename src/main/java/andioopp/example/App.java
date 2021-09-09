@@ -1,6 +1,6 @@
 package andioopp.example;
 
-import andioopp.common.ConcreteTransform;
+import andioopp.common.Entity;
 import andioopp.gfx.*;
 
 public class App implements GfxProgram {
@@ -9,7 +9,8 @@ public class App implements GfxProgram {
         window.setMaximized(true);
         Renderer<S> r = window.getRenderer();
         SpriteFactory<S> spriteFactory = r.getSpriteFactory();
-        S mario = spriteFactory.create("mario_run.png");
-        r.drawSprite(mario, new ConcreteTransform());
+        S marioSprite = spriteFactory.create("mario_run.png");
+        Entity<S> e = new Entity<>(marioSprite);
+        r.drawSprite(e.getSprite(), e.getTransform());
     }
 }
