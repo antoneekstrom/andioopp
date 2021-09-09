@@ -1,8 +1,9 @@
 package andioopp.gfx.javafx;
 
+import andioopp.common.Transform;
+import andioopp.common.Vector3f;
 import andioopp.gfx.Renderer;
 import andioopp.gfx.SpriteFactory;
-import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
@@ -17,9 +18,9 @@ public class FxRenderer implements Renderer<FxSprite> {
     }
 
     @Override
-    public void drawSprite(FxSprite sprite) {
-        Point2D p = sprite.getPosition();
-        getCtx().drawImage(sprite.getImage(),  p.getX(), p.getY());
+    public void drawSprite(FxSprite sprite, Transform transform) {
+        Vector3f position = transform.getPosition();
+        getCtx().drawImage(sprite.getImage(),  position.getX(), position.getY());
     }
 
     @Override
