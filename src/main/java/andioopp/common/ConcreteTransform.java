@@ -2,7 +2,7 @@ package andioopp.common;
 
 public class ConcreteTransform implements Transform {
 
-    private final Vector3f position, rotation, scale;
+    private Vector3f position, rotation, scale;
 
     public ConcreteTransform() {
         this(Vector3f.zero(), Vector3f.zero(), Vector3f.zero());
@@ -22,6 +22,16 @@ public class ConcreteTransform implements Transform {
     @Override
     public Vector3f getRotation() {
         return rotation;
+    }
+
+    @Override
+    public void setPosition(Vector3f position) {
+        this.position = position;
+    }
+
+    @Override
+    public void translate(Vector3f translation) {
+        position = position.add(translation);
     }
 
     @Override
