@@ -20,6 +20,10 @@ public class Vector3f {
         return new Vector3f(0, 0, 0);
     }
 
+    public Vector3f add(Vector3f other) {
+        return new Vector3f(getX() + other.getX(), getY() + other.getY(), getZ() + other.getZ());
+    }
+
     public float getX() {
         return x;
     }

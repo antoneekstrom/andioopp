@@ -1,6 +1,11 @@
 package andioopp.model.enemies;
 
-public abstract class Enemy {
+import andioopp.common.ConcreteTransform;
+import andioopp.common.Transform;
+import andioopp.common.Vector3f;
+import andioopp.gfx.Sprite;
+
+public abstract class Enemy<S extends Sprite<?>> {
     private int hp;
     private int speed;
 

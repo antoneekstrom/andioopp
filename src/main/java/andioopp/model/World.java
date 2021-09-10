@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class World {
-
     private final List<Lane> lanes;
 
     public World(ArrayList<Lane> lanes) {

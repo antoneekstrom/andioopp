@@ -8,6 +8,10 @@ public class ConcreteTransform implements Transform {
         this(Vector3f.zero(), Vector3f.zero(), Vector3f.zero());
     }
 
+    public ConcreteTransform(Vector3f position) {
+        this(position, Vector3f.zero(), Vector3f.zero());
+    }
+
     public ConcreteTransform(Vector3f position, Vector3f rotation, Vector3f scale) {
         this.position = position;
         this.rotation = rotation;

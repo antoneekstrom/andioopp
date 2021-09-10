@@ -1,5 +1,7 @@
 package andioopp.model;
 
+import andioopp.model.enemies.Enemy;
+
 public class Model {
 
     private final World world;
@@ -13,11 +15,15 @@ public class Model {
         this.player = player;
     }
 
-    public int getMoney() {
-        return money;
+    public void update() {
+        for (Lane lane : world.getLanes()) {
+            for (Enemy<?> enemy : lane.getEnemies()) {
+                enemy.update();
+            }
+        }
     }
 
-    public void buyTower() {
-
+    public World getWorld() {
+        return world;
     }
 }
