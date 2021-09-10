@@ -1,4 +1,4 @@
 package andioopp.model.enemies;
 
-public class KoopaTroopa extends Enemy{
+public class KoopaTroopa{
 }
