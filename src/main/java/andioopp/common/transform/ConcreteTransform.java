@@ -1,21 +1,17 @@
-package andioopp.common;
+package andioopp.common.transform;
 
 public class ConcreteTransform implements Transform {
 
     private Vector3f position, rotation, scale;
 
-    public ConcreteTransform() {
-        this(Vector3f.zero(), Vector3f.zero(), Vector3f.zero());
-    }
-
-    public ConcreteTransform(Vector3f position) {
-        this(position, Vector3f.zero(), Vector3f.zero());
-    }
-
-    public ConcreteTransform(Vector3f position, Vector3f rotation, Vector3f scale) {
+    ConcreteTransform(Vector3f position, Vector3f rotation, Vector3f scale) {
         this.position = position;
         this.rotation = rotation;
         this.scale = scale;
+    }
+
+    public static TransformFactory getFactory() {
+        return new TransformFactory(ConcreteTransform::new);
     }
 
     @Override
@@ -29,6 +25,19 @@ public class ConcreteTransform implements Transform {
     }
 
     @Override
+    public Vector3f getScale() {
+        return scale;
+    }
+
+    public void setRotation(Vector3f rotation) {
+        this.rotation = rotation;
+    }
+
+    public void setScale(Vector3f scale) {
+        this.scale = scale;
+    }
+
+    @Override
     public void setPosition(Vector3f position) {
         this.position = position;
     }
@@ -36,10 +45,5 @@ public class ConcreteTransform implements Transform {
     @Override
     public void translate(Vector3f translation) {
         position = position.add(translation);
-    }
-
-    @Override
-    public Vector3f getScale() {
-        return scale;
     }
 }

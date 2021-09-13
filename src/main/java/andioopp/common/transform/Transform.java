@@ -1,4 +1,4 @@
-package andioopp.common;
+package andioopp.common.transform;
 
 public interface Transform {
     Vector3f getPosition();
