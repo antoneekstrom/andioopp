@@ -1,33 +1,44 @@
 package andioopp.example;
 
-import andioopp.common.ClockListener;
+import andioopp.common.transform.ConcreteTransform;
+import andioopp.common.transform.TransformFactory;
+import andioopp.domain.model.enemy.EnemyFactory;
 import andioopp.gfx.*;
-import andioopp.model.*;
-import andioopp.model.enemies.*;
-import andioopp.common.Clock;
-import andioopp.common.FxClock;
+import andioopp.domain.model.*;
+import andioopp.common.time.Clock;
+import andioopp.common.time.FxClock;
+import andioopp.domain.view.View;
 
 import java.util.ArrayList;
 
 public class App implements GfxProgram {
     @Override
     public <S extends Sprite<?>, R extends Renderer<S>> void run(Window<R> window) {
-        window.setMaximized(true);
-        Renderer<S> r = window.getRenderer();
-        SpriteFactory<S> spriteFactory = r.getSpriteFactory();
+        R renderer = window.getRenderer();
+        initGameloop(createModel(ConcreteTransform.getFactory(), new EnemyFactory()), createView(renderer), createClock());
+    }
 
-        ArrayList<Lane> lanes = new ArrayList<>();
-        Lane lane = new Lane();
-        lanes.add(lane);
-        Enemy<S> goomba = new Goomba<>(spriteFactory);
-        lane.addEnemy(goomba);
-        Model model = new Model(new World(lanes), new WaveQueue(), new Player());
-
-        Clock clock = new FxClock();
-        clock.observe(model::update);
-        clock.observe(() -> {
-           r.drawSprite(goomba.getSprite(), goomba.getTransform());
-        });
+    private <S extends Sprite<?>> void initGameloop(Model model, View<S> view, Clock clock) {
+        clock.listen(model::update);
+        clock.listen((time) -> view.render(model));
         clock.start();
+    }
+
+    private Model createModel(TransformFactory transformFactory, EnemyFactory enemyFactory) {
+        Lane lane = new Lane(transformFactory.create());
+        lane.getEnemies().add(enemyFactory.goomba());
+
+        World world = new World(new ArrayList<>());
+        world.getLanes().add(lane);
+
+        return new Model(world, new WaveQueue(), new Player());
+    }
+
+    private FxClock createClock() {
+        return new FxClock();
+    }
+
+    private <S extends Sprite<?>, R extends Renderer<S>> View<S> createView(R renderer) {
+        return new View<>(renderer);
     }
 }
