@@ -1,4 +1,4 @@
-package andioopp.model.towers;
+package andioopp.domain.model.towers;
 
 public class Rosalina extends Tower{
 }

@@ -1,8 +1,9 @@
-package andioopp.model;
+package andioopp.domain.model;
 
-import andioopp.model.enemies.Enemy;
+import andioopp.common.time.Time;
+import andioopp.domain.model.enemy.Enemy;
 
-public class Model {
+public class Model implements Updateable {
 
     private final World world;
     private final WaveQueue waves;
@@ -15,10 +16,11 @@ public class Model {
         this.player = player;
     }
 
-    public void update() {
+    @Override
+    public void update(Time time) {
         for (Lane lane : world.getLanes()) {
-            for (Enemy<?> enemy : lane.getEnemies()) {
-                enemy.update();
+            for (Enemy enemy : lane.getEnemies()) {
+                enemy.update(time);
             }
         }
     }

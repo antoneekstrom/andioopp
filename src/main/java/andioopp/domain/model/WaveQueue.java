@@ -1,4 +1,4 @@
-package andioopp.model;
+package andioopp.domain.model;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -1,4 +1,4 @@
-package andioopp.model;
+package andioopp.domain.model;
 
 import java.util.ArrayList;
 import java.util.List;
