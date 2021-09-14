@@ -3,10 +3,9 @@ package andioopp.domain.view;
 import andioopp.common.transform.ConcreteTransform;
 import andioopp.common.transform.Transform;
 import andioopp.common.transform.Vector3f;
-import andioopp.domain.model.Lane;
-import andioopp.domain.model.Model;
-import andioopp.domain.model.World;
+import andioopp.domain.model.*;
 import andioopp.domain.model.enemy.Enemy;
+import andioopp.domain.model.towers.Tower;
 import andioopp.gfx.Color;
 import andioopp.gfx.Renderer;
 import andioopp.gfx.Sprite;
@@ -39,9 +38,7 @@ public class View<S extends Sprite<?>> {
             Vector3f lanePos = worldPos.add(new Vector3f(0, laneHeight * i));
             getRenderer().drawRectangle(lanePos, new Vector3f(worldSize.getX(), laneHeight), chooseColor(i));
 
-            drawCells(lane, lanePos);
-
-
+            drawCells(lane, lanePos, laneHeight, i);
 
             for (Enemy e : lane.getEnemies()) {
                 Vector3f enemyOffset = e.getTransform().getPosition().scale(new Vector3f(worldSize.getX(), 0));
@@ -51,6 +48,8 @@ public class View<S extends Sprite<?>> {
             }
 
         }
+
+        renderTowers(model);
     }
 
     private Color chooseColor(int i){
@@ -63,11 +62,24 @@ public class View<S extends Sprite<?>> {
 
     }
 
-    private void drawCells(Lane lane, Vector3f lanePos) {
+    private void drawCells(Lane lane, Vector3f lanePos, float laneHeight, int row) {
         int numCells = lane.getCells().size();
         float cellWidth = worldSize.getX()/numCells;
-        for(int j = 0; j < numCells; j++){
-            getRenderer().drawRectangle(lanePos.add(new Vector3f(cellWidth * j, 0, 0)), new Vector3f(cellWidth, laneHeight), (i % 2 == j % 2) ? evenColor : oddColor);
+        for(int col = 0; col < numCells; col++){
+            getRenderer().drawRectangle(lanePos.add(new Vector3f(cellWidth * col, 0, 0)), new Vector3f(cellWidth, laneHeight), (row % 2 == col % 2) ? evenColor : oddColor);
+        }
+    }
+
+    private void renderTowers(Model model){
+        Transform towerTransform = ConcreteTransform.getFactory().createWithPosition(new Vector3f(40,40,40));
+        for (Lane lane : model.getWorld().getLanes()) {
+            for (Cell cell : lane.getCells()) {
+
+                if(cell.getTower() != null){
+                    Tower t = cell.getTower();
+                    getRenderer().drawSprite(t.getSprite(renderer.getSpriteFactory()), towerTransform);
+                }
+            }
         }
     }
 
