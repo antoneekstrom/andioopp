@@ -1,4 +1,4 @@
 package andioopp.domain.model.towers;
 
-public class Luigi extends Tower{
+public class Luigi {
 }
