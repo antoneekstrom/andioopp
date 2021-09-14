@@ -20,8 +20,8 @@ public class View<S extends Sprite<?>> {
     private final Vector3f worldSize = new Vector3f(windowSize.getX() * worldSizeFactorX, windowSize.getY() * worldSizeFactorY);
     private final Vector3f worldPos = new Vector3f(windowSize.getX() - worldSize.getX(), (windowSize.getY() - worldSize.getY())*0.5f);
 
-    private Color oddColor = new Color(112, 146, 85);
-    private Color evenColor = new Color(62, 86, 34);
+    Color oddColor = new Color(112, 146, 85);
+    Color evenColor = new Color(62, 86, 34);
 
     public View(Renderer<S> renderer) {
         this.renderer = renderer;
@@ -49,8 +49,10 @@ public class View<S extends Sprite<?>> {
                 Transform enemyTransform = ConcreteTransform.getFactory().createWithPosition(enemyPos);
                 getRenderer().drawSprite(e.getSprite(renderer.getSpriteFactory()), enemyTransform);
             }
+
         }
     }
+
     private Color chooseColor(int i){
         Color oddColor = new Color(112, 146, 85);
         Color evenColor = new Color(62, 86, 34);

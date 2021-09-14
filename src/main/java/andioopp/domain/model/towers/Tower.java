@@ -12,4 +12,10 @@ public abstract class Tower {
         this.sprite = spritePath;
 
     }
+
+
+
+    public <S extends Sprite<?>> S getSprite(SpriteFactory<S> spriteFactory) {
+        return spriteFactory.get(sprite);
+    }
 }

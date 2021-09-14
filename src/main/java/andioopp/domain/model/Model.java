@@ -6,6 +6,7 @@ import andioopp.common.transform.TransformFactory;
 import andioopp.common.transform.Vector3f;
 import andioopp.domain.model.enemy.Enemy;
 import andioopp.domain.model.enemy.EnemyFactory;
+import andioopp.domain.model.towers.Mario;
 import andioopp.domain.model.towers.Tower;
 
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ public class Model implements Updateable {
 
     private void initWorld(World world, TransformFactory transformFactory, EnemyFactory enemyFactory) {
         addLanes(5, transformFactory,enemyFactory);
+        Tower mario = new Mario();
+        placeTower(mario, getCell(1, 3));
     }
 
     private void addLanes(int numlanes, TransformFactory transformFactory, EnemyFactory enemyFactory){
@@ -63,6 +66,7 @@ public class Model implements Updateable {
     }
 
     public void placeTower(Tower tower, Cell cell) {
+
         cell.setTower(tower);
     }
 }
