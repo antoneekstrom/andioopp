@@ -5,10 +5,10 @@ import andioopp.domain.model.enemy.Enemy;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class Lane {
-
-    private final Collection<Cell> cells = new ArrayList<>();
+    private final List<Cell> cells = new ArrayList<>();
     private final Collection<Enemy> enemies = new ArrayList<>();
 
     private final Transform transform;
@@ -23,5 +23,9 @@ public class Lane {
 
     public Collection<Enemy> getEnemies() {
         return enemies;
+    }
+
+    public List<Cell> getCells() {
+        return cells;
     }
 }

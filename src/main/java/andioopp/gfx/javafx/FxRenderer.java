@@ -21,7 +21,8 @@ public class FxRenderer implements Renderer<FxSprite> {
     }
 
     @Override
-    public void drawRectangle(Vector3f position, Vector3f dimensions) {
+    public void drawRectangle(Vector3f position, Vector3f dimensions, Color color) {
+        getCtx().setFill(getFxColor(color));
         getCtx().fillRect(position.getX(), position.getY(), dimensions.getX(), dimensions.getY());
     }
 

@@ -21,7 +21,7 @@ public abstract class Enemy implements Updateable {
 
     @Override
     public void update(Time time) {
-        getTransform().setPosition(new Vector3f((float) Math.sin(time.elapsedSeconds() / 100.00) * 50.0f, 0, 0));
+        getTransform().translate(new Vector3f(0.0005f, 0, 0));
     }
 
     public Transform getTransform() {

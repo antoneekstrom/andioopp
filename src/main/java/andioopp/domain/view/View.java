@@ -5,6 +5,7 @@ import andioopp.common.transform.Transform;
 import andioopp.common.transform.Vector3f;
 import andioopp.domain.model.Lane;
 import andioopp.domain.model.Model;
+import andioopp.domain.model.World;
 import andioopp.domain.model.enemy.Enemy;
 import andioopp.gfx.Color;
 import andioopp.gfx.Renderer;
@@ -13,27 +14,59 @@ import andioopp.gfx.Sprite;
 public class View<S extends Sprite<?>> {
 
     private final Renderer<S> renderer;
+    private final Vector3f windowSize = new Vector3f(1280, 720);
+    private final float worldSizeFactorX = 0.7f;
+    private final float worldSizeFactorY = 0.7f;
+    private final Vector3f worldSize = new Vector3f(windowSize.getX() * worldSizeFactorX, windowSize.getY() * worldSizeFactorY);
+    private final Vector3f worldPos = new Vector3f(windowSize.getX() - worldSize.getX(), (windowSize.getY() - worldSize.getY())*0.5f);
+
+    private Color oddColor = new Color(112, 146, 85);
+    private Color evenColor = new Color(62, 86, 34);
 
     public View(Renderer<S> renderer) {
         this.renderer = renderer;
     }
 
     public void render(Model model) {
+        World world = model.getWorld();
+
         getRenderer().clear(Color.WHITE);
-        model.getWorld().getLanes().forEach(this::renderLane);
+        int numLanes = world.getLanes().size();
+        float laneHeight = worldSize.getY() / numLanes;
+
+        for (int i = 0; i < numLanes; i++) {
+            Lane lane = world.getLanes().get(i);
+            Vector3f lanePos = worldPos.add(new Vector3f(0, laneHeight * i));
+            getRenderer().drawRectangle(lanePos, new Vector3f(worldSize.getX(), laneHeight), chooseColor(i));
+
+            drawCells(lane, lanePos);
+
+
+
+            for (Enemy e : lane.getEnemies()) {
+                Vector3f enemyOffset = e.getTransform().getPosition().scale(new Vector3f(worldSize.getX(), 0));
+                Vector3f enemyPos = enemyOffset.add(lanePos);
+                Transform enemyTransform = ConcreteTransform.getFactory().createWithPosition(enemyPos);
+                getRenderer().drawSprite(e.getSprite(renderer.getSpriteFactory()), enemyTransform);
+            }
+        }
+    }
+    private Color chooseColor(int i){
+        Color oddColor = new Color(112, 146, 85);
+        Color evenColor = new Color(62, 86, 34);
+        if (i % 2 == 0){
+            return evenColor;
+        }
+        return oddColor;
+
     }
 
-    private void renderLane(Lane lane) {
-        lane.getEnemies().forEach(enemy -> renderEnemy(lane, enemy));
-    }
-
-    private void renderEnemy(Lane lane, Enemy e) {
-        renderer.drawSprite(e.getSprite(getRenderer().getSpriteFactory()), getEnemyScreenTransform(lane, e));
-    }
-
-    private Transform getEnemyScreenTransform(Lane lane, Enemy e) {
-        Vector3f position = lane.getTransform().getPosition().add(e.getTransform().getPosition());
-        return ConcreteTransform.getFactory().createWithPosition(position);
+    private void drawCells(Lane lane, Vector3f lanePos) {
+        int numCells = lane.getCells().size();
+        float cellWidth = worldSize.getX()/numCells;
+        for(int j = 0; j < numCells; j++){
+            getRenderer().drawRectangle(lanePos.add(new Vector3f(cellWidth * j, 0, 0)), new Vector3f(cellWidth, laneHeight), (i % 2 == j % 2) ? evenColor : oddColor);
+        }
     }
 
     private Renderer<S> getRenderer() {

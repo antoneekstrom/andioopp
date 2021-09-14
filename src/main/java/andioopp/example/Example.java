@@ -15,7 +15,7 @@ public class Example extends Application {
     private FxWindowBuilder createWindowBuilder(Stage stage) {
         FxWindowBuilder builder = new FxWindowBuilder(stage);
         builder.setTitle("Example");
-        builder.setSize(new Dimension(256, 256));
+        builder.setSize(new Dimension(1280, 720));
         builder.setResizable(true);
         builder.setIcon("mario_icon.png");
         return builder;

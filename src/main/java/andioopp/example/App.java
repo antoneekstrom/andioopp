@@ -3,6 +3,8 @@ package andioopp.example;
 import andioopp.common.transform.ConcreteTransform;
 import andioopp.common.transform.TransformFactory;
 import andioopp.domain.model.enemy.EnemyFactory;
+import andioopp.domain.model.towers.Mario;
+import andioopp.domain.model.towers.Tower;
 import andioopp.gfx.*;
 import andioopp.domain.model.*;
 import andioopp.common.time.Clock;
@@ -15,23 +17,22 @@ public class App implements GfxProgram {
     @Override
     public <S extends Sprite<?>, R extends Renderer<S>> void run(Window<R> window) {
         R renderer = window.getRenderer();
-        initGameloop(createModel(ConcreteTransform.getFactory(), new EnemyFactory()), createView(renderer), createClock());
+        initGameloop(createModel(), createView(renderer), createClock());
     }
 
     private <S extends Sprite<?>> void initGameloop(Model model, View<S> view, Clock clock) {
         clock.listen(model::update);
         clock.listen((time) -> view.render(model));
         clock.start();
+
+        Tower mario = new Mario();
+        model.placeTower(mario, model.getCell(1, 3));
+
+        // här kan man börja skrivas
     }
 
-    private Model createModel(TransformFactory transformFactory, EnemyFactory enemyFactory) {
-        Lane lane = new Lane(transformFactory.create());
-        lane.getEnemies().add(enemyFactory.goomba());
-
-        World world = new World(new ArrayList<>());
-        world.getLanes().add(lane);
-
-        return new Model(world, new WaveQueue(), new Player());
+    private Model createModel() {
+        return new Model(new WaveQueue(), new Player());
     }
 
     private FxClock createClock() {

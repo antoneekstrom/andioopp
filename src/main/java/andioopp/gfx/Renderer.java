@@ -19,7 +19,7 @@ public interface Renderer<S extends Sprite<?>> {
      * @param position Where the rectangle should be drawn
      * @param dimensions Width and height of the rectangle
      */
-    void drawRectangle(Vector3f position, Vector3f dimensions);
+    void drawRectangle(Vector3f position, Vector3f dimensions, Color color);
 
     /**
      *
