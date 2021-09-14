@@ -25,8 +25,8 @@ public class App implements GfxProgram {
         clock.listen((time) -> view.render(model));
         clock.start();
 
-        Tower mario = new Mario();
-        model.placeTower(mario, model.getCell(1, 3));
+        /*Tower mario = new Mario();
+        model.placeTower(mario, model.getCell(1, 3));*/
 
         // här kan man börja skrivas
     }

@@ -8,4 +8,8 @@ public class Cell {
     public void setTower(Tower tower) {
         this.tower = tower;
     }
+
+    public Tower getTower() {
+        return tower;
+    }
 }

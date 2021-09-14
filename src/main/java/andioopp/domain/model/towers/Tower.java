@@ -1,5 +1,8 @@
 package andioopp.domain.model.towers;
 
+import andioopp.gfx.Sprite;
+import andioopp.gfx.SpriteFactory;
+
 public abstract class Tower {
     private int cost;
     private int hp;
