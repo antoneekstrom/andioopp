@@ -1,8 +1,6 @@
-package andioopp.domain.model.towers;
+package andioopp.domain.model.tower.towers;
 
-import andioopp.common.transform.ConcreteTransform;
-import andioopp.gfx.Sprite;
-import andioopp.gfx.SpriteFactory;
+import andioopp.domain.model.tower.Tower;
 
 public class Mario extends Tower {
 
