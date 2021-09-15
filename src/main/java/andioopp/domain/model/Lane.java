@@ -1,24 +1,21 @@
 package andioopp.domain.model;
 
-import andioopp.common.transform.Transform;
 import andioopp.domain.model.enemy.Enemy;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class Lane {
-    private final List<Cell> cells = new ArrayList<>();
-    private final Collection<Enemy> enemies = new ArrayList<>();
+    private final List<Cell> cells;
+    private final Collection<Enemy> enemies;
 
-    private final Transform transform;
-
-    public Lane(Transform transform) {
-        this.transform = transform;
+    Lane(List<Cell> cells, Collection<Enemy> enemies) {
+        this.cells = cells;
+        this.enemies = enemies;
     }
 
-    public Transform getTransform() {
-        return transform;
+    public static Cell getCell(List<Lane> lanes, int row, int col) {
+        return lanes.get(row).getCells().get(col);
     }
 
     public Collection<Enemy> getEnemies() {

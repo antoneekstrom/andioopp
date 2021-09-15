@@ -1,51 +1,29 @@
 package andioopp.domain.model;
 
+import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.time.Time;
-import andioopp.common.transform.ConcreteTransform;
-import andioopp.common.transform.TransformFactory;
-import andioopp.common.transform.Vector3f;
+import andioopp.domain.model.enemy.Enemies;
 import andioopp.domain.model.enemy.Enemy;
-import andioopp.domain.model.enemy.EnemyFactory;
-import andioopp.domain.model.towers.Mario;
-import andioopp.domain.model.towers.Tower;
-
-import java.util.ArrayList;
+import andioopp.domain.model.tower.Towers;
 
 public class Model implements Updateable {
 
     private final World world;
     private final WaveQueue waves;
     private final Player player;
-    private int money = 0;
+
+    private final ArrayListFactory listFactory = new ArrayListFactory();
 
     public Model(WaveQueue waves, Player player) {
-        this.world = new World(new ArrayList<>());
+        this.world = createWorld();
         this.waves = waves;
         this.player = player;
-
-        initWorld(world, ConcreteTransform.getFactory(), new EnemyFactory());
     }
 
-    private void initWorld(World world, TransformFactory transformFactory, EnemyFactory enemyFactory) {
-        addLanes(5, transformFactory,enemyFactory);
-        Tower mario = new Mario();
-        placeTower(mario, getCell(1, 3));
-    }
-
-    private void addLanes(int numlanes, TransformFactory transformFactory, EnemyFactory enemyFactory){
-        for (int i = 0; i < numlanes; i++){
-            Lane lane = new Lane(transformFactory.create());
-
-            lane.getEnemies().add(enemyFactory.goomba());
-            addCellsToLane(lane, 9);
-            world.getLanes().add(lane);
-        }
-    }
-
-    private void addCellsToLane(Lane lane, int numCells) {
-        for (int i = 0; i < numCells; i++) {
-            lane.getCells().add(new Cell());
-        }
+    private World createWorld() {
+        LaneBuilder laneBuilder = new LaneBuilder(listFactory).setCells(9).addEnemy(Enemies.goomba());
+        WorldBuilder builder = new WorldBuilder(laneBuilder, listFactory).setLanes(5).setTower(Towers.mario(), 1, 3);
+        return builder.build();
     }
 
     @Override
@@ -55,18 +33,17 @@ public class Model implements Updateable {
                 enemy.update(time);
             }
         }
-
     }
+
     public World getWorld() {
         return world;
     }
 
-    public Cell getCell(int row, int col) {
-        return getWorld().getLanes().get(row).getCells().get(col);
+    public Player getPlayer() {
+        return player;
     }
 
-    public void placeTower(Tower tower, Cell cell) {
-
-        cell.setTower(tower);
+    public WaveQueue getWaves() {
+        return waves;
     }
 }

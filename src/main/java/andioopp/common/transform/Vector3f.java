@@ -16,6 +16,22 @@ public class Vector3f {
         this(x, y, 0);
     }
 
+    public Vector3f(float x) {
+        this(x, 0, 0);
+    }
+
+    public static Vector3f withX(float x) {
+        return new Vector3f(x, 0, 0);
+    }
+
+    public static Vector3f withY(float y) {
+        return new Vector3f(0, y, 0);
+    }
+
+    public static Vector3f withZ(float z) {
+        return new Vector3f(0, 0, z);
+    }
+
     public static Vector3f zero() {
         return new Vector3f(0, 0, 0);
     }
@@ -26,6 +42,18 @@ public class Vector3f {
 
     public Vector3f add(Vector3f other) {
         return new Vector3f(getX() + other.getX(), getY() + other.getY(), getZ() + other.getZ());
+    }
+
+    public Vector3f setX(float x) {
+        return new Vector3f(x, getY(), getZ());
+    }
+
+    public Vector3f setY(float y) {
+        return new Vector3f(getX(), y, getZ());
+    }
+
+    public Vector3f setZ(float z) {
+        return new Vector3f(getX(), getY(), z);
     }
 
     public float getX() {

@@ -1,9 +1,5 @@
 package andioopp.common.observer;
 
-import java.util.ArrayList;
-
-public class ObservableFactory<T> {
-    public Observable<T> create() {
-        return new ObservableWithList<>(new ArrayList<>());
-    }
+public interface ObservableFactory {
+    <T> Observable<T> create();
 }

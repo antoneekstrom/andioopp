@@ -2,12 +2,9 @@ package andioopp.domain.model.enemy;
 
 import andioopp.domain.model.enemy.enemies.Goomba;
 
-public class EnemyFactory {
+public class Enemies {
 
-    public EnemyFactory() {
-    }
-
-    public Enemy goomba() {
+    public static Enemy goomba() {
         return new Goomba();
     }
 

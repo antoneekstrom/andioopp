@@ -1,8 +1,9 @@
 package andioopp.common.time;
 
 import andioopp.common.observer.Observable;
-import andioopp.common.observer.ObservableFactory;
+import andioopp.common.observer.ObservableFactoryWithListFactory;
 import andioopp.common.observer.Observer;
+import andioopp.common.storage.ArrayListFactory;
 import javafx.animation.AnimationTimer;
 
 public class FxClock extends AnimationTimer implements Clock {
@@ -11,7 +12,7 @@ public class FxClock extends AnimationTimer implements Clock {
     private long previousTime = 0L;
 
     public FxClock() {
-        observable = new ObservableFactory<Time>().create();
+        observable = new ObservableFactoryWithListFactory(new ArrayListFactory()).create();
     }
 
     @Override

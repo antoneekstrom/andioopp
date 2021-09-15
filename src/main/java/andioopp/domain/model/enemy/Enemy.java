@@ -24,19 +24,27 @@ public abstract class Enemy implements Updateable {
         getTransform().translate(new Vector3f(0.0005f, 0, 0));
     }
 
-    public Transform getTransform() {
-        return transform;
-    }
-
     public <S extends Sprite<?>> S getSprite(SpriteFactory<S> spriteFactory) {
         return spriteFactory.get(sprite);
     }
 
-    protected void setSprite(String sprite) {
+    public float getLaneProgress() {
+        return getTransform().getPosition().getX();
+    }
+
+    private void setLaneProgress(float progress) {
+        getTransform().setPosition(getTransform().getPosition().setX(progress));
+    }
+
+    private Transform getTransform() {
+        return transform;
+    }
+
+    private void setSprite(String sprite) {
         this.sprite = sprite;
     }
 
-    protected void setTransform(Transform transform) {
+    private void setTransform(Transform transform) {
         this.transform = transform;
     }
 }

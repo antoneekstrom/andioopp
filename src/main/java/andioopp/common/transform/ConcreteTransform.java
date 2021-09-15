@@ -10,8 +10,8 @@ public class ConcreteTransform implements Transform {
         this.scale = scale;
     }
 
-    public static TransformFactory getFactory() {
-        return new TransformFactory(ConcreteTransform::new);
+    public static ConcreteTransformFactory getFactory() {
+        return new ConcreteTransformFactory(ConcreteTransform::new);
     }
 
     @Override
