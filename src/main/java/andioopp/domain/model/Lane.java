@@ -6,7 +6,6 @@ import andioopp.domain.model.tower.Tower;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
 public class Lane implements Updateable {
     private final List<Cell> cells;

@@ -1,6 +1,7 @@
 package andioopp.domain.model.tower.towers;
 
 import andioopp.domain.model.enemy.Enemy;
+import andioopp.domain.model.tower.TargetingStrategy;
 import andioopp.domain.model.tower.Tower;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,6 +20,11 @@ public class Mario extends Tower {
 
     public Mario() {
         super(SPRITE_PATH, BASE_RANGE, BASE_COST, BASE_HEALTH, targetedLanes);
+    }
+
+    @Override
+    public TargetingStrategy getTargetingStrategy() {
+        return null;
     }
 
     public boolean canAttack(Collection<Enemy> enemies){
