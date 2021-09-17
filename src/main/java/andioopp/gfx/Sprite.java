@@ -10,4 +10,9 @@ public interface Sprite<T> {
      * @return Image to be rendered
      */
     T getImage();
+
+    int getWidth();
+
+    int getHeight();
+
 }

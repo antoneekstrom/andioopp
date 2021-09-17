@@ -1,7 +1,7 @@
 package andioopp.gfx.javafx;
 
 import andioopp.gfx.Sprite;
-import javafx.geometry.Point2D;
+import andioopp.gfx.SpriteFactory;
 import javafx.scene.image.Image;
 
 /**
@@ -19,8 +19,22 @@ public class FxSprite implements Sprite<Image> {
         return new FxSprite(new Image(path));
     }
 
+    public static SpriteFactory<FxSprite> getFactory() {
+        return new SpriteFactory<>(FxSprite::load);
+    }
+
     @Override
     public Image getImage() {
         return image;
+    }
+
+    @Override
+    public int getWidth() {
+        return (int) image.getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+        return (int) image.getHeight();
     }
 }

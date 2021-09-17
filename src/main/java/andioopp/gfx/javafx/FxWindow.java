@@ -27,6 +27,16 @@ public class FxWindow implements Window<FxRenderer> {
         return new FxRenderer(getCanvas().getGraphicsContext2D());
     }
 
+    @Override
+    public int getWidth() {
+        return (int) stage.getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+        return (int) stage.getHeight();
+    }
+
     public Canvas getCanvas() {
         return canvas;
     }

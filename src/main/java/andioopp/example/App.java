@@ -1,16 +1,31 @@
 package andioopp.example;
 
-import andioopp.common.Entity;
-import andioopp.gfx.*;
+import andioopp.gfx.javafx.FxWindowBuilder;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class App implements GfxProgram {
+import java.awt.*;
+
+/**
+ * Application entrypoint which handles window creation.
+ */
+public class App extends Application {
     @Override
-    public <S extends Sprite<?>, R extends Renderer<S>> void run(Window<R> window) {
-        window.setMaximized(true);
-        Renderer<S> r = window.getRenderer();
-        SpriteFactory<S> spriteFactory = r.getSpriteFactory();
-        S marioSprite = spriteFactory.create("mario_run.png");
-        Entity<S> e = new Entity<>(marioSprite);
-        r.drawSprite(e.getSprite(), e.getTransform());
+    public void start(Stage stage) {
+        new ExampleProgram().run(createWindowBuilder(stage).build());
     }
+
+    private FxWindowBuilder createWindowBuilder(Stage stage) {
+        FxWindowBuilder builder = new FxWindowBuilder(stage);
+        builder.setTitle("Example");
+        builder.setSize(new Dimension(1280, 720));
+        builder.setResizable(true);
+        builder.setIcon("mario_icon.png");
+        return builder;
+    }
+
+    public static void run(String[] args) {
+        launch(args);
+    }
+
 }
