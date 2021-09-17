@@ -23,8 +23,10 @@ public class View<S extends Sprite<?>> {
         this.size = size;
     }
 
-    private final static Color COLOR_CELL_ODD = new Color(112, 146, 85);
-    private final static Color COLOR_CELL_EVEN = new Color(62, 86, 34);
+    private static final Color COLOR_CELL_ODD = new Color(112, 146, 85);
+    private static final Color COLOR_CELL_EVEN = new Color(62, 86, 34);
+
+    private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
 
     /**
      * Renders the model.
@@ -69,7 +71,6 @@ public class View<S extends Sprite<?>> {
         }
     }
 
-
     private void renderCell(World world, int row, int col) {
         Lane lane = world.getLane(row);
 
@@ -80,16 +81,21 @@ public class View<S extends Sprite<?>> {
     }
 
     private void renderEnemy(World world, Enemy enemy, int row) {
+        /*
         Vector3f laneScreenPosition = getLaneScreenPosition(world, row);
         Vector3f laneScreenSize = getLaneScreenSize(world);
         Vector3f laneScreenPositionEnd = laneScreenPosition.add(laneScreenSize.onlyX());
+        */
+        Vector3f cellScreenSize = getCellScreenSize(world, world.getLane(row));
 
-        Vector3f enemyScreenOffset = Vector3f.withX(-enemy.getLaneProgress() * laneScreenSize.getX());
-        Vector3f enemyScreenPosition = laneScreenPositionEnd.add(enemyScreenOffset);
+        Vector3f enemyScreenOffset = enemy.getPosition().scale(cellScreenSize);
+        Vector3f enemyScreenPosition = getViewPosition().add(enemyScreenOffset);
 
         S enemySprite = enemy.getSprite(getRenderer().getSpriteFactory());
-        Transform enemyScreenTransform = getTransformFactory().createWithPosition(enemyScreenPosition);
+        Transform enemyScreenTransform = transformFactory.createWithPosition(enemyScreenPosition);
         Vector3f enemySpriteSize = getCellScreenSize(world, world.getLane(row));
+
+        System.out.println(enemyScreenPosition);
 
         getRenderer().drawSprite(enemySprite, enemyScreenTransform, enemySpriteSize);
     }
@@ -103,7 +109,7 @@ public class View<S extends Sprite<?>> {
             Vector3f cellScreenPosition = getCellScreenPosition(world, row, col);
 
             S towerSprite = tower.getSprite(getRenderer().getSpriteFactory());
-            Transform towerScreenTransform = getTransformFactory().createWithPosition(cellScreenPosition);
+            Transform towerScreenTransform = transformFactory.createWithPosition(cellScreenPosition);
             Vector3f towerSpriteSize = getCellScreenSize(world, lane);
 
             getRenderer().drawSprite(towerSprite, towerScreenTransform, towerSpriteSize);
@@ -148,10 +154,6 @@ public class View<S extends Sprite<?>> {
     private Vector3f getLaneScreenPosition(World world, int row) {
         Vector3f laneOffset = Vector3f.withY(getLaneScreenHeight(world) * row);
         return getViewPosition().add(laneOffset);
-    }
-
-    private TransformFactory getTransformFactory() {
-        return ConcreteTransform.getFactory();
     }
 
     private Vector3f getViewPosition() {
