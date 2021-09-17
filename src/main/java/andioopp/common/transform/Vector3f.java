@@ -1,5 +1,7 @@
 package andioopp.common.transform;
 
+import java.util.Objects;
+
 public class Vector3f {
 
     private final float x;
@@ -32,12 +34,28 @@ public class Vector3f {
         return new Vector3f(0, 0, z);
     }
 
+    public static Vector3f one() {
+        return new Vector3f(1, 1, 1);
+    }
+
     public static Vector3f zero() {
         return new Vector3f(0, 0, 0);
     }
 
     public static Vector3f all(float v) {
         return new Vector3f(v, v, v);
+    }
+
+    public Vector3f onlyX() {
+        return Vector3f.withX(getX());
+    }
+
+    public Vector3f onlyY() {
+        return Vector3f.withY(getY());
+    }
+
+    public Vector3f onlyZ() {
+        return Vector3f.withZ(getZ());
     }
 
     public Vector3f scaleXProportional(float w) {
@@ -92,5 +110,18 @@ public class Vector3f {
                 ", y=" + y +
                 ", z=" + z +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Vector3f)) return false;
+        Vector3f vector3f = (Vector3f) o;
+        return Float.compare(vector3f.getX(), getX()) == 0 && Float.compare(vector3f.getY(), getY()) == 0 && Float.compare(vector3f.getZ(), getZ()) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getX(), getY(), getZ());
     }
 }

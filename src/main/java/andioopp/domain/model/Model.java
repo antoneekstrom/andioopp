@@ -22,17 +22,17 @@ public class Model implements Updateable {
 
     private World createWorld() {
         LaneBuilder laneBuilder = new LaneBuilder(listFactory).setCells(9).addEnemy(Enemies.goomba());
-        WorldBuilder builder = new WorldBuilder(laneBuilder, listFactory).setLanes(5).setTower(Towers.mario(), 1, 3);
-        return builder.build();
+        WorldBuilder builder = new WorldBuilder(laneBuilder, listFactory).setLanes(5);
+
+        World world = builder.build();
+        world.getCell(1, 3).setTower(Towers.mario());
+
+        return world;
     }
 
     @Override
     public void update(Time time) {
-        for (Lane lane : world.getLanes()) {
-            for (Enemy enemy : lane.getEnemies()) {
-                enemy.update(time);
-            }
-        }
+        world.update(time);
     }
 
     public World getWorld() {

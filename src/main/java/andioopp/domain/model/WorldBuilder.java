@@ -20,11 +20,6 @@ public class WorldBuilder {
         return new World(getListFactory().create(getLanes()));
     }
 
-    public WorldBuilder setTower(Tower tower, int row, int col) {
-        Lane.getCell(getLanes(), row, col).setTower(tower);
-        return this;
-    }
-
     public WorldBuilder setLanes(int numLanes) {
         return setLanes(getListFactory().create(numLanes, getLaneBuilder()::build));
     }

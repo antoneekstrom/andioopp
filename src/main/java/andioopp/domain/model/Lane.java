@@ -14,15 +14,19 @@ public class Lane {
         this.enemies = enemies;
     }
 
-    public static Cell getCell(List<Lane> lanes, int row, int col) {
-        return lanes.get(row).getCells().get(col);
+    public int getNumberOfCells() {
+        return getCells().size();
+    }
+
+    public Cell getCell(int col) {
+        return getCells().get(col);
     }
 
     public Collection<Enemy> getEnemies() {
         return enemies;
     }
 
-    public List<Cell> getCells() {
+    private List<Cell> getCells() {
         return cells;
     }
 }
