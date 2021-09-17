@@ -54,12 +54,8 @@ public class View<S extends Sprite<?>> {
     }
 
     private void renderEnemies(World world) {
-        for (int row = 0; row < world.getNumberOfLanes(); row++) {
-            Lane lane = world.getLane(row);
-
-            for (Enemy enemy : lane.getEnemies()) {
-                renderEnemy(world, enemy, row);
-            }
+        for (Enemy enemy : world.getEnemies()) {
+            renderEnemy(world, enemy);
         }
     }
 
@@ -72,36 +68,26 @@ public class View<S extends Sprite<?>> {
     }
 
     private void renderCell(World world, int row, int col) {
-        Lane lane = world.getLane(row);
-
         Vector3f cellScreenPosition = getCellScreenPosition(world, row, col);
-        Vector3f cellScreenSize = getCellScreenSize(world, lane);
+        Vector3f cellScreenSize = getCellScreenSize(world);
 
         getRenderer().drawRectangle(cellScreenPosition, cellScreenSize, getCellColor(row, col));
     }
 
-    private void renderEnemy(World world, Enemy enemy, int row) {
-        /*
-        Vector3f laneScreenPosition = getLaneScreenPosition(world, row);
-        Vector3f laneScreenSize = getLaneScreenSize(world);
-        Vector3f laneScreenPositionEnd = laneScreenPosition.add(laneScreenSize.onlyX());
-        */
-        Vector3f cellScreenSize = getCellScreenSize(world, world.getLane(row));
+    private void renderEnemy(World world, Enemy enemy) {
+        Vector3f cellScreenSize = getCellScreenSize(world);
 
         Vector3f enemyScreenOffset = enemy.getPosition().scale(cellScreenSize);
         Vector3f enemyScreenPosition = getViewPosition().add(enemyScreenOffset);
 
         S enemySprite = enemy.getSprite(getRenderer().getSpriteFactory());
         Transform enemyScreenTransform = transformFactory.createWithPosition(enemyScreenPosition);
-        Vector3f enemySpriteSize = getCellScreenSize(world, world.getLane(row));
-
-        System.out.println(enemyScreenPosition);
+        Vector3f enemySpriteSize = getCellScreenSize(world);
 
         getRenderer().drawSprite(enemySprite, enemyScreenTransform, enemySpriteSize);
     }
 
     private void renderTowerInCell(World world, int row, int col) {
-        Lane lane = world.getLane(row);
         Cell cell = world.getCell(row, col);
         Tower tower = cell.getTower();
 
@@ -110,14 +96,14 @@ public class View<S extends Sprite<?>> {
 
             S towerSprite = tower.getSprite(getRenderer().getSpriteFactory());
             Transform towerScreenTransform = transformFactory.createWithPosition(cellScreenPosition);
-            Vector3f towerSpriteSize = getCellScreenSize(world, lane);
+            Vector3f towerSpriteSize = getCellScreenSize(world);
 
             getRenderer().drawSprite(towerSprite, towerScreenTransform, towerSpriteSize);
         }
     }
 
     private Vector3f getCellScreenPosition(World world, int row, int col) {
-        Vector3f cellScreenSize = getCellScreenSize(world, world.getLane(row));
+        Vector3f cellScreenSize = getCellScreenSize(world);
         Vector3f laneScreenPosition = getLaneScreenPosition(world, row);
         Vector3f cellScreenOffset = cellScreenSize.onlyX().scale(col);
 
@@ -135,8 +121,8 @@ public class View<S extends Sprite<?>> {
         return new Vector3f(getLaneScreenWidth(), getLaneScreenHeight(world));
     }
 
-    private Vector3f getCellScreenSize(World world, Lane lane) {
-        return new Vector3f(getCellScreenWidth(lane), getLaneScreenHeight(world));
+    private Vector3f getCellScreenSize(World world) {
+        return new Vector3f(getCellScreenWidth(world.getLane(0)), getLaneScreenHeight(world));
     }
 
     private float getCellScreenWidth(Lane lane) {

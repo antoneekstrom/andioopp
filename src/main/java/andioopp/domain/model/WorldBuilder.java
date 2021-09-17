@@ -1,6 +1,5 @@
 package andioopp.domain.model;
 import andioopp.common.storage.ListFactory;
-import andioopp.domain.model.tower.Tower;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class WorldBuilder {
     }
 
     public World build() {
-        return new World(getListFactory().create(getLanes()));
+        return new World(getListFactory().create(getLanes()), getListFactory().create());
     }
 
     public WorldBuilder setLanes(int numLanes) {

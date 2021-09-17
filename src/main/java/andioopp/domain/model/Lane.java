@@ -7,11 +7,9 @@ import java.util.List;
 
 public class Lane {
     private final List<Cell> cells;
-    private final Collection<Enemy> enemies;
 
-    Lane(List<Cell> cells, Collection<Enemy> enemies) {
+    Lane(List<Cell> cells) {
         this.cells = cells;
-        this.enemies = enemies;
     }
 
     public int getNumberOfCells() {
@@ -20,10 +18,6 @@ public class Lane {
 
     public Cell getCell(int col) {
         return getCells().get(col);
-    }
-
-    public Collection<Enemy> getEnemies() {
-        return enemies;
     }
 
     private List<Cell> getCells() {

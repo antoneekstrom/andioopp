@@ -5,14 +5,15 @@ import andioopp.domain.model.enemy.Enemy;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class World implements Updateable {
 
     private final List<Lane> lanes;
+    private final Collection<Enemy> enemies;
 
-    World(List<Lane> lanes) {
+    World(List<Lane> lanes, Collection<Enemy> enemies) {
         this.lanes = lanes;
+        this.enemies = enemies;
     }
 
     @Override
@@ -20,12 +21,12 @@ public class World implements Updateable {
         getEnemies().forEach((enemy) -> enemy.update(time));
     }
 
+    public void addEnemy(Enemy enemy) {
+        enemies.add(enemy);
+    }
+
     public Collection<Enemy> getEnemies() {
-        return getLanes()
-            .stream()
-            .map(Lane::getEnemies)
-            .flatMap(Collection::stream)
-            .collect(Collectors.toList());
+        return enemies;
     }
 
     public Lane getLane(int row) {

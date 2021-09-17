@@ -19,7 +19,7 @@ public class LaneBuilder {
     }
 
     public Lane build() {
-        return new Lane(getListFactory().create(getCells()), getListFactory().create(getEnemies()));
+        return new Lane(getListFactory().create(getCells()));
     }
 
     public LaneBuilder setCells(int numCells) {
