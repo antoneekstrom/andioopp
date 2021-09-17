@@ -2,17 +2,17 @@ package andioopp.domain.model;
 
 public class Health {
 
-    private float healthPoints;
+    private int healthPoints;
 
-    public Health(float healthPoints) {
+    public Health(int healthPoints) {
         this.healthPoints = healthPoints;
     }
 
-    public float decrease(float value) {
+    public int decrease(int value) {
         return add(-value);
     }
 
-    public float add(float value) {
+    public int add(int value) {
         if (isEqualToOrHigher(value)) {
             healthPoints = 0;
         }
@@ -23,11 +23,11 @@ public class Health {
         return get();
     }
 
-    public boolean isEqualToOrHigher(float value) {
+    public boolean isEqualToOrHigher(int value) {
         return get() <= value;
     }
 
-    public float get() {
+    public int get() {
         return healthPoints;
     }
 }

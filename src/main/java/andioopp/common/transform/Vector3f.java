@@ -36,12 +36,29 @@ public class Vector3f {
         return new Vector3f(0, 0, 0);
     }
 
+    public static Vector3f all(float v) {
+        return new Vector3f(v, v, v);
+    }
+
+    public Vector3f scaleXProportional(float w) {
+        float ratio = getX() / getY();
+        return new Vector3f(w, getX() / ratio);
+    }
+
     public Vector3f scale(Vector3f other) {
         return new Vector3f(getX() * other.getX(), getY() * other.getY(), getZ() * other.getZ());
     }
 
+    public Vector3f scale(float s) {
+        return scale(Vector3f.all(s));
+    }
+
     public Vector3f add(Vector3f other) {
         return new Vector3f(getX() + other.getX(), getY() + other.getY(), getZ() + other.getZ());
+    }
+
+    public Vector3f sub(Vector3f other) {
+        return new Vector3f(getX() - other.getX(), getY() - other.getY(), getZ() - other.getZ());
     }
 
     public Vector3f setX(float x) {
@@ -66,5 +83,14 @@ public class Vector3f {
 
     public float getZ() {
         return z;
+    }
+
+    @Override
+    public String toString() {
+        return "Vector3f{" +
+                "x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                '}';
     }
 }

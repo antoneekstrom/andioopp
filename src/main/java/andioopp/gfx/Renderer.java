@@ -12,7 +12,16 @@ public interface Renderer<S extends Sprite<?>> {
      * Draws a {@link Sprite}.
      * @param sprite {@link Sprite} to draw
      */
-    void drawSprite(S sprite, Transform transform);
+    void drawSprite(S sprite, Transform transform, Vector3f size);
+
+    /**
+     * 
+     * @param sprite
+     * @param transform
+     */
+    default void drawSprite(S sprite, Transform transform) {
+        drawSprite(sprite, transform, new Vector3f(sprite.getWidth(), sprite.getHeight()));
+    }
 
     /**
      * Draws a rectangle.

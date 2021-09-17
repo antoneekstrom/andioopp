@@ -16,4 +16,9 @@ public interface Window<R extends Renderer<?>> {
      * @param isMaximized If the window is maximized
      */
     void setMaximized(boolean isMaximized);
+
+    int getWidth();
+
+    int getHeight();
+
 }

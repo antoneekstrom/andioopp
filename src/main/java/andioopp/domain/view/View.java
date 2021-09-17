@@ -5,7 +5,6 @@ import andioopp.common.transform.Transform;
 import andioopp.common.transform.Vector3f;
 import andioopp.domain.model.Cell;
 import andioopp.domain.model.Lane;
-import andioopp.domain.model.Model;
 import andioopp.domain.model.World;
 import andioopp.domain.model.enemy.Enemy;
 import andioopp.domain.model.tower.Tower;
@@ -16,72 +15,111 @@ import andioopp.gfx.Sprite;
 public class View<S extends Sprite<?>> {
 
     private final Renderer<S> renderer;
-    private final Vector3f windowSize = new Vector3f(1280, 720);
-    private final float worldSizeFactorX = 0.7f;
-    private final float worldSizeFactorY = 0.7f;
-    private final Vector3f worldSize = new Vector3f(windowSize.getX() * worldSizeFactorX, windowSize.getY() * worldSizeFactorY);
-    private final Vector3f worldPos = new Vector3f(windowSize.getX() - worldSize.getX(), (windowSize.getY() - worldSize.getY()) * 0.5f);
+    private final Vector3f position;
+    private final Vector3f size;
+
+    public View(Renderer<S> renderer, Vector3f position, Vector3f size) {
+        this.renderer = renderer;
+        this.position = position;
+        this.size = size;
+    }
 
     private final static Color COLOR_CELL_ODD = new Color(112, 146, 85);
     private final static Color COLOR_CELL_EVEN = new Color(62, 86, 34);
 
-    public View(Renderer<S> renderer) {
-        this.renderer = renderer;
-    }
-
-    public void render(Model model) {
-        World world = model.getWorld();
-
+    public void render(World world) {
         getRenderer().clear(Color.WHITE);
-        int numLanes = world.getLanes().size();
-        float laneHeight = worldSize.getY() / numLanes;
-
-        for (int i = 0; i < numLanes; i++) {
-            Lane lane = world.getLanes().get(i);
-            Vector3f lanePos = worldPos.add(new Vector3f(0, laneHeight * i));
-            getRenderer().drawRectangle(lanePos, new Vector3f(worldSize.getX(), laneHeight), chooseColor(i));
-
-            drawCells(lane, lanePos, laneHeight, i);
-
-            for (Enemy e : lane.getEnemies()) {
-                Vector3f laneEndPos = lanePos.add(Vector3f.withX(worldSize.getX()));
-                Vector3f enemyOffset = new Vector3f(-e.getLaneProgress()).scale(new Vector3f(worldSize.getX()));
-                Vector3f enemyPos = enemyOffset.add(laneEndPos);
-                Transform enemyTransform = ConcreteTransform.getFactory().createWithPosition(enemyPos);
-                getRenderer().drawSprite(e.getSprite(renderer.getSpriteFactory()), enemyTransform);
-            }
-        }
-
-        renderTowers(model);
+        renderLanes(world);
     }
 
-    private Color chooseColor(int i) {
-        if (i % 2 == 0) {
+    private void renderLanes(World world) {
+        for (int i = 0; i < getLaneCount(world); i++) {
+            Lane lane = world.getLanes().get(i);
+            Vector3f laneScreenPosition = getLaneScreenPosition(world, i);
+            Vector3f laneSize = new Vector3f(getLaneWidth(), getLaneHeight(world));
+            renderCells(world, lane, i, laneScreenPosition);
+            renderEnemies(world, lane, laneScreenPosition, laneSize.getX());
+        }
+    }
+
+    private void renderEnemies(World world, Lane lane, Vector3f laneScreenPosition, float laneWidth) {
+        for (Enemy e : lane.getEnemies()) {
+            Vector3f laneEndPosition = laneScreenPosition.add(Vector3f.withX(laneWidth));
+            Vector3f enemyOffset = new Vector3f(-e.getLaneProgress()).scale(new Vector3f(getSize().getX()));
+            enemyOffset = enemyOffset.sub(Vector3f.withY(getCellDimensions(world, lane).getY() * 0.35f));
+            Vector3f enemyPos = laneEndPosition.add(enemyOffset);
+            Transform enemyTransform = ConcreteTransform.getFactory().createWithPosition(enemyPos);
+            getRenderer().drawSprite(e.getSprite(renderer.getSpriteFactory()), enemyTransform, getCellDimensions(world, lane).scale(0.7f));
+        }
+    }
+
+    private void renderCells(World world, Lane lane, int row, Vector3f laneScreenPosition) {
+        for (int col = 0; col < getCellCount(lane); col++) {
+            Cell cell = lane.getCells().get(col);
+            Vector3f cellDimensions = getCellDimensions(world, lane);
+            Vector3f cellPositionOffset = Vector3f.withX(cellDimensions.getX() * col);
+            Vector3f cellPosition = laneScreenPosition.add(cellPositionOffset);
+
+            getRenderer().drawRectangle(cellPosition, cellDimensions, getCellColor(row, col));
+            renderTower(world, lane, cell.getTower(), cellPosition);
+        }
+    }
+
+    private void renderTower(World world, Lane lane, Tower tower, Vector3f cellPosition) {
+        if (tower != null) {
+            Sprite<?> sprite = tower.getSprite(renderer.getSpriteFactory());
+            Transform transform = ConcreteTransform.getFactory().createWithPosition(cellPosition);
+
+            getRenderer().drawSprite(tower.getSprite(renderer.getSpriteFactory()), transform, getCellDimensions(world, lane));
+        }
+    }
+
+    private Vector3f getCellCenter(World world, Lane lane, Vector3f cellPosition) {
+        return cellPosition.add(getCellDimensions(world, lane).scale(Vector3f.all(0.5f)));
+    }
+
+    private Vector3f getCellDimensions(World world, Lane lane) {
+        return new Vector3f(getCellWidth(lane), getLaneHeight(world));
+    }
+
+    private float getLaneWidth() {
+        return getSize().getX();
+    }
+
+    private Vector3f getLaneScreenPosition(World world, int laneIndex) {
+        Vector3f laneOffset = Vector3f.withY(getLaneHeight(world) * laneIndex);
+        return getPosition().add(laneOffset);
+    }
+
+    private Color getCellColor(int i, int j) {
+        if (i % 2 == j % 2) {
             return COLOR_CELL_EVEN;
         }
         return COLOR_CELL_ODD;
-
     }
 
-    private void drawCells(Lane lane, Vector3f lanePos, float laneHeight, int row) {
-        int numCells = lane.getCells().size();
-        float cellWidth = worldSize.getX() / numCells;
-        for (int col = 0; col < numCells; col++) {
-            getRenderer().drawRectangle(lanePos.add(new Vector3f(cellWidth * col, 0, 0)), new Vector3f(cellWidth, laneHeight), (row % 2 == col % 2) ? COLOR_CELL_EVEN : COLOR_CELL_ODD);
-        }
+    private float getCellWidth(Lane lane) {
+        return getLaneWidth() / getCellCount(lane);
     }
 
-    private void renderTowers(Model model) {
-        Transform towerTransform = ConcreteTransform.getFactory().createWithPosition(new Vector3f(40, 40, 40));
-        for (Lane lane : model.getWorld().getLanes()) {
-            for (Cell cell : lane.getCells()) {
+    private float getLaneHeight(World world) {
+        return getSize().getY() / getLaneCount(world);
+    }
 
-                if (cell.getTower() != null) {
-                    Tower t = cell.getTower();
-                    getRenderer().drawSprite(t.getSprite(renderer.getSpriteFactory()), towerTransform);
-                }
-            }
-        }
+    private int getCellCount(Lane lane) {
+        return lane.getCells().size();
+    }
+
+    private int getLaneCount(World world) {
+        return world.getLanes().size();
+    }
+
+    private Vector3f getPosition() {
+        return position;
+    }
+
+    private Vector3f getSize() {
+        return size;
     }
 
     private Renderer<S> getRenderer() {

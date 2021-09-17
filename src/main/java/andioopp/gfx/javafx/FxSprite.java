@@ -27,4 +27,14 @@ public class FxSprite implements Sprite<Image> {
     public Image getImage() {
         return image;
     }
+
+    @Override
+    public int getWidth() {
+        return (int) image.getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+        return (int) image.getHeight();
+    }
 }

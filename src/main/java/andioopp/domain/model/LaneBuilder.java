@@ -11,7 +11,7 @@ public class LaneBuilder {
     private final ListFactory listFactory;
 
     private Collection<Enemy> enemies;
-    private List<Cell> cells;
+    private int numCells;
 
     public LaneBuilder(ListFactory listFactory) {
         this.listFactory = listFactory;
@@ -23,11 +23,7 @@ public class LaneBuilder {
     }
 
     public LaneBuilder setCells(int numCells) {
-        return setCells(getListFactory().create(numCells, this::getCell));
-    }
-
-    public LaneBuilder setCells(List<Cell> cells) {
-        this.cells = cells;
+        this.numCells = numCells;
         return this;
     }
 
@@ -41,8 +37,8 @@ public class LaneBuilder {
         return this;
     }
 
-    public List<Cell> getCells() {
-        return cells;
+    private List<Cell> getCells() {
+        return getListFactory().create(getNumCells(), this::getCell);
     }
 
     public Collection<Enemy> getEnemies() {
@@ -55,5 +51,9 @@ public class LaneBuilder {
 
     private Cell getCell() {
         return new Cell();
+    }
+
+    private int getNumCells() {
+        return numCells;
     }
 }
