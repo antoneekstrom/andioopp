@@ -17,6 +17,7 @@ public abstract class Tower {
     private final int cost;
     private final Health health;
     private String sprite;
+    private ArrayList<Integer> targetedLanes;
 
     public Tower(String spritePath, int range, int cost, int health, ArrayList<Integer> targetedLanes) {
         this.sprite = spritePath;
