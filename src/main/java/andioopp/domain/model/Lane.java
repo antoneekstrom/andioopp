@@ -19,16 +19,7 @@ public class Lane implements Updateable {
 
     @Override
     public void update(Time time) {
-        for (Cell cell : getCells()) {
-            Tower tower = cell.getTower();
-            if (tower != null) {
-                // ge mario avståndet till närmaste fiende (eller kanske lista med fiender i lanen)
-                // mario får svara om han kan attackera
-                // om mario kan attackera så kallar lane på mario's attack metod
 
-                // exempel:  if (mario.canAttack(enemies)) mario.attack()
-            }
-        }
     }
 
     public static Cell getCell(List<Lane> lanes, int row, int col) {

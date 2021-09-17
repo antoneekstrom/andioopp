@@ -1,6 +1,13 @@
 package andioopp.domain.model.tower.towers;
 
+import andioopp.domain.model.enemy.Enemy;
 import andioopp.domain.model.tower.Tower;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Arrays;
+import java.util.List;
+
+
 
 public class Mario extends Tower {
 
@@ -10,7 +17,11 @@ public class Mario extends Tower {
     private static final int BASE_RANGE = -1;
 
     public Mario() {
-        super(SPRITE_PATH, BASE_RANGE, BASE_COST, BASE_HEALTH);
+        super(SPRITE_PATH, BASE_RANGE, BASE_COST, BASE_HEALTH, targetedLanes);
     }
 
+    public boolean canAttack(Collection<Enemy> enemies){
+
+        return true;
+    }
 }
