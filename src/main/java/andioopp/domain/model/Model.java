@@ -4,7 +4,6 @@ import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.storage.ListFactory;
 import andioopp.common.time.Time;
 import andioopp.domain.model.enemy.Enemies;
-import andioopp.domain.model.enemy.Enemy;
 import andioopp.domain.model.tower.Towers;
 
 public class Model implements Updateable {
@@ -21,6 +20,11 @@ public class Model implements Updateable {
         this.player = player;
     }
 
+    @Override
+    public void update(Time time) {
+        world.update(time);
+    }
+
     private World createWorld() {
         LaneBuilder laneBuilder = new LaneBuilder(listFactory).setCells(9);
         WorldBuilder builder = new WorldBuilder(laneBuilder, listFactory).setLanes(5);
@@ -34,20 +38,7 @@ public class Model implements Updateable {
         return world;
     }
 
-    @Override
-    public void update(Time time) {
-        world.update(time);
-    }
-
     public World getWorld() {
         return world;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public WaveQueue getWaves() {
-        return waves;
     }
 }

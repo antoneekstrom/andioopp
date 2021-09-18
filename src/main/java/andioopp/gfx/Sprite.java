@@ -1,6 +1,6 @@
 package andioopp.gfx;
 
-import andioopp.common.transform.Vector3f;
+import andioopp.common.transform.Dimension;
 
 /**
  * Image which can be rendered onto a {@link Window}.
@@ -17,8 +17,8 @@ public interface Sprite<T> {
 
     int getHeight();
 
-    default Vector3f getSize() {
-        return new Vector3f(getWidth(), getHeight());
+    default Dimension getSize() {
+        return new Dimension(getWidth(), getHeight());
     }
 
 }

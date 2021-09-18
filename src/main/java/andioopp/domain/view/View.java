@@ -1,7 +1,6 @@
 package andioopp.domain.view;
 
 import andioopp.common.transform.*;
-import andioopp.domain.model.Cell;
 import andioopp.domain.model.Lane;
 import andioopp.domain.model.Model;
 import andioopp.domain.model.World;
@@ -75,30 +74,39 @@ public class View<S extends Sprite<?>> {
     }
 
     private void renderEnemy(World world, Enemy enemy) {
-        Vector3f cellScreenSize = getCellScreenSize(world);
+        Dimension cellScreenSize = new Dimension(getCellScreenSize(world));
 
-        Vector3f enemyScreenOffset = enemy.getPosition().scale(cellScreenSize);
-        Vector3f enemyScreenPosition = getViewPosition().add(enemyScreenOffset);
+        Vector3f enemyScreenOffset = enemy.getPosition().scale(cellScreenSize.toVector());
+        Vector3f enemyScreenOffsetLane = cellScreenSize.toVector().onlyY().scale(-0.3f);
+        Vector3f enemyScreenPosition = getViewPosition().add(enemyScreenOffset).add(enemyScreenOffsetLane);
 
         S enemySprite = enemy.getSprite(getRenderer().getSpriteFactory());
-        Transform enemyScreenTransform = transformFactory.createWithPosition(enemyScreenPosition);
-        Vector3f enemySpriteSize = getCellScreenSize(world);
+        Dimension enemySpriteSize = enemySprite.getSize();
+        Dimension enemyScreenSize = enemySpriteSize.scaleByHeight(cellScreenSize.getHeight() * 0.8f);
 
-        getRenderer().drawSprite(enemySprite, enemyScreenTransform, enemySpriteSize);
+        Transform enemyScreenTransform = transformFactory.createWithPosition(enemyScreenPosition);
+
+        getRenderer().drawSprite(enemySprite, enemyScreenTransform, enemyScreenSize.toVector());
     }
 
     private void renderTowerInCell(World world, int row, int col) {
-        Cell cell = world.getCell(row, col);
-        Tower tower = cell.getTower();
+        Tower tower = world.getCell(row, col).getTower();
 
         if (tower != null) {
             Vector3f cellScreenPosition = getCellScreenPosition(world, row, col);
+            Dimension cellScreenSize = new Dimension(getCellScreenSize(world));
 
             S towerSprite = tower.getSprite(getRenderer().getSpriteFactory());
-            Transform towerScreenTransform = transformFactory.createWithPosition(cellScreenPosition);
-            Vector3f towerSpriteSize = getCellScreenSize(world);
+            Dimension towerSpriteSize = towerSprite.getSize();
+            Dimension towerScreenSize = towerSpriteSize.scaleByHeight(cellScreenSize.getHeight());
 
-            getRenderer().drawSprite(towerSprite, towerScreenTransform, towerSpriteSize);
+            Vector3f towerScreenPositionCenter = cellScreenSize.centerWithin(cellScreenPosition, towerScreenSize);
+            Vector3f towerScreenPositionOffset = cellScreenSize.toVector().onlyY().scale(-0.3f);
+            Vector3f towerScreenPosition = towerScreenPositionCenter.add(towerScreenPositionOffset);
+
+            Transform towerScreenTransform = transformFactory.createWithPosition(towerScreenPosition);
+
+            getRenderer().drawSprite(towerSprite, towerScreenTransform, towerScreenSize.toVector());
         }
     }
 
@@ -115,10 +123,6 @@ public class View<S extends Sprite<?>> {
             return COLOR_CELL_EVEN;
         }
         return COLOR_CELL_ODD;
-    }
-
-    private Vector3f getLaneScreenSize(World world) {
-        return new Vector3f(getLaneScreenWidth(), getLaneScreenHeight(world));
     }
 
     private Vector3f getCellScreenSize(World world) {
