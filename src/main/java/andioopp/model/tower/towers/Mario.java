@@ -26,7 +26,6 @@ public class Mario extends Tower {
     }
 
     public boolean canAttack(Collection<Enemy> enemies){
-
         return true;
     }
 }

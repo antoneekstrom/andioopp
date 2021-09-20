@@ -69,45 +69,58 @@ public class View<S extends Sprite<?>> {
     private void renderCell(World world, int row, int col) {
         Vector3f cellScreenPosition = getCellScreenPosition(world, row, col);
         Vector3f cellScreenSize = getCellScreenSize(world);
-
         getRenderer().drawRectangle(cellScreenPosition, cellScreenSize, getCellColor(row, col));
     }
 
     private void renderEnemy(World world, Enemy enemy) {
-        Dimension cellScreenSize = new Dimension(getCellScreenSize(world));
-
-        Vector3f enemyScreenOffset = enemy.getPosition().scale(cellScreenSize.toVector());
-        Vector3f enemyScreenOffsetLane = cellScreenSize.toVector().onlyY().scale(-0.3f);
-        Vector3f enemyScreenPosition = getViewPosition().add(enemyScreenOffset).add(enemyScreenOffsetLane);
-
         S enemySprite = enemy.getSprite(getRenderer().getSpriteFactory());
-        Dimension enemySpriteSize = enemySprite.getSize();
-        Dimension enemyScreenSize = enemySpriteSize.scaleByHeight(cellScreenSize.getHeight() * 0.8f);
-
-        Transform enemyScreenTransform = transformFactory.createWithPosition(enemyScreenPosition);
-
+        Dimension enemyScreenSize = getEnemyScreenSize(world, enemySprite);
+        Transform enemyScreenTransform = transformFactory.createWithPosition(getEnemyScreenPosition(world, enemy, enemyScreenSize));
         getRenderer().drawSprite(enemySprite, enemyScreenTransform, enemyScreenSize.toVector());
     }
 
     private void renderTowerInCell(World world, int row, int col) {
         Tower tower = world.getCell(row, col).getTower();
-
         if (tower != null) {
             Vector3f cellScreenPosition = getCellScreenPosition(world, row, col);
-            Dimension cellScreenSize = new Dimension(getCellScreenSize(world));
-
             S towerSprite = tower.getSprite(getRenderer().getSpriteFactory());
-            Dimension towerSpriteSize = towerSprite.getSize();
-            Dimension towerScreenSize = towerSpriteSize.scaleByHeight(cellScreenSize.getHeight());
-
-            Vector3f towerScreenPositionCenter = cellScreenSize.centerWithin(cellScreenPosition, towerScreenSize);
-            Vector3f towerScreenPositionOffset = cellScreenSize.toVector().onlyY().scale(-0.3f);
-            Vector3f towerScreenPosition = towerScreenPositionCenter.add(towerScreenPositionOffset);
-
-            Transform towerScreenTransform = transformFactory.createWithPosition(towerScreenPosition);
-
+            Dimension towerScreenSize = new Dimension(getTowerScreenSize(world, tower).toVector());
+            Transform towerScreenTransform = transformFactory.createWithPosition(getTowerScreenPosition(world, cellScreenPosition, towerScreenSize));
             getRenderer().drawSprite(towerSprite, towerScreenTransform, towerScreenSize.toVector());
         }
+    }
+
+    private Vector3f getTowerScreenPosition(World world, Vector3f cellScreenPosition, Dimension size) {
+        return cellScreenPosition.add(alignWithCellBottom(world, size)).add(getEntityCellOffset(world));
+    }
+
+    private Dimension getTowerScreenSize(World world, Tower tower) {
+        Dimension cellScreenSize = new Dimension(getCellScreenSize(world));
+        S towerSprite = tower.getSprite(getRenderer().getSpriteFactory());
+        Dimension towerSpriteSize = towerSprite.getSize();
+        return towerSpriteSize.scaleByHeight(cellScreenSize.getHeight());
+    }
+
+    private Vector3f getEnemyScreenPosition(World world, Enemy enemy, Dimension size) {
+        return getViewPosition().add(enemy.getPosition().scale(getCellScreenSize(world))).add(alignWithCellBottom(world, size)).add(getEntityCellOffset(world));
+    }
+
+    private Dimension getEnemyScreenSize(World world, S enemySprite) {
+        Dimension cellScreenSize = new Dimension(getCellScreenSize(world));
+        Dimension enemySpriteSize = enemySprite.getSize();
+        return enemySpriteSize.scaleByHeight(cellScreenSize.getHeight() * 0.7f);
+    }
+
+    private Vector3f alignWithCellBottom(World world, Dimension size) {
+        Dimension cellScreenSize = new Dimension(getCellScreenSize(world));
+        Vector3f cellScreenPositionCenter = cellScreenSize.centerWithin(Vector3f.zero(), size);
+        Vector3f offsetToBottom = cellScreenSize.toVector().onlyY().scale(0.5f).sub(size.toVector().onlyY().scale(0.5f));
+        // Vector3f cellScreenPositionBottom = cellScreenPositionCenter.add(cellScreenSize.toVector().onlyY().scale(0.5f));
+        return cellScreenPositionCenter.add(offsetToBottom); // cellScreenPositionBottom.sub(size.toVector());
+    }
+
+    private Vector3f getEntityCellOffset(World world) {
+        return getCellScreenSize(world).onlyY().scale(-0.3f);
     }
 
     private Vector3f getCellScreenPosition(World world, int row, int col) {

@@ -32,7 +32,9 @@ public class Model implements Updateable {
         World world = builder.build();
         world.getCell(1, 3).setTower(Towers.mario());
         world.addEnemy(Enemies.goomba(world, 0));
+        world.addEnemy(Enemies.goomba(world, 1));
         world.addEnemy(Enemies.goomba(world, 2));
+        world.addEnemy(Enemies.goomba(world, 3));
         world.addEnemy(Enemies.goomba(world, 4));
 
         return world;
