@@ -11,9 +11,14 @@ import java.util.Collection;
 public abstract class Attack {
     private final float coolDown;
     private float timeSinceLastAttack;
+    public abstract AttackTargetArea getTargetArea();
+    private int row;
+    private int col;
 
-    public Attack(float coolDown) {
+    public Attack(float coolDown, int row, int col) {
         this.coolDown = coolDown;
+        this.row = row;
+        this.col = col;
     }
 
     public abstract void performAttack(Tower tower);
@@ -25,15 +30,6 @@ public abstract class Attack {
 
     public void updateTimeSinceLastAttack(Time time) {
         this.timeSinceLastAttack = time.getElapsedSeconds();
-    }
-
-    public abstract AttackTargetArea getTargetArea();
-    private int row;
-    private int col;
-
-    public Attack(int row, int col) {
-        this.row = row;
-        this.col = col;
     }
 
     public Collection<Enemy> getEnemiesInRange(World world) {
