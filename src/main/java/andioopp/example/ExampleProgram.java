@@ -18,7 +18,7 @@ public class ExampleProgram implements GfxProgram {
 
     private <S extends Sprite<?>> void initGameloop(Model model, View<S> view, Clock clock) {
         clock.listen(model::update);
-        clock.listen((time) -> view.render(model.getWorld()));
+        clock.listen((time) -> view.render(model));
         clock.start();
     }
 

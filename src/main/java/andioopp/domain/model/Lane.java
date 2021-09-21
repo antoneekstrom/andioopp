@@ -1,13 +1,11 @@
 package andioopp.domain.model;
 
-import andioopp.common.time.Time;
 import andioopp.domain.model.enemy.Enemy;
-import andioopp.domain.model.tower.Tower;
 
 import java.util.Collection;
 import java.util.List;
 
-public class Lane implements Updateable {
+public class Lane {
     private final List<Cell> cells;
     private final Collection<Enemy> enemies;
 
@@ -16,20 +14,19 @@ public class Lane implements Updateable {
         this.enemies = enemies;
     }
 
-    @Override
-    public void update(Time time) {
-
+    public int getNumberOfCells() {
+        return getCells().size();
     }
 
-    public static Cell getCell(List<Lane> lanes, int row, int col) {
-        return lanes.get(row).getCells().get(col);
+    public Cell getCell(int col) {
+        return getCells().get(col);
     }
 
     public Collection<Enemy> getEnemies() {
         return enemies;
     }
 
-    public List<Cell> getCells() {
+    private List<Cell> getCells() {
         return cells;
     }
 }
