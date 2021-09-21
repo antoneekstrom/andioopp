@@ -2,6 +2,8 @@ package andioopp.model;
 
 import andioopp.common.time.Time;
 import andioopp.model.enemy.Enemy;
+import andioopp.model.tower.Tower;
+import andioopp.model.tower.attack.Attack;
 
 import java.util.Collection;
 import java.util.List;
@@ -19,6 +21,13 @@ public class World implements Updateable {
     @Override
     public void update(Time time) {
         getEnemies().forEach((enemy) -> enemy.update(time));
+        for (int row = 0; row < getLanes().size(); row++) {
+            for (int col = 0; col < getNumberOfCellsInLanes(); col++) {
+                for (Attack attack : getCell(row, col).getTower().getAttacks()) {
+
+                }
+            }
+        }
     }
 
     public void addEnemy(Enemy enemy) {
