@@ -20,19 +20,17 @@ public class Mario extends Tower {
     private static final int BASE_RANGE = -1;
     private static ArrayList<Integer> targetedLanes = new ArrayList<>(Arrays.asList(0));
 
+    private static final ArrayList<Enum> requirements = new ArrayList<>();
+    private static final ArrayList<Enum> immunity = new ArrayList<>();
+
     public Mario() {
         super(SPRITE_PATH, BASE_RANGE, BASE_COST, BASE_HEALTH, targetedLanes);
+        requirements.add(REQUIREMENT.GROUND);
+        immunity.add(IMMUNITY.FIREBALL);
     }
 
     public boolean canAttack(Collection<Enemy> enemies){
         return true;
     }
 
-    @Override
-    public boolean isAttackable(Enemy enemy) {
-
-
-
-        return true; //true for now
-    }
 }

@@ -7,18 +7,26 @@ import andioopp.model.Updateable;
 import andioopp.common.gfx.Sprite;
 import andioopp.common.gfx.SpriteFactory;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public abstract class Enemy implements Updateable {
 
     private final Health health;
     private final Transform transform;
     private String sprite;
 
+    //Enums
+    public ArrayList<Enum> requirements = new ArrayList();
+    public ArrayList<Enum> immunity = new ArrayList<>();
+    public enum REQUIREMENT {FLYING, GROUND, GHOST, WATER, DIGGING, SPIKE, EAT, THROWABLE};
+    public enum IMMUNITY {BOSS, FIREBALLRESISTANT}
+
     protected Enemy(String spritePath, Transform transform, Health health) {
         this.sprite = spritePath;
         this.transform = transform;
         this.health = health;
     }
-
     public <S extends Sprite<?>> S getSprite(SpriteFactory<S> spriteFactory) {
         return spriteFactory.get(sprite);
     }
