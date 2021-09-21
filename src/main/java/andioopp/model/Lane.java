@@ -17,7 +17,7 @@ public class Lane {
         return getCells().get(col);
     }
 
-    private List<Cell> getCells() {
+    public List<Cell> getCells() {
         return cells;
     }
 }
