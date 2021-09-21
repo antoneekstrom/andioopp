@@ -4,6 +4,7 @@ import andioopp.model.Health;
 import andioopp.model.enemy.Enemy;
 import andioopp.common.gfx.Sprite;
 import andioopp.common.gfx.SpriteFactory;
+import andioopp.model.tower.attack.Attack;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,6 +25,10 @@ public abstract class Tower {
         this.targetedLanes = targetedLanes;
     }
 
+    public Attack[] getAttacks() {
+        return null;
+    }
+
     public <S extends Sprite<?>> S getSprite(SpriteFactory<S> spriteFactory) {
         return spriteFactory.get(sprite);
     }
@@ -39,8 +44,4 @@ public abstract class Tower {
     protected void setSprite(String sprite) {
         this.sprite = sprite;
     }
-
-    public abstract TargetingStrategy getTargetingStrategy();
-
-    public abstract boolean canAttack(Collection<Enemy> enemies);
 }

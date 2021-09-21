@@ -20,11 +20,6 @@ public class Mario extends Tower {
         super(SPRITE_PATH, BASE_RANGE, BASE_COST, BASE_HEALTH, targetedLanes);
     }
 
-    @Override
-    public TargetingStrategy getTargetingStrategy() {
-        return null;
-    }
-
     public boolean canAttack(Collection<Enemy> enemies){
         return true;
     }
