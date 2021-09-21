@@ -51,7 +51,7 @@ public abstract class Tower {
         this.sprite = sprite;
     }
 
-    public boolean matchesRequirements(Enemy enemy) {
+    public boolean hasMatchingRequirements(Enemy enemy) {
         for(int i = 0; i < requirements.size(); i++) {
             Enum r = requirements.get(i);
             for(int j = 0; i < enemy.requirements.size(); i++){
@@ -61,9 +61,18 @@ public abstract class Tower {
                 }
             }
         }
-        return true; //true for now
+        return false;
     }
-    /*public boolean matchesImmunity(Enemy enemy) {
-        for(int i = 0;i < )
-    }*/
+    public boolean isImmune(Enemy enemy) {
+        for(int i = 0;i < immunty.size(); i++ ) {
+            Enum imm = immunty.get(i);
+            for(int j = 0; j < enemy.immunity.size(); j++) {
+                Enum EnemyImm = enemy.immunity.get(j);
+                if (imm.equals(EnemyImm)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
