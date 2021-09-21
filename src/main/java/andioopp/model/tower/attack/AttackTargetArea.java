@@ -1,10 +1,12 @@
 package andioopp.model.tower.attack;
 
-import andioopp.model.World;
+import andioopp.common.transform.Vector3f;
 import andioopp.model.enemy.Enemy;
+import andioopp.model.tower.Tower;
 
-import java.util.Collection;
+import javax.swing.text.Position;
+import java.util.Vector;
 
 public interface AttackTargetArea {
-    Collection<Enemy> getEnemiesInArea(World world);
+    boolean enemyIsInRange(int row, int col, Vector3f enemyPosition);
 }
