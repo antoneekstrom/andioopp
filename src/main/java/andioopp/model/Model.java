@@ -15,8 +15,8 @@ public class Model implements Updateable {
     private final ListFactory listFactory = new ArrayListFactory();
 
     public Model(WaveQueue waves, Player player) {
-        this.world = createWorld();
         this.waves = waves;
+        this.world = createWorld();
         this.player = player;
     }
 
@@ -31,11 +31,14 @@ public class Model implements Updateable {
 
         World world = builder.build();
         world.getCell(1, 3).setTower(Towers.mario());
-        world.addEnemy(Enemies.goomba(world, 0));
+        waves.addWavesToWaveQueue(world,1);
+        waves.addWaveToWorld(world);
+
+        /*world.addEnemy(Enemies.goomba(world, 0));
         world.addEnemy(Enemies.goomba(world, 1));
         world.addEnemy(Enemies.goomba(world, 2));
         world.addEnemy(Enemies.goomba(world, 3));
-        world.addEnemy(Enemies.goomba(world, 4));
+        world.addEnemy(Enemies.goomba(world, 4));*/
 
         return world;
     }
@@ -44,3 +47,6 @@ public class Model implements Updateable {
         return world;
     }
 }
+
+
+
