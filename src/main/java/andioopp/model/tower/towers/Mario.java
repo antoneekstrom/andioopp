@@ -27,6 +27,8 @@ public class Mario extends Tower {
         super(SPRITE_PATH, BASE_RANGE, BASE_COST, BASE_HEALTH, targetedLanes);
         requirements.add(REQUIREMENT.GROUND);
         immunity.add(IMMUNITY.FIREBALL);
+
+
     }
 
     public boolean canAttack(Collection<Enemy> enemies){
