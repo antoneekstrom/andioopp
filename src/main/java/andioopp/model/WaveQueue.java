@@ -1,5 +1,7 @@
 package andioopp.model;
 
+import andioopp.common.time.Time;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
