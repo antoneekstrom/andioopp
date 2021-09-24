@@ -4,6 +4,7 @@ import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.storage.ListFactory;
 import andioopp.common.time.Time;
 import andioopp.model.enemy.Enemies;
+import andioopp.model.tower.Tower;
 import andioopp.model.tower.Towers;
 
 public class Model implements Updateable {
@@ -11,6 +12,7 @@ public class Model implements Updateable {
     private final World world;
     private final WaveQueue waves;
     private final Player player;
+    private boolean isPaused = true;
 
     private final ListFactory listFactory = new ArrayListFactory();
 
@@ -42,5 +44,23 @@ public class Model implements Updateable {
 
     public World getWorld() {
         return world;
+    }
+
+    public void toggleGamePauseStatus(){
+        if(isPaused){
+            //timer.goooooo;
+        }
+        else {
+            //timer.stooooooooooop
+        }
+    }
+
+    public boolean getPauseStatus(){
+        return isPaused;
+    }
+
+    public void placeTower(Tower tower, int row, int col) {
+        world.getCell(row, col).setTower(tower);
+        //TODO subtract tower cost from players money
     }
 }

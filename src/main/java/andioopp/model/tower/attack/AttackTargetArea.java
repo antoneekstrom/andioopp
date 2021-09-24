@@ -8,5 +8,5 @@ import javax.swing.text.Position;
 import java.util.Vector;
 
 public interface AttackTargetArea {
-    boolean enemyIsInRange(int row, int col, Vector3f enemyPosition);
+    boolean enemyIsInRange(Vector3f towerPosition, Vector3f enemyPosition);
 }

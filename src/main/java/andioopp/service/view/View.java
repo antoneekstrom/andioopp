@@ -9,6 +9,7 @@ import andioopp.model.tower.Tower;
 import andioopp.common.gfx.Color;
 import andioopp.common.gfx.Renderer;
 import andioopp.common.gfx.Sprite;
+import andioopp.model.tower.attack.projectiles.Projectile;
 
 public class View<S extends Sprite<?>> {
 
@@ -87,6 +88,12 @@ public class View<S extends Sprite<?>> {
             Dimension towerScreenSize = new Dimension(getTowerScreenSize(world, tower).toVector());
             Transform towerScreenTransform = transformFactory.createWithPosition(getTowerScreenPosition(world, cellScreenPosition, towerScreenSize));
             getRenderer().drawSprite(towerSprite, towerScreenTransform, towerScreenSize.toVector());
+        }
+    }
+
+    private void renderProjectiles(World world){
+        for (Projectile projectile : world.getProjectiles()){
+
         }
     }
 
