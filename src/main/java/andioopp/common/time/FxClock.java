@@ -16,8 +16,14 @@ public class FxClock extends AnimationTimer implements Clock {
     }
 
     @Override
+    public void start() {
+        super.start();
+        previousTime = System.nanoTime();
+    }
+
+    @Override
     public void handle(long time) {
-        observable.notifyObservers(new Time(millisToSeconds(time), millisToSeconds(getDeltaTime(time))));
+        observable.notifyObservers(new Time(nanosToSeconds(time), nanosToSeconds(getDeltaTime(time))));
     }
 
     @Override
@@ -36,7 +42,7 @@ public class FxClock extends AnimationTimer implements Clock {
         return elapsed;
     }
 
-    private long millisToSeconds(long millis) {
-        return millis / 1000L;
+    private float nanosToSeconds(long nanos) {
+        return (float)nanos * 0.000_000_000_1f;
     }
 }

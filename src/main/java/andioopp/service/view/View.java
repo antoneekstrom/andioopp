@@ -39,6 +39,7 @@ public class View<S extends Sprite<?>> {
         renderLanes(world);
         renderTowers(world);
         renderEnemies(world);
+        renderProjectiles(world);
     }
 
     private void clearScreen() {
@@ -91,9 +92,10 @@ public class View<S extends Sprite<?>> {
         }
     }
 
-    private void renderProjectiles(World world){
-        for (Projectile projectile : world.getProjectiles()){
-
+    private void renderProjectiles(World world) {
+        S fireballSprite = getRenderer().getSpriteFactory().get("fireball.png");
+        for (Projectile projectile : world.getProjectiles()) {
+            getRenderer().drawSprite(fireballSprite, ConcreteTransform.getFactory().createWithPosition(projectile.getPosition().scale(getCellScreenSize(world))));
         }
     }
 

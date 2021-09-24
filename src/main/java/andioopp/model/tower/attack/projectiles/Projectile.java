@@ -15,7 +15,7 @@ public abstract class Projectile implements Updateable {
         return getTransform().getPosition();
     }
 
-    protected Transform getTransform() {
+    public Transform getTransform() {
         return transform;
     }
 

@@ -9,21 +9,13 @@ import andioopp.model.tower.attack.projectiles.FireballProjectile;
 import andioopp.model.tower.attack.strategies.SingleLaneForward;
 
 public class FireballAttack extends Attack {
-    private AttackTargetArea SingleLaneForward;
 
-    public FireballAttack(World world, float coolDown, Vector3f position) {
-        super(world, coolDown, position);
+    public FireballAttack(float coolDown) {
+        super(coolDown, new SingleLaneForward());
     }
 
     @Override
-    public void performAttack(Tower tower) {
-        getWorld().addProjectile( new FireballProjectile(getPosition()) );
-        //Summon fireball entity at (row, col)
-        //And then the fireball moves on its own
-    }
-
-    @Override
-    public AttackTargetArea getTargetArea() {
-        return SingleLaneForward;
+    public void performAttack(World world, Vector3f position) {
+        world.addProjectile( new FireballProjectile(position) );
     }
 }

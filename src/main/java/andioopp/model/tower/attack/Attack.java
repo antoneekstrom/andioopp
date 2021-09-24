@@ -10,22 +10,16 @@ import andioopp.model.tower.Tower;
 import java.util.Collection;
 
 public abstract class Attack {
-    private final World world;
     private final float coolDown;
     private float timeSinceLastAttack;
+    private final AttackTargetArea targetArea;
 
-    public abstract AttackTargetArea getTargetArea();
-    //TODO Hej jag fattar inte varför denna heter getTargetArea, det är väl ingen getter tack tack //Jacob
-
-    private final Vector3f position;
-
-    public Attack(World world, float coolDown, Vector3f position) {
-        this.world = world;
+    public Attack(float coolDown, AttackTargetArea targetArea) {
         this.coolDown = coolDown;
-        this.position = position;
+        this.targetArea = targetArea;
     }
 
-    public abstract void performAttack(Tower tower);
+    public abstract void performAttack(World world, Vector3f position);
 
     public boolean isAvailableForAttack(Time time){
         float deltaSeconds = time.getElapsedSeconds() - timeSinceLastAttack;
@@ -36,22 +30,14 @@ public abstract class Attack {
         this.timeSinceLastAttack = time.getElapsedSeconds();
     }
 
-    public Collection<Enemy> getEnemiesInRange(World world) {
+    public Collection<Enemy> getEnemiesInRange(World world, Vector3f position) {
         Collection<Enemy> enemiesInRange = new ArrayListFactory().create();
         for ( Enemy enemy : world.getEnemies() ) {
 
-            if ( getTargetArea().enemyIsInRange( position, enemy.getPosition()) ){
+            if (targetArea.enemyIsInRange(position, enemy.getPosition())) {
                 enemiesInRange.add(enemy);
             }
         }
         return enemiesInRange;
-    }
-
-    public World getWorld(){
-        return world;
-    }
-
-    public Vector3f getPosition(){
-        return position;
     }
 }
