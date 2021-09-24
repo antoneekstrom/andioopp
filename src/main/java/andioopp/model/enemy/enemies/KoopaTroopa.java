@@ -18,9 +18,9 @@ public class KoopaTroopa extends Enemy{
 
     public KoopaTroopa(Vector3f position) {
         super(SPRITE_PATH, transformFactory.createWithPosition(position), new Health(BASE_HEALTH));
-        this.requirements.add(REQUIREMENT.GROUND);
+        /*this.requirements.add(REQUIREMENT.GROUND);
         this.requirements.add(REQUIREMENT.EAT);
-        this.requirements.add(REQUIREMENT.THROWABLE);
+        this.requirements.add(REQUIREMENT.THROWABLE);*/
     }
 
     @Override

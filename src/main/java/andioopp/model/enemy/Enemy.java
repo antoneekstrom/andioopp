@@ -2,6 +2,8 @@ package andioopp.model.enemy;
 
 import andioopp.common.transform.Transform;
 import andioopp.common.transform.Vector3f;
+import andioopp.model.FilterImmunity;
+import andioopp.model.FilterRequirement;
 import andioopp.model.Health;
 import andioopp.model.Updateable;
 import andioopp.common.gfx.Sprite;
@@ -17,10 +19,8 @@ public abstract class Enemy implements Updateable {
     private String sprite;
 
     //Enums
-    public ArrayList<Enum> requirements = new ArrayList();
-    public ArrayList<Enum> immunity = new ArrayList<>();
-    public enum REQUIREMENT {FLYING, GROUND, GHOST, WATER, DIGGING, SPIKE, EAT, THROWABLE};
-    public enum IMMUNITY {BOSS, FIREBALL}
+    public ArrayList<FilterRequirement> requirements = new ArrayList<>();
+    public ArrayList<FilterImmunity> immunity = new ArrayList<>();
 
     protected Enemy(String spritePath, Transform transform, Health health) {
         this.sprite = spritePath;

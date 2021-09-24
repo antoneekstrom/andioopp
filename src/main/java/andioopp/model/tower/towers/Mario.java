@@ -1,5 +1,7 @@
 package andioopp.model.tower.towers;
 
+import andioopp.model.FilterImmunity;
+import andioopp.model.FilterRequirement;
 import andioopp.model.enemy.Enemy;
 import andioopp.model.tower.TargetingStrategy;
 import andioopp.model.tower.Tower;
@@ -25,8 +27,8 @@ public class Mario extends Tower {
 
     public Mario() {
         super(SPRITE_PATH, BASE_RANGE, BASE_COST, BASE_HEALTH, targetedLanes);
-        requirements.add(REQUIREMENT.GROUND);
-        immunity.add(IMMUNITY.FIREBALL);
+        requirements.add(FilterRequirement.GROUND);
+        immunity.add(FilterImmunity.FIREBALL);
 
 
     }
