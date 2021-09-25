@@ -19,6 +19,7 @@ public class WaveQueue {
     private final Queue<Wave> queue;
     Random rand = new Random();
 
+
     public WaveQueue() {
 
         queue = new LinkedList<>();
@@ -36,14 +37,19 @@ public class WaveQueue {
         queue.add(wave);
 
     }
-    public void addWaveToWorld(World world){
+    public Wave getWave(World world){
 
-        Wave wave = queue.remove();
-        while(wave.enemyWave.size() != 0){
-            world.addEnemy(wave.enemyWave.remove());
+        Wave wave = queue.peek();
+        return wave;
 
-        }
+    }
+    public void addWaveToWorld(World world, Wave wave) {
+
+        wave = queue.peek();
+        world.addEnemy(wave.enemyWave.remove());
+    }
 
     }
 
-}
+
+

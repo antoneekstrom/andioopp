@@ -11,6 +11,8 @@ public class Model implements Updateable {
     private final World world;
     private final WaveQueue waves;
     private final Player player;
+    float timeSinceLastEnemy;
+    float deltaSeconds;
 
     private final ListFactory listFactory = new ArrayListFactory();
 
@@ -23,6 +25,20 @@ public class Model implements Updateable {
     @Override
     public void update(Time time) {
         world.update(time);
+
+        if(delayEnemies(time)){
+        if(waves.getWave(world).enemyWave.size() != 0) {
+
+            waves.addWaveToWorld(world, waves.getWave(world));
+            System.out.println("new enemy");
+            this.deltaSeconds = 0;
+            updateTimeSinceLastEnemy(time);
+
+
+        }
+            }
+
+
     }
 
     private World createWorld() {
@@ -32,7 +48,9 @@ public class Model implements Updateable {
         World world = builder.build();
         world.getCell(1, 3).setTower(Towers.mario());
         waves.addWavesToWaveQueue(world,1);
-        waves.addWaveToWorld(world);
+
+
+
 
         /*world.addEnemy(Enemies.goomba(world, 0));
         world.addEnemy(Enemies.goomba(world, 1));
@@ -42,7 +60,17 @@ public class Model implements Updateable {
 
         return world;
     }
+    public boolean delayEnemies(Time time){
+        this.deltaSeconds = time.getElapsedSeconds() - timeSinceLastEnemy;
+        System.out.println(deltaSeconds);
+        return(this.deltaSeconds > 20000000);
 
+    }
+
+
+    public void updateTimeSinceLastEnemy(Time time) {
+        this.timeSinceLastEnemy = time.getElapsedSeconds();
+    }
     public World getWorld() {
         return world;
     }
