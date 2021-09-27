@@ -22,6 +22,8 @@ public class Vector3f {
         this(x, 0, 0);
     }
 
+    public Vector3f(Vector3f other) { this(other.getX(), other.getY(), other.getZ()); }
+
     public static Vector3f withX(float x) {
         return new Vector3f(x, 0, 0);
     }
@@ -56,11 +58,6 @@ public class Vector3f {
 
     public Vector3f onlyZ() {
         return Vector3f.withZ(getZ());
-    }
-
-    public Vector3f scaleXProportional(float w) {
-        float ratio = getX() / getY();
-        return new Vector3f(w, getX() / ratio);
     }
 
     public Vector3f scale(Vector3f other) {
