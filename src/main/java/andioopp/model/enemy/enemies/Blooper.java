@@ -1,3 +1,4 @@
+
 package andioopp.model.enemy.enemies;
 
 import andioopp.common.time.Time;
@@ -17,7 +18,7 @@ public class Blooper extends Enemy {
 
     public Blooper(Vector3f position) {
         super(SPRITE_PATH, transformFactory.createWithPosition(position), new Health(BASE_HEALTH));
-        this.requirements.add(REQUIREMENT.WATER);
+        //this.requirements.add(REQUIREMENT.WATER);
     }
 
     @Override

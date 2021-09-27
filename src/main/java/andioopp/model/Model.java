@@ -4,7 +4,6 @@ import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.storage.ListFactory;
 import andioopp.common.time.Time;
 import andioopp.model.enemy.Enemies;
-import andioopp.model.tower.Tower;
 import andioopp.model.tower.Towers;
 
 public class Model implements Updateable {
@@ -12,19 +11,34 @@ public class Model implements Updateable {
     private final World world;
     private final WaveQueue waves;
     private final Player player;
-    private boolean isPaused = true;
+    float timeSinceLastEnemy;
+    float deltaSeconds;
 
     private final ListFactory listFactory = new ArrayListFactory();
 
     public Model(WaveQueue waves, Player player) {
-        this.world = createWorld();
         this.waves = waves;
+        this.world = createWorld();
         this.player = player;
     }
 
     @Override
     public void update(Time time) {
         world.update(time);
+
+        if(delayEnemies(time)){
+        if(waves.getWave(world).enemyWave.size() != 0) {
+
+            waves.addWaveToWorld(world, waves.getWave(world));
+            System.out.println("new enemy");
+            this.deltaSeconds = 0;
+            updateTimeSinceLastEnemy(time);
+
+
+        }
+            }
+
+
     }
 
     private World createWorld() {
@@ -33,34 +47,34 @@ public class Model implements Updateable {
 
         World world = builder.build();
         world.getCell(1, 3).setTower(Towers.mario());
-        world.addEnemy(Enemies.goomba(world, 0));
+        waves.addWavesToWaveQueue(world,1);
+
+
+
+
+        /*world.addEnemy(Enemies.goomba(world, 0));
         world.addEnemy(Enemies.goomba(world, 1));
         world.addEnemy(Enemies.goomba(world, 2));
         world.addEnemy(Enemies.goomba(world, 3));
-        world.addEnemy(Enemies.goomba(world, 4));
+        world.addEnemy(Enemies.goomba(world, 4));*/
 
         return world;
     }
+    public boolean delayEnemies(Time time){
+        this.deltaSeconds = time.getElapsedSeconds() - timeSinceLastEnemy;
+        System.out.println(deltaSeconds);
+        return(this.deltaSeconds > 20000000);
 
+    }
+
+
+    public void updateTimeSinceLastEnemy(Time time) {
+        this.timeSinceLastEnemy = time.getElapsedSeconds();
+    }
     public World getWorld() {
         return world;
     }
-
-    public void toggleGamePauseStatus(){
-        if(isPaused){
-            //timer.goooooo;
-        }
-        else {
-            //timer.stooooooooooop
-        }
-    }
-
-    public boolean getPauseStatus(){
-        return isPaused;
-    }
-
-    public void placeTower(Tower tower, int row, int col) {
-        world.getCell(row, col).setTower(tower);
-        //TODO subtract tower cost from players money
-    }
 }
+
+
+
