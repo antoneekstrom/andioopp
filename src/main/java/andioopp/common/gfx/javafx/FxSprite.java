@@ -1,7 +1,6 @@
 package andioopp.common.gfx.javafx;
 
 import andioopp.common.gfx.Sprite;
-import andioopp.common.gfx.SpriteFactory;
 import javafx.scene.image.Image;
 
 /**
@@ -15,12 +14,8 @@ public class FxSprite implements Sprite<Image> {
         this.image = image;
     }
 
-    public static FxSprite load(String path) {
-        return new FxSprite(new Image(path));
-    }
-
-    public static SpriteFactory<FxSprite> getFactory() {
-        return new SpriteFactory<>(FxSprite::load);
+    public FxSprite(String path) {
+        this(new Image(path));
     }
 
     @Override

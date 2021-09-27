@@ -10,8 +10,8 @@ public class ConcreteTransform implements Transform {
         this.scale = scale;
     }
 
-    public static ConcreteTransformFactory getFactory() {
-        return new ConcreteTransformFactory(ConcreteTransform::new);
+    public static TransformFactory getFactory() {
+        return ConcreteTransform::new;
     }
 
     @Override
@@ -29,10 +29,12 @@ public class ConcreteTransform implements Transform {
         return scale;
     }
 
+    @Override
     public void setRotation(Vector3f rotation) {
         this.rotation = rotation;
     }
 
+    @Override
     public void setScale(Vector3f scale) {
         this.scale = scale;
     }
@@ -40,10 +42,5 @@ public class ConcreteTransform implements Transform {
     @Override
     public void setPosition(Vector3f position) {
         this.position = position;
-    }
-
-    @Override
-    public void translate(Vector3f translation) {
-        position = position.add(translation);
     }
 }

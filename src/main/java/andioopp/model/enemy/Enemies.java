@@ -1,8 +1,7 @@
 package andioopp.model.enemy;
 
-import andioopp.common.time.Time;
 import andioopp.common.transform.Vector3f;
-import andioopp.model.World;
+import andioopp.model.world.World;
 import andioopp.model.enemy.enemies.Blooper;
 import andioopp.model.enemy.enemies.Goomba;
 import andioopp.model.enemy.enemies.KoopaTroopa;

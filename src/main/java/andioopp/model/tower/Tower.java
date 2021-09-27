@@ -1,13 +1,12 @@
 package andioopp.model.tower;
 
-import andioopp.model.Health;
+import andioopp.common.gfx.SpriteFactory;
+import andioopp.model.stats.Health;
 import andioopp.model.enemy.Enemy;
 import andioopp.common.gfx.Sprite;
-import andioopp.common.gfx.SpriteFactory;
 import andioopp.model.tower.attack.Attack;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public abstract class Tower {
 

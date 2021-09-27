@@ -1,13 +1,12 @@
 package andioopp.model.enemy;
 
+import andioopp.common.gfx.SpriteFactory;
 import andioopp.common.transform.Transform;
 import andioopp.common.transform.Vector3f;
-import andioopp.model.Health;
+import andioopp.model.stats.Health;
 import andioopp.model.Updateable;
 import andioopp.common.gfx.Sprite;
-import andioopp.common.gfx.SpriteFactory;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public abstract class Enemy implements Updateable {

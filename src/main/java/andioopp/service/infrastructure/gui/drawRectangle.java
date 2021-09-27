@@ -1,7 +1,6 @@
-package andioopp.service.GUI;
+package andioopp.service.infrastructure.gui;
 
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 public class drawRectangle {
     private final float height;

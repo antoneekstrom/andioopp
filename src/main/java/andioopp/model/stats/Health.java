@@ -1,4 +1,4 @@
-package andioopp.model;
+package andioopp.model.stats;
 
 public class Health {
 

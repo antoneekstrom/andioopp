@@ -1,9 +1,9 @@
-package andioopp.service.view;
+package andioopp.view;
 
 import andioopp.common.transform.*;
-import andioopp.model.Lane;
+import andioopp.model.world.Lane;
 import andioopp.model.Model;
-import andioopp.model.World;
+import andioopp.model.world.World;
 import andioopp.model.enemy.Enemy;
 import andioopp.model.tower.Tower;
 import andioopp.common.gfx.Color;
@@ -124,8 +124,7 @@ public class View<S extends Sprite<?>> {
         Dimension cellScreenSize = new Dimension(getCellScreenSize(world));
         Vector3f cellScreenPositionCenter = cellScreenSize.centerWithin(Vector3f.zero(), size);
         Vector3f offsetToBottom = cellScreenSize.toVector().onlyY().scale(0.5f).sub(size.toVector().onlyY().scale(0.5f));
-        // Vector3f cellScreenPositionBottom = cellScreenPositionCenter.add(cellScreenSize.toVector().onlyY().scale(0.5f));
-        return cellScreenPositionCenter.add(offsetToBottom); // cellScreenPositionBottom.sub(size.toVector());
+        return cellScreenPositionCenter.add(offsetToBottom);
     }
 
     private Vector3f getEntityCellOffset(World world) {

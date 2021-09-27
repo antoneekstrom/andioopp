@@ -4,8 +4,13 @@ import java.util.Collection;
 
 public interface Observable<T> {
     Collection<Observer<T>> getObservers();
-    void notifyObservers(T event);
-    void addObserver(Observer<T> observer);
-    void removeObserver(Observer<T> observer);
-
+    default void notifyObservers(T event) {
+        getObservers().forEach(observer -> observer.onEvent(event));
+    }
+    default void addObserver(Observer<T> observer) {
+        getObservers().add(observer);
+    }
+    default void removeObserver(Observer<T> observer) {
+        getObservers().remove(observer);
+    }
 }

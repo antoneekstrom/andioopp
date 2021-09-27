@@ -11,5 +11,5 @@ public interface GfxProgram {
      * @param <S> Describes the type of {@link Sprite} used by the {@link Renderer}
      * @param <R> Describes the {@link Renderer} used by the {@link Window}
      */
-    <S extends Sprite<?>, R extends Renderer<S>> void run(Window<R> window);
+    <S extends Sprite<?>, R extends Renderer<S>, W extends Window<R>> void run(WindowBuilder<W> window);
 }

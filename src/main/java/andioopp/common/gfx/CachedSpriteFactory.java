@@ -3,12 +3,13 @@ package andioopp.common.gfx;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CachedSpriteFactory<S extends Sprite<?>> extends SpriteFactory<S> {
-    
+public class CachedSpriteFactory<S extends Sprite<?>> implements SpriteFactory<S> {
+
+    private final SpriteFactory<S> spriteFactory;
     private final Map<String, S> cacheMap;
 
-    public CachedSpriteFactory(SpriteSupplier<S> spriteSupplier) {
-        super(spriteSupplier);
+    public CachedSpriteFactory(SpriteFactory<S> spriteFactory) {
+        this.spriteFactory = spriteFactory;
         cacheMap = new HashMap<>();
     }
 
@@ -18,7 +19,7 @@ public class CachedSpriteFactory<S extends Sprite<?>> extends SpriteFactory<S> {
             return cacheMap.get(path);
         }
         else {
-            return cache(path, super.get(path));
+            return cache(path, getSpriteFactory().get(path));
         }
     }
 
@@ -31,5 +32,7 @@ public class CachedSpriteFactory<S extends Sprite<?>> extends SpriteFactory<S> {
         return cacheMap.containsKey(path);
     }
 
-
+    private SpriteFactory<S> getSpriteFactory() {
+        return spriteFactory;
+    }
 }

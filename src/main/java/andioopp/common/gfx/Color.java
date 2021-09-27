@@ -9,8 +9,8 @@ public class Color {
     private final Vector3f rgb;
     private final float alpha;
 
-    public Color(float gray) {
-        this(gray, gray, gray);
+    public Color(float value) {
+        this(value, value, value);
     }
 
     public Color(float r, float g, float b) {

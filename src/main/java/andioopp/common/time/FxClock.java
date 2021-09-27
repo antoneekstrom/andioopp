@@ -1,9 +1,7 @@
 package andioopp.common.time;
 
 import andioopp.common.observer.Observable;
-import andioopp.common.observer.ObservableFactoryWithListFactory;
 import andioopp.common.observer.Observer;
-import andioopp.common.storage.ArrayListFactory;
 import javafx.animation.AnimationTimer;
 
 public class FxClock extends AnimationTimer implements Clock {
@@ -11,8 +9,18 @@ public class FxClock extends AnimationTimer implements Clock {
     private final Observable<Time> observable;
     private long previousTime = 0L;
 
-    public FxClock() {
-        observable = new ObservableFactoryWithListFactory(new ArrayListFactory()).create();
+    public FxClock(Observable<Time> observable) {
+        this.observable = observable;
+    }
+
+    private long getDeltaTime(long currentTime) {
+        long elapsed = currentTime - previousTime;
+        previousTime = currentTime;
+        return elapsed;
+    }
+
+    private float nanosToSeconds(long nanos) {
+        return (float) nanos * 0.000_000_000_1f;
     }
 
     @Override
@@ -36,13 +44,8 @@ public class FxClock extends AnimationTimer implements Clock {
         observable.removeObserver(listener);
     }
 
-    private long getDeltaTime(long currentTime) {
-        long elapsed = currentTime - previousTime;
-        previousTime = currentTime;
-        return elapsed;
-    }
-
-    private float nanosToSeconds(long nanos) {
-        return (float)nanos * 0.000_000_000_1f;
+    @Override
+    public void unlistenAll() {
+        observable.getObservers().clear();
     }
 }

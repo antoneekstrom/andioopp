@@ -3,9 +3,8 @@ package andioopp.model.tower.attack;
 import andioopp.common.time.Time;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.transform.Vector3f;
-import andioopp.model.World;
+import andioopp.model.world.World;
 import andioopp.model.enemy.Enemy;
-import andioopp.model.tower.Tower;
 
 import java.util.Collection;
 

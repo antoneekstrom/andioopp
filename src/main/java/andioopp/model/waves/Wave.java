@@ -1,14 +1,12 @@
-package andioopp.model;
+package andioopp.model.waves;
 
 import andioopp.model.enemy.Enemies;
 import andioopp.model.enemy.Enemy;
-import andioopp.model.enemy.enemies.*;
+import andioopp.model.world.World;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import java.util.LinkedList;
-import java.util.List;
 
 public class Wave {
 

@@ -1,4 +1,4 @@
-package andioopp.model;
+package andioopp.model.player;
 
 public class Player {
     private float currency;

@@ -1,11 +1,11 @@
 package andioopp.common.gfx.javafx;
 
+import andioopp.common.gfx.SpriteFactory;
 import andioopp.common.transform.Transform;
 import andioopp.common.transform.Vector3f;
 import andioopp.common.gfx.CachedSpriteFactory;
 import andioopp.common.gfx.Color;
 import andioopp.common.gfx.Renderer;
-import andioopp.common.gfx.SpriteFactory;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
@@ -39,7 +39,7 @@ public class FxRenderer implements Renderer<FxSprite> {
 
     @Override
     public SpriteFactory<FxSprite> getSpriteFactory() {
-        return new CachedSpriteFactory<>(FxSprite.getFactory());
+        return new CachedSpriteFactory<>(FxSprite::new);
     }
 
     private GraphicsContext getCtx() {

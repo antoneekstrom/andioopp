@@ -1,10 +1,8 @@
 package andioopp.model.tower.attack.attacks;
 
 import andioopp.common.transform.Vector3f;
-import andioopp.model.World;
-import andioopp.model.tower.Tower;
+import andioopp.model.world.World;
 import andioopp.model.tower.attack.Attack;
-import andioopp.model.tower.attack.AttackTargetArea;
 import andioopp.model.tower.attack.projectiles.FireballProjectile;
 import andioopp.model.tower.attack.strategies.SingleLaneForward;
 

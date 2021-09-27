@@ -1,6 +1,6 @@
-package andioopp.model;
+package andioopp.model.waves;
 
-import andioopp.common.time.Time;
+import andioopp.model.world.World;
 
 import java.util.LinkedList;
 import java.util.Queue;

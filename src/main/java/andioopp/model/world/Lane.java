@@ -1,4 +1,4 @@
-package andioopp.model;
+package andioopp.model.world;
 
 import java.util.List;
 

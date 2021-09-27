@@ -1,7 +1,8 @@
-package andioopp.model;
+package andioopp.model.world;
 
 import andioopp.common.time.Time;
 import andioopp.common.transform.Vector3f;
+import andioopp.model.Updateable;
 import andioopp.model.enemy.Enemy;
 import andioopp.model.tower.Tower;
 import andioopp.model.tower.attack.Attack;
@@ -27,16 +28,14 @@ public class World implements Updateable {
         getEnemies().forEach((enemy) -> enemy.update(time));
         getProjectiles().forEach((projectile) -> projectile.update(time));
 
-
-
         for (int row = 0; row < getLanes().size(); row++) {
             for (int col = 0; col < getNumberOfCellsInLanes(); col++) {
                 Tower tower = getCell(row, col).getTower();
-                if(tower != null){
+                if (tower != null) {
                     for (Attack attack : tower.getAttacks()) {
 
                         //If the current attack is still on cooldown, move on to the next attack
-                        if(!attack.isAvailableForAttack(time)) continue;
+                        if (!attack.isAvailableForAttack(time)) continue;
 
                         //Finds all enemies in range of the current attack
                         Collection<Enemy> enemiesInRangeOfCurrentAttack = attack.getEnemiesInRange(this, new Vector3f(col, row, 0));
@@ -46,11 +45,11 @@ public class World implements Updateable {
                         //When a targetable enemy is found, the attack can be performed as soon as possible
                         //No need to check the remaing enemies.
                         boolean targetableEnemyExists = false;
-                        for (Enemy enemy : enemiesInRangeOfCurrentAttack){
-                            if ( tower.isImmune(enemy) ) {
+                        for (Enemy enemy : enemiesInRangeOfCurrentAttack) {
+                            if (tower.isImmune(enemy)) {
                                 continue;
                             }
-                            if ( tower.hasMatchingRequirements(enemy) ) {
+                            if (tower.hasMatchingRequirements(enemy)) {
                                 continue;
                             }
                             targetableEnemyExists = true;
@@ -58,7 +57,7 @@ public class World implements Updateable {
                         }
 
                         //Performs the attack and updates its last time of use.
-                        if (targetableEnemyExists){
+                        if (targetableEnemyExists) {
                             attack.performAttack(this, new Vector3f(row, col));
                             attack.updateTimeSinceLastAttack(time);
                         }
@@ -108,7 +107,7 @@ public class World implements Updateable {
         projectiles.add(projectile);
     }
 
-    public Collection<Projectile> getProjectiles(){
+    public Collection<Projectile> getProjectiles() {
         return projectiles;
     }
 }
