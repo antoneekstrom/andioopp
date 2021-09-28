@@ -1,5 +1,7 @@
 package andioopp.model.tower.towers;
 
+import andioopp.model.FilterImmunity;
+import andioopp.model.FilterRequirement;
 import andioopp.model.enemy.Enemy;
 import andioopp.model.tower.TargetingStrategy;
 import andioopp.model.tower.Tower;
@@ -16,8 +18,8 @@ public class Mario extends Tower {
     private static final String SPRITE_PATH = "mario.png";
     private static final Attack[] attackList = {new FireballAttack(0.5f)};
 
-    private static final ArrayList<Enum> requirements = new ArrayList<>();
-    private static final ArrayList<Enum> immunity = new ArrayList<>();
+    public final ArrayList<FilterRequirement> requirements = new ArrayList<>();
+    public final ArrayList<FilterImmunity> immunity = new ArrayList<>();
 
 
     public Mario() {

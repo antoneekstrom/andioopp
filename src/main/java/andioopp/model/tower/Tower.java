@@ -1,5 +1,7 @@
 package andioopp.model.tower;
 
+import andioopp.model.FilterImmunity;
+import andioopp.model.FilterRequirement;
 import andioopp.model.Health;
 import andioopp.model.enemy.Enemy;
 import andioopp.common.gfx.Sprite;
@@ -17,10 +19,8 @@ public abstract class Tower {
     private ArrayList<Attack> attacks;
 
     //Enums
-    public ArrayList<Enum> requirements = new ArrayList<>();
-    public ArrayList<Enum> immunty = new ArrayList<>();
-    public enum REQUIREMENT {FLYING, GROUND, GHOST, WATER, DIGGING, SPIKE, EAT, THROWABLE};
-    public enum IMMUNITY {BOSS, FIREBALL}
+    public ArrayList<FilterRequirement> requirements = new ArrayList<>();
+    public ArrayList<FilterImmunity> immunty = new ArrayList<>();
 
     public Tower(String spritePath, int cost, int health, ArrayList<Attack> attacks) {
         this.sprite = spritePath;
@@ -49,11 +49,11 @@ public abstract class Tower {
         this.sprite = sprite;
     }
 
-    public boolean hasMatchingRequirements(Enemy enemy) {
+    private boolean hasMatchingRequirements(Enemy enemy) {
         for(int i = 0; i < requirements.size(); i++) {
-            Enum r = requirements.get(i);
-            for(int j = 0; i < enemy.requirements.size(); i++){
-                Enum e = enemy.requirements.get(j);
+            FilterRequirement r = requirements.get(i);
+            for(int j = 0; j < enemy.requirements.size(); j++){
+                FilterRequirement e = enemy.requirements.get(j);
                 if (r.equals(e)){
                     return true;
                 }
@@ -61,16 +61,27 @@ public abstract class Tower {
         }
         return false;
     }
-    public boolean isImmune(Enemy enemy) {
-        for(int i = 0;i < immunty.size(); i++ ) {
-            Enum imm = immunty.get(i);
-            for(int j = 0; j < enemy.immunity.size(); j++) {
-                Enum EnemyImm = enemy.immunity.get(j);
-                if (imm.equals(EnemyImm)) {
-                    return true;
+
+    private boolean isImmune(Enemy enemy) {
+        if(enemy.immunity.isEmpty()) { //if enemy immunity list is empty => Its not immune.
+            return false;
+        } else {
+            for (int i = 0; i < immunty.size(); i++) {
+                FilterImmunity imm = immunty.get(i);
+                for (int j = 0; j < enemy.immunity.size(); j++) {
+                    FilterImmunity EnemyImm = enemy.immunity.get(j);
+                    if (imm.equals(EnemyImm)) {
+                        return true;
+                    }
                 }
             }
         }
         return false;
+    }
+    public boolean checkFilters(Enemy enemy) {
+        boolean b1 = !isImmune(enemy);
+        boolean b2 = hasMatchingRequirements(enemy);
+        return b1 && b2;
+        //return ((!isImmune(enemy)) && hasMatchingRequirements(enemy));
     }
 }
