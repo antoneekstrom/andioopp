@@ -3,9 +3,7 @@ package andioopp.model;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.storage.ListFactory;
 import andioopp.common.time.Time;
-import andioopp.model.enemy.Enemies;
 import andioopp.model.tower.Towers;
-import java.lang.Math;
 
 public class Model implements Updateable {
 
@@ -27,9 +25,9 @@ public class Model implements Updateable {
         world.update(time);
 
         if(waves.delayEnemies(time, delay)){
-        if(waves.getWave(world).enemyWave.size() != 0) {
+        if(waves.getWave().enemyWave.size() != 0) {
 
-            waves.addWaveToWorld(world, waves.getWave(world));
+            waves.addWaveToWorld(world);
             System.out.println("new enemy");
             waves.setDeltaSeconds(0);
             this.delay = waves.getRandomDelay();

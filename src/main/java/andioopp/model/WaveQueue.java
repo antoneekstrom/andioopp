@@ -35,26 +35,25 @@ public class WaveQueue {
     }
 
     public void addWavesToWaveQueue(World world, int numWaves) {
-        Wave wave = new Wave(8);
+        Wave wave = new Wave(rand.nextInt(8) + 3);
         for (int i = 0; i < numWaves; i++){
             wave.addEnemyToWave(world);
         }
         queue.add(wave);
 
     }
-    public Wave getWave(World world){
+    public Wave getWave(){
 
         Wave wave = queue.peek();
         return wave;
 
     }
-    public void addWaveToWorld(World world, Wave wave) {
+    public void addWaveToWorld(World world) {
 
-        wave = queue.peek();
+        Wave wave = queue.peek();
         world.addEnemy(wave.enemyWave.remove());
     }
     public boolean delayEnemies(Time time, double delay){
-        //int randomDelay = rand.nextInt(100) + 1;
         this.deltaSeconds = time.getElapsedSeconds() - timeSinceLastEnemy;
         System.out.println(delay);
 
@@ -67,7 +66,7 @@ public class WaveQueue {
     }
 
     public double getRandomDelay(){
-        int randomDelay = rand.nextInt(11) + 4;
+        int randomDelay = rand.nextInt(12) + 3;
 
         return randomDelay * Math.pow(10,6.5);
 
