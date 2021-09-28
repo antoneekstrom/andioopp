@@ -18,7 +18,7 @@ public class Game implements GfxProgram {
         CreationService creationService = new CreationService(new ArrayListFactory(), ConcreteTransform.getFactory());
         LoopService loopService = new LoopService(creationService.createClock());
 
-        GameSetupService gameSetupService = new GameSetupService(
+        GameSetupService<W> gameSetupService = new GameSetupService<>(
             windowingService,
             loopService,
             null,

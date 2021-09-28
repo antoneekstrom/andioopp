@@ -49,7 +49,7 @@ public class Model implements Updateable {
 
     public boolean delayEnemies(Time time) {
         this.deltaSeconds = time.getElapsedSeconds() - timeSinceLastEnemy;
-        return (this.deltaSeconds > 2);
+        return (this.deltaSeconds > 0.2);
     }
 
     public void updateTimeSinceLastEnemy(Time time) {

@@ -3,6 +3,8 @@ package andioopp.model.tower.attack;
 import andioopp.common.time.Time;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.transform.Vector3f;
+import andioopp.model.FilterImmunity;
+import andioopp.model.FilterRequirement;
 import andioopp.model.world.World;
 import andioopp.model.enemy.Enemy;
 

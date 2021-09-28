@@ -1,5 +1,7 @@
 package andioopp.common.gfx;
 
+import andioopp.common.observer.Observable;
+
 /**
  * Represents the application window.
  * @param <R> Describes the type of {@link Renderer} the window has
@@ -16,6 +18,10 @@ public interface Window<R extends Renderer<?>> {
      * @param isMaximized If the window is maximized
      */
     void setMaximized(boolean isMaximized);
+
+    Observable<Object> getMouseObservable();
+
+    Observable<Object> getResizeObservable();
 
     int getWidth();
 

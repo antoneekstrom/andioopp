@@ -1,6 +1,6 @@
 package andioopp.service.infrastructure.creation;
 
-import andioopp.common.observer.ObservableWithListFactory;
+import andioopp.common.observer.ObservableWithList;
 import andioopp.common.storage.ListFactory;
 import andioopp.common.time.Clock;
 import andioopp.common.time.FxClock;
@@ -17,7 +17,7 @@ public class CreationService {
     }
 
     public Clock createClock() {
-        return new FxClock(new ObservableWithListFactory<>(getListFactory().create()));
+        return new FxClock(new ObservableWithList<>(getListFactory().create()));
     }
 
     public TransformFactory getTransformFactory() {

@@ -85,7 +85,7 @@ public class World implements Updateable {
         }
     }
 
-    private void evaluateProjectileHit(Projectile projectile, Enemy enemy){
+    private void evaluateProjectileHit(Projectile projectile, Enemy enemy) {
         projectiles.remove(projectile);
         enemies.remove(enemy);
     }

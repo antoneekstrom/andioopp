@@ -4,6 +4,8 @@ import andioopp.common.time.Time;
 import andioopp.common.transform.ConcreteTransform;
 import andioopp.common.transform.TransformFactory;
 import andioopp.common.transform.Vector3f;
+import andioopp.model.FilterImmunity;
+import andioopp.model.FilterRequirement;
 import andioopp.model.stats.Health;
 import andioopp.model.enemy.Enemy;
 
