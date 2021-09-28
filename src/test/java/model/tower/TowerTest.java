@@ -19,6 +19,8 @@ public class TowerTest {
     private Model model;
     Tower mario = new Mario();
 
+    /*
+
     @Before
     public void setup() {
         System.out.println( mario.requirements.size() + " REQUIEMREMNT SIZE I TESTIFLEN");
@@ -27,6 +29,7 @@ public class TowerTest {
         goomba = Enemies.goomba(world, 1);
         buzzyBeetle = Enemies.buzzyBeetle(world, 1);
     }
+
 
     @Test
     public void testtesttesttest() {
@@ -47,4 +50,6 @@ public class TowerTest {
         boolean f = mario.checkFilters(buzzyBeetle);
         assertFalse(f);
     }
+
+    */
 }
