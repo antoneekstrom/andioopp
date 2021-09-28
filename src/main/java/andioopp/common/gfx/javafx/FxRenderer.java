@@ -7,6 +7,9 @@ import andioopp.common.gfx.Color;
 import andioopp.common.gfx.Renderer;
 import andioopp.common.gfx.SpriteFactory;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.text.Font;
+
+import java.util.Vector;
 
 /**
  * {@link Renderer} implementation for JavaFX.
@@ -49,4 +52,10 @@ public class FxRenderer implements Renderer<FxSprite> {
     private javafx.scene.paint.Color getFxColor(Color color) {
         return new javafx.scene.paint.Color(color.getRed() / 255.0f, color.getGreen() / 255.0f, color.getBlue() / 255.0f, color.getAlpha());
     }
+
+    @Override
+    public void writeText(Vector3f position, String text){
+        getCtx().fillText(text, position.getX(), position.getY());
+    }
+
 }

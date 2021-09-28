@@ -3,22 +3,16 @@ package andioopp.service.GUI;
 import andioopp.common.gfx.Renderer;
 import andioopp.common.gfx.Sprite;
 import andioopp.common.gfx.SpriteFactory;
-import andioopp.common.gfx.Window;
-import andioopp.common.gfx.javafx.FxSprite;
 import andioopp.common.transform.*;
 import andioopp.common.transform.Dimension;
 import andioopp.model.World;
-import javafx.scene.image.Image;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.control.TextField;
 
+public class CoinView <S extends Sprite<?>> {
 
-import java.awt.*;
-
-    public class CoinView <S extends Sprite<?>> {
-
-        //private final Window<?> window;
-        private String sprite = "coinBox.png";
+        private String sprite = "sprites/coinBox.png";
         private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
+        private TextField currentAmount = new TextField();
 
 
         public void renderCoinView(World world, Renderer<S> renderer,Vector3f worldSize){
@@ -26,15 +20,11 @@ import java.awt.*;
             Dimension coinViewScreenSize = getCoinViewScreenSize(world, coinViewSprite);
             Transform coinViewScreenTransform = transformFactory.createWithPosition(getSpritePosition());
             renderer.drawSprite(coinViewSprite, coinViewScreenTransform, coinViewScreenSize.toVector());
-
-            //call to a method that checks number of coinleft and displays the number
-
-            //Vector3f worldPosition = getSpritePosition(worldDimenson());
         }
+
         public <S extends Sprite<?>> S getSprite(SpriteFactory<S> spriteFactory) {
             return spriteFactory.get(sprite);
         }
-
 
         private Vector3f getSpritePosition(){
             float distanceFromBorderX = 80f;
@@ -46,19 +36,17 @@ import java.awt.*;
             return coinViewSpriteSize;
         }
 
+        public void displayCoins(TextField currentAmount){
+
+
+        }
+
         private int numberOfCoinsLeft(){
-            int defaultAmount = 250;
-            int currentAmount = defaultAmount;
+            int defaultAmount = 100;
+            int currentAmount = defaultAmount /* - return value from a method that takes input from mouse */;
 
             return currentAmount;
         }
-        /*
-        private Vector3f getWorldDimenson(Vector3f windowsize){
-             Vector3f worldSize = new Vector3f(windowsize.getX(), windowsize.getY());
 
-            return worldSize;
-        }
 
-         */
-
-    }
+}
