@@ -1,26 +1,24 @@
 package andioopp.service.infrastructure.creation;
 
-import andioopp.common.gfx.Renderer;
-import andioopp.common.gfx.Sprite;
 import andioopp.common.gfx.Window;
 import andioopp.common.transform.Vector3f;
 import andioopp.model.Model;
 import andioopp.model.waves.WaveQueue;
 import andioopp.service.infrastructure.graphics.WindowingService;
+import andioopp.service.infrastructure.loop.LoopService;
 import andioopp.service.infrastructure.persistence.PersistenceService;
 import andioopp.service.infrastructure.resource.ResourceService;
-import andioopp.service.infrastructure.loop.LoopService;
 import andioopp.view.View;
 
-public class GameSetupService {
+public class GameSetupService<W extends Window<?>> {
 
-    private final WindowingService<?> windowingService;
+    private final WindowingService<W> windowingService;
     private final LoopService loopService;
     private final ResourceService resourceService;
     private final PersistenceService persistenceService;
     private final CreationService creationService;
 
-    public GameSetupService(WindowingService<?> windowingService, LoopService loopService, ResourceService resourceService, PersistenceService persistenceService, CreationService creationService) {
+    public GameSetupService(WindowingService<W> windowingService, LoopService loopService, ResourceService resourceService, PersistenceService persistenceService, CreationService creationService) {
         this.windowingService = windowingService;
         this.loopService = loopService;
         this.resourceService = resourceService;
@@ -29,20 +27,18 @@ public class GameSetupService {
     }
 
     public void start() {
-        WindowingService<?> windowingService = getWindowingService();
+        WindowingService<W> windowingService = getWindowingService();
         LoopService loopService = getLoopService();
 
         Model model = createModel();
-        View<?> view = createView(windowingService.createWindow());
-
-        loopService.start(model, view);
+        loopService.start(model, createView(windowingService.createWindow()));
     }
 
     private Model createModel() {
         return new Model(new WaveQueue());
     }
 
-    private <S extends Sprite<?>, R extends Renderer<S>> View<S> createView(Window<R> window) {
+    private View<?> createView(W window) {
         float worldSizeFactorX = 0.7f;
         float worldSizeFactorY = 0.7f;
 
@@ -57,7 +53,7 @@ public class GameSetupService {
         return creationService;
     }
 
-    private WindowingService<?> getWindowingService() {
+    private WindowingService<W> getWindowingService() {
         return windowingService;
     }
 

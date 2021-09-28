@@ -58,7 +58,7 @@ public class World implements Updateable {
 
                         //Performs the attack and updates its last time of use.
                         if (targetableEnemyExists) {
-                            attack.performAttack(this, new Vector3f(row, col));
+                            attack.performAttack(this, new Vector3f(col, row));
                             attack.updateTimeSinceLastAttack(time);
                         }
                     }

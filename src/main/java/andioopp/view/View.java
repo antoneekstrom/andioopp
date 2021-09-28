@@ -77,7 +77,7 @@ public class View<S extends Sprite<?>> {
     private void renderEnemy(World world, Enemy enemy) {
         S enemySprite = enemy.getSprite(getRenderer().getSpriteFactory());
         Dimension enemyScreenSize = getEnemyScreenSize(world, enemySprite);
-        Transform enemyScreenTransform = transformFactory.createWithPosition(getEnemyScreenPosition(world, enemy, enemyScreenSize));
+        Transform enemyScreenTransform = transformFactory.createWithPosition(getPluppScreenPosition(world, enemy.getPosition(), enemyScreenSize));
         getRenderer().drawSprite(enemySprite, enemyScreenTransform, enemyScreenSize.toVector());
     }
 
@@ -95,7 +95,9 @@ public class View<S extends Sprite<?>> {
     private void renderProjectiles(World world) {
         S fireballSprite = getRenderer().getSpriteFactory().get("fireball.png");
         for (Projectile projectile : world.getProjectiles()) {
-            getRenderer().drawSprite(fireballSprite, ConcreteTransform.getFactory().createWithPosition(projectile.getPosition().scale(getCellScreenSize(world))));
+            Dimension enemyScreenSize = getEnemyScreenSize(world, fireballSprite);
+            Transform enemyScreenTransform = transformFactory.createWithPosition(getPluppScreenPosition(world, projectile.getPosition(), enemyScreenSize));
+            getRenderer().drawSprite(fireballSprite, enemyScreenTransform, enemyScreenSize.toVector());
         }
     }
 
@@ -110,8 +112,8 @@ public class View<S extends Sprite<?>> {
         return towerSpriteSize.scaleByHeight(cellScreenSize.getHeight());
     }
 
-    private Vector3f getEnemyScreenPosition(World world, Enemy enemy, Dimension size) {
-        return getViewPosition().add(enemy.getPosition().scale(getCellScreenSize(world))).add(alignWithCellBottom(world, size)).add(getEntityCellOffset(world));
+    private Vector3f getPluppScreenPosition(World world, Vector3f position, Dimension size) {
+        return getViewPosition().add(position.scale(getCellScreenSize(world))).add(alignWithCellBottom(world, size)).add(getEntityCellOffset(world));
     }
 
     private Dimension getEnemyScreenSize(World world, S enemySprite) {
