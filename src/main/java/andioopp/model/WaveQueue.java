@@ -15,6 +15,8 @@ public class WaveQueue {
 - [ ]  Make a wave consist of different enemies
 - [ ]  Fiender kan ha en svårighetsgrad? Så att de svåraste inte kommer i början kanske
 - [ ]*/
+   float timeSinceLastEnemy;
+    float deltaSeconds;
 
     private final Queue<Wave> queue;
     Random rand = new Random();
@@ -23,6 +25,9 @@ public class WaveQueue {
     public WaveQueue() {
 
         queue = new LinkedList<>();
+    }
+    public void setDeltaSeconds(float deltaSeconds){
+        this.deltaSeconds = deltaSeconds;
     }
 
     public Queue<Wave> getWaves() {
@@ -47,6 +52,25 @@ public class WaveQueue {
 
         wave = queue.peek();
         world.addEnemy(wave.enemyWave.remove());
+    }
+    public boolean delayEnemies(Time time, double delay){
+        //int randomDelay = rand.nextInt(100) + 1;
+        this.deltaSeconds = time.getElapsedSeconds() - timeSinceLastEnemy;
+        System.out.println(delay);
+
+
+        return(this.deltaSeconds > delay);
+
+    }
+    public void updateTimeSinceLastEnemy(Time time) {
+        this.timeSinceLastEnemy = time.getElapsedSeconds();
+    }
+
+    public double getRandomDelay(){
+        int randomDelay = rand.nextInt(11) + 4;
+
+        return randomDelay * Math.pow(10,6.5);
+
     }
 
     }
