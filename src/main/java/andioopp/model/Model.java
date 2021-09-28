@@ -5,14 +5,14 @@ import andioopp.common.storage.ListFactory;
 import andioopp.common.time.Time;
 import andioopp.model.enemy.Enemies;
 import andioopp.model.tower.Towers;
+import java.lang.Math;
 
 public class Model implements Updateable {
 
     private final World world;
     private final WaveQueue waves;
     private final Player player;
-    float timeSinceLastEnemy;
-    float deltaSeconds;
+    private double delay = 1;
 
     private final ListFactory listFactory = new ArrayListFactory();
 
@@ -26,13 +26,14 @@ public class Model implements Updateable {
     public void update(Time time) {
         world.update(time);
 
-        if(delayEnemies(time)){
+        if(waves.delayEnemies(time, delay)){
         if(waves.getWave(world).enemyWave.size() != 0) {
 
             waves.addWaveToWorld(world, waves.getWave(world));
             System.out.println("new enemy");
-            this.deltaSeconds = 0;
-            updateTimeSinceLastEnemy(time);
+            waves.setDeltaSeconds(0);
+            this.delay = waves.getRandomDelay();
+            waves.updateTimeSinceLastEnemy(time);
 
 
         }
@@ -60,17 +61,10 @@ public class Model implements Updateable {
 
         return world;
     }
-    public boolean delayEnemies(Time time){
-        this.deltaSeconds = time.getElapsedSeconds() - timeSinceLastEnemy;
-        System.out.println(deltaSeconds);
-        return(this.deltaSeconds > 20000000);
-
-    }
 
 
-    public void updateTimeSinceLastEnemy(Time time) {
-        this.timeSinceLastEnemy = time.getElapsedSeconds();
-    }
+
+
     public World getWorld() {
         return world;
     }
