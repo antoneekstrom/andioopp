@@ -1,6 +1,7 @@
 package andioopp.model.enemy;
 
 import andioopp.common.transform.Vector3f;
+import andioopp.model.enemy.enemies.BuzzyBeetle;
 import andioopp.model.world.World;
 import andioopp.model.enemy.enemies.Blooper;
 import andioopp.model.enemy.enemies.Goomba;
@@ -35,6 +36,12 @@ public class Enemies {
 
 
     }
+    public static Enemy buzzyBeetle(World world, int row) {
+        float worldEndX = world.getNumberOfCellsInLanes();
+        return new BuzzyBeetle(new Vector3f(worldEndX, row));
+    }
+
+}
 
     
 

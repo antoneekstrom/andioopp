@@ -45,11 +45,11 @@ public class World implements Updateable {
                         //When a targetable enemy is found, the attack can be performed as soon as possible
                         //No need to check the remaing enemies.
                         boolean targetableEnemyExists = false;
-                        for (Enemy enemy : enemiesInRangeOfCurrentAttack) {
-                            if (tower.isImmune(enemy)) {
+                        for (Enemy enemy : enemiesInRangeOfCurrentAttack){
+                            if ( attack.isImmune(enemy) ) {
                                 continue;
                             }
-                            if (tower.hasMatchingRequirements(enemy)) {
+                            if ( attack.hasMatchingRequirements(enemy) ) {
                                 continue;
                             }
                             targetableEnemyExists = true;
@@ -57,7 +57,7 @@ public class World implements Updateable {
                         }
 
                         //Performs the attack and updates its last time of use.
-                        if (targetableEnemyExists) {
+                        if (targetableEnemyExists){
                             attack.performAttack(this, new Vector3f(col, row));
                             attack.updateTimeSinceLastAttack(time);
                         }
@@ -66,7 +66,28 @@ public class World implements Updateable {
             }
         }
 
+        checkProjectileHitboxes();
+
         updateProjectiles(time);
+    }
+
+    private void checkProjectileHitboxes(){
+        for (Projectile projectile : projectiles) {
+            for (Enemy enemy : enemies) {
+                Vector3f pp = projectile.getPosition();
+                Vector3f ep = enemy.getPosition();
+                float dm = 0.2f; //dm stands for delta max
+
+                if ( Math.abs(pp.getX() - ep.getX()) < dm && Math.abs(pp.getY() - ep.getY()) < dm) {
+                    evaluateProjectileHit(projectile, enemy);
+                }
+            }
+        }
+    }
+
+    private void evaluateProjectileHit(Projectile projectile, Enemy enemy){
+        projectiles.remove(projectile);
+        enemies.remove(enemy);
     }
 
     private void updateProjectiles(Time time) {

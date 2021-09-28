@@ -15,11 +15,6 @@ public abstract class Tower {
     private String sprite;
     private ArrayList<Attack> attacks;
 
-    //Enums
-    public ArrayList<Enum> requirements = new ArrayList<>();
-    public ArrayList<Enum> immunty = new ArrayList<>();
-    public enum REQUIREMENT {FLYING, GROUND, GHOST, WATER, DIGGING, SPIKE, EAT, THROWABLE};
-    public enum IMMUNITY {BOSS, FIREBALL}
 
     public Tower(String spritePath, int cost, int health, ArrayList<Attack> attacks) {
         this.sprite = spritePath;
@@ -48,28 +43,5 @@ public abstract class Tower {
         this.sprite = sprite;
     }
 
-    public boolean hasMatchingRequirements(Enemy enemy) {
-        for(int i = 0; i < requirements.size(); i++) {
-            Enum r = requirements.get(i);
-            for(int j = 0; i < enemy.requirements.size(); i++){
-                Enum e = enemy.requirements.get(j);
-                if (r.equals(e)){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    public boolean isImmune(Enemy enemy) {
-        for(int i = 0;i < immunty.size(); i++ ) {
-            Enum imm = immunty.get(i);
-            for(int j = 0; j < enemy.immunity.size(); j++) {
-                Enum EnemyImm = enemy.immunity.get(j);
-                if (imm.equals(EnemyImm)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+
 }

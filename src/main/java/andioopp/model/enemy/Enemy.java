@@ -16,10 +16,8 @@ public abstract class Enemy implements Updateable {
     private String sprite;
 
     //Enums
-    public ArrayList<Enum> requirements = new ArrayList();
-    public ArrayList<Enum> immunity = new ArrayList<>();
-    public enum REQUIREMENT {FLYING, GROUND, GHOST, WATER, DIGGING, SPIKE, EAT, THROWABLE};
-    public enum IMMUNITY {BOSS, FIREBALLRESISTANT}
+    public ArrayList<FilterRequirement> requirements = new ArrayList<>();
+    public ArrayList<FilterImmunity> immunity = new ArrayList<>();
 
     protected Enemy(String spritePath, Transform transform, Health health) {
         this.sprite = spritePath;
