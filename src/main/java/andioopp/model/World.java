@@ -47,10 +47,10 @@ public class World implements Updateable {
                         //No need to check the remaing enemies.
                         boolean targetableEnemyExists = false;
                         for (Enemy enemy : enemiesInRangeOfCurrentAttack){
-                            if ( tower.isImmune(enemy) ) {
+                            if ( attack.isImmune(enemy) ) {
                                 continue;
                             }
-                            if ( tower.hasMatchingRequirements(enemy) ) {
+                            if ( attack.hasMatchingRequirements(enemy) ) {
                                 continue;
                             }
                             targetableEnemyExists = true;

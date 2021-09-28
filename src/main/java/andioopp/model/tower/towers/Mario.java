@@ -24,8 +24,9 @@ public class Mario extends Tower {
 
     public Mario() {
         super(SPRITE_PATH, 60, 5, new ArrayList<>(Arrays.asList(attackList)));
-        requirements.add(REQUIREMENT.GROUND);
-        immunity.add(IMMUNITY.FIREBALL);
+        requirements.add(FilterRequirement.GROUND);
+        //System.out.println(requirements.size() + " mario size i konstrucktoirasr");
+        immunity.add(FilterImmunity.FIREBALL);
     }
 
     public boolean canAttack(Collection<Enemy> enemies){

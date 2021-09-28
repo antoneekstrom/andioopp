@@ -18,9 +18,6 @@ public abstract class Tower {
     private String sprite;
     private ArrayList<Attack> attacks;
 
-    //Enums
-    public ArrayList<FilterRequirement> requirements = new ArrayList<>();
-    public ArrayList<FilterImmunity> immunty = new ArrayList<>();
 
     public Tower(String spritePath, int cost, int health, ArrayList<Attack> attacks) {
         this.sprite = spritePath;
@@ -49,39 +46,5 @@ public abstract class Tower {
         this.sprite = sprite;
     }
 
-    private boolean hasMatchingRequirements(Enemy enemy) {
-        for(int i = 0; i < requirements.size(); i++) {
-            FilterRequirement r = requirements.get(i);
-            for(int j = 0; j < enemy.requirements.size(); j++){
-                FilterRequirement e = enemy.requirements.get(j);
-                if (r.equals(e)){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 
-    private boolean isImmune(Enemy enemy) {
-        if(enemy.immunity.isEmpty()) { //if enemy immunity list is empty => Its not immune.
-            return false;
-        } else {
-            for (int i = 0; i < immunty.size(); i++) {
-                FilterImmunity imm = immunty.get(i);
-                for (int j = 0; j < enemy.immunity.size(); j++) {
-                    FilterImmunity EnemyImm = enemy.immunity.get(j);
-                    if (imm.equals(EnemyImm)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-    public boolean checkFilters(Enemy enemy) {
-        boolean b1 = !isImmune(enemy);
-        boolean b2 = hasMatchingRequirements(enemy);
-        return b1 && b2;
-        //return ((!isImmune(enemy)) && hasMatchingRequirements(enemy));
-    }
 }
