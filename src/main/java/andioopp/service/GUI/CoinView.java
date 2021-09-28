@@ -17,14 +17,14 @@ import java.awt.*;
     public class CoinView <S extends Sprite<?>> {
 
         //private final Window<?> window;
-        private String sprite = "goomba.png";
+        private String sprite = "coinBox.png";
         private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
 
 
         public void renderCoinView(World world, Renderer<S> renderer,Vector3f worldSize){
             S coinViewSprite = getSprite(renderer.getSpriteFactory());
             Dimension coinViewScreenSize = getCoinViewScreenSize(world, coinViewSprite);
-            Transform coinViewScreenTransform = transformFactory.createWithPosition(getSpritePosition(worldSize));
+            Transform coinViewScreenTransform = transformFactory.createWithPosition(getSpritePosition());
             renderer.drawSprite(coinViewSprite, coinViewScreenTransform, coinViewScreenSize.toVector());
 
             //call to a method that checks number of coinleft and displays the number
@@ -36,11 +36,10 @@ import java.awt.*;
         }
 
 
-        private Vector3f getSpritePosition(Vector3f worldSize){
-            Vector3f boardSize = new Vector3f(worldSize.getX(), worldSize.getY());
-            float distanceFromBorderX = 1f;
-            float distanceFromBorderY = 1f;
-            return new Vector3f(boardSize.getX(),boardSize.getY());
+        private Vector3f getSpritePosition(){
+            float distanceFromBorderX = 80f;
+            float distanceFromBorderY = 50f;
+            return new Vector3f(distanceFromBorderX,distanceFromBorderY);
         }
         private Dimension getCoinViewScreenSize(World world, S coinViewSprite) {
             Dimension coinViewSpriteSize = coinViewSprite.getSize();
@@ -63,25 +62,3 @@ import java.awt.*;
          */
 
     }
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-
-
-        private void renderCell(World world, int row, int col) {
-            Vector3f cellScreenPosition = getCellScreenPosition(world, row, col);
-            Vector3f cellScreenSize = getCellScreenSize(world);
-            getRenderer().drawRectangle(cellScreenPosition, cellScreenSize, getCellColor(row, col));
-        }
- */
