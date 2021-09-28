@@ -15,9 +15,9 @@ public class Goomba extends Enemy {
 
     private static final String SPRITE_PATH = "goomba.png";
     private static final int BASE_HEALTH = 5;
-    private static final ArrayList<FilterRequirement> REQUIREMENTS = new ArrayList<>();
-    private static final ArrayList<FilterImmunity> IMMUNITY = new ArrayList<>();
     private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
+    private final ArrayList<FilterRequirement> requirements = new ArrayList<>();
+    private final ArrayList<FilterImmunity> immunity = new ArrayList<>();
 
     public Goomba(Vector3f position) {
         super(SPRITE_PATH, transformFactory.createWithPosition(position), new Health(BASE_HEALTH));

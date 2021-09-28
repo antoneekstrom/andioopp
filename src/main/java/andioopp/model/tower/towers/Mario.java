@@ -22,15 +22,14 @@ public class Mario extends Tower {
     private static final int BASE_RANGE = -1;
     private static ArrayList<Integer> targetedLanes = new ArrayList<>(Arrays.asList(0));
 
-    private static final ArrayList<Enum> requirements = new ArrayList<>();
-    private static final ArrayList<Enum> immunity = new ArrayList<>();
+    public final ArrayList<FilterRequirement> requirements = new ArrayList<>();
+    public final ArrayList<FilterImmunity> immunity = new ArrayList<>();
 
     public Mario() {
         super(SPRITE_PATH, BASE_RANGE, BASE_COST, BASE_HEALTH, targetedLanes);
         requirements.add(FilterRequirement.GROUND);
+        System.out.println(requirements.size() + " mario size i konstrucktoirasr");
         immunity.add(FilterImmunity.FIREBALL);
-
-
     }
 
     public boolean canAttack(Collection<Enemy> enemies){
