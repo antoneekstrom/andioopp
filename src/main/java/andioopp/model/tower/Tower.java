@@ -63,6 +63,7 @@ public abstract class Tower {
         }
         return false;
     }
+
     private boolean isImmune(Enemy enemy) {
         if(enemy.immunity.isEmpty()) { //if enemy immunity list is empty => Its not immune.
             return false;
@@ -80,8 +81,9 @@ public abstract class Tower {
         return false;
     }
     public boolean checkFilters(Enemy enemy) {
-        boolean req = hasMatchingRequirements(enemy);
-        boolean imm = !isImmune(enemy);
-        return req && imm;
+        boolean b1 = !isImmune(enemy);
+        boolean b2 = hasMatchingRequirements(enemy);
+        return b1 && b2;
+        //return ((!isImmune(enemy)) && hasMatchingRequirements(enemy));
     }
 }
