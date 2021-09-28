@@ -59,7 +59,7 @@ public class World implements Updateable {
 
                         //Performs the attack and updates its last time of use.
                         if (targetableEnemyExists){
-                            attack.performAttack(this, new Vector3f(row, col));
+                            attack.performAttack(this, new Vector3f(col, row));
                             attack.updateTimeSinceLastAttack(time);
                         }
                     }
@@ -67,7 +67,28 @@ public class World implements Updateable {
             }
         }
 
+        checkProjectileHitboxes();
+
         updateProjectiles(time);
+    }
+
+    private void checkProjectileHitboxes(){
+        for (Projectile projectile : projectiles) {
+            for (Enemy enemy : enemies) {
+                Vector3f pp = projectile.getPosition();
+                Vector3f ep = enemy.getPosition();
+                float dm = 0.2f; //dm stands for delta max
+
+                if ( Math.abs(pp.getX() - ep.getX()) < dm && Math.abs(pp.getY() - ep.getY()) < dm) {
+                    evaluateProjectileHit(projectile, enemy);
+                }
+            }
+        }
+    }
+
+    private void evaluateProjectileHit(Projectile projectile, Enemy enemy){
+        projectiles.remove(projectile);
+        enemies.remove(enemy);
     }
 
     private void updateProjectiles(Time time) {

@@ -10,6 +10,6 @@ public class FireballProjectile extends Projectile {
 
     @Override
     public void update(Time time) {
-        getTransform().translate(new Vector3f(0.005f,0,0));
+        getTransform().translate(new Vector3f(0.02f,0,0));
     }
 }
