@@ -12,7 +12,7 @@ import java.util.Vector;
 public class SingleLaneForward implements AttackTargetArea {
 
     @Override
-    public boolean enemyIsInRange(int row, int col, Vector3f enemyPosition) {
-        return ( enemyPosition.getY() == row && enemyPosition.getX() > col );
+    public boolean enemyIsInRange(Vector3f towerPosition, Vector3f enemyPosition) {
+        return ( enemyPosition.getY() == towerPosition.getY() && enemyPosition.getX() > towerPosition.getX() );
     }
 }

@@ -13,26 +13,24 @@ import java.util.Collection;
 
 public abstract class Tower {
 
-    private final int range;
     private final int cost;
     private final Health health;
     private String sprite;
-    private ArrayList<Integer> targetedLanes;
+    private ArrayList<Attack> attacks;
 
     //Enums
     public ArrayList<FilterRequirement> requirements = new ArrayList<>();
     public ArrayList<FilterImmunity> immunty = new ArrayList<>();
 
-    public Tower(String spritePath, int range, int cost, int health, ArrayList<Integer> targetedLanes) {
+    public Tower(String spritePath, int cost, int health, ArrayList<Attack> attacks) {
         this.sprite = spritePath;
-        this.range = range;
         this.cost = cost;
         this.health = new Health(health);
-        this.targetedLanes = targetedLanes;
+        this.attacks = attacks;
     }
 
-    public Attack[] getAttacks() {
-        return null;
+    public ArrayList<Attack> getAttacks() {
+        return attacks;
     }
 
     public <S extends Sprite<?>> S getSprite(SpriteFactory<S> spriteFactory) {

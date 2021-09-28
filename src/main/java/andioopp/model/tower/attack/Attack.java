@@ -2,6 +2,7 @@ package andioopp.model.tower.attack;
 
 import andioopp.common.time.Time;
 import andioopp.common.storage.ArrayListFactory;
+import andioopp.common.transform.Vector3f;
 import andioopp.model.World;
 import andioopp.model.enemy.Enemy;
 import andioopp.model.tower.Tower;
@@ -11,17 +12,14 @@ import java.util.Collection;
 public abstract class Attack {
     private final float coolDown;
     private float timeSinceLastAttack;
-    public abstract AttackTargetArea getTargetArea();
-    private int row;
-    private int col;
+    private final AttackTargetArea targetArea;
 
-    public Attack(float coolDown, int row, int col) {
+    public Attack(float coolDown, AttackTargetArea targetArea) {
         this.coolDown = coolDown;
-        this.row = row;
-        this.col = col;
+        this.targetArea = targetArea;
     }
 
-    public abstract void performAttack(Tower tower);
+    public abstract void performAttack(World world, Vector3f position);
 
     public boolean isAvailableForAttack(Time time){
         float deltaSeconds = time.getElapsedSeconds() - timeSinceLastAttack;
@@ -32,10 +30,11 @@ public abstract class Attack {
         this.timeSinceLastAttack = time.getElapsedSeconds();
     }
 
-    public Collection<Enemy> getEnemiesInRange(World world) {
+    public Collection<Enemy> getEnemiesInRange(World world, Vector3f position) {
         Collection<Enemy> enemiesInRange = new ArrayListFactory().create();
         for ( Enemy enemy : world.getEnemies() ) {
-            if ( getTargetArea().enemyIsInRange(row, col, enemy.getPosition()) ){
+
+            if (targetArea.enemyIsInRange(position, enemy.getPosition())) {
                 enemiesInRange.add(enemy);
             }
         }

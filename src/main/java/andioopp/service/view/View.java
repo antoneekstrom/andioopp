@@ -9,6 +9,7 @@ import andioopp.model.tower.Tower;
 import andioopp.common.gfx.Color;
 import andioopp.common.gfx.Renderer;
 import andioopp.common.gfx.Sprite;
+import andioopp.model.tower.attack.projectiles.Projectile;
 
 public class View<S extends Sprite<?>> {
 
@@ -38,6 +39,7 @@ public class View<S extends Sprite<?>> {
         renderLanes(world);
         renderTowers(world);
         renderEnemies(world);
+        renderProjectiles(world);
     }
 
     private void clearScreen() {
@@ -87,6 +89,13 @@ public class View<S extends Sprite<?>> {
             Dimension towerScreenSize = new Dimension(getTowerScreenSize(world, tower).toVector());
             Transform towerScreenTransform = transformFactory.createWithPosition(getTowerScreenPosition(world, cellScreenPosition, towerScreenSize));
             getRenderer().drawSprite(towerSprite, towerScreenTransform, towerScreenSize.toVector());
+        }
+    }
+
+    private void renderProjectiles(World world) {
+        S fireballSprite = getRenderer().getSpriteFactory().get("fireball.png");
+        for (Projectile projectile : world.getProjectiles()) {
+            getRenderer().drawSprite(fireballSprite, ConcreteTransform.getFactory().createWithPosition(projectile.getPosition().scale(getCellScreenSize(world))));
         }
     }
 

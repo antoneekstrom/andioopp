@@ -16,7 +16,7 @@ public class WorldBuilder {
     }
 
     public World build() {
-        return new World(getListFactory().create(getLanes()), getListFactory().create());
+        return new World(getListFactory().create(getLanes()), getListFactory().create(), getListFactory().create());
     }
 
     public WorldBuilder setLanes(int numLanes) {
