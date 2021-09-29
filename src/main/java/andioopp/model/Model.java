@@ -3,7 +3,6 @@ package andioopp.model;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.storage.ListFactory;
 import andioopp.common.time.Time;
-import andioopp.model.enemy.Enemies;
 import andioopp.model.tower.Towers;
 import andioopp.model.waves.WaveQueue;
 import andioopp.model.world.LaneBuilder;
@@ -17,6 +16,7 @@ public class Model implements Updateable {
     private final ListFactory listFactory = new ArrayListFactory();
     float timeSinceLastEnemy;
     float deltaSeconds;
+    private double delay = 1;
 
     public Model(WaveQueue waves) {
         this.waves = waves;
@@ -27,18 +27,18 @@ public class Model implements Updateable {
     public void update(Time time) {
         world.update(time);
 
-        if(waves.delayEnemies(time, delay)){
-        if(waves.getWave().enemyWave.size() != 0) {
+        if (waves.delayEnemies(time, delay)) {
+            if (waves.getWave().enemyWave.size() != 0) {
 
-            waves.addWaveToWorld(world);
-            System.out.println("new enemy");
-            waves.setDeltaSeconds(0);
-            this.delay = waves.getRandomDelay();
-            waves.updateTimeSinceLastEnemy(time);
+                waves.addWaveToWorld(world);
+                System.out.println("new enemy");
+                waves.setDeltaSeconds(0);
+                delay = waves.getRandomDelay();
+                waves.updateTimeSinceLastEnemy(time);
 
 
-        }
             }
+        }
 
 
     }
@@ -49,7 +49,7 @@ public class Model implements Updateable {
 
         World world = builder.build();
         world.getCell(1, 3).setTower(Towers.mario());
-        waves.addWavesToWaveQueue(world,1);
+        waves.addWavesToWaveQueue(world, 1);
 
 
 
@@ -62,8 +62,6 @@ public class Model implements Updateable {
 
         return world;
     }
-
-
 
 
     public World getWorld() {

@@ -1,5 +1,6 @@
 package andioopp.model.waves;
 
+import andioopp.common.time.Time;
 import andioopp.model.world.World;
 
 import java.util.LinkedList;
@@ -68,7 +69,7 @@ public class WaveQueue {
     public double getRandomDelay(){
         int randomDelay = rand.nextInt(12) + 3;
 
-        return randomDelay * Math.pow(10,6.5);
+        return randomDelay; // * Math.pow(10,6.5);
 
     }
 

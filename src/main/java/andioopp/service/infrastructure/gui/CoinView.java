@@ -1,21 +1,21 @@
-package andioopp.service.GUI;
+package andioopp.service.infrastructure.gui;
 
 import andioopp.common.gfx.Renderer;
 import andioopp.common.gfx.Sprite;
 import andioopp.common.gfx.SpriteFactory;
 import andioopp.common.transform.*;
 import andioopp.common.transform.Dimension;
-import andioopp.model.World;
+import andioopp.model.world.World;
 import javafx.scene.control.TextField;
 
 public class CoinView <S extends Sprite<?>> {
 
-        private String sprite = "sprites/coinBox.png";
+        private String sprite = "coinBox.png";
         private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
         private TextField currentAmount = new TextField();
 
 
-        public void renderCoinView(World world, Renderer<S> renderer,Vector3f worldSize){
+        public void renderCoinView(World world, Renderer<S> renderer, Vector3f worldSize){
             S coinViewSprite = getSprite(renderer.getSpriteFactory());
             Dimension coinViewScreenSize = getCoinViewScreenSize(world, coinViewSprite);
             Transform coinViewScreenTransform = transformFactory.createWithPosition(getSpritePosition());
