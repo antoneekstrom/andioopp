@@ -10,17 +10,20 @@ import andioopp.common.gfx.Color;
 import andioopp.common.gfx.Renderer;
 import andioopp.common.gfx.Sprite;
 import andioopp.model.tower.attack.projectiles.Projectile;
+import andioopp.service.GUI.CoinView;
 
 public class View<S extends Sprite<?>> {
 
     private final Renderer<S> renderer;
     private final Vector3f position;
     private final Vector3f size;
+    private CoinView coinView;
 
     public View(Renderer<S> renderer, Vector3f position, Vector3f size) {
         this.renderer = renderer;
         this.position = position;
         this.size = size;
+        this.coinView = new CoinView();
     }
 
     private static final Color COLOR_CELL_ODD = new Color(112, 146, 85);
@@ -40,6 +43,8 @@ public class View<S extends Sprite<?>> {
         renderTowers(world);
         renderEnemies(world);
         renderProjectiles(world);
+        coinView.renderCoinView(world, renderer, getViewSize());
+
     }
 
     private void clearScreen() {

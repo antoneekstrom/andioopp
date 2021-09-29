@@ -2,6 +2,7 @@ package andioopp.common.gfx;
 
 import andioopp.common.transform.Transform;
 import andioopp.common.transform.Vector3f;
+import javafx.scene.text.Font;
 
 /**
  * Draws graphics onto its corresponding {@link Window}.
@@ -41,4 +42,12 @@ public interface Renderer<S extends Sprite<?>> {
      * @return The {@link SpriteFactory}
      */
     SpriteFactory<S> getSpriteFactory();
+
+    /**
+     *
+     * @param position Where the text should be written
+     * @param text  The actual text that should be displayed
+     */
+    void writeText(Vector3f position, String text);
+
 }
