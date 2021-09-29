@@ -88,6 +88,48 @@ public class World implements Updateable {
     private void evaluateProjectileHit(Projectile projectile, Enemy enemy) {
         projectiles.remove(projectile);
         enemies.remove(enemy);
+    private void evaluateProjectileHit(Projectile projectile, Enemy enemy){
+        projectile.AlreadyInteractedWith.add(enemy);
+        //if the enemy is in contact with the projectile and isn´t
+        // immune to it, damage the enemy and remove the projectile.
+        if (!isImmune(projectile, enemy) && isContact(projectile, enemy) ) {
+            projectiles.remove(projectile);
+            enemy.Damage();
+            //if the enemy is immune to the projectile the enemy wont get damaged and
+            //the projectile will get destroyed.
+        } else if(isImmune(projectile, enemy) && isContact(projectile, enemy)) {
+            projectiles.remove(projectile);
+        }
+
+    }
+
+    //TODO destroy when outOfBounds
+    //TODO check AlreadyInteractedWith so that a enemy isn´t hit multiple times.
+    private boolean isContact(Projectile projectile, Enemy enemy) {
+        //Checks if the projectile can damage the enemy by comparing their requirement lists.
+        for (int i = 0; i < projectile.requirements.size(); i++) {
+            FilterRequirement proReq = projectile.requirements.get(i);
+            for (int j = 0; j < enemy.requirements.size(); j++) {
+                FilterRequirement enemyReq = enemy.requirements.get(i);
+                if (proReq.equals(enemyReq)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean isImmune(Projectile projectile, Enemy enemy) {
+        for (int i = 0; i < projectile.immunity.size(); i++) {
+            FilterImmunity proReq = projectile.immunity.get(i);
+            for (int j = 0; j < enemy.immunity.size(); j++) {
+                FilterImmunity enemyReq = enemy.immunity.get(i);
+                if (proReq.equals(enemyReq)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void updateProjectiles(Time time) {

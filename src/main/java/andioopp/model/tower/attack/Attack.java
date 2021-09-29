@@ -23,6 +23,7 @@ public abstract class Attack {
     public Attack(float coolDown, AttackTargetArea targetArea) {
         this.coolDown = coolDown;
         this.targetArea = targetArea;
+
     }
 
     public abstract void performAttack(World world, Vector3f position);
@@ -66,8 +67,10 @@ public abstract class Attack {
         } else {
             for (int i = 0; i < immunty.size(); i++) {
                 FilterImmunity imm = immunty.get(i);
+
                 for (int j = 0; j < enemy.immunity.size(); j++) {
                     FilterImmunity EnemyImm = enemy.immunity.get(j);
+
                     if (imm.equals(EnemyImm)) {
                         return true;
                     }

@@ -38,6 +38,10 @@ public abstract class Enemy implements Updateable {
         return getTransform().getPosition();
     }
 
+    public void Damage() {
+        getHealth().decrease(1);
+    }
+
     protected Transform getTransform() {
         return transform;
     }
