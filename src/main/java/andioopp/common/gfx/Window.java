@@ -1,6 +1,7 @@
 package andioopp.common.gfx;
 
 import andioopp.common.observer.Observable;
+import andioopp.common.input.MouseData;
 
 /**
  * Represents the application window.
@@ -19,7 +20,7 @@ public interface Window<R extends Renderer<?>> {
      */
     void setMaximized(boolean isMaximized);
 
-    Observable<Object> getMouseObservable();
+    Observable<MouseData> getMouseObservable();
 
     Observable<Object> getResizeObservable();
 
