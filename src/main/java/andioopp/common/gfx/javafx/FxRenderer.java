@@ -54,7 +54,9 @@ public class FxRenderer implements Renderer<FxSprite> {
     }
 
     @Override
-    public void writeText(Vector3f position, String text){
+    public void writeText(Vector3f position, String text, Color color, Font font){
+        getCtx().setFill(getFxColor(color));
+        getCtx().setFont(font);
         getCtx().fillText(text, position.getX(), position.getY());
     }
 

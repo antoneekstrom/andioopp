@@ -4,6 +4,7 @@ import andioopp.common.time.Time;
 import andioopp.common.transform.Vector3f;
 import andioopp.model.FilterImmunity;
 import andioopp.model.FilterRequirement;
+import andioopp.model.Money;
 import andioopp.model.Updateable;
 import andioopp.model.enemy.Enemy;
 import andioopp.model.tower.Tower;
@@ -18,11 +19,13 @@ public class World implements Updateable {
     private final List<Lane> lanes;
     private final Collection<Enemy> enemies;
     private final Collection<Projectile> projectiles;
+    private final Money money;
 
-    World(List<Lane> lanes, Collection<Enemy> enemies, Collection<Projectile> projectiles) {
+    World(List<Lane> lanes, Collection<Enemy> enemies, Collection<Projectile> projectiles, Money money) {
         this.lanes = lanes;
         this.enemies = enemies;
         this.projectiles = projectiles;
+        this.money = money;
     }
 
     @Override
@@ -171,5 +174,9 @@ public class World implements Updateable {
 
     public Collection<Projectile> getProjectiles() {
         return projectiles;
+    }
+
+    public Money getMoney() {
+        return money;
     }
 }
