@@ -19,6 +19,7 @@ public class Mario extends Tower {
     private static final Attack[] attackList = {new FireballAttack(0.5f)};
 
 
+
     public Mario() {
         super(SPRITE_PATH, 60, 5, new ArrayList<>(Arrays.asList(attackList)));
 

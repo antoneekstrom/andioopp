@@ -1,6 +1,7 @@
 package andioopp.view;
 
 import andioopp.common.transform.*;
+import andioopp.model.tower.towers.Mario;
 import andioopp.model.world.Lane;
 import andioopp.model.Model;
 import andioopp.model.world.World;
@@ -11,6 +12,8 @@ import andioopp.common.gfx.Renderer;
 import andioopp.common.gfx.Sprite;
 import andioopp.model.tower.attack.projectiles.Projectile;
 import andioopp.service.infrastructure.gui.CoinView;
+import andioopp.service.infrastructure.gui.TowerCard;
+import andioopp.service.infrastructure.gui.TowerCardsView;
 
 public class View<S extends Sprite<?>> {
 
@@ -18,12 +21,16 @@ public class View<S extends Sprite<?>> {
     private final Vector3f position;
     private final Vector3f size;
     private CoinView<S> coinView;
-
+    private TowerCardsView towerCardsView;
+    private TowerCard<S> towerCard;
+    private Tower tower = new Mario();
     public View(Renderer<S> renderer, Vector3f position, Vector3f size) {
         this.renderer = renderer;
         this.position = position;
         this.size = size;
         this.coinView = new CoinView<>();
+        this.towerCard = new TowerCard<>(tower);
+
     }
 
     private static final Color COLOR_CELL_ODD = new Color(112, 146, 85);
@@ -44,6 +51,8 @@ public class View<S extends Sprite<?>> {
         renderEnemies(world);
         renderProjectiles(world);
         coinView.renderCoinView(world, renderer, getViewSize());
+        towerCard.renderTowerCard(renderer, new Vector3f(400, 10));
+
 
     }
 
