@@ -1,5 +1,7 @@
 package andioopp.view;
 
+import andioopp.common.storage.ArrayListFactory;
+import andioopp.common.storage.ListFactory;
 import andioopp.common.transform.*;
 import andioopp.model.world.Lane;
 import andioopp.model.Model;
@@ -11,6 +13,9 @@ import andioopp.common.gfx.Renderer;
 import andioopp.common.gfx.Sprite;
 import andioopp.model.tower.attack.projectiles.Projectile;
 import andioopp.service.infrastructure.gui.CoinView;
+import andioopp.common.input.Clickable;
+
+import java.util.List;
 
 public class View<S extends Sprite<?>> {
 
@@ -29,7 +34,27 @@ public class View<S extends Sprite<?>> {
     private static final Color COLOR_CELL_ODD = new Color(112, 146, 85);
     private static final Color COLOR_CELL_EVEN = new Color(62, 86, 34);
 
+    private static final ListFactory listFactory = new ArrayListFactory();
     private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
+
+    /**
+     * Creates clickables for each cell so that they can be used to click on.
+     * @param world
+     * @return
+     */
+    public List<Clickable> getCellClickables(World world) {
+        List<Clickable> clickables = listFactory.create(world.getNumberOfLanes() * world.getNumberOfCellsInLanes());
+        for (int row = 0; row < world.getNumberOfLanes(); row++) {
+            for (int col = 0; col < world.getNumberOfCellsInLanes(); col++) {
+                clickables.add(cellToClickable(world, row, col));
+            }
+        }
+        return clickables;
+    }
+
+    private Clickable cellToClickable(World world, int row, int col) {
+        return new Rectangle(getCellScreenPosition(world, row, col), new Dimension(getCellScreenSize(world)));
+    }
 
     /**
      * Renders the model.
@@ -44,7 +69,6 @@ public class View<S extends Sprite<?>> {
         renderEnemies(world);
         renderProjectiles(world);
         coinView.renderCoinView(world, renderer, getViewSize());
-
     }
 
     private void clearScreen() {
