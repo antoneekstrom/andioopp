@@ -15,8 +15,8 @@ public class FireballProjectile extends Projectile {
 
     public FireballProjectile(Vector3f position, ArrayList<FilterRequirement> requirements, ArrayList<FilterImmunity> immunity) {
         super(position, requirements, immunity);
-        this.requirements = requirements;
-        this.immunity = immunity;
+        requirements.add(FilterRequirement.GROUND);
+        immunity.add(FilterImmunity.FIREBALL);
     }
 
     @Override

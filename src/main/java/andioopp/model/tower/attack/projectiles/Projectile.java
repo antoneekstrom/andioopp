@@ -15,7 +15,7 @@ public abstract class Projectile implements Updateable {
     public ArrayList<FilterRequirement> requirements;
     public ArrayList<FilterImmunity> immunity;
 
-    public ArrayList<Enemy> AlreadyInteractedWith;
+    public ArrayList<Enemy> alreadyInteractedWith = new ArrayList<>();
 
     public Projectile(Vector3f position, ArrayList<FilterRequirement> requirements, ArrayList<FilterImmunity> immunity) {
         this.transform = ConcreteTransform.getFactory().createWithPosition(position);

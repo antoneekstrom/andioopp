@@ -49,4 +49,8 @@ public abstract class Enemy implements Updateable {
     protected void setSprite(String sprite) {
         this.sprite = sprite;
     }
+
+    protected boolean isDead() {
+        return getHealth().isZero();
+    }
 }

@@ -9,6 +9,7 @@ import andioopp.model.enemy.Enemy;
 import andioopp.model.tower.Tower;
 import andioopp.model.tower.attack.Attack;
 import andioopp.model.tower.attack.projectiles.Projectile;
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
 import java.util.Collection;
 import java.util.List;
@@ -71,6 +72,16 @@ public class World implements Updateable {
         checkProjectileHitboxes();
 
         updateProjectiles(time);
+
+
+    }
+
+    private void DespawnOutOfBoundProjectiles() {
+        //Checks if a projectile is out of bounds and removes it if true.
+
+        //projectiles.removeIf(projectile -> projectile.getPosition().getX() > this.length);
+
+
     }
 
     private void checkProjectileHitboxes(){
@@ -88,18 +99,23 @@ public class World implements Updateable {
     }
 
     private void evaluateProjectileHit(Projectile projectile, Enemy enemy) {
-        projectile.AlreadyInteractedWith.add(enemy);
         //if the enemy is in contact with the projectile and isn´t
         // immune to it, damage the enemy and remove the projectile.
-        if (!isImmune(projectile, enemy) && isContact(projectile, enemy) ) {
+        if (!isImmune(projectile, enemy) && isContact(projectile, enemy) && !projectile.alreadyInteractedWith.contains(enemy)) {
             projectiles.remove(projectile);
-            enemy.Damage();
-            //if the enemy is immune to the projectile the enemy wont get damaged and
-            //the projectile will get destroyed.
-        } else if(isImmune(projectile, enemy) && isContact(projectile, enemy)) {
+            enemy.getHealth().decrease(1);
+            projectile.alreadyInteractedWith.add(enemy);
+        //if the enemy is immune to the projectile the enemy wont get damaged and
+        //the projectile will get destroyed.
+        } else if(isImmune(projectile, enemy) && isContact(projectile, enemy) && !projectile.alreadyInteractedWith.contains(enemy)) {
             projectiles.remove(projectile);
-        }
+            System.out.println(" 2 ");
+            projectile.alreadyInteractedWith.add(enemy);
 
+        }
+        if (isEnemyDead(enemy)) {
+            enemies.remove(enemy);
+        }
     }
 
     //TODO destroy when outOfBounds
@@ -109,7 +125,7 @@ public class World implements Updateable {
         for (int i = 0; i < projectile.requirements.size(); i++) {
             FilterRequirement proReq = projectile.requirements.get(i);
             for (int j = 0; j < enemy.requirements.size(); j++) {
-                FilterRequirement enemyReq = enemy.requirements.get(i);
+                FilterRequirement enemyReq = enemy.requirements.get(j);
                 if (proReq.equals(enemyReq)) {
                     return true;
                 }
@@ -122,13 +138,17 @@ public class World implements Updateable {
         for (int i = 0; i < projectile.immunity.size(); i++) {
             FilterImmunity proReq = projectile.immunity.get(i);
             for (int j = 0; j < enemy.immunity.size(); j++) {
-                FilterImmunity enemyReq = enemy.immunity.get(i);
+                FilterImmunity enemyReq = enemy.immunity.get(j);
                 if (proReq.equals(enemyReq)) {
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    private boolean isEnemyDead(Enemy enemy) {
+        return enemy.getHealth().isZero();
     }
 
     private void updateProjectiles(Time time) {
