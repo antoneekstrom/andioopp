@@ -73,15 +73,12 @@ public class World implements Updateable {
 
         updateProjectiles(time);
 
-
+        DespawnOutOfBoundProjectiles();
     }
 
     private void DespawnOutOfBoundProjectiles() {
         //Checks if a projectile is out of bounds and removes it if true.
-
-        //projectiles.removeIf(projectile -> projectile.getPosition().getX() > this.length);
-
-
+        projectiles.removeIf(projectile -> projectile.getPosition().getX() > getNumberOfCellsInLanes());
     }
 
     private void checkProjectileHitboxes(){
