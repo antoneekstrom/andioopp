@@ -10,7 +10,6 @@ import andioopp.model.enemy.Enemy;
 import andioopp.model.tower.Tower;
 import andioopp.model.tower.attack.Attack;
 import andioopp.model.tower.attack.projectiles.Projectile;
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
 import java.util.Collection;
 import java.util.List;
