@@ -17,6 +17,7 @@ public class Model implements Updateable {
     float timeSinceLastEnemy;
     float deltaSeconds;
     private double delay = 1;
+    private final Money money = new Money(100);
 
     public Model(WaveQueue waves) {
         this.waves = waves;
@@ -46,10 +47,11 @@ public class Model implements Updateable {
 
     private World createWorld() {
         LaneBuilder laneBuilder = new LaneBuilder(listFactory).setCells(9);
-        WorldBuilder builder = new WorldBuilder(laneBuilder, listFactory).setLanes(5);
+        WorldBuilder builder = new WorldBuilder(laneBuilder, listFactory, money).setLanes(5);
 
         World world = builder.build();
         world.getCell(1, 3).setTower(Towers.mario());
+        world.getCell(2, 4).setTower(Towers.toad());
         waves.addWavesToWaveQueue(world, 1);
 
 
