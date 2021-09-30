@@ -15,6 +15,7 @@ public class Goomba extends Enemy {
 
     private static final String SPRITE_PATH = "goomba.png";
     private static final int BASE_HEALTH = 3;
+    private final float speed = 0.01f;
     private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
 
     public Goomba(Vector3f position) {
@@ -24,7 +25,7 @@ public class Goomba extends Enemy {
 
     @Override
     public void update(Time time) {
-        getTransform().translate(new Vector3f(-1f * time.getDeltaSeconds(), 0, 0));
+        getTransform().translate(new Vector3f(-speed * time.getDeltaSeconds(), 0, 0));
     }
 
 }

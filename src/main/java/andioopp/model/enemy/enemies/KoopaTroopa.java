@@ -14,7 +14,7 @@ public class KoopaTroopa extends Enemy{
 
     private static final String SPRITE_PATH = "koopaTroopa.png";
     private static final int BASE_HEALTH = 4;
-    private static final double speed = 0.01;
+    private final float speed = 0.01f;
     private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
 
     public KoopaTroopa(Vector3f position) {
@@ -24,7 +24,7 @@ public class KoopaTroopa extends Enemy{
 
     @Override
     public void update(Time time) {
-        getTransform().translate(new Vector3f(-0.01f, 0, 0));
+        getTransform().translate(new Vector3f(-speed * time.getDeltaSeconds(), 0, 0));
     }
 
 }
