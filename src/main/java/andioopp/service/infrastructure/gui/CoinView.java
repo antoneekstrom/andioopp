@@ -27,8 +27,8 @@ public class CoinView <S extends Sprite<?>> {
         }
 
         private Vector3f getSpritePosition(){
-            float distanceFromBorderX = 80f;
-            float distanceFromBorderY = 50f;
+            float distanceFromBorderX = 50f;
+            float distanceFromBorderY = 10f;
             return new Vector3f(distanceFromBorderX,distanceFromBorderY);
         }
         private Dimension getCoinViewScreenSize(World world, S coinViewSprite) {

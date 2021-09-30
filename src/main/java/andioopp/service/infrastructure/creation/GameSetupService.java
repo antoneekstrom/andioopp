@@ -44,7 +44,7 @@ public class GameSetupService<W extends Window<?>> {
 
         Vector3f windowSize = new Vector3f(window.getWidth(), window.getHeight());
         Vector3f worldSize = new Vector3f(windowSize.getX() * worldSizeFactorX, windowSize.getY() * worldSizeFactorY);
-        Vector3f worldPos = new Vector3f(windowSize.getX() - worldSize.getX(), (windowSize.getY() - worldSize.getY()) * 0.5f);
+        Vector3f worldPos = new Vector3f(windowSize.getX() - (worldSize.getX()*1.01f), windowSize.getY()-(worldSize.getY()*1.10f));
 
         window.getMouseObservable().addObserver((e) -> {
 
