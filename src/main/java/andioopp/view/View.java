@@ -29,7 +29,7 @@ public class View<S extends Sprite<?>> {
         this.position = position;
         this.size = size;
         this.coinView = new CoinView<>();
-        this.towerCard = new TowerCard<>(tower);
+        this.towerCardsView = new TowerCardsView();
 
     }
 
@@ -51,7 +51,8 @@ public class View<S extends Sprite<?>> {
         renderEnemies(world);
         renderProjectiles(world);
         coinView.renderCoinView(world, renderer, getViewSize());
-        towerCard.renderTowerCard(renderer, new Vector3f(400, 10));
+
+        towerCardsView.renderTowerCardsList(renderer, new Vector3f(390, 10));
 
 
     }

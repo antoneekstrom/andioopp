@@ -14,41 +14,50 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class TowerCard <S extends Sprite<?>> {
+public class TowerCard<S extends Sprite<?>> {
     ImageView imageView;
     Label prizeLabel;
     Label nameLabel;
-    private static final int HEIGHT = 150;
-    private static final int WIDTH = 120;
-    private static final int IMAGE_HEIGHT = 115;
-    private static final int IMAGE_WIDTH = 90;
+    private final int HEIGHT = 150;
+    private final int WIDTH = 115;
+    private final int IMAGE_HEIGHT = 115;
+    private final int IMAGE_WIDTH = 85;
     private Tower tower;
     private SpriteFactory<?> spriteFactory;
     private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
 
 
     public TowerCard(Tower tower) {
-
         this.tower = tower;
-
         //nameLabel.setText(tower.getName());
         //prizeLabel.setText(String.valueOf(tower.getCost()));
         //imageView.setImage(new Image(tower.getSprite()));
-
-
-
     }
-    public void renderTowerCard(Renderer<S> renderer, Vector3f towerCardPosition){
+
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    public void renderTowerCard(Renderer<S> renderer, Vector3f towerCardPosition) {
         S towerCardSprite = tower.getSprite(renderer.getSpriteFactory());
         Transform towerCardScreenTransform = transformFactory.createWithPosition(new Vector3f(towerCardPosition.getX() + 15, towerCardPosition.getY()));
         renderer.drawRectangle(towerCardPosition, getCardDimension(), new Color(150, 150, 150));
-        renderer.drawSprite(towerCardSprite,towerCardScreenTransform ,getImageDimension());
+        renderer.drawSprite(towerCardSprite, towerCardScreenTransform, getImageDimension());
+        renderer.writeText(getTextPosition(towerCardPosition), tower.getName());
+        System.out.println(tower.getName());
+
     }
-    public Vector3f getCardDimension(){
+    public Vector3f getTextPosition(Vector3f towerCardPos){
+        return new Vector3f(towerCardPos.getX(), towerCardPos.getY() + IMAGE_HEIGHT + 10);
+
+    }
+
+    public Vector3f getCardDimension() {
         return new Vector3f(WIDTH, HEIGHT);
     }
-    public Vector3f getImageDimension(){
-        return new Vector3f(IMAGE_WIDTH,IMAGE_HEIGHT);
+
+    public Vector3f getImageDimension() {
+        return new Vector3f(IMAGE_WIDTH, IMAGE_HEIGHT);
     }
 
 
