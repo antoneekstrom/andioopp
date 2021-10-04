@@ -14,10 +14,12 @@ public class Toad extends Tower {
 
     private static final String SPRITE_PATH = "toad.png";
     private static final Attack[] attackList = {new DigCoinAttack(3f)};
+    //TODO Det fungerar inte att ha en statisk attacklista för att då körs bara attacken en gång typ
+    //Det finns bara en instans av den liksom
 
 
     public Toad() {
-        super(SPRITE_PATH, 60, 5, new ArrayList<>(Arrays.asList(attackList)));
+        super(SPRITE_PATH, 60, 5, new ArrayList<>(Arrays.asList(new DigCoinAttack(3f))));
 
     }
 

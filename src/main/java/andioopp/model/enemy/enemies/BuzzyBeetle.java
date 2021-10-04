@@ -21,7 +21,7 @@ public class BuzzyBeetle extends Enemy {
     private final ArrayList<FilterImmunity> immunity = new ArrayList<>();
 
     public BuzzyBeetle(Vector3f position) {
-        super(SPRITE_PATH, transformFactory.createWithPosition(position), new Health(BASE_HEALTH));
+        super(SPRITE_PATH, transformFactory.createWithPosition(position), new Health(BASE_HEALTH), 0.01f, 0.3f);
         requirements.add(FilterRequirement.GROUND);
         immunity.add(FilterImmunity.FIREBALL);
     }

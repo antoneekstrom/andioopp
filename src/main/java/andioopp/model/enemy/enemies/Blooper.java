@@ -17,7 +17,7 @@ public class Blooper extends Enemy {
     private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
 
     public Blooper(Vector3f position) {
-        super(SPRITE_PATH, transformFactory.createWithPosition(position), new Health(BASE_HEALTH));
+        super(SPRITE_PATH, transformFactory.createWithPosition(position), new Health(BASE_HEALTH), 0.01f, 0.3f);
         requirements.add(FilterRequirement.WATER);
     }
 
