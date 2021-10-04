@@ -12,6 +12,7 @@ import andioopp.model.tower.attack.Attack;
 import andioopp.model.tower.attack.projectiles.Projectile;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 public class World implements Updateable {
@@ -84,8 +85,11 @@ public class World implements Updateable {
     }
 
     private void checkProjectileHitboxes(){
-        for (Projectile projectile : projectiles) {
-            for (Enemy enemy : enemies) {
+        for (Iterator<Projectile> projectileIterator = projectiles.iterator(); projectileIterator.hasNext();) {
+            Projectile projectile = projectileIterator.next();
+
+            for (Iterator<Enemy> enemyIterator = enemies.iterator(); enemyIterator.hasNext();) {
+                Enemy enemy = enemyIterator.next();
                 Vector3f pp = projectile.getPosition();
                 Vector3f ep = enemy.getPosition();
                 float dm = 0.2f; //dm stands for delta max
