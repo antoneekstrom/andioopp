@@ -14,7 +14,6 @@ import andioopp.common.gfx.Renderer;
 import andioopp.common.gfx.Sprite;
 import andioopp.model.tower.attack.projectiles.Projectile;
 import andioopp.service.infrastructure.gui.CoinView;
-import andioopp.common.input.Clickable;
 
 import java.util.List;
 import andioopp.service.infrastructure.gui.TowerCard;
@@ -50,17 +49,17 @@ public class View<S extends Sprite<?>> {
      * @param world
      * @return
      */
-    public List<Clickable> getCellClickables(World world) {
-        List<Clickable> clickables = listFactory.create(world.getNumberOfLanes() * world.getNumberOfCellsInLanes());
+    public List<Rectangle> getCellRectangles(World world) {
+        List<Rectangle> rectangles = listFactory.create(world.getNumberOfLanes() * world.getNumberOfCellsInLanes());
         for (int row = 0; row < world.getNumberOfLanes(); row++) {
             for (int col = 0; col < world.getNumberOfCellsInLanes(); col++) {
-                clickables.add(cellToClickable(world, row, col));
+                rectangles.add(cellToRectangle(world, row, col));
             }
         }
-        return clickables;
+        return rectangles;
     }
 
-    private Clickable cellToClickable(World world, int row, int col) {
+    private Rectangle cellToRectangle(World world, int row, int col) {
         return new Rectangle(getCellScreenPosition(world, row, col), new Dimension(getCellScreenSize(world)));
     }
 

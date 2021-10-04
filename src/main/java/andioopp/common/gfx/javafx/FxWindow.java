@@ -3,8 +3,10 @@ package andioopp.common.gfx.javafx;
 import andioopp.common.gfx.Window;
 import andioopp.common.observer.Observable;
 import andioopp.common.observer.ObservableWithList;
+import andioopp.common.observer.Observer;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.input.MouseData;
+import andioopp.common.transform.Dimension;
 import andioopp.common.transform.Vector3f;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
@@ -18,7 +20,7 @@ public class FxWindow implements Window<FxRenderer> {
     private final Stage stage;
     private final Canvas canvas;
 
-    private final Observable<MouseData> mouseObservable;
+    private final Observable<MouseData, Observer<MouseData>> mouseObservable;
 
     public FxWindow(Stage stage, Canvas canvas) {
         this.stage = stage;
@@ -32,12 +34,12 @@ public class FxWindow implements Window<FxRenderer> {
     }
 
     @Override
-    public Observable<MouseData> getMouseObservable() {
+    public Observable<MouseData, Observer<MouseData>> getMouseObservable() {
         return mouseObservable;
     }
 
     @Override
-    public Observable<Object> getResizeObservable() {
+    public Observable<Dimension, Observer<Dimension>> getResizeObservable() {
         return null;
     }
 

@@ -36,12 +36,8 @@ public class Model implements Updateable {
                 waves.setDeltaSeconds(0);
                 this.delay = waves.getRandomDelay();
                 waves.updateTimeSinceLastEnemy(time);
-
-
             }
         }
-
-
     }
 
     private World createWorld() {
@@ -57,18 +53,8 @@ public class Model implements Updateable {
         world.getCell(4, 6).setTower(Towers.mario());
         waves.addWavesToWaveQueue(world, 1);
 
-
-
-
-        /*world.addEnemy(Enemies.goomba(world, 0));
-        world.addEnemy(Enemies.goomba(world, 1));
-        world.addEnemy(Enemies.goomba(world, 2));
-        world.addEnemy(Enemies.goomba(world, 3));
-        world.addEnemy(Enemies.goomba(world, 4));*/
-
         return world;
     }
-
 
     public World getWorld() {
         return world;

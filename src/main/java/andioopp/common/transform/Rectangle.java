@@ -1,8 +1,6 @@
 package andioopp.common.transform;
 
-import andioopp.common.input.Clickable;
-
-public class Rectangle implements Clickable {
+public class Rectangle {
 
     private final Vector3f position;
     private final Dimension size;
@@ -12,12 +10,16 @@ public class Rectangle implements Clickable {
         this.size = size;
     }
 
-    @Override
+    public boolean contains(Vector3f point) {
+        Vector3f min = getPosition();
+        Vector3f max = getPosition().add(getSize().toVector());
+        return point.getX() >= min.getX() && point.getX() <= max.getX() && point.getY() >= min.getY() && point.getY() <= max.getY();
+    }
+
     public Vector3f getPosition() {
         return position;
     }
 
-    @Override
     public Dimension getSize() {
         return size;
     }

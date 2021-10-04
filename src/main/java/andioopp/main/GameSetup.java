@@ -1,28 +1,25 @@
-package andioopp.service.infrastructure.creation;
+package andioopp.main;
 
 import andioopp.common.gfx.Window;
 import andioopp.common.transform.Vector3f;
+import andioopp.control.PlaceTowerController;
 import andioopp.model.Model;
 import andioopp.model.waves.WaveQueue;
+import andioopp.service.infrastructure.creation.CreationService;
 import andioopp.service.infrastructure.graphics.WindowingService;
+import andioopp.service.infrastructure.input.DragAndDropService;
 import andioopp.service.infrastructure.loop.LoopService;
-import andioopp.service.infrastructure.persistence.PersistenceService;
-import andioopp.service.infrastructure.resource.ResourceService;
 import andioopp.view.View;
 
-public class GameSetupService<W extends Window<?>> {
+public class GameSetup<W extends Window<?>> {
 
     private final WindowingService<W> windowingService;
     private final LoopService loopService;
-    private final ResourceService resourceService;
-    private final PersistenceService persistenceService;
     private final CreationService creationService;
 
-    public GameSetupService(WindowingService<W> windowingService, LoopService loopService, ResourceService resourceService, PersistenceService persistenceService, CreationService creationService) {
+    public GameSetup(WindowingService<W> windowingService, LoopService loopService, CreationService creationService) {
         this.windowingService = windowingService;
         this.loopService = loopService;
-        this.resourceService = resourceService;
-        this.persistenceService = persistenceService;
         this.creationService = creationService;
     }
 
@@ -30,8 +27,13 @@ public class GameSetupService<W extends Window<?>> {
         WindowingService<W> windowingService = getWindowingService();
         LoopService loopService = getLoopService();
 
+        W window = windowingService.createWindow();
+        View<?> view = createView(window);
         Model model = createModel();
-        loopService.start(model, createView(windowingService.createWindow()));
+        DragAndDropService dragAndDropService = new DragAndDropService(window.getMouseObservable(), getCreationService().getListFactory());
+        PlaceTowerController placeTowerController = new PlaceTowerController(dragAndDropService, model, view);
+        placeTowerController.register();
+        loopService.start(model, view);
     }
 
     private Model createModel() {
@@ -46,10 +48,6 @@ public class GameSetupService<W extends Window<?>> {
         Vector3f worldSize = new Vector3f(windowSize.getX() * worldSizeFactorX, windowSize.getY() * worldSizeFactorY);
         Vector3f worldPos = new Vector3f(windowSize.getX() - (worldSize.getX()*1.01f), windowSize.getY()-(worldSize.getY()*1.10f));
 
-        window.getMouseObservable().addObserver((e) -> {
-
-        });
-
         return new View<>(window.getRenderer(), worldPos, worldSize);
     }
 
@@ -63,13 +61,5 @@ public class GameSetupService<W extends Window<?>> {
 
     private LoopService getLoopService() {
         return loopService;
-    }
-
-    private ResourceService getResourceService() {
-        return resourceService;
-    }
-
-    private PersistenceService getPersistenceService() {
-        return persistenceService;
     }
 }

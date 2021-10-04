@@ -2,15 +2,15 @@ package andioopp.common.observer;
 
 import java.util.Collection;
 
-public interface Observable<T> {
-    Collection<Observer<T>> getObservers();
+public interface Observable<T, O extends Observer<T>> {
+    Collection<O> getObservers();
     default void notifyObservers(T event) {
         getObservers().forEach(observer -> observer.onEvent(event));
     }
-    default void addObserver(Observer<T> observer) {
+    default void addObserver(O observer) {
         getObservers().add(observer);
     }
-    default void removeObserver(Observer<T> observer) {
+    default void removeObserver(O observer) {
         getObservers().remove(observer);
     }
 }
