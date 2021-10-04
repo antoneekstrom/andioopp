@@ -95,29 +95,29 @@ public class World implements Updateable {
                 float dm = 0.2f; //dm stands for delta max
 
                 if ( Math.abs(pp.getX() - ep.getX()) < dm && Math.abs(pp.getY() - ep.getY()) < dm) {
-                    evaluateProjectileHit(projectile, enemy);
+                    evaluateProjectileHit(projectile, enemy, projectileIterator, enemyIterator);
                 }
             }
         }
     }
 
-    private void evaluateProjectileHit(Projectile projectile, Enemy enemy) {
+    private void evaluateProjectileHit(Projectile projectile, Enemy enemy, Iterator<Projectile> projectileIterator, Iterator<Enemy> enemyIterator) {
         //if the enemy is in contact with the projectile and isn´t
         // immune to it, damage the enemy and remove the projectile.
         if (!isImmune(projectile, enemy) && isContact(projectile, enemy) && !projectile.alreadyInteractedWith.contains(enemy)) {
-            projectiles.remove(projectile);
+            projectileIterator.remove();
             enemy.getHealth().decrease(1);
             projectile.alreadyInteractedWith.add(enemy);
         //if the enemy is immune to the projectile the enemy wont get damaged and
         //the projectile will get destroyed.
         } else if(isImmune(projectile, enemy) && isContact(projectile, enemy) && !projectile.alreadyInteractedWith.contains(enemy)) {
-            projectiles.remove(projectile);
+            projectileIterator.remove();
             System.out.println(" 2 ");
             projectile.alreadyInteractedWith.add(enemy);
 
         }
         if (isEnemyDead(enemy)) {
-            enemies.remove(enemy);
+            enemyIterator.remove();
         }
     }
 
