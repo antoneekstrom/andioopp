@@ -25,7 +25,7 @@ public class Goomba extends Enemy {
 
     @Override
     public void update(Time time) {
-        getTransform().translate(new Vector3f(-speed * time.getDeltaSeconds(), 0, 0));
+        getTransform().translate(new Vector3f(-speed, 0, 0));
     }
 
 }
