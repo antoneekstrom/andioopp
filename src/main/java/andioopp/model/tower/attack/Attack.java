@@ -41,7 +41,7 @@ public abstract class Attack {
         Collection<Enemy> enemiesInRange = new ArrayListFactory().create();
         for ( Enemy enemy : world.getEnemies() ) {
 
-            if (targetArea.enemyIsInRange(position, enemy.getPosition())) {
+            if (targetArea.enemyIsInRange(position, enemy.getPosition(), world)) {
                 enemiesInRange.add(enemy);
             }
         }
