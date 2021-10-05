@@ -16,7 +16,7 @@ public class WaveQueue {
 - [ ]  Make a wave consist of different enemies
 - [ ]  Fiender kan ha en svårighetsgrad? Så att de svåraste inte kommer i början kanske
 - [ ]*/
-   float timeSinceLastEnemy;
+    float timeSinceLastEnemy;
     float deltaSeconds;
 
     private final Queue<Wave> queue;
@@ -56,6 +56,7 @@ public class WaveQueue {
     }
     public boolean delayEnemies(Time time, double delay){
         this.deltaSeconds = time.getElapsedSeconds() - timeSinceLastEnemy;
+        //gb System.out.println(delay);
 
 
 

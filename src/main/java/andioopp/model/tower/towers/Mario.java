@@ -17,7 +17,7 @@ public class Mario extends Tower {
 
     private static final String SPRITE_PATH = "mario.png";
     private static final Attack[] attackList = {new FireballAttack(0.5f)};
-    private String name = "Mario";
+    public String name = "Mario";
 
 
     public Mario() {
@@ -28,7 +28,5 @@ public class Mario extends Tower {
     public boolean canAttack(Collection<Enemy> enemies){
         return true;
     }
-    public String getName(){
-        return name;
-    }
+
 }
