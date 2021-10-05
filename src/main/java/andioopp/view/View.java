@@ -53,13 +53,13 @@ public class View<S extends Sprite<?>> {
         List<Rectangle> rectangles = listFactory.create(world.getNumberOfLanes() * world.getNumberOfCellsInLanes());
         for (int row = 0; row < world.getNumberOfLanes(); row++) {
             for (int col = 0; col < world.getNumberOfCellsInLanes(); col++) {
-                rectangles.add(cellToRectangle(world, row, col));
+                rectangles.add(getCellRectangle(world, row, col));
             }
         }
         return rectangles;
     }
 
-    private Rectangle cellToRectangle(World world, int row, int col) {
+    public Rectangle getCellRectangle(World world, int row, int col) {
         return new Rectangle(getCellScreenPosition(world, row, col), new Dimension(getCellScreenSize(world)));
     }
 
