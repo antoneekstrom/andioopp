@@ -28,5 +28,8 @@ public class Mario extends Tower {
     public boolean canAttack(Collection<Enemy> enemies){
         return true;
     }
+    public String getName(){
+        return name;
+    }
 
 }

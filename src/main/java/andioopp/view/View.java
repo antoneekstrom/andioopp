@@ -30,6 +30,7 @@ public class View<S extends Sprite<?>> {
         this.size = size;
         this.coinView = new CoinView<>();
         this.towerCardsView = new TowerCardsView();
+        towerCardsView.createTowerCardsList();
 
     }
 
@@ -52,7 +53,7 @@ public class View<S extends Sprite<?>> {
         renderProjectiles(world);
         coinView.renderCoinView(world, renderer, getViewSize());
 
-        towerCardsView.renderTowerCardsList(renderer, new Vector3f(390, 10));
+        towerCardsView.renderTowerCardsList(renderer, new Vector3f(380, 10));
 
 
     }
