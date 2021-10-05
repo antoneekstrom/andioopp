@@ -46,6 +46,4 @@ public abstract class Tower {
     protected void setSprite(String sprite) {
         this.sprite = sprite;
     }
-
-
 }

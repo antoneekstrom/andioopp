@@ -26,7 +26,9 @@ public class Wave {
         for (int i = 0; i < numEnemies; i++) {
             randLane = rand.nextInt(5);
             Enemy enemy = enemies.createRandomEnemy(world, randLane);
+            Enemy enemy2 = enemies.createRandomEnemy(world, 4);
             enemyWave.add(enemy);
+            enemyWave.add(enemy2);
         }
     }
 }
