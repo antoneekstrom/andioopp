@@ -20,7 +20,7 @@ public class FxClock extends AnimationTimer implements Clock {
     }
 
     private float nanosToSeconds(long nanos) {
-        return (float) nanos * 0.000_000_000_1f;
+        return (float) nanos * 0.000_000_001f;
     }
 
     @Override

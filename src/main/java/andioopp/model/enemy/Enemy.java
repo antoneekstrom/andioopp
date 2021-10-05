@@ -1,6 +1,7 @@
 package andioopp.model.enemy;
 
 import andioopp.common.gfx.SpriteFactory;
+import andioopp.common.time.Time;
 import andioopp.common.transform.Transform;
 import andioopp.common.transform.Vector3f;
 import andioopp.model.FilterImmunity;
@@ -15,17 +16,43 @@ public abstract class Enemy implements Updateable {
 
     private final Health health;
     private final Transform transform;
+    private final float speed;
+    private final float attackCooldown;
     private String sprite;
 
     //Enums
     public ArrayList<FilterRequirement> requirements = new ArrayList<>();
     public ArrayList<FilterImmunity> immunity = new ArrayList<>();
 
-    protected Enemy(String spritePath, Transform transform, Health health) {
+    protected Enemy(String spritePath, Transform transform, Health health, float speed, float attackCooldown) {
         this.sprite = spritePath;
         this.transform = transform;
         this.health = health;
+        this.speed = speed; //NEGATIVE SPEED SINCE ENEMIES COME IN FROM THE LEFT
+        this.attackCooldown = attackCooldown;
+
     }
+
+    private boolean towerAhead = false;
+    protected void move() {
+        if (towerAhead) { //Enemy should stop moving if there is a tower infront of it. Can ofcourse be overriden.
+            return;
+        }
+        else {
+            getTransform().translate(new Vector3f(-speed, 0, 0));
+        }
+    }
+
+    private float timeOfLastAttack;
+    public void setTimeOfLastAttack(Time time) {
+        timeOfLastAttack = time.getElapsedSeconds();
+    }
+    public boolean canAttack(Time time) {
+        float deltaTime = time.getElapsedSeconds() - timeOfLastAttack;
+        System.out.println(deltaTime);
+        return (deltaTime > attackCooldown);
+    }
+
     public <S extends Sprite<?>> S getSprite(SpriteFactory<S> spriteFactory) {
         return spriteFactory.get(sprite);
     }
@@ -52,5 +79,13 @@ public abstract class Enemy implements Updateable {
 
     protected boolean isDead() {
         return getHealth().isZero();
+    }
+
+    public boolean isTowerAhead() {
+        return towerAhead;
+    }
+
+    public void setTowerAhead(boolean state) {
+        towerAhead = state;
     }
 }

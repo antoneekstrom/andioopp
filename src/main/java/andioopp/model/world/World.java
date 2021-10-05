@@ -14,6 +14,7 @@ import andioopp.model.tower.attack.projectiles.Projectile;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class World implements Updateable {
 
@@ -75,6 +76,8 @@ public class World implements Updateable {
         checkProjectileHitboxes();
 
         updateProjectiles(time);
+
+        handleEnemyAttacks(time);
 
         DespawnOutOfBoundProjectiles();
     }
@@ -160,6 +163,40 @@ public class World implements Updateable {
         }
     }
 
+    private void handleEnemyAttacks(Time time){
+
+        for ( Enemy enemy : enemies ) {
+
+            int row = (int) enemy.getPosition().getY();
+
+            enemy.setTowerAhead(false);
+            for (int col = 0; col < getNumberOfCellsInLanes(); col++) {
+                Tower tower = getCell(row, col).getTower();
+
+                if (tower != null) {
+                    if (enemy.getPosition().getX() - col < 0.5f) {
+                        enemy.setTowerAhead(true);
+                        if (enemy.canAttack(time)) {
+                            enemy.setTimeOfLastAttack(time);
+                            tower.getHealth().decrease(1);
+                            System.out.println(enemy.getClass().getSimpleName() + " attacked " + tower.getClass().getSimpleName());
+
+                            if (tower.getHealth().isZero()) {
+                                getCell(row, col).setTower(null);
+                            }
+                        }
+                        else {
+                            //System.out.println("Enemy couldnt attack");
+                        }
+                    }
+                    else {
+                        //System.out.println("Enemy isnt close enough to a tower");
+                    }
+                }
+            }
+        }
+    }
+
     public void addEnemy(Enemy enemy) {
         enemies.add(enemy);
     }
@@ -186,6 +223,10 @@ public class World implements Updateable {
 
     public List<Lane> getLanes() {
         return lanes;
+    }
+
+    public Collection<Cell> getCells() {
+        return getLanes().stream().map(Lane::getCells).flatMap(Collection::stream).collect(Collectors.toList());
     }
 
     public void addProjectile(Projectile projectile) {
