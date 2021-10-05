@@ -17,10 +17,13 @@ public class Health {
             healthPoints = 0;
         }
         else {
-            healthPoints -= value;
+            healthPoints += value;
         }
 
         return get();
+    }
+    public boolean isZero() {
+        return healthPoints < 1;
     }
 
     public boolean isEqualToOrHigher(int value) {

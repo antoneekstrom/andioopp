@@ -4,6 +4,7 @@ import andioopp.common.time.Time;
 import andioopp.common.transform.Vector3f;
 import andioopp.model.FilterImmunity;
 import andioopp.model.FilterRequirement;
+import andioopp.model.Money;
 import andioopp.model.Updateable;
 import andioopp.model.enemy.Enemy;
 import andioopp.model.tower.Tower;
@@ -11,6 +12,7 @@ import andioopp.model.tower.attack.Attack;
 import andioopp.model.tower.attack.projectiles.Projectile;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 public class World implements Updateable {
@@ -18,11 +20,13 @@ public class World implements Updateable {
     private final List<Lane> lanes;
     private final Collection<Enemy> enemies;
     private final Collection<Projectile> projectiles;
+    private final Money money;
 
-    World(List<Lane> lanes, Collection<Enemy> enemies, Collection<Projectile> projectiles) {
+    World(List<Lane> lanes, Collection<Enemy> enemies, Collection<Projectile> projectiles, Money money) {
         this.lanes = lanes;
         this.enemies = enemies;
         this.projectiles = projectiles;
+        this.money = money;
     }
 
     @Override
@@ -71,35 +75,50 @@ public class World implements Updateable {
         checkProjectileHitboxes();
 
         updateProjectiles(time);
+
+        DespawnOutOfBoundProjectiles();
+    }
+
+    private void DespawnOutOfBoundProjectiles() {
+        //Checks if a projectile is out of bounds and removes it if true.
+        projectiles.removeIf(projectile -> projectile.getPosition().getX() > getNumberOfCellsInLanes());
     }
 
     private void checkProjectileHitboxes(){
-        for (Projectile projectile : projectiles) {
-            for (Enemy enemy : enemies) {
+        for (Iterator<Projectile> projectileIterator = projectiles.iterator(); projectileIterator.hasNext();) {
+            Projectile projectile = projectileIterator.next();
+
+            for (Iterator<Enemy> enemyIterator = enemies.iterator(); enemyIterator.hasNext();) {
+                Enemy enemy = enemyIterator.next();
                 Vector3f pp = projectile.getPosition();
                 Vector3f ep = enemy.getPosition();
                 float dm = 0.2f; //dm stands for delta max
 
                 if ( Math.abs(pp.getX() - ep.getX()) < dm && Math.abs(pp.getY() - ep.getY()) < dm) {
-                    evaluateProjectileHit(projectile, enemy);
+                    evaluateProjectileHit(projectile, enemy, projectileIterator, enemyIterator);
                 }
             }
         }
     }
 
-    private void evaluateProjectileHit(Projectile projectile, Enemy enemy) {
-        projectile.AlreadyInteractedWith.add(enemy);
+    private void evaluateProjectileHit(Projectile projectile, Enemy enemy, Iterator<Projectile> projectileIterator, Iterator<Enemy> enemyIterator) {
         //if the enemy is in contact with the projectile and isn´t
         // immune to it, damage the enemy and remove the projectile.
-        if (!isImmune(projectile, enemy) && isContact(projectile, enemy) ) {
-            projectiles.remove(projectile);
-            enemy.Damage();
-            //if the enemy is immune to the projectile the enemy wont get damaged and
-            //the projectile will get destroyed.
-        } else if(isImmune(projectile, enemy) && isContact(projectile, enemy)) {
-            projectiles.remove(projectile);
-        }
+        if (!isImmune(projectile, enemy) && isContact(projectile, enemy) && !projectile.alreadyInteractedWith.contains(enemy)) {
+            projectileIterator.remove();
+            enemy.getHealth().decrease(1);
+            projectile.alreadyInteractedWith.add(enemy);
+        //if the enemy is immune to the projectile the enemy wont get damaged and
+        //the projectile will get destroyed.
+        } else if(isImmune(projectile, enemy) && isContact(projectile, enemy) && !projectile.alreadyInteractedWith.contains(enemy)) {
+            projectileIterator.remove();
+            System.out.println(" 2 ");
+            projectile.alreadyInteractedWith.add(enemy);
 
+        }
+        if (isEnemyDead(enemy)) {
+            enemyIterator.remove();
+        }
     }
 
     //TODO destroy when outOfBounds
@@ -109,7 +128,7 @@ public class World implements Updateable {
         for (int i = 0; i < projectile.requirements.size(); i++) {
             FilterRequirement proReq = projectile.requirements.get(i);
             for (int j = 0; j < enemy.requirements.size(); j++) {
-                FilterRequirement enemyReq = enemy.requirements.get(i);
+                FilterRequirement enemyReq = enemy.requirements.get(j);
                 if (proReq.equals(enemyReq)) {
                     return true;
                 }
@@ -122,13 +141,17 @@ public class World implements Updateable {
         for (int i = 0; i < projectile.immunity.size(); i++) {
             FilterImmunity proReq = projectile.immunity.get(i);
             for (int j = 0; j < enemy.immunity.size(); j++) {
-                FilterImmunity enemyReq = enemy.immunity.get(i);
+                FilterImmunity enemyReq = enemy.immunity.get(j);
                 if (proReq.equals(enemyReq)) {
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    private boolean isEnemyDead(Enemy enemy) {
+        return enemy.getHealth().isZero();
     }
 
     private void updateProjectiles(Time time) {
@@ -171,5 +194,9 @@ public class World implements Updateable {
 
     public Collection<Projectile> getProjectiles() {
         return projectiles;
+    }
+
+    public Money getMoney() {
+        return money;
     }
 }

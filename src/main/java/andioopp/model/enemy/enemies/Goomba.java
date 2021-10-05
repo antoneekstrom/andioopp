@@ -14,10 +14,9 @@ import java.util.ArrayList;
 public class Goomba extends Enemy {
 
     private static final String SPRITE_PATH = "goomba.png";
-    private static final int BASE_HEALTH = 5;
+    private static final int BASE_HEALTH = 3;
+    private final float speed = 0.01f;
     private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
-    private final ArrayList<FilterRequirement> requirements = new ArrayList<>();
-    private final ArrayList<FilterImmunity> immunity = new ArrayList<>();
 
     public Goomba(Vector3f position) {
         super(SPRITE_PATH, transformFactory.createWithPosition(position), new Health(BASE_HEALTH));
@@ -26,7 +25,7 @@ public class Goomba extends Enemy {
 
     @Override
     public void update(Time time) {
-        getTransform().translate(new Vector3f(-0.5f * time.getDeltaSeconds(), 0, 0));
+        getTransform().translate(new Vector3f(-speed, 0, 0));
     }
 
 }

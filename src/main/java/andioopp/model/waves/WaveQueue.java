@@ -56,7 +56,6 @@ public class WaveQueue {
     }
     public boolean delayEnemies(Time time, double delay){
         this.deltaSeconds = time.getElapsedSeconds() - timeSinceLastEnemy;
-        //gb System.out.println(delay);
 
 
 

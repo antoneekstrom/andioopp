@@ -48,6 +48,6 @@ public interface Renderer<S extends Sprite<?>> {
      * @param position Where the text should be written
      * @param text  The actual text that should be displayed
      */
-    void writeText(Vector3f position, String text);
+    void writeText(Vector3f position, String text, Color color, Font font);
 
 }

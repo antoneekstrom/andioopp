@@ -1,24 +1,24 @@
 package andioopp.service.infrastructure.input;
 
+import andioopp.common.input.MouseData;
 import andioopp.common.observer.Observable;
 
+/**
+ * Middleman which communicates with {@link andioopp.common.gfx.Window}.
+ */
 public class MouseInputService {
 
-    private final Observable<MouseEvent> mouseEventObservable;
+    private final Observable<MouseData> mouseDataObservable;
 
-    public MouseInputService(Observable<MouseEvent> mouseEventObservable) {
-        this.mouseEventObservable = mouseEventObservable;
+    public MouseInputService(Observable<MouseData> mouseDataObservable) {
+        this.mouseDataObservable = mouseDataObservable;
     }
 
-    private void register() {
-        mouseEventObservable.addObserver(this::onMouseEvent);
-    }
-
-    private void unregister() {
-        mouseEventObservable.removeObserver(this::onMouseEvent);
-    }
-
-    private void onMouseEvent(MouseEvent e) {
-
+    /**
+     * Returns an observable which emits mouse events
+     * @return the observable
+     */
+    public Observable<MouseData> getMouseDataObservable() {
+        return mouseDataObservable;
     }
 }
