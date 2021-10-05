@@ -44,12 +44,12 @@ public class TowerCard<S extends Sprite<?>> {
         Transform towerCardScreenTransform = transformFactory.createWithPosition(new Vector3f(towerCardPosition.getX() + 15, towerCardPosition.getY()));
         renderer.drawRectangle(towerCardPosition, getCardDimension(), new Color(150, 150, 150));
         renderer.drawSprite(towerCardSprite, towerCardScreenTransform, getImageDimension());
-        renderer.writeText(getTextPosition(towerCardPosition), tower.getName());
-        System.out.println(tower.getName());
+        renderer.writeText(getTextPosition(towerCardPosition), tower.getName(), new Color(0,0,0), new Font("Comic Sans MS", 25));
+
 
     }
     public Vector3f getTextPosition(Vector3f towerCardPos){
-        return new Vector3f(towerCardPos.getX(), towerCardPos.getY() + IMAGE_HEIGHT + 10);
+        return new Vector3f(towerCardPos.getX() + 20, towerCardPos.getY() + IMAGE_HEIGHT + 15);
 
     }
 
