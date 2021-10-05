@@ -14,6 +14,7 @@ public abstract class Tower {
     private final Health health;
     private String sprite;
     private ArrayList<Attack> attacks;
+    public String name;
 
 
     public Tower(String spritePath, int cost, int health, ArrayList<Attack> attacks) {
@@ -30,14 +31,17 @@ public abstract class Tower {
     public <S extends Sprite<?>> S getSprite(SpriteFactory<S> spriteFactory) {
         return spriteFactory.get(sprite);
     }
-
+    public String getSprite(){
+        return sprite;
+    }
     public Health getHealth() {
         return health;
     }
 
-    public float getCost() {
+    public int getCost() {
         return cost;
     }
+    public String getName(){ return name;}
 
     protected void setSprite(String sprite) {
         this.sprite = sprite;

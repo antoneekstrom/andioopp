@@ -3,6 +3,7 @@ package andioopp.view;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.storage.ListFactory;
 import andioopp.common.transform.*;
+import andioopp.model.tower.towers.Mario;
 import andioopp.model.world.Lane;
 import andioopp.model.Model;
 import andioopp.model.world.World;
@@ -16,6 +17,8 @@ import andioopp.service.infrastructure.gui.CoinView;
 import andioopp.common.input.Clickable;
 
 import java.util.List;
+import andioopp.service.infrastructure.gui.TowerCard;
+import andioopp.service.infrastructure.gui.TowerCardsView;
 
 public class View<S extends Sprite<?>> {
 
@@ -23,12 +26,17 @@ public class View<S extends Sprite<?>> {
     private final Vector3f position;
     private final Vector3f size;
     private CoinView<S> coinView;
-
+    private TowerCardsView towerCardsView;
+    private TowerCard<S> towerCard;
+    private Tower tower = new Mario();
     public View(Renderer<S> renderer, Vector3f position, Vector3f size) {
         this.renderer = renderer;
         this.position = position;
         this.size = size;
         this.coinView = new CoinView<>();
+        this.towerCardsView = new TowerCardsView();
+        towerCardsView.createTowerCardsList();
+
     }
 
     private static final Color COLOR_CELL_ODD = new Color(112, 146, 85);
@@ -69,6 +77,10 @@ public class View<S extends Sprite<?>> {
         renderEnemies(world);
         renderProjectiles(world);
         coinView.renderCoinView(world, renderer, getViewSize());
+
+        towerCardsView.renderTowerCardsList(renderer, new Vector3f(380, 10));
+
+
     }
 
     private void clearScreen() {
