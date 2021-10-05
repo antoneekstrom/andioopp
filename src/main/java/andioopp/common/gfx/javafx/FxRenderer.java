@@ -17,9 +17,11 @@ import java.util.Vector;
 public class FxRenderer implements Renderer<FxSprite> {
 
     private final GraphicsContext ctx;
+    private final SpriteFactory<FxSprite> spriteFactory;
 
     public FxRenderer(GraphicsContext ctx) {
         this.ctx = ctx;
+        spriteFactory = new CachedSpriteFactory<>(FxSprite::new);
     }
 
     @Override
@@ -42,7 +44,7 @@ public class FxRenderer implements Renderer<FxSprite> {
 
     @Override
     public SpriteFactory<FxSprite> getSpriteFactory() {
-        return new CachedSpriteFactory<>(FxSprite::new);
+        return spriteFactory;
     }
 
     private GraphicsContext getCtx() {

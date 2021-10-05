@@ -19,9 +19,9 @@ public class TowerCardsView <S extends Sprite<?>>{
 
  public TowerCardsView() {
  }
- public void renderTowerCardsList(Renderer renderer, Vector3f towerCardListPosition){
+ public void renderTowerCardsList(Renderer<S> renderer, Vector3f towerCardListPosition){
 
-     for (TowerCard t : towerCardList){
+     for (TowerCard<S> t : towerCardList){
          t.renderTowerCard(renderer, new Vector3f(towerCardListPosition.getX(), towerCardListPosition.getY()));
          towerCardListPosition = new Vector3f(towerCardListPosition.getX() + t.getWidth() + 10, towerCardListPosition.getY());
      }
