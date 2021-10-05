@@ -30,10 +30,6 @@ public class World implements Updateable {
         this.money = money;
     }
 
-    public Collection<Cell> getCells() {
-        return getLanes().stream().map(Lane::getCells).flatMap(Collection::stream).collect(Collectors.toList());
-    }
-
     @Override
     public void update(Time time) {
         getEnemies().forEach((enemy) -> enemy.update(time));
