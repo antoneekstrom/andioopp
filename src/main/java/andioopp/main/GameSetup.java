@@ -3,6 +3,7 @@ package andioopp.main;
 import andioopp.common.gfx.Window;
 import andioopp.common.transform.Vector3f;
 import andioopp.control.PlaceTowerController;
+import andioopp.control.TowerDragEvent;
 import andioopp.model.Model;
 import andioopp.model.waves.WaveQueue;
 import andioopp.service.infrastructure.creation.CreationService;
@@ -30,8 +31,8 @@ public class GameSetup<W extends Window<?>> {
         W window = windowingService.createWindow();
         View<?> view = createView(window);
         Model model = createModel();
-        DragAndDropService dragAndDropService = new DragAndDropService(window.getMouseObservable(), getCreationService().getListFactory());
-        PlaceTowerController placeTowerController = new PlaceTowerController(dragAndDropService, model, view);
+        DragAndDropService<TowerDragEvent> dragAndDropService = new DragAndDropService<>(window.getMouseObservable(), getCreationService().getListFactory());
+        PlaceTowerController placeTowerController = new PlaceTowerController(dragAndDropService, model, view, getCreationService().getListFactory());
         placeTowerController.register();
         loopService.start(model, view);
     }

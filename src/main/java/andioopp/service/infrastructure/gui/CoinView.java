@@ -30,7 +30,7 @@ public class CoinView <S extends Sprite<?>> {
             return spriteFactory.get(sprite);
         }
 
-        private Vector3f getSpritePosition(){
+        private Vector3f getSpritePosition() {
             float distanceFromBorderX = 50f;
             float distanceFromBorderY = 10f;
             return new Vector3f(distanceFromBorderX,distanceFromBorderY);

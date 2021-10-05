@@ -1,21 +1,18 @@
 package andioopp.service.infrastructure.input;
 
 import andioopp.common.input.MouseData;
+import andioopp.common.observer.Observer;
 import andioopp.common.transform.Rectangle;
 
-public class DragAndDropObserver implements DraggableObserver, DroppableObserver {
-
+public abstract class Draggable<T> implements Observer<MouseData> {
     private final Rectangle rectangle;
 
-    public DragAndDropObserver(Rectangle rectangle) {
+    public Draggable(Rectangle rectangle) {
         this.rectangle = rectangle;
     }
 
-    @Override
-    public void onEvent(MouseData event) {
-    }
+    abstract T getDragData();
 
-    @Override
     public Rectangle getRectangle() {
         return rectangle;
     }
