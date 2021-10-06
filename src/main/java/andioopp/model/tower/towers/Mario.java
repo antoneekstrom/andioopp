@@ -19,6 +19,7 @@ public class Mario extends Tower {
     private static final Attack[] attackList = {new FireballAttack(0.5f)};
 
     public String name = "Mario";
+    public int cost = 100;
 
 
     //TODO se toad, attacklistan kan inte vara statisk typ, för då finns bara en instans av attacken
@@ -35,5 +36,6 @@ public class Mario extends Tower {
     public String getName(){
         return name;
     }
+    public int getCost(){ return cost; }
 
 }
