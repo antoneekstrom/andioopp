@@ -4,7 +4,7 @@ import andioopp.common.storage.ListFactory;
 import andioopp.common.transform.Rectangle;
 import andioopp.model.Model;
 import andioopp.model.world.World;
-import andioopp.service.infrastructure.gui.TowerCard;
+import andioopp.view.gui.TowerCard;
 import andioopp.service.infrastructure.input.DragAndDropService;
 import andioopp.view.View;
 

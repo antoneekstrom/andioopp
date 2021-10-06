@@ -1,9 +1,6 @@
 package andioopp.view;
 
-import andioopp.common.storage.ArrayListFactory;
-import andioopp.common.storage.ListFactory;
 import andioopp.common.transform.*;
-import andioopp.model.tower.towers.Mario;
 import andioopp.model.world.Lane;
 import andioopp.model.Model;
 import andioopp.model.world.World;
@@ -13,11 +10,9 @@ import andioopp.common.gfx.Color;
 import andioopp.common.gfx.Renderer;
 import andioopp.common.gfx.Sprite;
 import andioopp.model.tower.attack.projectiles.Projectile;
-import andioopp.service.infrastructure.gui.CoinView;
+import andioopp.view.gui.CoinView;
 
-import java.util.List;
-import andioopp.service.infrastructure.gui.TowerCard;
-import andioopp.service.infrastructure.gui.TowerCardsView;
+import andioopp.view.gui.TowerCardsView;
 
 public class View<S extends Sprite<?>> {
 
