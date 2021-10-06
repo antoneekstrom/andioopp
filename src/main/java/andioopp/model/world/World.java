@@ -164,9 +164,7 @@ public class World implements Updateable {
     }
 
     private void handleEnemyAttacks(Time time){
-
         for ( Enemy enemy : enemies ) {
-
             int row = (int) enemy.getPosition().getY();
 
             enemy.setTowerAhead(false);
