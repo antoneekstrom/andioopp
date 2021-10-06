@@ -4,6 +4,7 @@ import andioopp.common.storage.ListFactory;
 import andioopp.common.transform.Rectangle;
 import andioopp.model.Model;
 import andioopp.model.world.World;
+import andioopp.service.infrastructure.gui.TowerCard;
 import andioopp.service.infrastructure.input.DragAndDropService;
 import andioopp.view.View;
 
@@ -35,9 +36,18 @@ public class PlaceTowerController {
         }
     }
 
+    private void registerDraggableCards() {
+        for (TowerCard<?> card : view.getTowerCardsView().getCards()) {
+            Rectangle rectangle = view.getTowerCardsView().getTowerCardRectangle(View.TOWER_CARD_LIST_POSITION);
+            TowerCardDraggableController draggable = new TowerCardDraggableController(rectangle, card::getTower);
+            dragAndDropService.getDraggableObservable().addObserver(draggable);
+        }
+    }
+
     public void register() {
         dragAndDropService.register();
         registerDroppableCells();
+        registerDraggableCards();
     }
 
     private void unregisterDroppableCells() {

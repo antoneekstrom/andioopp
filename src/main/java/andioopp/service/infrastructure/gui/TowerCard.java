@@ -17,12 +17,10 @@ import java.io.IOException;
 
 public class TowerCard<S extends Sprite<?>> {
     ImageView imageView;
-    Label prizeLabel;
-    Label nameLabel;
-    private final int HEIGHT = 150;
-    private final int WIDTH = 115;
-    private final int IMAGE_HEIGHT = 115;
-    private final int IMAGE_WIDTH = 85;
+    private static final int HEIGHT = 150;
+    private static final int WIDTH = 115;
+    private static final int IMAGE_HEIGHT = 115;
+    private static final int IMAGE_WIDTH = 85;
     private Tower tower;
     private SpriteFactory<?> spriteFactory;
     private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
@@ -30,9 +28,6 @@ public class TowerCard<S extends Sprite<?>> {
 
     public TowerCard(Tower tower) {
         this.tower = tower;
-        //nameLabel.setText(tower.getName());
-        //prizeLabel.setText(String.valueOf(tower.getCost()));
-        //imageView.setImage(new Image(tower.getSprite()));
     }
 
     public int getWidth() {
@@ -45,19 +40,21 @@ public class TowerCard<S extends Sprite<?>> {
         renderer.drawRectangle(towerCardPosition, getCardDimension(), new Color(150, 150, 150));
         renderer.drawSprite(towerCardSprite, towerCardScreenTransform, getImageDimension());
         renderer.writeText(getTextPosition(towerCardPosition), tower.getName(), new Color(0,0,0), new Font("Comic Sans MS", 25));
-
-
     }
+
     public Vector3f getTextPosition(Vector3f towerCardPos){
         return new Vector3f(towerCardPos.getX() + 20, towerCardPos.getY() + IMAGE_HEIGHT + 15);
-
     }
 
-    public Vector3f getCardDimension() {
+    public Tower getTower() {
+        return tower;
+    }
+
+    public static Vector3f getCardDimension() {
         return new Vector3f(WIDTH, HEIGHT);
     }
 
-    public Vector3f getImageDimension() {
+    public static Vector3f getImageDimension() {
         return new Vector3f(IMAGE_WIDTH, IMAGE_HEIGHT);
     }
 
