@@ -83,7 +83,7 @@ public class World implements Updateable {
     }
 
 
-    public void DespawnOutOfBoundProjectiles() {
+    private void DespawnOutOfBoundProjectiles() {
         //Checks if a projectile is out of bounds and removes it if true.
         projectiles.removeIf(projectile -> projectile.getPosition().getX() > getNumberOfCellsInLanes());
     }
