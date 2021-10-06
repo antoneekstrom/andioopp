@@ -1,6 +1,6 @@
 package andioopp.service.infrastructure.input;
 
-import andioopp.common.input.MouseData;
+import andioopp.common.input.MouseEvent;
 import andioopp.common.observer.Observable;
 import andioopp.common.observer.ObservableWithList;
 import andioopp.common.observer.Observer;
@@ -8,29 +8,29 @@ import andioopp.common.storage.ListFactory;
 
 public class DragAndDropService<T> extends MouseInputService {
 
-    private final Observable<MouseData, Draggable<T>> draggableObservable;
+    private final Observable<MouseEvent, Draggable<T>> draggableObservable;
     private final Observable<T, Droppable<T>> droppableObservable;
 
     private boolean mouseDown = false;
     private T dragData;
 
-    public DragAndDropService(Observable<MouseData, Observer<MouseData>> mouseDataObservable, ListFactory listFactory) {
+    public DragAndDropService(Observable<MouseEvent, Observer<MouseEvent>> mouseDataObservable, ListFactory listFactory) {
         super(mouseDataObservable);
         this.draggableObservable = new ObservableWithList<>(listFactory.create());
         this.droppableObservable = new ObservableWithList<>(listFactory.create());
     }
 
-    private void onMouseEvent(MouseData e) {
-        if (e.getType().equals(MouseData.MouseEventType.RELEASE)) {
+    private void onMouseEvent(MouseEvent e) {
+        if (e.getType().equals(MouseEvent.MouseEventType.RELEASE)) {
             mouseDown = false;
             onMouseRelease(e);
-        } else if (e.getType().equals(MouseData.MouseEventType.PRESS)) {
+        } else if (e.getType().equals(MouseEvent.MouseEventType.PRESS)) {
             mouseDown = true;
             onMouseDown(e);
         }
     }
 
-    private void onMouseDown(MouseData e) {
+    private void onMouseDown(MouseEvent e) {
         for (Draggable<T> d : getDraggableObservable().getObservers()) {
             boolean isBeingClicked = d.getRectangle().contains(e.getPosition());
             if (isBeingClicked) {
@@ -40,7 +40,7 @@ public class DragAndDropService<T> extends MouseInputService {
         }
     }
 
-    private void onMouseRelease(MouseData e) {
+    private void onMouseRelease(MouseEvent e) {
         for (Droppable<T> d : getDroppableObservable().getObservers()) {
             boolean isBeingClicked = d.getRectangle().contains(e.getPosition());
             if (isBeingClicked) {
@@ -69,7 +69,7 @@ public class DragAndDropService<T> extends MouseInputService {
         getMouseDataObservable().removeObserver(this::onMouseEvent);
     }
 
-    public Observable<MouseData, Draggable<T>> getDraggableObservable() {
+    public Observable<MouseEvent, Draggable<T>> getDraggableObservable() {
         return draggableObservable;
     }
 
