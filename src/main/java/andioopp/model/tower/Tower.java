@@ -8,6 +8,9 @@ import andioopp.model.tower.attack.Attack;
 
 import java.util.ArrayList;
 
+/**
+ * A tower.
+ */
 public abstract class Tower {
 
     private final int cost;
@@ -15,7 +18,6 @@ public abstract class Tower {
     private String sprite;
     private ArrayList<Attack> attacks;
     public String name;
-
 
     public Tower(String spritePath, int cost, int health, ArrayList<Attack> attacks) {
         this.sprite = spritePath;
