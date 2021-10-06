@@ -31,6 +31,7 @@ public class GameSetup<W extends Window<?>> {
         W window = windowingService.createWindow();
         View<?> view = createView(window);
         Model model = createModel();
+
         DragAndDropService<TowerDragEvent> dragAndDropService = new DragAndDropService<>(window.getMouseObservable(), getCreationService().getListFactory());
         PlaceTowerController placeTowerController = new PlaceTowerController(dragAndDropService, model, view, getCreationService().getListFactory());
         placeTowerController.register();

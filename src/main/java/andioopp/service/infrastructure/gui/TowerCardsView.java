@@ -5,41 +5,41 @@ import andioopp.common.gfx.Sprite;
 import andioopp.common.transform.*;
 import andioopp.model.tower.Tower;
 import andioopp.model.tower.towers.Mario;
-import andioopp.model.world.World;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TowerCardsView <S extends Sprite<?>>{
+public class TowerCardsView<S extends Sprite<?>> {
 
- private List<TowerCard> towerCardList = new LinkedList<>();
- private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
+    private final List<TowerCard<S>> cards = new LinkedList<>();
 
+    public void renderTowerCardsList(Renderer<S> renderer, Vector3f towerCardListPosition) {
+        for (TowerCard<S> t : cards) {
+            t.renderTowerCard(renderer, towerCardListPosition);
+            // den här raden gjorde inget??
+            // towerCardListPosition = new Vector3f(towerCardListPosition.getX() + t.getWidth() + 10, towerCardListPosition.getY());
+        }
+    }
 
- public TowerCardsView() {
- }
- public void renderTowerCardsList(Renderer<S> renderer, Vector3f towerCardListPosition){
+    public Rectangle getTowerCardRectangle(Vector3f towerCardListPosition) {
+        return new Rectangle(towerCardListPosition, new Dimension(TowerCard.getCardDimension()));
+    }
 
-     for (TowerCard<S> t : towerCardList){
-         t.renderTowerCard(renderer, new Vector3f(towerCardListPosition.getX(), towerCardListPosition.getY()));
-         towerCardListPosition = new Vector3f(towerCardListPosition.getX() + t.getWidth() + 10, towerCardListPosition.getY());
-     }
- }
- public void createTowerCardsList(){
-     addTowerCardToList(new Mario());
-     addTowerCardToList(new Mario());
-     addTowerCardToList(new Mario());
-     addTowerCardToList(new Mario());
-     addTowerCardToList(new Mario());
-     addTowerCardToList(new Mario());
+    public void createTowerCardsList() {
+        addTowerCardToList(new Mario());
+        addTowerCardToList(new Mario());
+        addTowerCardToList(new Mario());
+        addTowerCardToList(new Mario());
+        addTowerCardToList(new Mario());
+        addTowerCardToList(new Mario());
+    }
 
- }
+    public void addTowerCardToList(Tower tower) {
+        this.cards.add(new TowerCard<>(tower));
+    }
 
-
- public void addTowerCardToList(Tower tower){
-     this.towerCardList.add(new TowerCard(tower));
- }
-
-
+    public Collection<TowerCard<S>> getCards() {
+        return cards;
+    }
 }
