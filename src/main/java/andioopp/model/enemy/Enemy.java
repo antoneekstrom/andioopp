@@ -20,8 +20,14 @@ public abstract class Enemy implements Updateable {
     private final float attackCooldown;
     private String sprite;
 
-    //Enums
+    /**
+     * List of enums. Each enemy individually adds enums of "requirements" to kill that enemy.
+     */
     public ArrayList<FilterRequirement> requirements = new ArrayList<>();
+    /**
+     * List of enums. Each enemy individually adds enums of "immunities".
+     * Towers can´t kill a enemy if its immune to it´s attack
+     */
     public ArrayList<FilterImmunity> immunity = new ArrayList<>();
 
     protected Enemy(String spritePath, Transform transform, Health health, float speed, float attackCooldown) {
