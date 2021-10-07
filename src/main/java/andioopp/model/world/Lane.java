@@ -8,7 +8,7 @@ import java.util.List;
 public class Lane {
     private final List<Cell> cells;
 
-    Lane(List<Cell> cells) {
+    public Lane(List<Cell> cells) {
         this.cells = cells;
     }
 
