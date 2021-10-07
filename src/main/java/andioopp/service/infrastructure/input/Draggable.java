@@ -11,7 +11,7 @@ public abstract class Draggable<T> implements Observer<MouseData> {
         this.rectangle = rectangle;
     }
 
-    abstract T getDragData();
+    protected abstract T getDragData();
 
     public Rectangle getRectangle() {
         return rectangle;

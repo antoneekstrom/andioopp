@@ -104,28 +104,43 @@ public class World implements Updateable {
         }
     }
 
+    /**
+     * Called when a collision is detected. Checks what to do with the collision.
+     * @param projectile to compare with enemy
+     * @param enemy to compare with projectile
+     * @param projectileIterator to edit list of projectiles
+     * @param enemyIterator to edit list of enemies
+     */
     private void evaluateProjectileHit(Projectile projectile, Enemy enemy, Iterator<Projectile> projectileIterator, Iterator<Enemy> enemyIterator) {
+
         //if the enemy is in contact with the projectile and isn´t
         // immune to it, damage the enemy and remove the projectile.
         if (!isImmune(projectile, enemy) && isContact(projectile, enemy) && !projectile.alreadyInteractedWith.contains(enemy)) {
             projectileIterator.remove();
             enemy.getHealth().decrease(1);
             projectile.alreadyInteractedWith.add(enemy);
-        //if the enemy is immune to the projectile the enemy wont get damaged and
-        //the projectile will get destroyed.
+
+        //if the enemy is immune to the projectile the enemy won´t get damaged and
+        //the projectile will be destroyed.
         } else if(isImmune(projectile, enemy) && isContact(projectile, enemy) && !projectile.alreadyInteractedWith.contains(enemy)) {
             projectileIterator.remove();
             System.out.println(" 2 ");
             projectile.alreadyInteractedWith.add(enemy);
 
         }
+
+        //if the enemy´s health is zero after evaluation then remove enemy.
         if (isEnemyDead(enemy)) {
             enemyIterator.remove();
         }
     }
 
-    //TODO destroy when outOfBounds
-    //TODO check AlreadyInteractedWith so that a enemy isn´t hit multiple times.
+    /**
+     * Checks if projectile and enemies requirements list matches.
+     * @param projectile to compare with enemy
+     * @param enemy to compare with projectile
+     * @return true if projectile can make contact with enemy.
+     */
     private boolean isContact(Projectile projectile, Enemy enemy) {
         //Checks if the projectile can damage the enemy by comparing their requirement lists.
         for (int i = 0; i < projectile.requirements.size(); i++) {
@@ -140,6 +155,13 @@ public class World implements Updateable {
         return false;
     }
 
+    /**
+     * checks if projectile and enemy immunity lists matches.
+     * The enemy is immune to the projectile if return true.
+     * @param projectile to compare with enemy
+     * @param enemy to compare with projectile
+     * @return true if enemy is immune to projectile
+     */
     private boolean isImmune(Projectile projectile, Enemy enemy) {
         for (int i = 0; i < projectile.immunity.size(); i++) {
             FilterImmunity proReq = projectile.immunity.get(i);
@@ -153,9 +175,16 @@ public class World implements Updateable {
         return false;
     }
 
+    /**
+     * checks enemy health.
+     * If health is zero return true.
+     * @param enemy enemy to check if dead.
+     * @return true if enemy health is zero.
+     */
     private boolean isEnemyDead(Enemy enemy) {
         return enemy.getHealth().isZero();
     }
+
 
     private void updateProjectiles(Time time) {
         for (Projectile projectile : projectiles) {
@@ -164,9 +193,7 @@ public class World implements Updateable {
     }
 
     private void handleEnemyAttacks(Time time){
-
         for ( Enemy enemy : enemies ) {
-
             int row = (int) enemy.getPosition().getY();
 
             enemy.setTowerAhead(false);
