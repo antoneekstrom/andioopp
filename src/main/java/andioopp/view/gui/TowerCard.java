@@ -1,4 +1,4 @@
-package andioopp.service.infrastructure.gui;
+package andioopp.view.gui;
 
 import andioopp.common.gfx.Color;
 import andioopp.common.gfx.Renderer;
@@ -6,14 +6,8 @@ import andioopp.common.gfx.Sprite;
 import andioopp.common.gfx.SpriteFactory;
 import andioopp.common.transform.*;
 import andioopp.model.tower.Tower;
-import andioopp.model.world.World;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
-
-import java.io.IOException;
 
 public class TowerCard<S extends Sprite<?>> {
     ImageView imageView;

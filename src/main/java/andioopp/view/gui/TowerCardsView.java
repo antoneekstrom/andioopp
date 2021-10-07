@@ -1,4 +1,4 @@
-package andioopp.service.infrastructure.gui;
+package andioopp.view.gui;
 
 import andioopp.common.gfx.Renderer;
 import andioopp.common.gfx.Sprite;

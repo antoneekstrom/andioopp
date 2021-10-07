@@ -1,6 +1,6 @@
 package andioopp.control;
 
-import andioopp.common.input.MouseData;
+import andioopp.common.input.MouseEvent;
 import andioopp.common.transform.Rectangle;
 import andioopp.model.tower.Tower;
 import andioopp.service.infrastructure.input.Draggable;
@@ -22,7 +22,7 @@ public class TowerCardDraggableController extends Draggable<TowerDragEvent> {
     }
 
     @Override
-    public void onEvent(MouseData event) {
+    public void onEvent(MouseEvent event) {
 
     }
 }

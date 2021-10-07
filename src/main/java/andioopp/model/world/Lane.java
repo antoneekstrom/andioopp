@@ -2,6 +2,9 @@ package andioopp.model.world;
 
 import java.util.List;
 
+/**
+ * A lane which contains {@link Cell} objects.
+ */
 public class Lane {
     private final List<Cell> cells;
 
