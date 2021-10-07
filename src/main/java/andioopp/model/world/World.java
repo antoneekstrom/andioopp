@@ -182,7 +182,7 @@ public class World implements Updateable {
      * @param enemy enemy to check if dead.
      * @return true if enemy health is zero.
      */
-    private boolean isEnemyDead(Enemy enemy) {
+    public boolean isEnemyDead(Enemy enemy) {
         return enemy.getHealth().isZero();
     }
 
