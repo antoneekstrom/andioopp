@@ -35,6 +35,21 @@ public class World implements Updateable {
         getEnemies().forEach((enemy) -> enemy.update(time));
         getProjectiles().forEach((projectile) -> projectile.update(time));
 
+        performAllAttacks(time);
+
+        checkProjectileHitboxes();
+
+        updateProjectiles(time);
+
+        handleEnemyAttacks(time);
+
+        despawnOutOfBoundsProjectiles();
+
+        despawnOutOfBoundsEnemies();
+    }
+
+
+    private void performAllAttacks(Time time) {
         for (int row = 0; row < getLanes().size(); row++) {
             for (int col = 0; col < getNumberOfCellsInLanes(); col++) {
                 Tower tower = getCell(row, col).getTower();
@@ -72,20 +87,16 @@ public class World implements Updateable {
                 }
             }
         }
-
-        checkProjectileHitboxes();
-
-        updateProjectiles(time);
-
-        handleEnemyAttacks(time);
-
-        DespawnOutOfBoundProjectiles();
     }
 
-
-    private void DespawnOutOfBoundProjectiles() {
+    private void despawnOutOfBoundsProjectiles() {
         //Checks if a projectile is out of bounds and removes it if true.
         projectiles.removeIf(projectile -> projectile.getPosition().getX() > getNumberOfCellsInLanes());
+    }
+
+    private void despawnOutOfBoundsEnemies() {
+        //Checks if a projectile is out of bounds and removes it if true.
+        enemies.removeIf(enemy -> enemy.getPosition().getX() < 0);
     }
 
     private void checkProjectileHitboxes(){

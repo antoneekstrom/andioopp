@@ -26,6 +26,11 @@ public class FireballAttack extends Attack {
         immunity.add(FilterImmunity.FIREBALL);
     }
 
+    /**
+     * Spawns a fireball projectile at the position of the tower that is attacking.
+     * @param world
+     * @param position position of the tower, or wherever the attack is to be performed
+     */
     @Override
     public void performAttack(World world, Vector3f position) {
         world.addProjectile( new FireballProjectile(position, requirements, immunity) );

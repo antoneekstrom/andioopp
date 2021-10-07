@@ -54,10 +54,20 @@ public abstract class Enemy implements Updateable {
 
     private float timeOfLastAttack;
 
+    /**
+     * Sets the time of the enemy's latest attack.
+     * It is used to calculate when its next attack can be performed.
+     * @param time the current time of the attack
+     */
     public void setTimeOfLastAttack(Time time) {
         timeOfLastAttack = time.getElapsedSeconds();
     }
 
+    /**
+     * Calculates if the tower is able to attack depending on when it attacked the last time.
+     * @param time the current time.
+     * @return true if the tower is able to attack.
+     */
     public boolean canAttack(Time time) {
         float deltaTime = time.getElapsedSeconds() - timeOfLastAttack;
         System.out.println(deltaTime);
