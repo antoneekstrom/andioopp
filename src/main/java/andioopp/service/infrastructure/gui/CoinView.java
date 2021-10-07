@@ -16,6 +16,12 @@ public class CoinView <S extends Sprite<?>> {
         private String sprite = "coinBox.png";
         private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
 
+    /**
+     * A constructor for rendering a sprite for displaying the players in-game balance.
+     * @param world a part of the model that controls the actual spelplan.
+     * @param renderer an interface for rendering images
+     * @param worldSize the actual size of the game plan
+     */
         public void renderCoinView(World world, Renderer<S> renderer, Vector3f worldSize){
 
             S coinViewSprite = getSprite(renderer.getSpriteFactory());
@@ -26,6 +32,12 @@ public class CoinView <S extends Sprite<?>> {
             displayCoins(renderer, world);
         }
 
+    /**
+     * A method for getting the sprite path from a specific image.
+     * @param spriteFactory a factory class for getting the image's sprite path
+     * @param <S> Sprite
+     * @return
+     */
         public <S extends Sprite<?>> S getSprite(SpriteFactory<S> spriteFactory) {
             return spriteFactory.get(sprite);
         }
