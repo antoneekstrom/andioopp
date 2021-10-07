@@ -3,19 +3,21 @@ package andioopp.model;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.storage.ListFactory;
 import andioopp.common.time.Time;
+import andioopp.model.stats.Money;
 import andioopp.model.tower.Towers;
 import andioopp.model.waves.WaveQueue;
 import andioopp.model.world.LaneBuilder;
 import andioopp.model.world.World;
 import andioopp.model.world.WorldBuilder;
 
+/**
+ * Facade for the entire model.
+ */
 public class Model implements Updateable {
 
     private final World world;
     private final WaveQueue waves;
     private final ListFactory listFactory = new ArrayListFactory();
-    float timeSinceLastEnemy;
-    float deltaSeconds;
     private double delay = 1;
     private final Money money = new Money(100);
 

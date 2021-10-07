@@ -5,7 +5,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * Application entrypoint which handles window creation.
+ * Application entrypoint.
  */
 public class App extends Application {
     public static void run(String[] args) {

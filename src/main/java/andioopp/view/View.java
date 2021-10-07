@@ -1,9 +1,6 @@
 package andioopp.view;
 
-import andioopp.common.storage.ArrayListFactory;
-import andioopp.common.storage.ListFactory;
 import andioopp.common.transform.*;
-import andioopp.model.tower.towers.Mario;
 import andioopp.model.world.Lane;
 import andioopp.model.Model;
 import andioopp.model.world.World;
@@ -13,50 +10,31 @@ import andioopp.common.gfx.Color;
 import andioopp.common.gfx.Renderer;
 import andioopp.common.gfx.Sprite;
 import andioopp.model.tower.attack.projectiles.Projectile;
-import andioopp.service.infrastructure.gui.CoinView;
+import andioopp.view.gui.CoinView;
 
-import java.util.List;
-import andioopp.service.infrastructure.gui.TowerCard;
-import andioopp.service.infrastructure.gui.TowerCardsView;
+import andioopp.view.gui.TowerCardsView;
 
 public class View<S extends Sprite<?>> {
+
+    private static final Color COLOR_CELL_ODD = new Color(112, 146, 85);
+    private static final Color COLOR_CELL_EVEN = new Color(62, 86, 34);
+    public static final Vector3f TOWER_CARD_LIST_POSITION = new Vector3f(380, 10);
 
     private final Renderer<S> renderer;
     private final Vector3f position;
     private final Vector3f size;
-    private CoinView<S> coinView;
-    private TowerCardsView towerCardsView;
-    private TowerCard<S> towerCard;
-    private Tower tower = new Mario();
+    private final CoinView<S> coinView;
+    private final TowerCardsView<S> towerCardsView;
+
+    private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
+
     public View(Renderer<S> renderer, Vector3f position, Vector3f size) {
         this.renderer = renderer;
         this.position = position;
         this.size = size;
         this.coinView = new CoinView<>();
-        this.towerCardsView = new TowerCardsView();
+        this.towerCardsView = new TowerCardsView<>();
         towerCardsView.createTowerCardsList();
-
-    }
-
-    private static final Color COLOR_CELL_ODD = new Color(112, 146, 85);
-    private static final Color COLOR_CELL_EVEN = new Color(62, 86, 34);
-
-    private static final ListFactory listFactory = new ArrayListFactory();
-    private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
-
-    /**
-     * Creates clickables for each cell so that they can be used to click on.
-     * @param world
-     * @return
-     */
-    public List<Rectangle> getCellRectangles(World world) {
-        List<Rectangle> rectangles = listFactory.create(world.getNumberOfLanes() * world.getNumberOfCellsInLanes());
-        for (int row = 0; row < world.getNumberOfLanes(); row++) {
-            for (int col = 0; col < world.getNumberOfCellsInLanes(); col++) {
-                rectangles.add(getCellRectangle(world, row, col));
-            }
-        }
-        return rectangles;
     }
 
     public Rectangle getCellRectangle(World world, int row, int col) {
@@ -77,9 +55,7 @@ public class View<S extends Sprite<?>> {
         renderProjectiles(world);
         coinView.renderCoinView(world, renderer, getViewSize());
 
-        towerCardsView.renderTowerCardsList(renderer, new Vector3f(380, 10));
-
-
+        towerCardsView.renderTowerCardsList(renderer, TOWER_CARD_LIST_POSITION);
     }
 
     private void clearScreen() {
@@ -219,5 +195,9 @@ public class View<S extends Sprite<?>> {
 
     private Renderer<S> getRenderer() {
         return renderer;
+    }
+
+    public TowerCardsView<?> getTowerCardsView() {
+        return towerCardsView;
     }
 }

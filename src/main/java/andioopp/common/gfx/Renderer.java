@@ -16,9 +16,9 @@ public interface Renderer<S extends Sprite<?>> {
     void drawSprite(S sprite, Transform transform, Vector3f size);
 
     /**
-     * 
-     * @param sprite
-     * @param transform
+     * Draws a sprite.
+     * @param sprite the sprite to draw
+     * @param transform how the sprite should be drawn
      */
     default void drawSprite(S sprite, Transform transform) {
         drawSprite(sprite, transform, new Vector3f(sprite.getWidth(), sprite.getHeight()));
@@ -32,8 +32,8 @@ public interface Renderer<S extends Sprite<?>> {
     void drawRectangle(Vector3f position, Vector3f dimensions, Color color);
 
     /**
-     *
-     * @param color
+     * Clears the canvas by filling with a certain color.
+     * @param color the color to fill with
      */
     void clear(Color color);
 
@@ -44,7 +44,7 @@ public interface Renderer<S extends Sprite<?>> {
     SpriteFactory<S> getSpriteFactory();
 
     /**
-     *
+     * Draws text to the canvas.
      * @param position Where the text should be written
      * @param text  The actual text that should be displayed
      */
