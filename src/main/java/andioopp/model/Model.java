@@ -14,8 +14,6 @@ public class Model implements Updateable {
     private final World world;
     private final WaveQueue waves;
     private final ListFactory listFactory = new ArrayListFactory();
-    float timeSinceLastEnemy;
-    float deltaSeconds;
     private double delay = 1;
     private final Money money = new Money(100);
 

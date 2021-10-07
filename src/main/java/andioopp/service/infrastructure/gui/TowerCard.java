@@ -16,52 +16,52 @@ import javafx.scene.text.Font;
 import java.io.IOException;
 
 public class TowerCard<S extends Sprite<?>> {
-    ImageView imageView;
-    Label prizeLabel;
-    Label nameLabel;
+
     private final int HEIGHT = 150;
     private final int WIDTH = 115;
     private final int IMAGE_HEIGHT = 100;
     private final int IMAGE_WIDTH = 70;
     private Tower tower;
-    private SpriteFactory<?> spriteFactory;
     private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
 
 
     public TowerCard(Tower tower) {
         this.tower = tower;
-        //nameLabel.setText(tower.getName());
-        //prizeLabel.setText(String.valueOf(tower.getCost()));
-        //imageView.setImage(new Image(tower.getSprite()));
+
     }
 
+    // Uses a renderer to render one TowerCard on the screen.
+    public void renderTowerCard(Renderer<S> renderer, Vector3f towerCardPosition) {
+        S towerCardSprite = tower.getSprite(renderer.getSpriteFactory());   //Gets image for Tower
+        Transform towerCardScreenTransform = transformFactory.createWithPosition(new Vector3f(towerCardPosition.getX() + 15, towerCardPosition.getY())); // Gets position for Image
+        renderer.drawRectangle(towerCardPosition, getCardDimension(), new Color(150, 150, 150));    //Creates a background for TowerCard
+        renderer.drawSprite(towerCardSprite, towerCardScreenTransform, getImageDimension());
+        renderer.writeText(getTextPosition(towerCardPosition), tower.getName(), new Color(0,0,0), new Font("Comic Sans MS", 20));  //Writes name of Tower
+        renderer.writeText(getCostPosition(towerCardPosition), String.valueOf(tower.getCost()), new Color(0,0,0), new Font("Comic Sans MS", 25)); //Writes cost of Tower
+
+    }
+    //returns width of whole TowerCard
     public int getWidth() {
         return WIDTH;
     }
 
-    public void renderTowerCard(Renderer<S> renderer, Vector3f towerCardPosition) {
-        S towerCardSprite = tower.getSprite(renderer.getSpriteFactory());
-        Transform towerCardScreenTransform = transformFactory.createWithPosition(new Vector3f(towerCardPosition.getX() + 15, towerCardPosition.getY()));
-        renderer.drawRectangle(towerCardPosition, getCardDimension(), new Color(150, 150, 150));
-        renderer.drawSprite(towerCardSprite, towerCardScreenTransform, getImageDimension());
-        renderer.writeText(getTextPosition(towerCardPosition), tower.getName(), new Color(0,0,0), new Font("Comic Sans MS", 20));
-        renderer.writeText(getCostPosition(towerCardPosition), String.valueOf(tower.getCost()), new Color(0,0,0), new Font("Comic Sans MS", 25));
-
-    }
-    public Vector3f getTextPosition(Vector3f towerCardPos){
+    // returns position for name of tower
+    private Vector3f getTextPosition(Vector3f towerCardPos){
         return new Vector3f(towerCardPos.getX() + 30, towerCardPos.getY() + IMAGE_HEIGHT + 18);
 
     }
-    public Vector3f getCostPosition(Vector3f towerCardPos){
+    //returns position for cost of Tower
+    private Vector3f getCostPosition(Vector3f towerCardPos){
         return new Vector3f(towerCardPos.getX() + 35, towerCardPos.getY() + IMAGE_HEIGHT + 40);
 
     }
-
-    public Vector3f getCardDimension() {
+    //returns dimension for whole TowerCard
+    private Vector3f getCardDimension() {
         return new Vector3f(WIDTH, HEIGHT);
     }
 
-    public Vector3f getImageDimension() {
+    //returns dimension for image on TowerCard
+    private Vector3f getImageDimension() {
         return new Vector3f(IMAGE_WIDTH, IMAGE_HEIGHT);
     }
 
