@@ -19,7 +19,7 @@ public class Toad extends Tower {
 
 
     public Toad() {
-        super(SPRITE_PATH, 60, 5, new ArrayList<>(Arrays.asList(new DigCoinAttack(3f))));
+        super(SPRITE_PATH,"Toad", 60, 5, new ArrayList<>(Arrays.asList(new DigCoinAttack(3f))));
 
     }
 
