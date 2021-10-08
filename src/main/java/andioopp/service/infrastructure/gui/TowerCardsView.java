@@ -6,6 +6,7 @@ import andioopp.common.transform.*;
 import andioopp.model.tower.Tower;
 import andioopp.model.tower.towers.Mario;
 import andioopp.model.world.World;
+import andioopp.view.gui.TowerCard;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
