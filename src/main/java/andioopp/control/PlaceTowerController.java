@@ -3,6 +3,7 @@ package andioopp.control;
 import andioopp.common.storage.ListFactory;
 import andioopp.common.transform.Rectangle;
 import andioopp.model.Model;
+import andioopp.model.tower.Tower;
 import andioopp.model.world.World;
 import andioopp.view.gui.TowerCard;
 import andioopp.service.infrastructure.input.DragAndDropService;
@@ -40,7 +41,9 @@ public class PlaceTowerController {
         for (TowerCard<?> card : view.getTowerCardsView().getCards()) {
             Rectangle rectangle = view.getTowerCardsView().getTowerCardRectangle(View.TOWER_CARD_LIST_POSITION);
             TowerCardDraggableController draggable = new TowerCardDraggableController(rectangle, card::getTower);
+            System.out.println(draggable.getDragData().getTower().getName());
             dragAndDropService.getDraggableObservable().addObserver(draggable);
+
         }
     }
 

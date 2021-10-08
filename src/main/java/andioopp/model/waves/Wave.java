@@ -19,7 +19,10 @@ public class Wave {
         this.numEnemies = numEnemies;
         this.enemyWave = new LinkedList<>();
     }
-    //Adds same amount as numEnemies of random enemies to wave
+
+    /**
+     * Adds same amount as numEnemies of random enemies to Wave
+     */
     public void addEnemyToWave(World world) {
         Enemies enemies = new Enemies();
         int randLane;

@@ -23,7 +23,12 @@ public class TowerCard<S extends Sprite<?>> {
         this.tower = tower;
     }
 
-    // Uses a renderer to render one TowerCard on the screen.
+    /**
+     * Uses a renderer to render one TowerCard on the screen.
+     * @param renderer is used for drawing TowerCard on screen.
+     * @param towerCardPosition the position where TowerCard will be drawn.
+     */
+
     public void renderTowerCard(Renderer<S> renderer, Vector3f towerCardPosition) {
         S towerCardSprite = tower.getSprite(renderer.getSpriteFactory());   //Gets image for Tower
         Transform towerCardScreenTransform = transformFactory.createWithPosition(new Vector3f(towerCardPosition.getX() + 15, towerCardPosition.getY())); // Gets position for Image
@@ -33,12 +38,20 @@ public class TowerCard<S extends Sprite<?>> {
         renderer.writeText(getCostPosition(towerCardPosition), String.valueOf(tower.getCost()), new Color(0,0,0), new Font("Comic Sans MS", 25)); //Writes cost of Tower
 
     }
-    //returns width of whole TowerCard
+
+    /**
+     * Returns width of whole TowerCard
+     */
+
     public int getWidth() {
         return WIDTH;
     }
 
-    // returns position for name of tower
+    /**
+     * Returns position for name of tower
+     * @param towerCardPos where the whole TowerCard is placed.
+     */
+
     private Vector3f getTextPosition(Vector3f towerCardPos) {
         return new Vector3f(towerCardPos.getX() + 30, towerCardPos.getY() + IMAGE_HEIGHT + 18);
     }
@@ -46,19 +59,25 @@ public class TowerCard<S extends Sprite<?>> {
     public Tower getTower() {
         return tower;
     }
-    //returns position for cost of Tower
+
+    /**
+     * Returns position for cost of Tower
+     * @param towerCardPos where the whole TowerCard is placed.
+     */
     private Vector3f getCostPosition(Vector3f towerCardPos){
         return new Vector3f(towerCardPos.getX() + 35, towerCardPos.getY() + IMAGE_HEIGHT + 40);
 
     }
-    //returns dimension for whole TowerCard
 
+    /**
+     * Returns dimension for whole TowerCard
+     */
     public static Vector3f getCardDimension() {
         return new Vector3f(WIDTH, HEIGHT);
     }
-
-    //returns dimension for image on TowerCard
-
+    /**
+     * Returns dimension for image on TowerCard
+     */
     public static Vector3f getImageDimension() {
         return new Vector3f(IMAGE_WIDTH, IMAGE_HEIGHT);
     }

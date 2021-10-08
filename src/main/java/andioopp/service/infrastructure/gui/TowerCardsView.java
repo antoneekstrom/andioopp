@@ -18,14 +18,24 @@ public class TowerCardsView<S extends Sprite<?>> {
 
     public TowerCardsView() {
     }
-    //Uses a renderer to draw all TowerCards of towerCardList on the screen.
+
+    /**
+     * Uses a renderer to draw all TowerCards of towerCardList on the screen.
+     * @param renderer is used for drawing towerCardList on the screen.
+     * @param towerCardListPosition where the towerCard will be drawn.
+     */
+
     public void renderTowerCardsList(Renderer renderer, Vector3f towerCardListPosition) {
         for (TowerCard t : towerCardList) {
             t.renderTowerCard(renderer, new Vector3f(towerCardListPosition.getX(), towerCardListPosition.getY()));
             towerCardListPosition = new Vector3f(towerCardListPosition.getX() + t.getWidth() + 10, towerCardListPosition.getY()); //Updates position for next TowerCard
         }
     }
-    //Should add a TowerCard of all different towers to TowerCardList
+
+    /**
+     * Should add a TowerCard of all different towers to TowerCardList.
+     */
+
     public void createTowerCardsList() {
         addTowerCardToList(new Mario());
         addTowerCardToList(new Mario());
