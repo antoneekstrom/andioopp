@@ -5,6 +5,8 @@ import andioopp.common.observer.ObservableWithList;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.storage.ListFactory;
 import andioopp.common.time.FxClock;
+import andioopp.common.transform.Dimension;
+import andioopp.common.transform.Rectangle;
 import andioopp.common.transform.Vector3f;
 import andioopp.control.PlaceTowerController;
 import andioopp.control.TowerDragEvent;
@@ -49,8 +51,8 @@ public class Game implements GfxProgram {
 
         Vector3f windowSize = new Vector3f(window.getWidth(), window.getHeight());
         Vector3f worldSize = new Vector3f(windowSize.getX() * worldSizeFactorX, windowSize.getY() * worldSizeFactorY);
-        Vector3f worldPos = new Vector3f(windowSize.getX() - (worldSize.getX()*1.01f), windowSize.getY()-(worldSize.getY()*1.10f));
+        Vector3f worldPos = new Vector3f(windowSize.getX() - (worldSize.getX() * 1.01f), windowSize.getY() - (worldSize.getY() * 1.10f));
 
-        return new View<>(window.getRenderer(), worldPos, worldSize);
+        return new View<>(window.getRenderer(), new Rectangle(worldPos, new Dimension(worldSize)));
     }
 }

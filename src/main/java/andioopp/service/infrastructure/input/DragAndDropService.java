@@ -1,6 +1,5 @@
 package andioopp.service.infrastructure.input;
 
-import andioopp.common.input.MouseEvent;
 import andioopp.common.observer.Observable;
 import andioopp.common.observer.ObservableWithList;
 import andioopp.common.observer.Observer;

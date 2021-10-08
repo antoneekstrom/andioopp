@@ -1,4 +1,4 @@
-package andioopp.common.input;
+package andioopp.service.infrastructure.input;
 
 import andioopp.common.transform.Vector3f;
 

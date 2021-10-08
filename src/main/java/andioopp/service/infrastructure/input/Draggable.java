@@ -1,6 +1,5 @@
 package andioopp.service.infrastructure.input;
 
-import andioopp.common.input.MouseEvent;
 import andioopp.common.observer.Observer;
 import andioopp.common.transform.Rectangle;
 

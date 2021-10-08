@@ -1,7 +1,7 @@
 package andioopp.common.gfx;
 
 import andioopp.common.observer.Observable;
-import andioopp.common.input.MouseEvent;
+import andioopp.service.infrastructure.input.MouseEvent;
 import andioopp.common.observer.Observer;
 import andioopp.common.transform.Dimension;
 

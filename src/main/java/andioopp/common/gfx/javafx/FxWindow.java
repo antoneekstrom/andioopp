@@ -5,7 +5,7 @@ import andioopp.common.observer.Observable;
 import andioopp.common.observer.ObservableWithList;
 import andioopp.common.observer.Observer;
 import andioopp.common.storage.ArrayListFactory;
-import andioopp.common.input.MouseEvent;
+import andioopp.service.infrastructure.input.MouseEvent;
 import andioopp.common.transform.Dimension;
 import andioopp.common.transform.Vector3f;
 import javafx.scene.canvas.Canvas;
