@@ -7,6 +7,7 @@ import andioopp.common.gfx.Sprite;
 import andioopp.model.tower.attack.Attack;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A tower.
@@ -15,19 +16,21 @@ public abstract class Tower {
 
     private final int cost;
     private final Health health;
-    private String sprite;
-    private ArrayList<Attack> attacks;
-    public String name;
+    private final String sprite;
+    private final List<Attack> attacks;
+    private final String name;
 
-    public Tower(String spritePath, String name, int cost, int health, ArrayList<Attack> attacks) {
+    public Tower(String spritePath, String name, int cost, int health) {
         this.sprite = spritePath;
         this.name = name;
         this.cost = cost;
         this.health = new Health(health);
-        this.attacks = attacks;
+        this.attacks = createAttacks();
     }
 
-    public ArrayList<Attack> getAttacks() {
+    protected abstract List<Attack> createAttacks();
+
+    public List<Attack> getAttacks() {
         return attacks;
     }
 
@@ -45,8 +48,4 @@ public abstract class Tower {
         return cost;
     }
     public String getName(){ return name;}
-
-    protected void setSprite(String sprite) {
-        this.sprite = sprite;
-    }
 }

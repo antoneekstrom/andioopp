@@ -14,11 +14,11 @@ public class KoopaTroopa extends Enemy{
 
     private static final String SPRITE_PATH = "koopaTroopa.png";
     private static final int BASE_HEALTH = 4;
-    private static final float INIT_SPEED = 0.0015f;
+    private static final float INIT_SPEED = 0.015f;
     private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
 
     public KoopaTroopa(Vector3f position) {
-        super(SPRITE_PATH, transformFactory.createWithPosition(position), new Health(BASE_HEALTH), INIT_SPEED, 0.3f);
+        super(SPRITE_PATH, transformFactory.createWithPosition(position), new Health(BASE_HEALTH), INIT_SPEED, 1f);
         requirements.add(FilterRequirement.GROUND);
     }
 

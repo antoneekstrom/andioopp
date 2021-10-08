@@ -3,11 +3,12 @@ package andioopp.view.gui;
 import andioopp.common.gfx.Color;
 import andioopp.common.gfx.Renderer;
 import andioopp.common.gfx.Sprite;
-import andioopp.common.gfx.SpriteFactory;
 import andioopp.common.transform.*;
 import andioopp.model.tower.Tower;
-import javafx.scene.image.ImageView;
+import andioopp.model.tower.Towers;
 import javafx.scene.text.Font;
+
+import java.util.function.Supplier;
 
 public class TowerCard<S extends Sprite<?>> {
 
@@ -15,12 +16,14 @@ public class TowerCard<S extends Sprite<?>> {
     private final static int WIDTH = 115;
     private final static int IMAGE_HEIGHT = 100;
     private final static int IMAGE_WIDTH = 70;
-    private Tower tower;
+    private Supplier<Tower> towerSupplier;
+    Tower tower;
     private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
 
 
-    public TowerCard(Tower tower) {
-        this.tower = tower;
+    public TowerCard(Supplier<Tower> towerSupplier) {
+        this.towerSupplier = towerSupplier;
+        tower = towerSupplier.get();
     }
 
     /**
@@ -56,8 +59,8 @@ public class TowerCard<S extends Sprite<?>> {
         return new Vector3f(towerCardPos.getX() + 30, towerCardPos.getY() + IMAGE_HEIGHT + 18);
     }
 
-    public Tower getTower() {
-        return tower;
+    public Supplier<Tower> getTowerSupplier() {
+        return towerSupplier;
     }
 
     /**

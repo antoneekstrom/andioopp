@@ -20,6 +20,7 @@ public class CellDroppableController extends Droppable<TowerDragEvent> {
     @Override
     public void onEvent(TowerDragEvent event) {
         if (event.getTower() != null) {
+            //System.out.println(event.getTower().getHealth().get() + " towers health");
             model.getWorld().getCell(row, col).setTower(event.getTower());
         }
     }

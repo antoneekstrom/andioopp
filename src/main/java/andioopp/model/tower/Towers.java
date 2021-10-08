@@ -10,5 +10,16 @@ public class Towers {
     public static Tower toad() {
         return new Toad();
     }
-
+    public static Tower luigi() {
+        return new Luigi();
+    }
+    public static Tower yoshi() {
+        return new Yoshi();
+    }
+    public static Tower rosalina() {
+        return new Rosalina();
+    }
+    public static Tower bobomb() {
+        return new Bobomb();
+    }
 }
