@@ -22,6 +22,6 @@ public class Mario extends Tower {
 
     @Override
     protected List<Attack> createAttacks() {
-        return Arrays.asList(new FireballAttack(500f));
+        return Arrays.asList(new FireballAttack(1f));
     }
 }

@@ -9,37 +9,42 @@ import andioopp.common.transform.Dimension;
 import andioopp.model.world.World;
 import javafx.scene.text.Font;
 
-public class CoinView <S extends Sprite<?>> {
+public class CoinView<S extends Sprite<?>> {
 
-        private String sprite = "coinBox.png";
-        private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
+    private static final String sprite = "coinBox.png";
 
-        public void renderCoinView(World world, Renderer<S> renderer, Vector3f worldSize){
+    private final Renderer<S> renderer;
+    private final TransformFactory transformFactory;
 
-            S coinViewSprite = getSprite(renderer.getSpriteFactory());
-            Dimension coinViewScreenSize = getCoinViewScreenSize(world, coinViewSprite);
-            Transform coinViewScreenTransform = transformFactory.createWithPosition(getSpritePosition());
-            renderer.drawSprite(coinViewSprite, coinViewScreenTransform, coinViewScreenSize.toVector());
+    public CoinView(Renderer<S> renderer, TransformFactory transformFactory) {
+        this.renderer = renderer;
+        this.transformFactory = transformFactory;
+    }
 
-            displayCoins(renderer, world);
-        }
+    public void render(World world) {
+        S coinViewSprite = getSprite(renderer.getSpriteFactory());
+        Dimension coinViewScreenSize = getCoinViewScreenSize(coinViewSprite);
+        Transform coinViewScreenTransform = transformFactory.createWithPosition(getSpritePosition());
+        renderer.drawSprite(coinViewSprite, coinViewScreenTransform, coinViewScreenSize.toVector());
+        displayCoins(world);
+    }
 
-        public <S extends Sprite<?>> S getSprite(SpriteFactory<S> spriteFactory) {
-            return spriteFactory.get(sprite);
-        }
+    private S getSprite(SpriteFactory<S> spriteFactory) {
+        return spriteFactory.get(sprite);
+    }
 
-        private Vector3f getSpritePosition() {
-            float distanceFromBorderX = 50f;
-            float distanceFromBorderY = 10f;
-            return new Vector3f(distanceFromBorderX,distanceFromBorderY);
-        }
-        private Dimension getCoinViewScreenSize(World world, S coinViewSprite) {
-            Dimension coinViewSpriteSize = coinViewSprite.getSize();
-            return coinViewSpriteSize;
-        }
+    private Vector3f getSpritePosition() {
+        float distanceFromBorderX = 50f;
+        float distanceFromBorderY = 10f;
+        return new Vector3f(distanceFromBorderX, distanceFromBorderY);
+    }
 
-        public void displayCoins(Renderer renderer, World world){
-            Vector3f textPosition = getSpritePosition().add(new Vector3f(120, 120, 0));
-            renderer.writeText(textPosition, String.valueOf(world.getMoney().get()), new Color(0,0,0), new Font("Comic Sans MS", 16));
-        }
+    private Dimension getCoinViewScreenSize(S coinViewSprite) {
+        return coinViewSprite.getSize();
+    }
+
+    private void displayCoins(World world) {
+        Vector3f textPosition = getSpritePosition().add(new Vector3f(120, 120, 0));
+        renderer.writeText(textPosition, String.valueOf(world.getMoney().get()), new Color(0, 0, 0), new Font("Comic Sans MS", 16));
+    }
 }

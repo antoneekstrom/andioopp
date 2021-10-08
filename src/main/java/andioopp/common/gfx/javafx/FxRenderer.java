@@ -1,6 +1,7 @@
 package andioopp.common.gfx.javafx;
 
 import andioopp.common.gfx.SpriteFactory;
+import andioopp.common.transform.Dimension;
 import andioopp.common.transform.Transform;
 import andioopp.common.transform.Vector3f;
 import andioopp.common.gfx.CachedSpriteFactory;
@@ -25,9 +26,9 @@ public class FxRenderer implements Renderer<FxSprite> {
     }
 
     @Override
-    public void drawRectangle(Vector3f position, Vector3f dimensions, Color color) {
+    public void drawRectangle(Vector3f position, Dimension dimensions, Color color) {
         getCtx().setFill(getFxColor(color));
-        getCtx().fillRect(position.getX(), position.getY(), dimensions.getX(), dimensions.getY());
+        getCtx().fillRect(position.getX(), position.getY(), dimensions.getWidth(), dimensions.getHeight());
     }
 
     @Override

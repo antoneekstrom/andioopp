@@ -1,13 +1,12 @@
 package andioopp.main;
 
 import andioopp.common.gfx.*;
+import andioopp.common.gfx.Renderer;
 import andioopp.common.observer.ObservableWithList;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.storage.ListFactory;
 import andioopp.common.time.FxClock;
-import andioopp.common.transform.Dimension;
-import andioopp.common.transform.Rectangle;
-import andioopp.common.transform.Vector3f;
+import andioopp.common.transform.*;
 import andioopp.control.PlaceTowerController;
 import andioopp.control.TowerDragEvent;
 import andioopp.model.Model;
@@ -41,18 +40,21 @@ public class Game implements GfxProgram {
         loopService.start(model, view);
     }
 
-    private Model createModel() {
-        return new Model(new WaveQueue());
-    }
-
     private <W extends Window<?>> View<?> createView(W window) {
         float worldSizeFactorX = 0.7f;
         float worldSizeFactorY = 0.7f;
 
-        Vector3f windowSize = new Vector3f(window.getWidth(), window.getHeight());
-        Vector3f worldSize = new Vector3f(windowSize.getX() * worldSizeFactorX, windowSize.getY() * worldSizeFactorY);
-        Vector3f worldPos = new Vector3f(windowSize.getX() - (worldSize.getX() * 1.01f), windowSize.getY() - (worldSize.getY() * 1.10f));
+        TransformFactory transformFactory = ConcreteTransform.getFactory();
+        Renderer<?> renderer = window.getRenderer();
 
-        return new View<>(window.getRenderer(), new Rectangle(worldPos, new Dimension(worldSize)));
+        Vector3f windowSize = new Vector3f(window.getWidth(), window.getHeight());
+        Dimension worldSize = new Dimension(windowSize.getX() * worldSizeFactorX, windowSize.getY() * worldSizeFactorY);
+        Vector3f worldPos = new Vector3f(windowSize.getX() - (worldSize.getWidth() * 1.01f), windowSize.getY() - (worldSize.getHeight() * 1.10f));
+        Rectangle viewport = new Rectangle(worldPos, worldSize);
+        return new View<>(renderer, transformFactory, viewport);
+    }
+
+    private Model createModel() {
+        return new Model(new WaveQueue());
     }
 }

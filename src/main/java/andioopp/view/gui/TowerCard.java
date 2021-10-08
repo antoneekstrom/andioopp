@@ -35,7 +35,7 @@ public class TowerCard<S extends Sprite<?>> {
     public void renderTowerCard(Renderer<S> renderer, Vector3f towerCardPosition) {
         S towerCardSprite = tower.getSprite(renderer.getSpriteFactory());   //Gets image for Tower
         Transform towerCardScreenTransform = transformFactory.createWithPosition(new Vector3f(towerCardPosition.getX() + 15, towerCardPosition.getY())); // Gets position for Image
-        renderer.drawRectangle(towerCardPosition, getCardDimension(), new Color(150, 150, 150));    //Creates a background for TowerCard
+        renderer.drawRectangle(towerCardPosition, new Dimension(WIDTH, HEIGHT), new Color(150, 150, 150));    //Creates a background for TowerCard
         renderer.drawSprite(towerCardSprite, towerCardScreenTransform, getImageDimension());
         renderer.writeText(getTextPosition(towerCardPosition), tower.getName(), new Color(0,0,0), new Font("Comic Sans MS", 20));  //Writes name of Tower
         renderer.writeText(getCostPosition(towerCardPosition), String.valueOf(tower.getCost()), new Color(0,0,0), new Font("Comic Sans MS", 25)); //Writes cost of Tower

@@ -3,14 +3,12 @@ package andioopp.control;
 import andioopp.common.storage.ListFactory;
 import andioopp.common.transform.Rectangle;
 import andioopp.model.Model;
-import andioopp.model.tower.Tower;
 import andioopp.model.world.World;
 import andioopp.view.gui.TowerCard;
 import andioopp.service.infrastructure.input.DragAndDropService;
 import andioopp.view.View;
-import andioopp.view.gui.TowerCardsView;
+import andioopp.view.gui.CardsView;
 
-import javax.smartcardio.Card;
 import java.util.Collection;
 import java.util.List;
 
@@ -32,7 +30,7 @@ public class PlaceTowerController {
         World world = model.getWorld();
         for (int row = 0; row < world.getNumberOfLanes(); row++) {
             for (int col = 0; col < world.getNumberOfCellsInLanes(); col++) {
-                Rectangle rectangle = view.getCellRectangle(world, row, col);
+                Rectangle rectangle = view.getCellsView().getCellScreenRectangle(world, row, col);
                 CellDroppableController droppable = new CellDroppableController(rectangle, model, row, col);
                 dragAndDropService.getDroppableObservable().addObserver(droppable);
                 droppables.add(droppable);
@@ -41,7 +39,7 @@ public class PlaceTowerController {
     }
 
     private void registerDraggableCards() {
-        TowerCardsView<?> towerCardsView = view.getTowerCardsView();
+        CardsView<?> towerCardsView = view.getCardsView();
         List<? extends TowerCard<?>> cards = towerCardsView.getCards();
 
         for (int i = 0; i < cards.size(); i++) {

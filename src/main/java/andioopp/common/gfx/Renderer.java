@@ -1,5 +1,6 @@
 package andioopp.common.gfx;
 
+import andioopp.common.transform.Dimension;
 import andioopp.common.transform.Transform;
 import andioopp.common.transform.Vector3f;
 import javafx.scene.text.Font;
@@ -29,7 +30,7 @@ public interface Renderer<S extends Sprite<?>> {
      * @param position Where the rectangle should be drawn
      * @param dimensions Width and height of the rectangle
      */
-    void drawRectangle(Vector3f position, Vector3f dimensions, Color color);
+    void drawRectangle(Vector3f position, Dimension dimensions, Color color);
 
     /**
      * Clears the canvas by filling with a certain color.
