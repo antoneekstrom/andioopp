@@ -1,6 +1,5 @@
 package model.world;
 
-import andioopp.common.time.Time;
 import andioopp.common.transform.Vector3f;
 import andioopp.model.FilterImmunity;
 import andioopp.model.FilterRequirement;
@@ -12,31 +11,19 @@ import andioopp.model.tower.attack.projectiles.Projectile;
 import andioopp.model.waves.WaveQueue;
 import andioopp.model.world.Cell;
 import andioopp.model.world.Lane;
-import andioopp.model.world.World;
-import com.sun.source.tree.AssertTree;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
-import andioopp.model.*;
-import andioopp.model.enemy.Enemies;
-import andioopp.model.enemy.Enemy;
-import andioopp.model.tower.Tower;
-import andioopp.model.tower.Towers;
-import andioopp.model.tower.towers.Mario;
-import org.junit.Before;
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class WorldTest {
 
-    private WaveQueue waveQueue = new WaveQueue();
-    private Model model = new Model(waveQueue);
-    private ArrayList<FilterRequirement> FireballRequirements = new ArrayList<>();
-    private ArrayList<FilterImmunity> FireballImmunity = new ArrayList<>();
+    private final WaveQueue waveQueue = new WaveQueue();
+    private final Model model = new Model(waveQueue);
+    private final ArrayList<FilterRequirement> FireballRequirements = new ArrayList<>();
+    private final ArrayList<FilterImmunity> FireballImmunity = new ArrayList<>();
 
 
     @Before
@@ -77,7 +64,7 @@ public class WorldTest {
         model.getWorld().getLanes().clear();
         //Adds one single lane
         model.getWorld().getLanes().add(lane);
-        //checks if nuber of lanes is 1.
+        //checks if number of lanes is 1.
         assertEquals(1, model.getWorld().getNumberOfLanes());
     }
 

@@ -4,7 +4,7 @@ import andioopp.common.gfx.Renderer;
 import andioopp.common.gfx.Sprite;
 import andioopp.common.transform.*;
 import andioopp.model.tower.Tower;
-import andioopp.model.tower.towers.Mario;
+import andioopp.model.tower.towers.*;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -28,11 +28,11 @@ public class TowerCardsView<S extends Sprite<?>> {
 
     public void createTowerCardsList() {
         addTowerCardToList(new Mario());
-        addTowerCardToList(new Mario());
-        addTowerCardToList(new Mario());
-        addTowerCardToList(new Mario());
-        addTowerCardToList(new Mario());
-        addTowerCardToList(new Mario());
+        addTowerCardToList(new Toad());
+        addTowerCardToList(new Yoshi());
+        addTowerCardToList(new Luigi());
+        addTowerCardToList(new Rosalina());
+        addTowerCardToList(new Bobomb());
     }
 
     public void addTowerCardToList(Tower tower) {
