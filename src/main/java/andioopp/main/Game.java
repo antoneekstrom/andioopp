@@ -1,11 +1,19 @@
 package andioopp.main;
 
 import andioopp.common.gfx.*;
+import andioopp.common.observer.ObservableWithList;
 import andioopp.common.storage.ArrayListFactory;
-import andioopp.common.transform.ConcreteTransform;
-import andioopp.service.infrastructure.creation.CreationService;
+import andioopp.common.storage.ListFactory;
+import andioopp.common.time.FxClock;
+import andioopp.common.transform.Vector3f;
+import andioopp.control.PlaceTowerController;
+import andioopp.control.TowerDragEvent;
+import andioopp.model.Model;
+import andioopp.model.waves.WaveQueue;
 import andioopp.service.infrastructure.graphics.WindowingService;
+import andioopp.service.infrastructure.input.DragAndDropService;
 import andioopp.service.infrastructure.loop.LoopService;
+import andioopp.view.View;
 
 /**
  * Initializes the game. Completely decoupled from platform and rendering.
@@ -14,15 +22,35 @@ public class Game implements GfxProgram {
     @Override
     public <S extends Sprite<?>, R extends Renderer<S>, W extends Window<R>> void run(WindowBuilder<W> windowBuilder) {
         WindowingService<W> windowingService = new WindowingService<>(windowBuilder);
-        CreationService creationService = new CreationService(new ArrayListFactory(), ConcreteTransform.getFactory());
-        LoopService loopService = new LoopService(creationService.createClock());
+        ListFactory listFactory = new ArrayListFactory();
+        LoopService loopService = new LoopService(new FxClock(new ObservableWithList<>(listFactory.create())));
 
-        GameSetup<W> gameSetupService = new GameSetup<>(
-            windowingService,
-            loopService,
-            creationService
-        );
+        start(listFactory, windowingService, loopService);
+    }
 
-        gameSetupService.start();
+    public <W extends Window<?>> void start(ListFactory listFactory, WindowingService<W> windowingService, LoopService loopService) {
+        W window = windowingService.createWindow();
+        View<?> view = createView(window);
+        Model model = createModel();
+
+        DragAndDropService<TowerDragEvent> dragAndDropService = new DragAndDropService<>(window.getMouseObservable(), listFactory);
+        PlaceTowerController placeTowerController = new PlaceTowerController(dragAndDropService, model, view, listFactory);
+        placeTowerController.register();
+        loopService.start(model, view);
+    }
+
+    private Model createModel() {
+        return new Model(new WaveQueue());
+    }
+
+    private <W extends Window<?>> View<?> createView(W window) {
+        float worldSizeFactorX = 0.7f;
+        float worldSizeFactorY = 0.7f;
+
+        Vector3f windowSize = new Vector3f(window.getWidth(), window.getHeight());
+        Vector3f worldSize = new Vector3f(windowSize.getX() * worldSizeFactorX, windowSize.getY() * worldSizeFactorY);
+        Vector3f worldPos = new Vector3f(windowSize.getX() - (worldSize.getX()*1.01f), windowSize.getY()-(worldSize.getY()*1.10f));
+
+        return new View<>(window.getRenderer(), worldPos, worldSize);
     }
 }
