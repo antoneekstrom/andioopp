@@ -1,9 +1,6 @@
 package andioopp.model.tower.towers;
 
-import andioopp.model.FilterImmunity;
-import andioopp.model.FilterRequirement;
 import andioopp.model.enemy.Enemy;
-import andioopp.model.tower.TargetingStrategy;
 import andioopp.model.tower.Tower;
 import andioopp.model.tower.attack.Attack;
 import andioopp.model.tower.attack.attacks.FireballAttack;

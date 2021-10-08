@@ -8,6 +8,10 @@ import andioopp.model.enemy.Enemy;
 
 import java.util.ArrayList;
 
+/**
+ * A projectile.
+ * Usually part of an attack from a tower, i.e. a fireball.
+ */
 public abstract class Projectile implements Updateable {
 
     private final Transform transform;
