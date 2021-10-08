@@ -43,10 +43,11 @@ public class DragAndDropService<T> extends MouseInputService {
     private void onMouseRelease(MouseEvent e) {
         for (Droppable<T> d : getDroppableObservable().getObservers()) {
             boolean isBeingClicked = d.getRectangle().contains(e.getPosition());
-            if (isBeingClicked) {
+            if (isBeingClicked && getDragData() != null) {
                 d.onEvent(getDragData());
             }
         }
+        setDragData(null);
     }
 
     private T getDragData() {
