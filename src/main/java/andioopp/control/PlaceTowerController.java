@@ -7,8 +7,11 @@ import andioopp.model.world.World;
 import andioopp.view.gui.TowerCard;
 import andioopp.service.infrastructure.input.DragAndDropService;
 import andioopp.view.View;
+import andioopp.view.gui.TowerCardsView;
 
+import javax.smartcardio.Card;
 import java.util.Collection;
+import java.util.List;
 
 public class PlaceTowerController {
 
@@ -37,8 +40,12 @@ public class PlaceTowerController {
     }
 
     private void registerDraggableCards() {
-        for (TowerCard<?> card : view.getTowerCardsView().getCards()) {
-            Rectangle rectangle = view.getTowerCardsView().getTowerCardRectangle(View.TOWER_CARD_LIST_POSITION);
+        TowerCardsView<?> towerCardsView = view.getTowerCardsView();
+        List<? extends TowerCard<?>> cards = towerCardsView.getCards();
+
+        for (int i = 0; i < cards.size(); i++) {
+            TowerCard<?> card = cards.get(i);
+            Rectangle rectangle = towerCardsView.getTowerCardRectangle(i);
             TowerCardDraggableController draggable = new TowerCardDraggableController(rectangle, card.getTowerSupplier());
             dragAndDropService.getDraggableObservable().addObserver(draggable);
         }

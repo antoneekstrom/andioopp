@@ -5,7 +5,6 @@ import andioopp.common.gfx.Sprite;
 import andioopp.common.transform.*;
 import andioopp.model.tower.Tower;
 import andioopp.model.tower.Towers;
-import andioopp.model.tower.towers.*;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -15,17 +14,28 @@ import java.util.function.Supplier;
 public class TowerCardsView<S extends Sprite<?>> {
 
     private final List<TowerCard<S>> cards = new LinkedList<>();
+    private final Vector3f position;
 
-    public void renderTowerCardsList(Renderer<S> renderer, Vector3f towerCardListPosition) {
-        for (TowerCard<S> t : cards) {
-            t.renderTowerCard(renderer, towerCardListPosition);
-            // den här raden gjorde inget??
-            towerCardListPosition = new Vector3f(towerCardListPosition.getX() + t.getWidth() + 10, towerCardListPosition.getY());
+    private final static Vector3f CARD_OFFSET = new Vector3f(20);
+
+    public TowerCardsView(Vector3f screenPosition) {
+        this.position = screenPosition;
+    }
+
+    public void renderTowerCardsList(Renderer<S> renderer) {
+        for (int i = 0; i < cards.size(); i++) {
+            Vector3f cardPosition = getTowerCardRectangle(position, i).getPosition();
+            cards.get(i).renderTowerCard(renderer, cardPosition);
         }
     }
 
-    public Rectangle getTowerCardRectangle(Vector3f towerCardListPosition) {
-        return new Rectangle(towerCardListPosition, new Dimension(TowerCard.getCardDimension()));
+    public Rectangle getTowerCardRectangle(int cardIndex) {
+        return getTowerCardRectangle(position, cardIndex);
+    }
+
+    public Rectangle getTowerCardRectangle(Vector3f position, int cardIndex) {
+        Vector3f cardOffset = TowerCard.getCardDimension().onlyX().add(CARD_OFFSET);
+        return new Rectangle(position.add(cardOffset.scale(cardIndex)), new Dimension(TowerCard.getCardDimension()));
     }
 
     public void createTowerCardsList() {
@@ -41,7 +51,7 @@ public class TowerCardsView<S extends Sprite<?>> {
         this.cards.add(new TowerCard<>(towerSupplier));
     }
 
-    public Collection<TowerCard<S>> getCards() {
+    public List<TowerCard<S>> getCards() {
         return cards;
     }
 }
