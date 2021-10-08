@@ -70,7 +70,6 @@ public abstract class Enemy implements Updateable {
      */
     public boolean canAttack(Time time) {
         float deltaTime = time.getElapsedSeconds() - timeOfLastAttack;
-        System.out.println(deltaTime);
         return (deltaTime > attackCooldown);
     }
 

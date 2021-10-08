@@ -17,7 +17,7 @@ public abstract class Tower {
     private final Health health;
     private String sprite;
     private ArrayList<Attack> attacks;
-    public String name;
+    private final String name;
 
     public Tower(String spritePath, String name, int cost, int health, ArrayList<Attack> attacks) {
         this.sprite = spritePath;

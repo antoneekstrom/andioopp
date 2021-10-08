@@ -53,6 +53,8 @@ public class Model implements Updateable {
         world.getCell(2, 4).setTower(Towers.toad());
         world.getCell(3, 7).setTower(Towers.toad());
         world.getCell(4, 6).setTower(Towers.mario());
+        world.getCell(4, 7).setTower(Towers.mario());
+        world.getCell(4, 8).setTower(Towers.mario());
         waves.addWavesToWaveQueue(world, 1);
 
         return world;

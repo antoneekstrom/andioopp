@@ -4,11 +4,13 @@ import andioopp.common.gfx.Renderer;
 import andioopp.common.gfx.Sprite;
 import andioopp.common.transform.*;
 import andioopp.model.tower.Tower;
+import andioopp.model.tower.Towers;
 import andioopp.model.tower.towers.*;
 
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class TowerCardsView<S extends Sprite<?>> {
 
@@ -27,16 +29,16 @@ public class TowerCardsView<S extends Sprite<?>> {
     }
 
     public void createTowerCardsList() {
-        addTowerCardToList(new Mario());
-        addTowerCardToList(new Toad());
-        addTowerCardToList(new Yoshi());
-        addTowerCardToList(new Luigi());
-        addTowerCardToList(new Rosalina());
-        addTowerCardToList(new Bobomb());
+        addTowerCardToList(Towers::mario);
+        addTowerCardToList(Towers::toad);
+        addTowerCardToList(Towers::luigi);
+        addTowerCardToList(Towers::yoshi);
+        addTowerCardToList(Towers::rosalina);
+        addTowerCardToList(Towers::bobomb);
     }
 
-    public void addTowerCardToList(Tower tower) {
-        this.cards.add(new TowerCard<>(tower));
+    public void addTowerCardToList(Supplier<Tower> towerSupplier) {
+        this.cards.add(new TowerCard<>(towerSupplier));
     }
 
     public Collection<TowerCard<S>> getCards() {

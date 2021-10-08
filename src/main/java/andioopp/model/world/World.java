@@ -35,7 +35,7 @@ public class World implements Updateable {
         getEnemies().forEach((enemy) -> enemy.update(time));
         getProjectiles().forEach((projectile) -> projectile.update(time));
 
-        performAllAttacks(time);
+        performAllTowerAttacks(time);
 
         checkProjectileHitboxes();
 
@@ -49,7 +49,7 @@ public class World implements Updateable {
     }
 
 
-    private void performAllAttacks(Time time) {
+    private void performAllTowerAttacks(Time time) {
         for (int row = 0; row < getLanes().size(); row++) {
             for (int col = 0; col < getNumberOfCellsInLanes(); col++) {
                 Tower tower = getCell(row, col).getTower();
@@ -213,23 +213,27 @@ public class World implements Updateable {
                 Tower tower = getCell(row, col).getTower();
 
                 if (tower != null) {
-                    if (enemy.getPosition().getX() - col < 0.5f) {
+                    System.out.println(tower.getClass().getSimpleName() + " har " + tower.getHealth().get() + " hp");
+
+                    float deltaX = enemy.getPosition().getX() - col;
+                    if (deltaX < 0.5f && deltaX > 0) {
                         enemy.setTowerAhead(true);
                         if (enemy.canAttack(time)) {
                             enemy.setTimeOfLastAttack(time);
                             tower.getHealth().decrease(1);
                             System.out.println(enemy.getClass().getSimpleName() + " attacked " + tower.getClass().getSimpleName());
-
-                            if (tower.getHealth().isZero()) {
-                                getCell(row, col).setTower(null);
-                            }
                         }
+
                         else {
                             //System.out.println("Enemy couldnt attack");
                         }
                     }
                     else {
                         //System.out.println("Enemy isnt close enough to a tower");
+                    }
+
+                    if (tower.getHealth().isZero()) {
+                        getCell(row, col).setTower(null);
                     }
                 }
             }

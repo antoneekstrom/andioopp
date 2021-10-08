@@ -15,7 +15,7 @@ public class Bobomb extends Tower {
 
 
     public Bobomb() {
-        super(SPRITE_PATH, "Bobomb", 200, 5, new ArrayList<>(Arrays.asList(new FireballAttack(0.1f))));
+        super(SPRITE_PATH, "Bobomb", 200, 5, new ArrayList<>(Arrays.asList(new FireballAttack(8f))));
 
     }
 }
