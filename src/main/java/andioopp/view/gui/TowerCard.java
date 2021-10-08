@@ -11,10 +11,10 @@ import javafx.scene.text.Font;
 
 public class TowerCard<S extends Sprite<?>> {
 
-    private final int HEIGHT = 150;
-    private final int WIDTH = 115;
-    private final int IMAGE_HEIGHT = 100;
-    private final int IMAGE_WIDTH = 70;
+    private final static int HEIGHT = 150;
+    private final static int WIDTH = 115;
+    private final static int IMAGE_HEIGHT = 100;
+    private final static int IMAGE_WIDTH = 70;
     private Tower tower;
     private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
 
@@ -39,10 +39,8 @@ public class TowerCard<S extends Sprite<?>> {
     }
 
     // returns position for name of tower
-    private Vector3f getTextPosition(Vector3f towerCardPos){
+    private Vector3f getTextPosition(Vector3f towerCardPos) {
         return new Vector3f(towerCardPos.getX() + 30, towerCardPos.getY() + IMAGE_HEIGHT + 18);
-    public Vector3f getTextPosition(Vector3f towerCardPos){
-        return new Vector3f(towerCardPos.getX() + 20, towerCardPos.getY() + IMAGE_HEIGHT + 15);
     }
 
     public Tower getTower() {
