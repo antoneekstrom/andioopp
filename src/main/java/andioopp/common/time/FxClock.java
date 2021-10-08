@@ -4,12 +4,15 @@ import andioopp.common.observer.Observable;
 import andioopp.common.observer.Observer;
 import javafx.animation.AnimationTimer;
 
+/**
+ * Implementation of {@link Clock} which uses {@link AnimationTimer} from javafx.
+ */
 public class FxClock extends AnimationTimer implements Clock {
 
-    private final Observable<Time> observable;
+    private final Observable<Time, Observer<Time>> observable;
     private long previousTime = 0L;
 
-    public FxClock(Observable<Time> observable) {
+    public FxClock(Observable<Time, Observer<Time>> observable) {
         this.observable = observable;
     }
 

@@ -1,4 +1,4 @@
-package andioopp.service.infrastructure.gui;
+package andioopp.view.gui;
 
 import andioopp.common.gfx.Color;
 import andioopp.common.gfx.Renderer;
@@ -6,14 +6,8 @@ import andioopp.common.gfx.Sprite;
 import andioopp.common.gfx.SpriteFactory;
 import andioopp.common.transform.*;
 import andioopp.model.tower.Tower;
-import andioopp.model.world.World;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
-
-import java.io.IOException;
 
 public class TowerCard<S extends Sprite<?>> {
 
@@ -27,7 +21,6 @@ public class TowerCard<S extends Sprite<?>> {
 
     public TowerCard(Tower tower) {
         this.tower = tower;
-
     }
 
     // Uses a renderer to render one TowerCard on the screen.
@@ -48,7 +41,12 @@ public class TowerCard<S extends Sprite<?>> {
     // returns position for name of tower
     private Vector3f getTextPosition(Vector3f towerCardPos){
         return new Vector3f(towerCardPos.getX() + 30, towerCardPos.getY() + IMAGE_HEIGHT + 18);
+    public Vector3f getTextPosition(Vector3f towerCardPos){
+        return new Vector3f(towerCardPos.getX() + 20, towerCardPos.getY() + IMAGE_HEIGHT + 15);
+    }
 
+    public Tower getTower() {
+        return tower;
     }
     //returns position for cost of Tower
     private Vector3f getCostPosition(Vector3f towerCardPos){
@@ -56,12 +54,14 @@ public class TowerCard<S extends Sprite<?>> {
 
     }
     //returns dimension for whole TowerCard
-    private Vector3f getCardDimension() {
+
+    public static Vector3f getCardDimension() {
         return new Vector3f(WIDTH, HEIGHT);
     }
 
     //returns dimension for image on TowerCard
-    private Vector3f getImageDimension() {
+
+    public static Vector3f getImageDimension() {
         return new Vector3f(IMAGE_WIDTH, IMAGE_HEIGHT);
     }
 

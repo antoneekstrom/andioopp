@@ -1,16 +1,17 @@
 package andioopp.service.infrastructure.input;
 
-import andioopp.common.input.MouseData;
+import andioopp.common.input.MouseEvent;
 import andioopp.common.observer.Observable;
+import andioopp.common.observer.Observer;
 
 /**
  * Middleman which communicates with {@link andioopp.common.gfx.Window}.
  */
 public class MouseInputService {
 
-    private final Observable<MouseData> mouseDataObservable;
+    private final Observable<MouseEvent, Observer<MouseEvent>> mouseDataObservable;
 
-    public MouseInputService(Observable<MouseData> mouseDataObservable) {
+    public MouseInputService(Observable<MouseEvent, Observer<MouseEvent>> mouseDataObservable) {
         this.mouseDataObservable = mouseDataObservable;
     }
 
@@ -18,7 +19,7 @@ public class MouseInputService {
      * Returns an observable which emits mouse events
      * @return the observable
      */
-    public Observable<MouseData> getMouseDataObservable() {
+    public Observable<MouseEvent, Observer<MouseEvent>> getMouseDataObservable() {
         return mouseDataObservable;
     }
 }

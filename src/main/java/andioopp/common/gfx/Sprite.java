@@ -13,10 +13,22 @@ public interface Sprite<T> {
      */
     T getImage();
 
+    /**
+     * Returns the width of the image in pixels
+     * @return the width
+     */
     int getWidth();
 
+    /**
+     * Returns the height of the image in pixels
+     * @return the height
+     */
     int getHeight();
 
+    /**
+     * Returns the size of the image.
+     * @return the size
+     */
     default Dimension getSize() {
         return new Dimension(getWidth(), getHeight());
     }

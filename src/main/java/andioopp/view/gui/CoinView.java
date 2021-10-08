@@ -1,4 +1,4 @@
-package andioopp.service.infrastructure.gui;
+package andioopp.view.gui;
 
 import andioopp.common.gfx.Color;
 import andioopp.common.gfx.Renderer;
@@ -7,9 +7,7 @@ import andioopp.common.gfx.SpriteFactory;
 import andioopp.common.transform.*;
 import andioopp.common.transform.Dimension;
 import andioopp.model.world.World;
-import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 public class CoinView <S extends Sprite<?>> {
 
@@ -30,7 +28,7 @@ public class CoinView <S extends Sprite<?>> {
             return spriteFactory.get(sprite);
         }
 
-        private Vector3f getSpritePosition(){
+        private Vector3f getSpritePosition() {
             float distanceFromBorderX = 50f;
             float distanceFromBorderY = 10f;
             return new Vector3f(distanceFromBorderX,distanceFromBorderY);

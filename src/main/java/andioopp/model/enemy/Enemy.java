@@ -12,6 +12,9 @@ import andioopp.common.gfx.Sprite;
 
 import java.util.ArrayList;
 
+/**
+ * An enemy.
+ */
 public abstract class Enemy implements Updateable {
 
     private final Health health;
@@ -20,8 +23,14 @@ public abstract class Enemy implements Updateable {
     private final float attackCooldown;
     private String sprite;
 
-    //Enums
+    /**
+     * List of enums. Each enemy individually adds enums of "requirements" to kill that enemy.
+     */
     public ArrayList<FilterRequirement> requirements = new ArrayList<>();
+    /**
+     * List of enums. Each enemy individually adds enums of "immunities".
+     * Towers can´t kill a enemy if its immune to it´s attack
+     */
     public ArrayList<FilterImmunity> immunity = new ArrayList<>();
 
     protected Enemy(String spritePath, Transform transform, Health health, float speed, float attackCooldown) {
@@ -34,19 +43,21 @@ public abstract class Enemy implements Updateable {
     }
 
     private boolean towerAhead = false;
+
     protected void move() {
         if (towerAhead) { //Enemy should stop moving if there is a tower infront of it. Can ofcourse be overriden.
             return;
-        }
-        else {
+        } else {
             getTransform().translate(new Vector3f(-speed, 0, 0));
         }
     }
 
     private float timeOfLastAttack;
+
     public void setTimeOfLastAttack(Time time) {
         timeOfLastAttack = time.getElapsedSeconds();
     }
+
     public boolean canAttack(Time time) {
         float deltaTime = time.getElapsedSeconds() - timeOfLastAttack;
         System.out.println(deltaTime);
