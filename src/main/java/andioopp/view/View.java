@@ -49,13 +49,12 @@ public class View<S extends Sprite<?>> {
         World world = model.getWorld();
 
         clearScreen();
+        towerCardsView.renderTowerCardsList(renderer);
         renderLanes(world);
         renderTowers(world);
         renderEnemies(world);
         renderProjectiles(world);
         coinView.renderCoinView(world, renderer, getViewSize());
-
-        towerCardsView.renderTowerCardsList(renderer);
     }
 
     private void clearScreen() {
