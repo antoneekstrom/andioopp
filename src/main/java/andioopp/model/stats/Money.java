@@ -17,6 +17,13 @@ public class Money {
         return money;
     }
 
+    public boolean purchase(int amount) {
+        if(amount > money) return false;
+
+        money -= amount;
+        return true;
+    }
+
     public int get() {
         return money;
     }
