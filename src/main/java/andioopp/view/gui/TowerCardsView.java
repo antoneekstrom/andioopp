@@ -18,7 +18,7 @@ public class TowerCardsView<S extends Sprite<?>> {
         for (TowerCard<S> t : cards) {
             t.renderTowerCard(renderer, towerCardListPosition);
             // den här raden gjorde inget??
-            // towerCardListPosition = new Vector3f(towerCardListPosition.getX() + t.getWidth() + 10, towerCardListPosition.getY());
+            towerCardListPosition = new Vector3f(towerCardListPosition.getX() + t.getWidth() + 10, towerCardListPosition.getY());
         }
     }
 
