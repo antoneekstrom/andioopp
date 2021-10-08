@@ -136,7 +136,6 @@ public class World implements Updateable {
         //the projectile will be destroyed.
         } else if(isImmune(projectile, enemy) && isContact(projectile, enemy) && !projectile.alreadyInteractedWith.contains(enemy)) {
             projectileIterator.remove();
-            System.out.println(" 2 ");
             projectile.alreadyInteractedWith.add(enemy);
 
         }
@@ -213,15 +212,12 @@ public class World implements Updateable {
                 Tower tower = getCell(row, col).getTower();
 
                 if (tower != null) {
-                    System.out.println(tower.getClass().getSimpleName() + " har " + tower.getHealth().get() + " hp");
-
                     float deltaX = enemy.getPosition().getX() - col;
                     if (deltaX < 0.5f && deltaX > 0) {
                         enemy.setTowerAhead(true);
                         if (enemy.canAttack(time)) {
                             enemy.setTimeOfLastAttack(time);
                             tower.getHealth().decrease(1);
-                            System.out.println(enemy.getClass().getSimpleName() + " attacked " + tower.getClass().getSimpleName());
                         }
 
                         else {

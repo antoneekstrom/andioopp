@@ -18,31 +18,28 @@ public class View<S extends Sprite<?>> {
 
     private static final Color COLOR_CELL_ODD = new Color(112, 146, 85);
     private static final Color COLOR_CELL_EVEN = new Color(62, 86, 34);
+    private static final float TOWER_CELL_OFFSET_PERCENT = -0.3f;
+    private static final float ENEMY_SIZE_BY_CELL_SCALE = 0.7f;
     public static final Vector3f TOWER_CARD_LIST_POSITION = new Vector3f(380, 10);
 
     private final Renderer<S> renderer;
-    private final Vector3f position;
-    private final Vector3f size;
+    private final Rectangle viewport;
     private final CoinView<S> coinView;
     private final TowerCardsView<S> towerCardsView;
 
     private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
 
-    public View(Renderer<S> renderer, Vector3f position, Vector3f size) {
+    public View(Renderer<S> renderer, Rectangle viewport) {
         this.renderer = renderer;
-        this.position = position;
-        this.size = size;
+        this.viewport = viewport;
         this.coinView = new CoinView<>();
         this.towerCardsView = new TowerCardsView<>(TOWER_CARD_LIST_POSITION);
         towerCardsView.createTowerCardsList();
     }
 
-    public Rectangle getCellRectangle(World world, int row, int col) {
-        return new Rectangle(getCellScreenPosition(world, row, col), new Dimension(getCellScreenSize(world)));
-    }
-
     /**
      * Renders the model.
+     *
      * @param model the model to render
      */
     public void render(Model model) {
@@ -54,7 +51,11 @@ public class View<S extends Sprite<?>> {
         renderTowers(world);
         renderEnemies(world);
         renderProjectiles(world);
-        coinView.renderCoinView(world, renderer, getViewSize());
+        coinView.renderCoinView(world, renderer, getViewportSize().toVector());
+    }
+
+    public Rectangle getCellRectangle(World world, int row, int col) {
+        return new Rectangle(getCellScreenPosition(world, row, col), new Dimension(getCellScreenSize(world)));
     }
 
     private void clearScreen() {
@@ -92,7 +93,7 @@ public class View<S extends Sprite<?>> {
     private void renderEnemy(World world, Enemy enemy) {
         S enemySprite = enemy.getSprite(getRenderer().getSpriteFactory());
         Dimension enemyScreenSize = getEnemyScreenSize(world, enemySprite);
-        Transform enemyScreenTransform = transformFactory.createWithPosition(getPluppScreenPosition(world, enemy.getPosition(), enemyScreenSize));
+        Transform enemyScreenTransform = transformFactory.createWithPosition(getEntityScreenPosition(world, enemy.getPosition(), enemyScreenSize));
         getRenderer().drawSprite(enemySprite, enemyScreenTransform, enemyScreenSize.toVector());
     }
 
@@ -111,7 +112,7 @@ public class View<S extends Sprite<?>> {
         S fireballSprite = getRenderer().getSpriteFactory().get("fireball.png");
         for (Projectile projectile : world.getProjectiles()) {
             Dimension enemyScreenSize = getEnemyScreenSize(world, fireballSprite);
-            Transform enemyScreenTransform = transformFactory.createWithPosition(getPluppScreenPosition(world, projectile.getPosition(), enemyScreenSize));
+            Transform enemyScreenTransform = transformFactory.createWithPosition(getEntityScreenPosition(world, projectile.getPosition(), enemyScreenSize));
             getRenderer().drawSprite(fireballSprite, enemyScreenTransform, enemyScreenSize.toVector());
         }
     }
@@ -127,14 +128,14 @@ public class View<S extends Sprite<?>> {
         return towerSpriteSize.scaleByHeight(cellScreenSize.getHeight());
     }
 
-    private Vector3f getPluppScreenPosition(World world, Vector3f position, Dimension size) {
-        return getViewPosition().add(position.scale(getCellScreenSize(world))).add(alignWithCellBottom(world, size)).add(getEntityCellOffset(world));
+    private Vector3f getEntityScreenPosition(World world, Vector3f position, Dimension size) {
+        return getViewportPosition().add(position.scale(getCellScreenSize(world))).add(alignWithCellBottom(world, size)).add(getEntityCellOffset(world));
     }
 
     private Dimension getEnemyScreenSize(World world, S enemySprite) {
         Dimension cellScreenSize = new Dimension(getCellScreenSize(world));
         Dimension enemySpriteSize = enemySprite.getSize();
-        return enemySpriteSize.scaleByHeight(cellScreenSize.getHeight() * 0.7f);
+        return enemySpriteSize.scaleByHeight(cellScreenSize.getHeight() * ENEMY_SIZE_BY_CELL_SCALE);
     }
 
     private Vector3f alignWithCellBottom(World world, Dimension size) {
@@ -145,14 +146,13 @@ public class View<S extends Sprite<?>> {
     }
 
     private Vector3f getEntityCellOffset(World world) {
-        return getCellScreenSize(world).onlyY().scale(-0.3f);
+        return getCellScreenSize(world).onlyY().scale(TOWER_CELL_OFFSET_PERCENT);
     }
 
     private Vector3f getCellScreenPosition(World world, int row, int col) {
         Vector3f cellScreenSize = getCellScreenSize(world);
         Vector3f laneScreenPosition = getLaneScreenPosition(world, row);
         Vector3f cellScreenOffset = cellScreenSize.onlyX().scale(col);
-
         return laneScreenPosition.add(cellScreenOffset);
     }
 
@@ -172,24 +172,28 @@ public class View<S extends Sprite<?>> {
     }
 
     private float getLaneScreenWidth() {
-        return getViewSize().getX();
+        return getViewportSize().getWidth();
     }
 
     private float getLaneScreenHeight(World world) {
-        return getViewSize().getY() / world.getNumberOfLanes();
+        return getViewportSize().getHeight() / world.getNumberOfLanes();
     }
 
     private Vector3f getLaneScreenPosition(World world, int row) {
         Vector3f laneOffset = Vector3f.withY(getLaneScreenHeight(world) * row);
-        return getViewPosition().add(laneOffset);
+        return getViewportPosition().add(laneOffset);
     }
 
-    private Vector3f getViewPosition() {
-        return position;
+    private Vector3f getViewportPosition() {
+        return getViewport().getPosition();
     }
 
-    private Vector3f getViewSize() {
-        return size;
+    private Dimension getViewportSize() {
+        return getViewport().getSize();
+    }
+
+    private Rectangle getViewport() {
+        return viewport;
     }
 
     private Renderer<S> getRenderer() {

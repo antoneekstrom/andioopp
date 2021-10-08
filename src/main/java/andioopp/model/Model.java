@@ -34,7 +34,6 @@ public class Model implements Updateable {
             if (waves.getWave().enemyWave.size() != 0) {
 
                 waves.addWaveToWorld(world);
-                System.out.println("new enemy");
                 waves.setDeltaSeconds(0);
                 this.delay = waves.getRandomDelay();
                 waves.updateTimeSinceLastEnemy(time);
