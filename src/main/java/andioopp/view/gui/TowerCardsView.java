@@ -22,6 +22,11 @@ public class TowerCardsView<S extends Sprite<?>> {
         this.position = screenPosition;
     }
 
+    /**
+     * Uses a renderer to draw all TowerCards of towerCardList on the screen.
+     * @param renderer is used for drawing towerCardList on the screen.
+     * @param towerCardListPosition where the towerCard will be drawn.
+     */
     public void renderTowerCardsList(Renderer<S> renderer) {
         for (int i = 0; i < cards.size(); i++) {
             Vector3f cardPosition = getTowerCardRectangle(position, i).getPosition();
@@ -38,6 +43,9 @@ public class TowerCardsView<S extends Sprite<?>> {
         return new Rectangle(position.add(cardOffset.scale(cardIndex)), new Dimension(TowerCard.getCardDimension()));
     }
 
+    /**
+     * Adds a TowerCard of all different towers to TowerCardList.
+     */
     public void createTowerCardsList() {
         addTowerCardToList(Towers::mario);
         addTowerCardToList(Towers::toad);
@@ -47,6 +55,10 @@ public class TowerCardsView<S extends Sprite<?>> {
         addTowerCardToList(Towers::bobomb);
     }
 
+    /**
+     * Adds a TowerCard to TowerCardList
+     * @param tower the tower that will be added
+     */
     public void addTowerCardToList(Supplier<Tower> towerSupplier) {
         this.cards.add(new TowerCard<>(towerSupplier));
     }
