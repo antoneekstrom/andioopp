@@ -48,6 +48,8 @@ public class Vector3f {
         return new Vector3f(v, v, v);
     }
 
+    public Vector3f negate() { return new Vector3f(-getX(), -getY(), -getZ()); }
+
     public Vector3f onlyX() {
         return Vector3f.withX(getX());
     }
@@ -73,7 +75,7 @@ public class Vector3f {
     }
 
     public Vector3f sub(Vector3f other) {
-        return new Vector3f(getX() - other.getX(), getY() - other.getY(), getZ() - other.getZ());
+        return add(other.negate());
     }
 
     public Vector3f setX(float x) {
