@@ -14,7 +14,7 @@ public interface Renderer<S extends Sprite<?>> {
      * Draws a {@link Sprite}.
      * @param sprite {@link Sprite} to draw
      */
-    void drawSprite(S sprite, Transform transform, Vector3f size);
+    void drawSprite(S sprite, Transform transform, Dimension size);
 
     /**
      * Draws a sprite.
@@ -22,7 +22,7 @@ public interface Renderer<S extends Sprite<?>> {
      * @param transform how the sprite should be drawn
      */
     default void drawSprite(S sprite, Transform transform) {
-        drawSprite(sprite, transform, new Vector3f(sprite.getWidth(), sprite.getHeight()));
+        drawSprite(sprite, transform, sprite.getSize());
     }
 
     /**

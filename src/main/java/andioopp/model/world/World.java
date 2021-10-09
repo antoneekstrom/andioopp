@@ -1,6 +1,7 @@
 package andioopp.model.world;
 
 import andioopp.common.time.Time;
+import andioopp.common.transform.Dimension;
 import andioopp.common.transform.Vector3f;
 import andioopp.model.FilterImmunity;
 import andioopp.model.FilterRequirement;
@@ -47,7 +48,6 @@ public class World implements Updateable {
 
         despawnOutOfBoundsEnemies();
     }
-
 
     private void performAllTowerAttacks(Time time) {
         for (int row = 0; row < getLanes().size(); row++) {
@@ -234,6 +234,10 @@ public class World implements Updateable {
                 }
             }
         }
+    }
+
+    public Dimension getGridSize() {
+        return new Dimension(getNumberOfCellsInLanes(), getNumberOfLanes());
     }
 
     public void addEnemy(Enemy enemy) {

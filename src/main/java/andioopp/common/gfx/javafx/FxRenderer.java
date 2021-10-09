@@ -32,9 +32,9 @@ public class FxRenderer implements Renderer<FxSprite> {
     }
 
     @Override
-    public void drawSprite(FxSprite sprite, Transform transform, Vector3f size) {
+    public void drawSprite(FxSprite sprite, Transform transform, Dimension size) {
         Vector3f position = transform.getPosition();
-        getCtx().drawImage(sprite.getImage(),  position.getX(), position.getY(), size.getX(), size.getY());
+        getCtx().drawImage(sprite.getImage(),  position.getX(), position.getY(), size.getWidth(), size.getHeight());
     }
 
     @Override
