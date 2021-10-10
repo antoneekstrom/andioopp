@@ -1,5 +1,7 @@
 package andioopp.service.infrastructure.loop;
 
+import andioopp.common.graphics.Renderer;
+import andioopp.common.graphics.Sprite;
 import andioopp.common.observer.Observer;
 import andioopp.common.time.Clock;
 import andioopp.common.time.Time;
@@ -14,8 +16,8 @@ public class LoopService {
         this.clock = clock;
     }
 
-    public void start(Model model, View<?> view) {
-        init(model, view);
+    public <S extends Sprite<?>> void start(Renderer<S> renderer, View<S> view, Model model) {
+        init(renderer, model, view);
         getClock().start();
     }
 
@@ -24,13 +26,13 @@ public class LoopService {
         getClock().unlistenAll();
     }
 
-    private void init(Model model, View<?> view) {
+    private <S extends Sprite<?>> void init(Renderer<S> renderer, Model model, View<S> view) {
         getClock().listen(getUpdateModel(model));
-        getClock().listen(getUpdateView(model, view));
+        getClock().listen(getUpdateView(renderer, model, view));
     }
 
-    private Observer<Time> getUpdateView(Model model, View<?> view) {
-        return (time) -> view.render(model);
+    private <S extends Sprite<?>> Observer<Time> getUpdateView(Renderer<S> renderer, Model model, View<S> view) {
+        return (time) -> view.render(renderer, model);
     }
 
     private Observer<Time> getUpdateModel(Model model) {

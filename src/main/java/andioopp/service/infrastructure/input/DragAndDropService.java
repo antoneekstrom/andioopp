@@ -10,7 +10,6 @@ public class DragAndDropService<T> extends MouseInputService {
     private final Observable<MouseEvent, Draggable<T>> draggableObservable;
     private final Observable<T, Droppable<T>> droppableObservable;
 
-    private boolean mouseDown = false;
     private T dragData;
 
     public DragAndDropService(Observable<MouseEvent, Observer<MouseEvent>> mouseDataObservable, ListFactory listFactory) {
@@ -21,10 +20,8 @@ public class DragAndDropService<T> extends MouseInputService {
 
     private void onMouseEvent(MouseEvent e) {
         if (e.getType().equals(MouseEvent.MouseEventType.RELEASE)) {
-            mouseDown = false;
             onMouseRelease(e);
         } else if (e.getType().equals(MouseEvent.MouseEventType.PRESS)) {
-            mouseDown = true;
             onMouseDown(e);
         }
     }
@@ -55,10 +52,6 @@ public class DragAndDropService<T> extends MouseInputService {
 
     private void setDragData(T dragData) {
         this.dragData = dragData;
-    }
-
-    public boolean isMouseDown() {
-        return mouseDown;
     }
 
     public void register() {

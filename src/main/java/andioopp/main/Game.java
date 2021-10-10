@@ -1,7 +1,6 @@
 package andioopp.main;
 
-import andioopp.common.gfx.*;
-import andioopp.common.gfx.Renderer;
+import andioopp.common.graphics.*;
 import andioopp.common.observer.ObservableWithList;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.storage.ListFactory;
@@ -10,11 +9,17 @@ import andioopp.common.transform.*;
 import andioopp.control.PlaceTowerController;
 import andioopp.control.TowerDragEvent;
 import andioopp.model.Model;
+import andioopp.model.tower.Tower;
+import andioopp.model.tower.Towers;
 import andioopp.model.waves.WaveQueue;
 import andioopp.service.infrastructure.graphics.WindowingService;
 import andioopp.service.infrastructure.input.DragAndDropService;
 import andioopp.service.infrastructure.loop.LoopService;
-import andioopp.view.View;
+import andioopp.view.*;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Initializes the game. Completely decoupled from platform and rendering.
@@ -25,36 +30,41 @@ public class Game implements GfxProgram {
         WindowingService<W> windowingService = new WindowingService<>(windowBuilder);
         ListFactory listFactory = new ArrayListFactory();
         LoopService loopService = new LoopService(new FxClock(new ObservableWithList<>(listFactory.create())));
-
         start(listFactory, windowingService, loopService);
     }
 
-    public <W extends Window<?>> void start(ListFactory listFactory, WindowingService<W> windowingService, LoopService loopService) {
-        W window = windowingService.createWindow();
-        View<?> view = createView(window);
+    public <S extends Sprite<?>> void start(ListFactory listFactory, WindowingService<? extends Window<? extends Renderer<S>>> windowingService, LoopService loopService) {
+        Window<? extends Renderer<S>> window = windowingService.createWindow();
+        GameView<S> view = createView(window);
         Model model = createModel();
-
-        DragAndDropService<TowerDragEvent> dragAndDropService = new DragAndDropService<>(window.getMouseObservable(), listFactory);
-        PlaceTowerController placeTowerController = new PlaceTowerController(dragAndDropService, model, view, listFactory);
-        placeTowerController.register();
-        loopService.start(model, view);
+        addControllers(listFactory, window, view, model);
+        loopService.start(window.getRenderer(), view, model);
     }
 
-    private <W extends Window<?>> View<?> createView(W window) {
-        float worldSizeFactorX = 0.7f;
-        float worldSizeFactorY = 0.7f;
+    private <S extends Sprite<?>> void addControllers(ListFactory listFactory, Window<? extends Renderer<S>> window, GameView<S> view, Model model) {
+        DragAndDropService<TowerDragEvent> dragAndDropService = new DragAndDropService<>(window.getMouseObservable(), listFactory);
+        PlaceTowerController placeTowerController = new PlaceTowerController(dragAndDropService, model, listFactory);
+        placeTowerController.register(view.getLanesView(), view.getCardsView());
+    }
 
+    private <S extends Sprite<?>> GameView<S> createView(Window<? extends Renderer<S>> window) {
         TransformFactory transformFactory = ConcreteTransform.getFactory();
-        Renderer<?> renderer = window.getRenderer();
 
-        Vector3f windowSize = new Vector3f(window.getWidth(), window.getHeight());
-        Dimension worldSize = new Dimension(windowSize.getX() * worldSizeFactorX, windowSize.getY() * worldSizeFactorY);
-        Vector3f worldPos = new Vector3f(windowSize.getX() - (worldSize.getWidth() * 1.01f), windowSize.getY() - (worldSize.getHeight() * 1.10f));
-        Rectangle viewport = new Rectangle(worldPos, worldSize);
-        return new View<>(renderer, transformFactory, viewport);
+        Vector3f worldSizeFactor = new Vector3f(0.7f, 0.7f);
+        Dimension windowSize = new Dimension(window.getWidth(), window.getHeight());
+
+        Dimension worldSize = new Dimension(windowSize.toVector().scale(worldSizeFactor));
+        Vector3f worldPos = new Vector3f(windowSize.getWidth() - (worldSize.getWidth() * 1.01f), windowSize.getHeight() - (worldSize.getHeight() * 1.10f));
+        Rectangle viewportRect = new Rectangle(worldPos, worldSize);
+
+        return new GameView<>(viewportRect, transformFactory);
+    }
+
+    private List<Supplier<Tower>> getCards() {
+        return Arrays.asList(Towers::mario, Towers::toad);
     }
 
     private Model createModel() {
-        return new Model(new WaveQueue());
+        return new Model(new WaveQueue(), getCards());
     }
 }

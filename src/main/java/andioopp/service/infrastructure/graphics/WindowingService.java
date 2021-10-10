@@ -1,7 +1,7 @@
 package andioopp.service.infrastructure.graphics;
 
-import andioopp.common.gfx.Window;
-import andioopp.common.gfx.WindowBuilder;
+import andioopp.common.graphics.Window;
+import andioopp.common.graphics.WindowBuilder;
 
 import java.awt.*;
 

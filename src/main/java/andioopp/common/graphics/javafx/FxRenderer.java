@@ -1,16 +1,14 @@
-package andioopp.common.gfx.javafx;
+package andioopp.common.graphics.javafx;
 
-import andioopp.common.gfx.SpriteFactory;
+import andioopp.common.graphics.SpriteFactory;
 import andioopp.common.transform.Dimension;
 import andioopp.common.transform.Transform;
 import andioopp.common.transform.Vector3f;
-import andioopp.common.gfx.CachedSpriteFactory;
-import andioopp.common.gfx.Color;
-import andioopp.common.gfx.Renderer;
+import andioopp.common.graphics.CachedSpriteFactory;
+import andioopp.common.graphics.Color;
+import andioopp.common.graphics.Renderer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.text.Font;
-
-import java.util.Vector;
 
 /**
  * {@link Renderer} implementation for JavaFX.
@@ -32,9 +30,9 @@ public class FxRenderer implements Renderer<FxSprite> {
     }
 
     @Override
-    public void drawSprite(FxSprite sprite, Transform transform, Vector3f size) {
+    public void drawSprite(FxSprite sprite, Transform transform, Dimension size) {
         Vector3f position = transform.getPosition();
-        getCtx().drawImage(sprite.getImage(),  position.getX(), position.getY(), size.getX(), size.getY());
+        getCtx().drawImage(sprite.getImage(),  position.getX(), position.getY(), size.getWidth(), size.getHeight());
     }
 
     @Override

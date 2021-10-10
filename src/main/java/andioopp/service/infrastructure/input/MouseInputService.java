@@ -4,7 +4,7 @@ import andioopp.common.observer.Observable;
 import andioopp.common.observer.Observer;
 
 /**
- * Middleman which communicates with {@link andioopp.common.gfx.Window}.
+ * Middleman which communicates with {@link andioopp.common.graphics.Window}.
  */
 public class MouseInputService {
 

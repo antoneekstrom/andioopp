@@ -1,12 +1,10 @@
 package andioopp.model.tower;
 
-import andioopp.common.gfx.SpriteFactory;
+import andioopp.common.graphics.SpriteFactory;
 import andioopp.model.stats.Health;
-import andioopp.model.enemy.Enemy;
-import andioopp.common.gfx.Sprite;
+import andioopp.common.graphics.Sprite;
 import andioopp.model.tower.attack.Attack;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

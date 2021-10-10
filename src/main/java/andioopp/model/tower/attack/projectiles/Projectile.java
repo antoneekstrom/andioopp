@@ -14,6 +14,8 @@ import java.util.ArrayList;
  */
 public abstract class Projectile implements Updateable {
 
+    public final String spritePath = "fireball.png";
+
     private final Transform transform;
 
     public ArrayList<FilterRequirement> requirements;
@@ -25,6 +27,10 @@ public abstract class Projectile implements Updateable {
         this.transform = ConcreteTransform.getFactory().createWithPosition(position);
         this.requirements = requirements;
         this.immunity = immunity;
+    }
+
+    public String getSpritePath() {
+        return spritePath;
     }
 
     public abstract boolean shouldRemove();

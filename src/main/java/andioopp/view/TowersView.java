@@ -1,68 +1,54 @@
 package andioopp.view;
 
-import andioopp.common.gfx.Renderer;
-import andioopp.common.gfx.Sprite;
+import andioopp.common.graphics.Renderer;
+import andioopp.common.graphics.Sprite;
 import andioopp.common.transform.*;
+import andioopp.model.Model;
 import andioopp.model.tower.Tower;
 import andioopp.model.world.World;
 
-public class TowersView<S extends Sprite<?>> {
+public class TowersView<S extends Sprite<?>> extends CellView implements View<S> {
 
     private static final float TOWER_CELL_OFFSET_PERCENT = -0.3f;
 
-    private final Renderer<S> renderer;
-    private final CellsView<S> cellsView;
     private final TransformFactory transformFactory;
 
-    public TowersView(Renderer<S> renderer, CellsView<S> cellsView, TransformFactory transformFactory) {
-        this.renderer = renderer;
-        this.cellsView = cellsView;
+    public TowersView(Rectangle viewportRect, TransformFactory transformFactory) {
+        super(viewportRect);
         this.transformFactory = transformFactory;
     }
 
-    public void render(World world) {
+    @Override
+    public void render(Renderer<S> renderer, Model model) {
+        World world = model.getWorld();
         for (int row = 0; row < world.getNumberOfLanes(); row++) {
             for (int col = 0; col < world.getNumberOfCellsInLanes(); col++) {
-                renderTower(world, row, col);
+                renderTower(renderer, world, row, col);
             }
         }
     }
 
-    private void renderTower(World world, int row, int col) {
+    private void renderTower(Renderer<S> renderer, World world, int row, int col) {
         Tower tower = world.getCell(row, col).getTower();
+
         if (tower != null) {
-            Vector3f cellScreenPosition = cellsView.getCellScreenPosition(world, row, col);
-            S towerSprite = tower.getSprite(getRenderer().getSpriteFactory());
-            Dimension towerScreenSize = new Dimension(getTowerScreenSize(world, tower).toVector());
-            Transform towerScreenTransform = transformFactory.createWithPosition(getTowerScreenPosition(world, cellScreenPosition, towerScreenSize));
-            getRenderer().drawSprite(towerSprite, towerScreenTransform, towerScreenSize.toVector());
+            S towerSprite = tower.getSprite(renderer.getSpriteFactory());
+            Dimension towerSize = getTowerSize(world, towerSprite);
+
+            Vector3f towerPosition = getTowerPosition(world, row, col);
+            Transform towerTransform = transformFactory.createWithPosition(towerPosition);
+
+            renderer.drawSprite(towerSprite, towerTransform, towerSize);
         }
     }
 
-    private Vector3f alignWithCellBottom(World world, Dimension size) {
-        Dimension cellScreenSize = cellsView.getCellScreenSize(world);
-        Vector3f cellScreenPositionCenter = cellScreenSize.centerWithin(Vector3f.zero(), size);
-        Vector3f offsetToBottom = cellScreenSize.toVector().onlyY().scale(0.5f).sub(size.toVector().onlyY().scale(0.5f));
-        return cellScreenPositionCenter.add(offsetToBottom);
+    private Vector3f getTowerPosition(World world, int row, int col) {
+        Rectangle cellRect = getCellRect(world, row, col);
+        return cellRect.getPosition().add(cellRect.getSize().toVector().scale(Vector3f.withY(TOWER_CELL_OFFSET_PERCENT)));
     }
 
-    private Vector3f getTowerScreenPosition(World world, Vector3f cellScreenPosition, Dimension size) {
-        return cellScreenPosition.add(alignWithCellBottom(world, size)).add(getEntityCellOffset(world));
-    }
-
-    private Vector3f getEntityCellOffset(World world) {
-        return cellsView.getCellScreenSize(world).toVector().onlyY().scale(TOWER_CELL_OFFSET_PERCENT);
-    }
-
-    private Dimension getTowerScreenSize(World world, Tower tower) {
-        Dimension cellScreenSize = new Dimension(cellsView.getCellScreenSize(world));
-        S towerSprite = tower.getSprite(getRenderer().getSpriteFactory());
-        Dimension towerSpriteSize = towerSprite.getSize();
-        return towerSpriteSize.scaleByHeight(cellScreenSize.getHeight());
-    }
-
-
-    private Renderer<S> getRenderer() {
-        return renderer;
+    private Dimension getTowerSize(World world, S sprite) {
+        Dimension cellRes = getCellSize(world);
+        return sprite.getSize().scaleByHeight(cellRes.getHeight());
     }
 }
