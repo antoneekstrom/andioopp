@@ -1,4 +1,4 @@
-package andioopp.common.gfx;
+package andioopp.common.graphics;
 
 import andioopp.common.transform.Dimension;
 import andioopp.common.transform.Transform;

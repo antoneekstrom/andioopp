@@ -1,4 +1,4 @@
-package andioopp.common.gfx;
+package andioopp.common.graphics;
 
 import andioopp.common.observer.Observable;
 import andioopp.service.infrastructure.input.MouseEvent;

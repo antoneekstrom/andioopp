@@ -1,10 +1,9 @@
 package andioopp.view;
 
-import andioopp.common.gfx.Renderer;
-import andioopp.common.gfx.Sprite;
+import andioopp.common.graphics.Renderer;
+import andioopp.common.graphics.Sprite;
 import andioopp.common.transform.*;
 import andioopp.model.Model;
-import andioopp.model.enemy.Enemy;
 import andioopp.model.tower.attack.projectiles.Projectile;
 import andioopp.model.world.World;
 

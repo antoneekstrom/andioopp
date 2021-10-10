@@ -1,6 +1,6 @@
 package andioopp.model.enemy;
 
-import andioopp.common.gfx.SpriteFactory;
+import andioopp.common.graphics.SpriteFactory;
 import andioopp.common.time.Time;
 import andioopp.common.transform.Transform;
 import andioopp.common.transform.Vector3f;
@@ -8,7 +8,7 @@ import andioopp.model.FilterImmunity;
 import andioopp.model.FilterRequirement;
 import andioopp.model.stats.Health;
 import andioopp.model.Updateable;
-import andioopp.common.gfx.Sprite;
+import andioopp.common.graphics.Sprite;
 
 import java.util.ArrayList;
 

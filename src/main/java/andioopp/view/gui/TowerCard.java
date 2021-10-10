@@ -1,11 +1,10 @@
 package andioopp.view.gui;
 
-import andioopp.common.gfx.Color;
-import andioopp.common.gfx.Renderer;
-import andioopp.common.gfx.Sprite;
+import andioopp.common.graphics.Color;
+import andioopp.common.graphics.Renderer;
+import andioopp.common.graphics.Sprite;
 import andioopp.common.transform.*;
 import andioopp.model.tower.Tower;
-import andioopp.model.tower.Towers;
 import javafx.scene.text.Font;
 
 import java.util.function.Supplier;

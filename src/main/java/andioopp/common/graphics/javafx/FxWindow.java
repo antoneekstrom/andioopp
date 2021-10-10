@@ -1,6 +1,6 @@
-package andioopp.common.gfx.javafx;
+package andioopp.common.graphics.javafx;
 
-import andioopp.common.gfx.Window;
+import andioopp.common.graphics.Window;
 import andioopp.common.observer.Observable;
 import andioopp.common.observer.ObservableWithList;
 import andioopp.common.observer.Observer;

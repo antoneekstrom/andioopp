@@ -1,12 +1,11 @@
 package andioopp.service.infrastructure.loop;
 
-import andioopp.common.gfx.Renderer;
-import andioopp.common.gfx.Sprite;
+import andioopp.common.graphics.Renderer;
+import andioopp.common.graphics.Sprite;
 import andioopp.common.observer.Observer;
 import andioopp.common.time.Clock;
 import andioopp.common.time.Time;
 import andioopp.model.Model;
-import andioopp.view.ComposedView;
 import andioopp.view.View;
 
 public class LoopService {

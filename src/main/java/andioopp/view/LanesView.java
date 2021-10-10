@@ -1,13 +1,10 @@
 package andioopp.view;
 
-import andioopp.common.gfx.Color;
-import andioopp.common.gfx.Renderer;
-import andioopp.common.gfx.Sprite;
-import andioopp.common.transform.Dimension;
+import andioopp.common.graphics.Color;
+import andioopp.common.graphics.Renderer;
+import andioopp.common.graphics.Sprite;
 import andioopp.common.transform.Rectangle;
-import andioopp.common.transform.Vector3f;
 import andioopp.model.Model;
-import andioopp.model.world.Lane;
 import andioopp.model.world.World;
 
 public class LanesView<S extends Sprite<?>> extends CellView implements View<S> {

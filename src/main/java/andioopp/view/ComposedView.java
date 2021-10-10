@@ -1,11 +1,9 @@
 package andioopp.view;
 
-import andioopp.common.gfx.Color;
-import andioopp.common.gfx.Renderer;
-import andioopp.common.gfx.Sprite;
+import andioopp.common.graphics.Color;
+import andioopp.common.graphics.Renderer;
+import andioopp.common.graphics.Sprite;
 import andioopp.model.Model;
-
-import java.util.List;
 
 public class ComposedView<S extends Sprite<?>> implements View<S> {
 
