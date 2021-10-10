@@ -23,7 +23,7 @@ public class TowerTest {
 
     @Before
     public void setup() {
-        System.out.println( mario.requirements.size() + " REQUIEMREMNT SIZE I TESTIFLEN");
+        System.out.println( mario.damageTargetTypes.size() + " REQUIEMREMNT SIZE I TESTIFLEN");
         model = new Model(new WaveQueue(), new Player());
         World world = model.getWorld();
         goomba = Enemies.goomba(world, 1);
@@ -33,9 +33,9 @@ public class TowerTest {
 
     @Test
     public void testtesttesttest() {
-        int i = goomba.requirements.size();
+        int i = goomba.damageTargetTypes.size();
         System.out.println(i + " Gomba req size");
-        int j = mario.requirements.size();
+        int j = mario.damageTargetTypes.size();
         System.out.println(j + " mario req size");
     }
 

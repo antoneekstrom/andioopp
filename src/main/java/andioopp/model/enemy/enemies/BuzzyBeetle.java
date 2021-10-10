@@ -2,11 +2,10 @@ package andioopp.model.enemy.enemies;
 
 import andioopp.common.time.Time;
 import andioopp.common.transform.ConcreteTransform;
-import andioopp.common.transform.Transform;
 import andioopp.common.transform.TransformFactory;
 import andioopp.common.transform.Vector3f;
-import andioopp.model.FilterImmunity;
-import andioopp.model.FilterRequirement;
+import andioopp.model.damage.DamageSourceType;
+import andioopp.model.damage.DamageTargetType;
 import andioopp.model.enemy.Enemy;
 import andioopp.model.stats.Health;
 
@@ -17,13 +16,13 @@ public class BuzzyBeetle extends Enemy {
     private static final String SPRITE_PATH = "buzzybeetle.png";
     private static final int BASE_HEALTH = 100;
     private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
-    private final ArrayList<FilterRequirement> requirements = new ArrayList<>();
-    private final ArrayList<FilterImmunity> immunity = new ArrayList<>();
+    private final ArrayList<DamageTargetType> damageTargetTypes = new ArrayList<>();
+    private final ArrayList<DamageSourceType> damageSourceType = new ArrayList<>();
 
     public BuzzyBeetle(Vector3f position) {
         super(SPRITE_PATH, transformFactory.createWithPosition(position), new Health(BASE_HEALTH), 0.01f, 0.3f);
-        requirements.add(FilterRequirement.GROUND);
-        immunity.add(FilterImmunity.FIREBALL);
+        damageTargetTypes.add(DamageTargetType.GROUND);
+        damageSourceType.add(DamageSourceType.FIRE);
     }
 
     @Override

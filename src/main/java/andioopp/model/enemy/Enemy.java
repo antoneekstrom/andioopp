@@ -4,8 +4,8 @@ import andioopp.common.gfx.SpriteFactory;
 import andioopp.common.time.Time;
 import andioopp.common.transform.Transform;
 import andioopp.common.transform.Vector3f;
-import andioopp.model.FilterImmunity;
-import andioopp.model.FilterRequirement;
+import andioopp.model.damage.DamageSourceType;
+import andioopp.model.damage.DamageTargetType;
 import andioopp.model.stats.Health;
 import andioopp.model.Updateable;
 import andioopp.common.gfx.Sprite;
@@ -24,14 +24,14 @@ public abstract class Enemy implements Updateable {
     private String sprite;
 
     /**
-     * List of enums. Each enemy individually adds enums of "requirements" to kill that enemy.
+     * List of enums. Each enemy individually adds enums of "damageTargetTypes" to kill that enemy.
      */
-    public ArrayList<FilterRequirement> requirements = new ArrayList<>();
+    public ArrayList<DamageTargetType> damageTargetTypes = new ArrayList<>();
     /**
      * List of enums. Each enemy individually adds enums of "immunities".
      * Towers can´t kill a enemy if its immune to it´s attack
      */
-    public ArrayList<FilterImmunity> immunity = new ArrayList<>();
+    public ArrayList<DamageSourceType> immunities = new ArrayList<>();
 
     protected Enemy(String spritePath, Transform transform, Health health, float speed, float attackCooldown) {
         this.sprite = spritePath;
@@ -85,19 +85,11 @@ public abstract class Enemy implements Updateable {
         return getTransform().getPosition();
     }
 
-    public void Damage() {
-        getHealth().decrease(1);
-    }
-
     protected Transform getTransform() {
         return transform;
     }
 
-    protected void setSprite(String sprite) {
-        this.sprite = sprite;
-    }
-
-    protected boolean isDead() {
+    public boolean isDead() {
         return getHealth().isZero();
     }
 

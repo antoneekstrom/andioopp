@@ -3,8 +3,8 @@ package andioopp.model.tower.attack;
 import andioopp.common.time.Time;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.transform.Vector3f;
-import andioopp.model.FilterImmunity;
-import andioopp.model.FilterRequirement;
+import andioopp.model.damage.DamageSourceType;
+import andioopp.model.damage.DamageTargetType;
 import andioopp.model.world.World;
 import andioopp.model.enemy.Enemy;
 
@@ -21,8 +21,8 @@ public abstract class Attack {
     private final AttackTargetArea targetArea;
 
     //Enums
-    public ArrayList<FilterRequirement> requirements = new ArrayList<>();
-    public ArrayList<FilterImmunity> immunty = new ArrayList<>();
+    public ArrayList<DamageTargetType> damageTargetTypes = new ArrayList<>();
+    public ArrayList<DamageSourceType> immunty = new ArrayList<>();
 
     public Attack(float coolDown, AttackTargetArea targetArea) {
         this.coolDown = coolDown;
@@ -79,10 +79,10 @@ public abstract class Attack {
      * @return true if it can attack the current enemy.
      */
     public boolean hasMatchingRequirements(Enemy enemy) {
-        for(int i = 0; i < requirements.size(); i++) {
-            FilterRequirement r = requirements.get(i);
-            for(int j = 0; j < enemy.requirements.size(); j++){
-                FilterRequirement e = enemy.requirements.get(j);
+        for(int i = 0; i < damageTargetTypes.size(); i++) {
+            DamageTargetType r = damageTargetTypes.get(i);
+            for(int j = 0; j < enemy.damageTargetTypes.size(); j++){
+                DamageTargetType e = enemy.damageTargetTypes.get(j);
                 if (r.equals(e)){
                     return true;
                 }
@@ -97,14 +97,14 @@ public abstract class Attack {
      * @return true if it is immune.
      */
     public boolean isImmune(Enemy enemy) {
-        if(enemy.immunity.isEmpty()) { //if enemy immunity list is empty => Its not immune.
+        if(enemy.immunities.isEmpty()) { //if enemy damageSourceType list is empty => Its not immune.
             return false;
         } else {
             for (int i = 0; i < immunty.size(); i++) {
-                FilterImmunity imm = immunty.get(i);
+                DamageSourceType imm = immunty.get(i);
 
-                for (int j = 0; j < enemy.immunity.size(); j++) {
-                    FilterImmunity EnemyImm = enemy.immunity.get(j);
+                for (int j = 0; j < enemy.immunities.size(); j++) {
+                    DamageSourceType EnemyImm = enemy.immunities.get(j);
 
                     if (imm.equals(EnemyImm)) {
                         return true;

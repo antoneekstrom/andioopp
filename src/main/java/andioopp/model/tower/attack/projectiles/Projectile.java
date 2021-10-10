@@ -1,8 +1,8 @@
 package andioopp.model.tower.attack.projectiles;
 
 import andioopp.common.transform.*;
-import andioopp.model.FilterImmunity;
-import andioopp.model.FilterRequirement;
+import andioopp.model.damage.DamageSourceType;
+import andioopp.model.damage.DamageTargetType;
 import andioopp.model.Updateable;
 import andioopp.model.enemy.Enemy;
 
@@ -18,15 +18,15 @@ public abstract class Projectile implements Updateable {
 
     private final Transform transform;
 
-    public ArrayList<FilterRequirement> requirements;
-    public ArrayList<FilterImmunity> immunity;
+    public ArrayList<DamageTargetType> damageTargetTypes;
+    public ArrayList<DamageSourceType> immunities;
 
     public ArrayList<Enemy> alreadyInteractedWith = new ArrayList<>();
 
-    public Projectile(Vector3f position, ArrayList<FilterRequirement> requirements, ArrayList<FilterImmunity> immunity) {
+    public Projectile(Vector3f position, ArrayList<DamageTargetType> damageTargetTypes, ArrayList<DamageSourceType> immunities) {
         this.transform = ConcreteTransform.getFactory().createWithPosition(position);
-        this.requirements = requirements;
-        this.immunity = immunity;
+        this.damageTargetTypes = damageTargetTypes;
+        this.immunities = immunities;
     }
 
     public String getSpritePath() {

@@ -2,21 +2,21 @@ package andioopp.model.tower.attack.projectiles;
 
 import andioopp.common.time.Time;
 import andioopp.common.transform.Vector3f;
-import andioopp.model.FilterImmunity;
-import andioopp.model.FilterRequirement;
+import andioopp.model.damage.DamageSourceType;
+import andioopp.model.damage.DamageTargetType;
 
 import java.util.ArrayList;
 
 public class FireballProjectile extends Projectile {
 
-    public ArrayList<FilterRequirement> requirements;
-    public ArrayList<FilterImmunity> immunity;
+    public ArrayList<DamageTargetType> damageTargetTypes;
+    public ArrayList<DamageSourceType> damageSourceType;
     private int pierceCounter = 0;
 
-    public FireballProjectile(Vector3f position, ArrayList<FilterRequirement> requirements, ArrayList<FilterImmunity> immunity) {
-        super(position, requirements, immunity);
-        requirements.add(FilterRequirement.GROUND);
-        immunity.add(FilterImmunity.FIREBALL);
+    public FireballProjectile(Vector3f position, ArrayList<DamageTargetType> damageTargetTypes, ArrayList<DamageSourceType> damageSourceType) {
+        super(position, damageTargetTypes, damageSourceType);
+        damageTargetTypes.add(DamageTargetType.GROUND);
+        damageSourceType.add(DamageSourceType.FIRE);
     }
 
     @Override

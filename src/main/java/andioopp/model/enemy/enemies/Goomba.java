@@ -4,12 +4,9 @@ import andioopp.common.time.Time;
 import andioopp.common.transform.ConcreteTransform;
 import andioopp.common.transform.TransformFactory;
 import andioopp.common.transform.Vector3f;
-import andioopp.model.FilterImmunity;
-import andioopp.model.FilterRequirement;
+import andioopp.model.damage.DamageTargetType;
 import andioopp.model.stats.Health;
 import andioopp.model.enemy.Enemy;
-
-import java.util.ArrayList;
 
 public class Goomba extends Enemy {
 
@@ -20,7 +17,7 @@ public class Goomba extends Enemy {
 
     public Goomba(Vector3f position) {
         super(SPRITE_PATH, transformFactory.createWithPosition(position), new Health(BASE_HEALTH), INIT_SPEED, 0.3f);
-        requirements.add(FilterRequirement.GROUND);
+        damageTargetTypes.add(DamageTargetType.GROUND);
     }
 
     @Override
