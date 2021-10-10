@@ -5,9 +5,10 @@ import andioopp.common.observer.Observable;
 import andioopp.common.observer.ObservableWithList;
 import andioopp.common.observer.Observer;
 import andioopp.common.storage.ArrayListFactory;
-import andioopp.service.infrastructure.input.MouseEvent;
 import andioopp.common.transform.Dimension;
 import andioopp.common.transform.Vector3f;
+import andioopp.service.infrastructure.input.MouseEvent;
+import javafx.beans.value.ChangeListener;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
 
@@ -20,6 +21,7 @@ public class FxWindow implements Window<FxRenderer> {
     private final Canvas canvas;
 
     private final Observable<MouseEvent, Observer<MouseEvent>> mouseObservable;
+    private final Observable<Dimension, Observer<Dimension>> resizeObservable;
 
     public FxWindow(Stage stage, Canvas canvas) {
         this.stage = stage;
@@ -42,6 +44,14 @@ public class FxWindow implements Window<FxRenderer> {
             Vector3f position = new Vector3f((float) e.getX(), (float) e.getY());
             mouseObservable.notifyObservers(new MouseEvent(position, MouseEvent.MouseEventType.RELEASE));
         });
+
+        resizeObservable = new ObservableWithList<>(new ArrayListFactory().create());
+        ChangeListener<Number> resizeListener = (observable, oldValue, newValue) -> {
+            resizeObservable.notifyObservers(getSize());
+            canvas.resize(getSize().getWidth(), getSize().getHeight());
+        };
+        stage.widthProperty().addListener(resizeListener);
+        stage.heightProperty().addListener(resizeListener);
     }
 
     @Override
@@ -51,34 +61,21 @@ public class FxWindow implements Window<FxRenderer> {
 
     @Override
     public Observable<Dimension, Observer<Dimension>> getResizeObservable() {
-        return null;
+        return resizeObservable;
     }
 
     @Override
     public void setMaximized(boolean isMaximized) {
-        getStage().setMaximized(isMaximized);
+        stage.setMaximized(isMaximized);
     }
 
     @Override
     public FxRenderer getRenderer() {
-        return new FxRenderer(getCanvas().getGraphicsContext2D());
+        return new FxRenderer(canvas.getGraphicsContext2D());
     }
 
     @Override
-    public int getWidth() {
-        return (int) stage.getWidth();
-    }
-
-    @Override
-    public int getHeight() {
-        return (int) stage.getHeight();
-    }
-
-    public Canvas getCanvas() {
-        return canvas;
-    }
-
-    public Stage getStage() {
-        return stage;
+    public Dimension getSize() {
+        return new Dimension((float) stage.getWidth(), (float) stage.getHeight());
     }
 }
