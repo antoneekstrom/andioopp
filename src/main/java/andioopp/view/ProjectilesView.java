@@ -32,4 +32,9 @@ public class ProjectilesView<S extends Sprite<?>> extends EntityView implements 
         Transform enemyTransform = transformFactory.createWithPosition(enemyRect.getPosition());
         renderer.drawSprite(sprite, enemyTransform, enemyRect.getSize());
     }
+
+    @Override
+    protected Dimension getEntitySize(World world, Sprite<?> sprite) {
+        return new Dimension(super.getEntitySize(world, sprite).toVector().scale(0.7f));
+    }
 }

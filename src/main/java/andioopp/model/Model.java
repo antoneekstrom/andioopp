@@ -75,7 +75,7 @@ public class Model implements Updateable {
         LaneBuilder laneBuilder = new LaneBuilder(listFactory).setCells(9);
         WorldBuilder builder = new WorldBuilder(laneBuilder, listFactory).setLanes(5);
         World world = builder.build();
-        waves.addWavesToWaveQueue(world, 1);
+        waves.addWavesToWaveQueue(world, 5);
         return world;
     }
 

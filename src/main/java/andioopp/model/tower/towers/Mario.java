@@ -1,12 +1,9 @@
 package andioopp.model.tower.towers;
 
-import andioopp.model.enemy.Enemy;
 import andioopp.model.tower.Tower;
 import andioopp.model.tower.attack.Attack;
 import andioopp.model.tower.attack.attacks.FireballAttack;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,6 +19,6 @@ public class Mario extends Tower {
 
     @Override
     protected List<Attack> createAttacks() {
-        return Arrays.asList(new FireballAttack(1f));
+        return Arrays.asList(new FireballAttack(2.5f));
     }
 }

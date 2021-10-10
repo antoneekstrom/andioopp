@@ -17,6 +17,6 @@ public class Toad extends Tower {
 
     @Override
     protected List<Attack> createAttacks() {
-        return Arrays.asList(new DigCoinAttack(3f, new FloatRange(15, 25)));
+        return Arrays.asList(new DigCoinAttack(15f, new FloatRange(15, 25)));
     }
 }

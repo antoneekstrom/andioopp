@@ -19,7 +19,7 @@ public abstract class Attack implements DamageSource {
     private final float cooldown;
     private final AttackTargetArea targetArea;
     private final DamageSource damageSource;
-    private float timeSinceLastAttack;
+    protected float timeOfLastAttack;
 
     public Attack(float cooldown, AttackTargetArea targetArea, DamageSource damageSource) {
         this.cooldown = cooldown;
@@ -48,7 +48,7 @@ public abstract class Attack implements DamageSource {
      * @return true if enough time has passed since the last attack.
      */
     public boolean isAvailableForAttack(Time time) {
-        float deltaSeconds = time.getElapsedSeconds() - timeSinceLastAttack;
+        float deltaSeconds = time.getElapsedSeconds() - timeOfLastAttack;
         return (deltaSeconds > this.cooldown);
     }
 
@@ -57,8 +57,8 @@ public abstract class Attack implements DamageSource {
      *
      * @param time the current time
      */
-    public void updateTimeSinceLastAttack(Time time) {
-        this.timeSinceLastAttack = time.getElapsedSeconds();
+    public void updateTimeOfLastAttack(Time time) {
+        this.timeOfLastAttack = time.getElapsedSeconds();
     }
 
     /**
