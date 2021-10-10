@@ -1,6 +1,6 @@
 package andioopp.main;
 
-import andioopp.common.gfx.javafx.FxWindowBuilder;
+import andioopp.common.graphics.javafx.FxWindowBuilder;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

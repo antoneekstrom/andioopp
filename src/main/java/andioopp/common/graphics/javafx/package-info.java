@@ -4,4 +4,4 @@
  * @author Anton Ekström
  * @version 1.0
  */
-package andioopp.common.gfx.javafx;
+package andioopp.common.graphics.javafx;

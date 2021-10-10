@@ -1,7 +1,7 @@
 package andioopp.view;
 
-import andioopp.common.gfx.Renderer;
-import andioopp.common.gfx.Sprite;
+import andioopp.common.graphics.Renderer;
+import andioopp.common.graphics.Sprite;
 import andioopp.common.transform.Rectangle;
 import andioopp.common.transform.TransformFactory;
 import andioopp.model.Model;

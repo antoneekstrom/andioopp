@@ -1,6 +1,6 @@
 package andioopp.view;
 
-import andioopp.common.gfx.Sprite;
+import andioopp.common.graphics.Sprite;
 import andioopp.common.transform.Dimension;
 import andioopp.common.transform.Rectangle;
 import andioopp.common.transform.Vector3f;

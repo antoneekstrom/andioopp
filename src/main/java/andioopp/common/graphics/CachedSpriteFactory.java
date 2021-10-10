@@ -1,4 +1,4 @@
-package andioopp.common.gfx;
+package andioopp.common.graphics;
 
 import java.util.HashMap;
 import java.util.Map;

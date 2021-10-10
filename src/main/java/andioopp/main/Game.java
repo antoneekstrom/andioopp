@@ -1,6 +1,6 @@
 package andioopp.main;
 
-import andioopp.common.gfx.*;
+import andioopp.common.graphics.*;
 import andioopp.common.observer.ObservableWithList;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.storage.ListFactory;
@@ -16,7 +16,6 @@ import andioopp.service.infrastructure.graphics.WindowingService;
 import andioopp.service.infrastructure.input.DragAndDropService;
 import andioopp.service.infrastructure.loop.LoopService;
 import andioopp.view.*;
-import andioopp.view.gui.TowerCard;
 
 import java.util.Arrays;
 import java.util.List;

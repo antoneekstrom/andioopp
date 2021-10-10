@@ -1,6 +1,6 @@
-package andioopp.common.gfx.javafx;
+package andioopp.common.graphics.javafx;
 
-import andioopp.common.gfx.Sprite;
+import andioopp.common.graphics.Sprite;
 import javafx.scene.image.Image;
 
 /**
