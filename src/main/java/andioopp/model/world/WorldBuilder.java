@@ -1,6 +1,6 @@
 package andioopp.model.world;
 import andioopp.common.storage.ListFactory;
-import andioopp.model.stats.Money;
+import andioopp.model.player.Money;
 
 import java.util.List;
 
@@ -11,18 +11,16 @@ public class WorldBuilder {
 
     private final ListFactory listFactory;
     private final LaneBuilder laneBuilder;
-    private final Money money;
 
     private List<Lane> lanes;
 
-    public WorldBuilder(LaneBuilder laneBuilder, ListFactory listFactory, Money money) {
+    public WorldBuilder(LaneBuilder laneBuilder, ListFactory listFactory) {
         this.listFactory = listFactory;
         this.laneBuilder = laneBuilder;
-        this.money = money;
     }
 
     public World build() {
-        return new World(getListFactory().create(getLanes()), getListFactory().create(), getListFactory().create(), money);
+        return new World(getListFactory().create(getLanes()), getListFactory().create(), getListFactory().create());
     }
 
     public WorldBuilder setLanes(int numLanes) {

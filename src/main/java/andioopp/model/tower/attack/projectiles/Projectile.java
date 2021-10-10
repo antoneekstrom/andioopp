@@ -1,39 +1,39 @@
 package andioopp.model.tower.attack.projectiles;
 
 import andioopp.common.transform.*;
-import andioopp.model.damage.DamageSourceType;
-import andioopp.model.damage.DamageTargetType;
-import andioopp.model.Updateable;
+import andioopp.model.damage.DamageSource;
+import andioopp.model.damage.DamageType;
+import andioopp.model.interfaces.Updateable;
 import andioopp.model.enemy.Enemy;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A projectile.
  * Usually part of an attack from a tower, i.e. a fireball.
  */
-public abstract class Projectile implements Updateable {
+public abstract class Projectile implements Updateable, DamageSource {
 
     public final String spritePath = "fireball.png";
-
     private final Transform transform;
+    private final DamageSource damageSource;
 
-    public ArrayList<DamageTargetType> damageTargetTypes;
-    public ArrayList<DamageSourceType> immunities;
+    public final ArrayList<Enemy> alreadyInteractedWith = new ArrayList<>();
 
-    public ArrayList<Enemy> alreadyInteractedWith = new ArrayList<>();
-
-    public Projectile(Vector3f position, ArrayList<DamageTargetType> damageTargetTypes, ArrayList<DamageSourceType> immunities) {
+    public Projectile(Vector3f position, DamageSource damageSource) {
         this.transform = ConcreteTransform.getFactory().createWithPosition(position);
-        this.damageTargetTypes = damageTargetTypes;
-        this.immunities = immunities;
+        this.damageSource = damageSource;
+    }
+
+    @Override
+    public List<DamageType> getTypes() {
+        return damageSource.getTypes();
     }
 
     public String getSpritePath() {
         return spritePath;
     }
-
-    public abstract boolean shouldRemove();
 
     public Vector3f getPosition() {
         return getTransform().getPosition();

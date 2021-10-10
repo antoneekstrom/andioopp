@@ -4,55 +4,54 @@ import andioopp.common.graphics.SpriteFactory;
 import andioopp.common.time.Time;
 import andioopp.common.transform.Transform;
 import andioopp.common.transform.Vector3f;
-import andioopp.model.damage.DamageSourceType;
-import andioopp.model.damage.DamageTargetType;
+import andioopp.model.damage.DamageFilter;
+import andioopp.model.damage.BaseDamageSource;
+import andioopp.model.damage.DamageSource;
 import andioopp.model.stats.Health;
-import andioopp.model.Updateable;
+import andioopp.model.interfaces.Updateable;
 import andioopp.common.graphics.Sprite;
-
-import java.util.ArrayList;
 
 /**
  * An enemy.
  */
-public abstract class Enemy implements Updateable {
+public abstract class Enemy implements Updateable, DamageFilter {
 
     private final Health health;
     private final Transform transform;
-    private final float speed;
+    private final String spritePath;
     private final float attackCooldown;
-    private String sprite;
-
-    /**
-     * List of enums. Each enemy individually adds enums of "damageTargetTypes" to kill that enemy.
-     */
-    public ArrayList<DamageTargetType> damageTargetTypes = new ArrayList<>();
-    /**
-     * List of enums. Each enemy individually adds enums of "immunities".
-     * Towers can´t kill a enemy if its immune to it´s attack
-     */
-    public ArrayList<DamageSourceType> immunities = new ArrayList<>();
-
-    protected Enemy(String spritePath, Transform transform, Health health, float speed, float attackCooldown) {
-        this.sprite = spritePath;
-        this.transform = transform;
-        this.health = health;
-        this.speed = speed; //NEGATIVE SPEED SINCE ENEMIES COME IN FROM THE LEFT
-        this.attackCooldown = attackCooldown;
-
-    }
+    private final float speed;
 
     private boolean towerAhead = false;
+    private float timeOfLastAttack;
 
-    protected void move() {
-        if (towerAhead) { //Enemy should stop moving if there is a tower infront of it. Can ofcourse be overriden.
-            return;
-        } else {
+    private final DamageFilter damageFilter;
+
+    protected Enemy(String spritePath, Transform transform, Health health, float speed, float attackCooldown, DamageFilter damageFilter) {
+        this.spritePath = spritePath;
+        this.transform = transform;
+        this.health = health;
+        this.speed = speed; // Negative speed since enemies come from the left
+        this.attackCooldown = attackCooldown;
+        this.damageFilter = damageFilter;
+    }
+
+    @Override
+    public void update(Time time) {
+        move();
+    }
+
+    private void move() {
+        // Enemy should stop moving if there is a tower in front of it
+        if (!towerAhead) {
             getTransform().translate(new Vector3f(-speed, 0, 0));
         }
     }
 
-    private float timeOfLastAttack;
+    @Override
+    public boolean canBeDamagedBy(DamageSource src) {
+        return damageFilter.canBeDamagedBy(src);
+    }
 
     /**
      * Sets the time of the enemy's latest attack.
@@ -74,7 +73,7 @@ public abstract class Enemy implements Updateable {
     }
 
     public <S extends Sprite<?>> S getSprite(SpriteFactory<S> spriteFactory) {
-        return spriteFactory.get(sprite);
+        return spriteFactory.get(spritePath);
     }
 
     public Health getHealth() {
@@ -91,10 +90,6 @@ public abstract class Enemy implements Updateable {
 
     public boolean isDead() {
         return getHealth().isZero();
-    }
-
-    public boolean isTowerAhead() {
-        return towerAhead;
     }
 
     public void setTowerAhead(boolean state) {

@@ -4,10 +4,12 @@ import andioopp.common.graphics.Color;
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
 import andioopp.common.graphics.SpriteFactory;
-import andioopp.common.transform.*;
 import andioopp.common.transform.Dimension;
+import andioopp.common.transform.Transform;
+import andioopp.common.transform.TransformFactory;
+import andioopp.common.transform.Vector3f;
 import andioopp.model.Model;
-import andioopp.model.world.World;
+import andioopp.model.player.Player;
 import andioopp.view.View;
 import javafx.scene.text.Font;
 
@@ -23,12 +25,11 @@ public class CoinView<S extends Sprite<?>> implements View<S> {
 
     @Override
     public void render(Renderer<S> renderer, Model model) {
-        World world = model.getWorld();
         S coinViewSprite = getSprite(renderer.getSpriteFactory());
         Dimension coinViewScreenSize = getCoinViewScreenSize(coinViewSprite);
         Transform coinViewScreenTransform = transformFactory.createWithPosition(getSpritePosition());
         renderer.drawSprite(coinViewSprite, coinViewScreenTransform, coinViewScreenSize);
-        displayCoins(renderer, world);
+        displayCoins(renderer, model.getPlayer());
     }
 
     private S getSprite(SpriteFactory<S> spriteFactory) {
@@ -45,8 +46,8 @@ public class CoinView<S extends Sprite<?>> implements View<S> {
         return coinViewSprite.getSize();
     }
 
-    private void displayCoins(Renderer<S> renderer, World world) {
+    private void displayCoins(Renderer<S> renderer, Player player) {
         Vector3f textPosition = getSpritePosition().add(new Vector3f(120, 120, 0));
-        renderer.writeText(textPosition, String.valueOf(world.getMoney().get()), new Color(0, 0, 0), new Font("Comic Sans MS", 16));
+        renderer.writeText(textPosition, String.valueOf(player.getMoney().getMoney()), Color.BLACK, new Font("Comic Sans MS", 16));
     }
 }

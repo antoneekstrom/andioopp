@@ -7,19 +7,21 @@ import andioopp.common.storage.ListFactory;
 import andioopp.common.time.FxClock;
 import andioopp.common.transform.*;
 import andioopp.control.PlaceTowerController;
-import andioopp.control.TowerDragEvent;
+import andioopp.control.TowerCardDragEvent;
 import andioopp.model.Model;
+import andioopp.model.player.Money;
+import andioopp.model.player.Player;
+import andioopp.model.player.TowerCard;
 import andioopp.model.tower.Tower;
 import andioopp.model.tower.Towers;
 import andioopp.model.waves.WaveQueue;
 import andioopp.service.infrastructure.graphics.WindowingService;
 import andioopp.service.infrastructure.input.DragAndDropService;
 import andioopp.service.infrastructure.loop.LoopService;
-import andioopp.view.*;
+import andioopp.view.GameView;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
 
 /**
  * Initializes the game. Completely decoupled from platform and rendering.
@@ -42,7 +44,7 @@ public class Game implements GfxProgram {
     }
 
     private <S extends Sprite<?>> void addControllers(ListFactory listFactory, Window<? extends Renderer<S>> window, GameView<S> view, Model model) {
-        DragAndDropService<TowerDragEvent> dragAndDropService = new DragAndDropService<>(window.getMouseObservable(), listFactory);
+        DragAndDropService<TowerCardDragEvent> dragAndDropService = new DragAndDropService<>(window.getMouseObservable(), listFactory);
         PlaceTowerController placeTowerController = new PlaceTowerController(dragAndDropService, model, listFactory);
         placeTowerController.register(view.getLanesView(), view.getCardsView());
     }
@@ -60,11 +62,13 @@ public class Game implements GfxProgram {
         return new GameView<>(viewportRect, transformFactory);
     }
 
-    private List<Supplier<Tower>> getCards() {
-        return Arrays.asList(Towers::mario, Towers::toad);
+    private List<TowerCard<?>> getCards() {
+        TowerCard<Tower> mario = new TowerCard<>(new Money(60), Towers::mario);
+        TowerCard<Tower> toad = new TowerCard<>(new Money(40), Towers::toad);
+        return Arrays.asList(mario, toad);
     }
 
     private Model createModel() {
-        return new Model(new WaveQueue(), getCards());
+        return new Model(new WaveQueue(), new Player(new Money(100), getCards()));
     }
 }

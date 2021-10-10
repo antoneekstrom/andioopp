@@ -3,13 +3,9 @@ package andioopp.model.world;
 import andioopp.common.time.Time;
 import andioopp.common.transform.Dimension;
 import andioopp.common.transform.Vector3f;
-import andioopp.model.damage.DamageSourceType;
-import andioopp.model.damage.DamageTargetType;
-import andioopp.model.Updateable;
+import andioopp.model.interfaces.Updateable;
 import andioopp.model.enemy.Enemy;
-import andioopp.model.stats.Money;
 import andioopp.model.tower.Tower;
-import andioopp.model.tower.attack.Attack;
 import andioopp.model.tower.attack.projectiles.Projectile;
 
 import java.util.Collection;
@@ -22,13 +18,11 @@ public class World implements Updateable {
     private final List<Lane> lanes;
     private final Collection<Enemy> enemies;
     private final Collection<Projectile> projectiles;
-    private final Money money;
 
-    World(List<Lane> lanes, Collection<Enemy> enemies, Collection<Projectile> projectiles, Money money) {
+    World(List<Lane> lanes, Collection<Enemy> enemies, Collection<Projectile> projectiles) {
         this.lanes = lanes;
         this.enemies = enemies;
         this.projectiles = projectiles;
-        this.money = money;
     }
 
     @Override
@@ -36,57 +30,11 @@ public class World implements Updateable {
         getEnemies().forEach((enemy) -> enemy.update(time));
         getProjectiles().forEach((projectile) -> projectile.update(time));
 
-        performAllTowerAttacks(time);
-
         checkProjectileHitboxes();
-
         updateProjectiles(time);
-
         handleEnemyAttacks(time);
-
         despawnOutOfBoundsProjectiles();
-
         despawnOutOfBoundsEnemies();
-    }
-
-    private void performAllTowerAttacks(Time time) {
-        for (int row = 0; row < getLanes().size(); row++) {
-            for (int col = 0; col < getNumberOfCellsInLanes(); col++) {
-                Tower tower = getCell(row, col).getTower();
-                if (tower != null) {
-                    for (Attack attack : tower.getAttacks()) {
-
-                        //If the current attack is still on cooldown, move on to the next attack
-                        if (!attack.isAvailableForAttack(time)) continue;
-
-                        //Finds all enemies in range of the current attack
-                        Collection<Enemy> enemiesInRangeOfCurrentAttack = attack.getEnemiesInRange(this, new Vector3f(col, row, 0));
-
-                        //Checks against all enemies in range if they are immune
-                        //If they are immune or if it has the incorrect damageTargetTypes, move on to the next enemy.
-                        //When a targetable enemy is found, the attack can be performed as soon as possible
-                        //No need to check the remaing enemies.
-                        boolean targetableEnemyExists = false;
-                        for (Enemy enemy : enemiesInRangeOfCurrentAttack) {
-                            if (attack.isImmune(enemy)) {
-                                continue;
-                            }
-                            if (attack.hasMatchingRequirements(enemy)) {
-                                continue;
-                            }
-                            targetableEnemyExists = true;
-                            break;
-                        }
-
-                        //Performs the attack and updates its last time of use.
-                        if (targetableEnemyExists) {
-                            attack.performAttack(this, new Vector3f(col, row));
-                            attack.updateTimeSinceLastAttack(time);
-                        }
-                    }
-                }
-            }
-        }
     }
 
     private void despawnOutOfBoundsProjectiles() {
@@ -125,67 +73,19 @@ public class World implements Updateable {
      * @param enemyIterator      to edit list of enemies
      */
     private void evaluateProjectileHit(Projectile projectile, Enemy enemy, Iterator<Projectile> projectileIterator, Iterator<Enemy> enemyIterator) {
+        if (projectile.alreadyInteractedWith.contains(enemy)) {
+            return;
+        }
 
-        //if the enemy is in contact with the projectile and isn´t
-        // immune to it, damage the enemy and remove the projectile.
-        if (!isImmune(projectile, enemy) && isContact(projectile, enemy) && !projectile.alreadyInteractedWith.contains(enemy)) {
-            projectileIterator.remove();
+        projectile.alreadyInteractedWith.add(enemy);
+        projectileIterator.remove();
+
+        if (enemy.canBeDamagedBy(projectile)) {
             enemy.getHealth().decrease(1);
-            projectile.alreadyInteractedWith.add(enemy);
-
-            //if the enemy is immune to the projectile the enemy won´t get damaged and
-            //the projectile will be destroyed.
-        } else if (isImmune(projectile, enemy) && isContact(projectile, enemy) && !projectile.alreadyInteractedWith.contains(enemy)) {
-            projectileIterator.remove();
-            projectile.alreadyInteractedWith.add(enemy);
-
-        }
-
-        if (enemy.isDead()) {
-            enemyIterator.remove();
-        }
-    }
-
-    /**
-     * Checks if projectile and enemies damageTargetTypes list matches.
-     *
-     * @param projectile to compare with enemy
-     * @param enemy      to compare with projectile
-     * @return true if projectile can make contact with enemy.
-     */
-    private boolean isContact(Projectile projectile, Enemy enemy) {
-        //Checks if the projectile can damage the enemy by comparing their requirement lists.
-        for (int i = 0; i < projectile.damageTargetTypes.size(); i++) {
-            DamageTargetType proReq = projectile.damageTargetTypes.get(i);
-            for (int j = 0; j < enemy.damageTargetTypes.size(); j++) {
-                DamageTargetType enemyReq = enemy.damageTargetTypes.get(j);
-                if (proReq.equals(enemyReq)) {
-                    return true;
-                }
+            if (enemy.isDead()) {
+                enemyIterator.remove();
             }
         }
-        return false;
-    }
-
-    /**
-     * checks if projectile and enemy damageSourceType lists matches.
-     * The enemy is immune to the projectile if return true.
-     *
-     * @param projectile to compare with enemy
-     * @param enemy      to compare with projectile
-     * @return true if enemy is immune to projectile
-     */
-    private boolean isImmune(Projectile projectile, Enemy enemy) {
-        for (int i = 0; i < projectile.immunities.size(); i++) {
-            DamageSourceType proReq = projectile.immunities.get(i);
-            for (int j = 0; j < enemy.immunities.size(); j++) {
-                DamageSourceType enemyReq = enemy.immunities.get(j);
-                if (proReq.equals(enemyReq)) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     private void updateProjectiles(Time time) {
@@ -261,9 +161,5 @@ public class World implements Updateable {
 
     public Collection<Projectile> getProjectiles() {
         return projectiles;
-    }
-
-    public Money getMoney() {
-        return money;
     }
 }

@@ -1,28 +1,32 @@
 package andioopp.model.tower.attack.attacks;
 
+import andioopp.common.math.FloatRange;
 import andioopp.common.transform.Vector3f;
+import andioopp.model.Model;
+import andioopp.model.damage.BaseDamageSource;
+import andioopp.model.damage.DamageType;
+import andioopp.model.player.Money;
 import andioopp.model.tower.attack.Attack;
-import andioopp.model.tower.attack.AttackTargetArea;
 import andioopp.model.tower.attack.strategies.NonTargeting;
-import andioopp.model.world.World;
 
 /**
  * An attack (sort of) which generates money
- * Mainly used by Toad.
  */
 public class DigCoinAttack extends Attack {
 
-    public DigCoinAttack(float coolDown) {
-        super(coolDown, new NonTargeting());
+    private final FloatRange moneyRange;
+
+    public DigCoinAttack(float cooldown, FloatRange moneyRange) {
+        super(cooldown, new NonTargeting(), new BaseDamageSource(DamageType.ANY));
+        this.moneyRange = moneyRange;
     }
 
-    /**
-     * Increases the amount of money by 20-40 units.
-     * @param world
-     * @param position position of the tower, or wherever the attack is to be performed
-     */
     @Override
-    public void performAttack(World world, Vector3f position) {
-        world.getMoney().increase((int) Math.round(Math.random()*20) + 20);
+    public void performAttack(Model model, Vector3f position) {
+        model.getPlayer().give(getRandomMoney());
+    }
+
+    private Money getRandomMoney() {
+        return new Money(Math.round(moneyRange.getRandom()));
     }
 }
