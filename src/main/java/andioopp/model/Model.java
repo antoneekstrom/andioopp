@@ -62,7 +62,7 @@ public class Model implements Updateable {
                         for (Enemy enemy : attack.getEnemiesInRange(world, position)) {
                             if (enemy.canBeDamagedBy(attack)) {
                                 attack.performAttack(this, position);
-                                attack.updateTimeSinceLastAttack(time);
+                                attack.updateTimeOfLastAttack(time);
                             }
                         }
                     }
