@@ -1,6 +1,7 @@
 package andioopp.view;
 
 import andioopp.common.transform.Dimension;
+import andioopp.common.transform.ImmutableRectangle;
 import andioopp.common.transform.Rectangle;
 import andioopp.common.transform.Vector3f;
 
@@ -48,7 +49,7 @@ public class Viewport {
     public Rectangle toViewportRect(Rectangle rectangle) {
         Vector3f position = toViewportPosition(rectangle.getPosition());
         Dimension size = toViewportSize(rectangle.getSize());
-        return new Rectangle(position, size);
+        return new ImmutableRectangle(position, size);
     }
 
     /**

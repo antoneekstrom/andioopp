@@ -5,7 +5,7 @@ import andioopp.common.observer.ObservableWithList;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.storage.ListFactory;
 import andioopp.common.time.FxClock;
-import andioopp.common.transform.*;
+import andioopp.common.transform.ConcreteTransform;
 import andioopp.control.PlaceTowerController;
 import andioopp.control.TowerCardDragEvent;
 import andioopp.model.Model;
@@ -50,16 +50,7 @@ public class Game implements GfxProgram {
     }
 
     private <S extends Sprite<?>> GameView<S> createView(Window<? extends Renderer<S>> window) {
-        TransformFactory transformFactory = ConcreteTransform.getFactory();
-
-        Vector3f worldSizeFactor = new Vector3f(0.7f, 0.7f);
-        Dimension windowSize = new Dimension(window.getWidth(), window.getHeight());
-
-        Dimension worldSize = new Dimension(windowSize.toVector().scale(worldSizeFactor));
-        Vector3f worldPos = new Vector3f(windowSize.getWidth() - (worldSize.getWidth() * 1.01f), windowSize.getHeight() - (worldSize.getHeight() * 1.10f));
-        Rectangle viewportRect = new Rectangle(worldPos, worldSize);
-
-        return new GameView<>(viewportRect, transformFactory);
+        return new GameView<>(window, ConcreteTransform.getFactory());
     }
 
     private List<TowerCard<?>> getCards() {

@@ -3,6 +3,7 @@ package andioopp.view.gui;
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
 import andioopp.common.transform.Dimension;
+import andioopp.common.transform.ImmutableRectangle;
 import andioopp.common.transform.Rectangle;
 import andioopp.common.transform.Vector3f;
 import andioopp.model.Model;
@@ -38,7 +39,7 @@ public class CardsView<S extends Sprite<?>> implements View<S> {
 
     public Rectangle getTowerCardRect(Vector3f position, int cardIndex) {
         Vector3f cardOffset = TowerCardView.getCardDimension().onlyX().add(CARD_OFFSET);
-        return new Rectangle(position.add(cardOffset.scale(cardIndex)), new Dimension(TowerCardView.getCardDimension()));
+        return new ImmutableRectangle(position.add(cardOffset.scale(cardIndex)), new Dimension(TowerCardView.getCardDimension()));
     }
 
     private Vector3f getViewportPosition() {
