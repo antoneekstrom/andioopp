@@ -58,14 +58,7 @@ public class Model implements Updateable {
 
         World world = builder.build();
 
-        world.getCell(0, 6).setTower(Towers.toad());
-        world.getCell(1, 3).setTower(Towers.mario());
-        world.getCell(2, 4).setTower(Towers.toad());
-        world.getCell(3, 7).setTower(Towers.toad());
-        world.getCell(4, 6).setTower(Towers.mario());
-        world.getCell(4, 7).setTower(Towers.mario());
-        world.getCell(4, 8).setTower(Towers.mario());
-        waves.addWavesToWaveQueue(world, 1);
+        waves.addWavesToWaveQueue(world, 5);
 
         return world;
     }

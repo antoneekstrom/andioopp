@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class Goomba extends Enemy {
 
     private static final String SPRITE_PATH = "goomba.png";
-    private static final int BASE_HEALTH = 3;
-    private static final float INIT_SPEED = 0.01f;
+    private static final int BASE_HEALTH = 10;
+    private static final float INIT_SPEED = 0.001f;
     private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
 
     public Goomba(Vector3f position) {
