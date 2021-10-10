@@ -2,14 +2,14 @@ package andioopp.model.damage.targets;
 
 import andioopp.common.storage.ListFactory;
 import andioopp.model.damage.DamageFilterBase;
-import andioopp.model.damage.DamageSourceType;
+import andioopp.model.damage.DamageType;
 
 import java.util.List;
 
 public class FilterGhost extends DamageFilterBase {
 
     @Override
-    protected List<DamageSourceType> getRequirements(ListFactory listFactory) {
-        return listFactory.create(DamageSourceType.LIGHT);
+    protected List<DamageType> getRequirements(ListFactory listFactory) {
+        return listFactory.create(DamageType.LIGHT);
     }
 }

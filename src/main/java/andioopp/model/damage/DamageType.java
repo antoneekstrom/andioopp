@@ -1,6 +1,6 @@
 package andioopp.model.damage;
 
-public enum DamageSourceType {
+public enum DamageType {
     FIRE,
     JUMP,
     EAT,
@@ -13,5 +13,6 @@ public enum DamageSourceType {
     BOOMERANG,
     ICE,
     GROUND,
-    FLYING
+    FLYING,
+    ANY
 }
