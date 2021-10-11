@@ -7,11 +7,9 @@ import andioopp.common.transform.Rectangle;
 import andioopp.common.transform.Vector3f;
 import andioopp.model.Model;
 import andioopp.model.player.TowerCard;
-import andioopp.model.tower.Tower;
 import andioopp.view.View;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 public class CardsView<S extends Sprite<?>> implements View<S> {
 

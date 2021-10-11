@@ -4,10 +4,12 @@ import andioopp.common.graphics.*;
 import andioopp.common.observer.ObservableWithList;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.storage.ListFactory;
+import andioopp.common.time.Clock;
 import andioopp.common.time.FxClock;
 import andioopp.common.transform.*;
 import andioopp.control.PlaceTowerController;
 import andioopp.control.TowerCardDragEvent;
+import andioopp.model.BaseModel;
 import andioopp.model.Model;
 import andioopp.model.player.Money;
 import andioopp.model.player.Player;
@@ -15,9 +17,11 @@ import andioopp.model.player.TowerCard;
 import andioopp.model.tower.Tower;
 import andioopp.model.tower.Towers;
 import andioopp.model.waves.WaveQueue;
-import andioopp.service.infrastructure.graphics.WindowingService;
+import andioopp.model.world.LaneBuilder;
+import andioopp.model.world.World;
+import andioopp.model.world.WorldBuilder;
+import andioopp.service.domain.*;
 import andioopp.service.infrastructure.input.DragAndDropService;
-import andioopp.service.infrastructure.loop.LoopService;
 import andioopp.view.GameView;
 
 import java.util.Arrays;
@@ -29,24 +33,49 @@ import java.util.List;
 public class Game implements GfxProgram {
     @Override
     public <S extends Sprite<?>, R extends Renderer<S>, W extends Window<R>> void run(WindowBuilder<W> windowBuilder) {
-        WindowingService<W> windowingService = new WindowingService<>(windowBuilder);
         ListFactory listFactory = new ArrayListFactory();
-        LoopService loopService = new LoopService(new FxClock(new ObservableWithList<>(listFactory.create())));
-        start(listFactory, windowingService, loopService);
+        Clock clock = new FxClock(new ObservableWithList<>(listFactory.create()));
+        Window<? extends Renderer<S>> window = createWindow(windowBuilder);
+        init(window, clock, listFactory);
+        clock.start();
     }
 
-    public <S extends Sprite<?>> void start(ListFactory listFactory, WindowingService<? extends Window<? extends Renderer<S>>> windowingService, LoopService loopService) {
-        Window<? extends Renderer<S>> window = windowingService.createWindow();
+    public <S extends Sprite<?>> void init(Window<? extends Renderer<S>> window, Clock clock, ListFactory listFactory) {
         GameView<S> view = createView(window);
         Model model = createModel();
+
+        clock.listen((time) -> view.render(window.getRenderer(), model));
+
         addControllers(listFactory, window, view, model);
-        loopService.start(window.getRenderer(), view, model);
+        addServices(clock, model);
+    }
+
+    private void addServices(Clock clock, Model model) {
+        addService(new UpdateEnemyService(), model, clock);
+        addService(new UpdateProjectileService(), model, clock);
+        addService(new PerformAttackService(), model, clock);
+        addService(new EnemyProjectileCollisionService(), model, clock);
+        addService(new HandleEnemyAttackService(), model, clock);
+        addService(new DespawnOutOfBoundsService(), model, clock);
+        addService(new UpdateWavesService(), model, clock);
+    }
+
+    private void addService(DomainService service, Model model, Clock clock) {
+        service.onSetup(model);
+        clock.listen((time) -> service.update(model, time));
     }
 
     private <S extends Sprite<?>> void addControllers(ListFactory listFactory, Window<? extends Renderer<S>> window, GameView<S> view, Model model) {
         DragAndDropService<TowerCardDragEvent> dragAndDropService = new DragAndDropService<>(window.getMouseObservable(), listFactory);
         PlaceTowerController placeTowerController = new PlaceTowerController(dragAndDropService, model, listFactory);
         placeTowerController.register(view.getLanesView(), view.getCardsView());
+    }
+
+    private <S extends Sprite<?>> Window<? extends Renderer<S>> createWindow(WindowBuilder<? extends Window<? extends Renderer<S>>> builder) {
+        builder.setSize(new java.awt.Dimension(1280, 720));
+        builder.setResizable(true);
+        builder.setIcon("mario_icon.png");
+        return builder.build();
     }
 
     private <S extends Sprite<?>> GameView<S> createView(Window<? extends Renderer<S>> window) {
@@ -69,6 +98,9 @@ public class Game implements GfxProgram {
     }
 
     private Model createModel() {
-        return new Model(new WaveQueue(), new Player(new Money(100), getCards()));
+        Player player = new Player(new Money(100), getCards());
+        WorldBuilder worldBuilder = new WorldBuilder(new LaneBuilder(new ArrayListFactory()).setCells(7), new ArrayListFactory());
+        World world = worldBuilder.setLanes(5).build();
+        return new BaseModel(world, player);
     }
 }

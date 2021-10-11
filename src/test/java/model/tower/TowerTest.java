@@ -1,15 +1,9 @@
 package model.tower;
 
-import static org.junit.Assert.*;
-
 import andioopp.model.*;
-import andioopp.model.enemy.Enemies;
 import andioopp.model.enemy.Enemy;
 import andioopp.model.tower.Tower;
-import andioopp.model.tower.Towers;
 import andioopp.model.tower.towers.Mario;
-import org.junit.Before;
-import org.junit.Test;
 
 public class TowerTest {
 
