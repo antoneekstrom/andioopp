@@ -4,12 +4,12 @@ import andioopp.common.time.Time;
 import andioopp.common.transform.Vector3f;
 import andioopp.model.damage.DamageSource;
 
-public class Fireball extends Projectile {
+public class FireballProjectile extends Projectile {
 
     private final Vector3f origin;
     private float timeAlive = 0;
 
-    public Fireball(Vector3f position, DamageSource damageSource) {
+    public FireballProjectile(Vector3f position, DamageSource damageSource) {
         super(position, damageSource);
         this.origin = position;
     }
@@ -31,6 +31,7 @@ public class Fireball extends Projectile {
 
     private float getHeightOffset() {
         float amplitude = 0.45f - Math.min(0.20f, (timeAlive / 15f) * 0.45f);
-        return (float) -Math.abs(Math.cos(timeAlive * 2.5f)) * amplitude + 0.1f;
+        float period = 1f;
+        return (float) -Math.abs(Math.cos(timeAlive * period)) * amplitude + 0.1f;
     }
 }
