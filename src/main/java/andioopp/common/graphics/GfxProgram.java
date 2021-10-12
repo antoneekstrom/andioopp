@@ -1,4 +1,4 @@
-package andioopp.common.gfx;
+package andioopp.common.graphics;
 
 /**
  * Describes a function that accepts any type of window.

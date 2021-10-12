@@ -1,6 +1,7 @@
 package andioopp.model.world;
 
 import andioopp.common.time.Time;
+import andioopp.common.transform.Dimension;
 import andioopp.common.transform.Vector3f;
 import andioopp.model.FilterImmunity;
 import andioopp.model.FilterRequirement;
@@ -48,7 +49,6 @@ public class World implements Updateable {
         despawnOutOfBoundsEnemies();
     }
 
-
     private void performAllTowerAttacks(Time time) {
         for (int row = 0; row < getLanes().size(); row++) {
             for (int col = 0; col < getNumberOfCellsInLanes(); col++) {
@@ -81,7 +81,7 @@ public class World implements Updateable {
                         //Performs the attack and updates its last time of use.
                         if (targetableEnemyExists){
                             attack.performAttack(this, new Vector3f(col, row));
-                            attack.updateTimeSinceLastAttack(time);
+                            attack.updateTimeOfLastAttack(time);
                         }
                     }
                 }
@@ -234,6 +234,10 @@ public class World implements Updateable {
                 }
             }
         }
+    }
+
+    public Dimension getGridSize() {
+        return new Dimension(getNumberOfCellsInLanes(), getNumberOfLanes());
     }
 
     public void addEnemy(Enemy enemy) {

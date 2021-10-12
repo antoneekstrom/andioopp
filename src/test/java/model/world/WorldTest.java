@@ -16,12 +16,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class WorldTest {
 
     private final WaveQueue waveQueue = new WaveQueue();
-    private final Model model = new Model(waveQueue);
+    private final Model model = new Model(waveQueue, Collections.emptyList());
     private final ArrayList<FilterRequirement> FireballRequirements = new ArrayList<>();
     private final ArrayList<FilterImmunity> FireballImmunity = new ArrayList<>();
 

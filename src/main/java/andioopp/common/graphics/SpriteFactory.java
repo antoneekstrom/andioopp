@@ -1,4 +1,4 @@
-package andioopp.common.gfx;
+package andioopp.common.graphics;
 
 @FunctionalInterface
 public interface SpriteFactory<T extends Sprite<?>> {

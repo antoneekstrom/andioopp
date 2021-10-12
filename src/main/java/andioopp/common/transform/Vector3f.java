@@ -22,7 +22,9 @@ public class Vector3f {
         this(x, 0, 0);
     }
 
-    public Vector3f(Vector3f other) { this(other.getX(), other.getY(), other.getZ()); }
+    public Vector3f(Vector3f other) {
+        this(other.getX(), other.getY(), other.getZ());
+    }
 
     public static Vector3f withX(float x) {
         return new Vector3f(x, 0, 0);
@@ -46,6 +48,18 @@ public class Vector3f {
 
     public static Vector3f all(float v) {
         return new Vector3f(v, v, v);
+    }
+
+    public Vector3f round() {
+        return new Vector3f(Math.round(getX()), Math.round(getY()), Math.round(getZ()));
+    }
+
+    public Vector3f negate() {
+        return new Vector3f(-getX(), -getY(), -getZ());
+    }
+
+    public Vector3f inverse() {
+        return new Vector3f(getX() == 0 ? 0 : 1.0f / getX(), getY() == 0 ? 0 : 1.0f / getY(), getZ() == 0 ? 0 : 1.0f / getZ());
     }
 
     public Vector3f onlyX() {
@@ -73,31 +87,31 @@ public class Vector3f {
     }
 
     public Vector3f sub(Vector3f other) {
-        return new Vector3f(getX() - other.getX(), getY() - other.getY(), getZ() - other.getZ());
-    }
-
-    public Vector3f setX(float x) {
-        return new Vector3f(x, getY(), getZ());
-    }
-
-    public Vector3f setY(float y) {
-        return new Vector3f(getX(), y, getZ());
-    }
-
-    public Vector3f setZ(float z) {
-        return new Vector3f(getX(), getY(), z);
+        return add(other.negate());
     }
 
     public float getX() {
         return x;
     }
 
+    public Vector3f setX(float x) {
+        return new Vector3f(x, getY(), getZ());
+    }
+
     public float getY() {
         return y;
     }
 
+    public Vector3f setY(float y) {
+        return new Vector3f(getX(), y, getZ());
+    }
+
     public float getZ() {
         return z;
+    }
+
+    public Vector3f setZ(float z) {
+        return new Vector3f(getX(), getY(), z);
     }
 
     @Override

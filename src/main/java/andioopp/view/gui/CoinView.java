@@ -1,32 +1,34 @@
 package andioopp.view.gui;
 
-import andioopp.common.gfx.Color;
-import andioopp.common.gfx.Renderer;
-import andioopp.common.gfx.Sprite;
-import andioopp.common.gfx.SpriteFactory;
+import andioopp.common.graphics.Color;
+import andioopp.common.graphics.Renderer;
+import andioopp.common.graphics.Sprite;
+import andioopp.common.graphics.SpriteFactory;
 import andioopp.common.transform.*;
 import andioopp.common.transform.Dimension;
+import andioopp.model.Model;
 import andioopp.model.world.World;
+import andioopp.view.View;
 import javafx.scene.text.Font;
 
-public class CoinView<S extends Sprite<?>> {
+public class CoinView<S extends Sprite<?>> implements View<S> {
 
     private static final String sprite = "coinBox.png";
 
-    private final Renderer<S> renderer;
     private final TransformFactory transformFactory;
 
-    public CoinView(Renderer<S> renderer, TransformFactory transformFactory) {
-        this.renderer = renderer;
+    public CoinView(TransformFactory transformFactory) {
         this.transformFactory = transformFactory;
     }
 
-    public void render(World world) {
+    @Override
+    public void render(Renderer<S> renderer, Model model) {
+        World world = model.getWorld();
         S coinViewSprite = getSprite(renderer.getSpriteFactory());
         Dimension coinViewScreenSize = getCoinViewScreenSize(coinViewSprite);
         Transform coinViewScreenTransform = transformFactory.createWithPosition(getSpritePosition());
-        renderer.drawSprite(coinViewSprite, coinViewScreenTransform, coinViewScreenSize.toVector());
-        displayCoins(world);
+        renderer.drawSprite(coinViewSprite, coinViewScreenTransform, coinViewScreenSize);
+        displayCoins(renderer, world);
     }
 
     private S getSprite(SpriteFactory<S> spriteFactory) {
@@ -43,7 +45,7 @@ public class CoinView<S extends Sprite<?>> {
         return coinViewSprite.getSize();
     }
 
-    private void displayCoins(World world) {
+    private void displayCoins(Renderer<S> renderer, World world) {
         Vector3f textPosition = getSpritePosition().add(new Vector3f(120, 120, 0));
         renderer.writeText(textPosition, String.valueOf(world.getMoney().get()), new Color(0, 0, 0), new Font("Comic Sans MS", 16));
     }

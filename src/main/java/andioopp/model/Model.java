@@ -4,11 +4,15 @@ import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.storage.ListFactory;
 import andioopp.common.time.Time;
 import andioopp.model.stats.Money;
+import andioopp.model.tower.Tower;
 import andioopp.model.tower.Towers;
 import andioopp.model.waves.WaveQueue;
 import andioopp.model.world.LaneBuilder;
 import andioopp.model.world.World;
 import andioopp.model.world.WorldBuilder;
+
+import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Facade for the entire model.
@@ -18,12 +22,19 @@ public class Model implements Updateable {
     private final World world;
     private final WaveQueue waves;
     private final ListFactory listFactory = new ArrayListFactory();
-    private double delay = 1;
     private final Money money = new Money(100);
+    private final List<Supplier<Tower>> cards;
 
-    public Model(WaveQueue waves) {
+    private double delay = 1;
+
+    public Model(WaveQueue waves, List<Supplier<Tower>> cards) {
         this.waves = waves;
+        this.cards = cards;
         this.world = createWorld();
+    }
+
+    public List<Supplier<Tower>> getCards() {
+        return cards;
     }
 
     @Override
@@ -47,14 +58,7 @@ public class Model implements Updateable {
 
         World world = builder.build();
 
-        world.getCell(0, 6).setTower(Towers.toad());
-        world.getCell(1, 3).setTower(Towers.mario());
-        world.getCell(2, 4).setTower(Towers.toad());
-        world.getCell(3, 7).setTower(Towers.toad());
-        world.getCell(4, 6).setTower(Towers.mario());
-        world.getCell(4, 7).setTower(Towers.mario());
-        world.getCell(4, 8).setTower(Towers.mario());
-        waves.addWavesToWaveQueue(world, 1);
+        waves.addWavesToWaveQueue(world, 5);
 
         return world;
     }

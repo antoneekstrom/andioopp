@@ -1,6 +1,6 @@
-package andioopp.common.gfx.javafx;
+package andioopp.common.graphics.javafx;
 
-import andioopp.common.gfx.WindowBuilder;
+import andioopp.common.graphics.WindowBuilder;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;

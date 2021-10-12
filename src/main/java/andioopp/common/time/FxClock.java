@@ -22,19 +22,23 @@ public class FxClock extends AnimationTimer implements Clock {
         return elapsed;
     }
 
-    private float nanosToSeconds(long nanos) {
+    public static float nanosToSeconds(long nanos) {
         return (float) nanos * 0.000_000_001f;
     }
 
     @Override
     public void start() {
         super.start();
-        previousTime = System.nanoTime();
+        previousTime = getNowTimeNanos();
+    }
+
+    public static long getNowTimeNanos() {
+        return System.nanoTime();
     }
 
     @Override
     public void handle(long time) {
-        observable.notifyObservers(new Time(nanosToSeconds(time), nanosToSeconds(getDeltaTime(time))));
+        observable.notifyObservers(new Time(nanosToSeconds(getNowTimeNanos()), nanosToSeconds(getDeltaTime(time))));
     }
 
     @Override
