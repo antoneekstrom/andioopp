@@ -25,15 +25,7 @@ public class Enemies {
 
     private static final List<EnemySupplier> RANDOM_ENEMY_POOL = new ArrayListFactory().create(
             Enemies::goomba,
-            Enemies::goomba,
-            Enemies::goomba,
-            Enemies::goomba,
-            Enemies::goomba,
-            Enemies::koopaTroopa,
-            Enemies::koopaTroopa,
-            Enemies::koopaTroopa,
-            Enemies::buzzyBeetle,
-            Enemies::blooper
+            Enemies::koopaTroopa
     );
 
     public Enemy randomEnemy(World world, int row) {

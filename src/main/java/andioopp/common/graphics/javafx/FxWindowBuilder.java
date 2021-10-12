@@ -1,13 +1,13 @@
 package andioopp.common.graphics.javafx;
 
 import andioopp.common.graphics.WindowBuilder;
+import andioopp.common.transform.Dimension;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.util.Objects;
 
 /**

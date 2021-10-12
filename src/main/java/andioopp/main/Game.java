@@ -1,106 +1,72 @@
 package andioopp.main;
 
-import andioopp.common.graphics.*;
-import andioopp.common.observer.ObservableWithList;
-import andioopp.common.storage.ArrayListFactory;
+import andioopp.common.graphics.Renderer;
+import andioopp.common.graphics.Sprite;
+import andioopp.common.graphics.Window;
 import andioopp.common.storage.ListFactory;
-import andioopp.common.time.Clock;
-import andioopp.common.time.FxClock;
-import andioopp.common.transform.*;
-import andioopp.control.PlaceTowerController;
-import andioopp.control.TowerCardDragEvent;
-import andioopp.model.BaseModel;
+import andioopp.common.time.Time;
 import andioopp.model.Model;
-import andioopp.model.player.Money;
-import andioopp.model.player.Player;
-import andioopp.model.player.TowerCard;
-import andioopp.model.tower.Tower;
-import andioopp.model.tower.Towers;
-import andioopp.model.waves.WaveQueue;
-import andioopp.model.world.LaneBuilder;
-import andioopp.model.world.World;
-import andioopp.model.world.WorldBuilder;
-import andioopp.service.domain.*;
-import andioopp.service.infrastructure.input.DragAndDropService;
-import andioopp.view.GameView;
+import andioopp.model.interfaces.Updateable;
+import andioopp.service.Service;
+import andioopp.service.domain.DomainService;
+import andioopp.view.View;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
 
-/**
- * Initializes the game. Completely decoupled from platform and rendering.
- */
-public class Game implements GfxProgram {
+public class Game<S extends Sprite<?>> implements Updateable {
+
+    private final Model model;
+
+    private final Window<? extends Renderer<S>> window;
+    private final Collection<View<S>> views;
+    private final Collection<Service<Game<?>>> services;
+
+    public Game(Model model, Window<? extends Renderer<S>> window, ListFactory listFactory) {
+        this.model = model;
+        this.window = window;
+        this.views = listFactory.create();
+        this.services = listFactory.create();
+    }
+
+    public void setup() {
+        services.forEach((service) -> service.onSetup(this));
+    }
+
+    public void destroy() {
+        services.forEach((service) -> service.onDestroy(this));
+    }
+
     @Override
-    public <S extends Sprite<?>, R extends Renderer<S>, W extends Window<R>> void run(WindowBuilder<W> windowBuilder) {
-        ListFactory listFactory = new ArrayListFactory();
-        Clock clock = new FxClock(new ObservableWithList<>(listFactory.create()));
-        Window<? extends Renderer<S>> window = createWindow(windowBuilder);
-        init(window, clock, listFactory);
-        clock.start();
+    public void update(Time time) {
+        services.forEach((service) -> updateService(service, time));
+        views.forEach(this::renderView);
     }
 
-    public <S extends Sprite<?>> void init(Window<? extends Renderer<S>> window, Clock clock, ListFactory listFactory) {
-        GameView<S> view = createView(window);
-        Model model = createModel();
-
-        clock.listen((time) -> view.render(window.getRenderer(), model));
-
-        addControllers(listFactory, window, view, model);
-        addServices(clock, model);
+    private void updateService(Service<Game<?>> service, Time time) {
+        service.update(this, time);
     }
 
-    private void addServices(Clock clock, Model model) {
-        addService(new UpdateEnemyService(), model, clock);
-        addService(new UpdateProjectileService(), model, clock);
-        addService(new PerformAttackService(), model, clock);
-        addService(new EnemyProjectileCollisionService(), model, clock);
-        addService(new HandleEnemyAttackService(), model, clock);
-        addService(new DespawnOutOfBoundsService(), model, clock);
-        addService(new UpdateWavesService(), model, clock);
+    private void renderView(View<S> view) {
+        view.render(getWindow().getRenderer(), getModel());
     }
 
-    private void addService(DomainService service, Model model, Clock clock) {
-        service.onSetup(model);
-        clock.listen((time) -> service.update(model, time));
+    public void registerView(View<S> view) {
+        views.add(view);
     }
 
-    private <S extends Sprite<?>> void addControllers(ListFactory listFactory, Window<? extends Renderer<S>> window, GameView<S> view, Model model) {
-        DragAndDropService<TowerCardDragEvent> dragAndDropService = new DragAndDropService<>(window.getMouseObservable(), listFactory);
-        PlaceTowerController placeTowerController = new PlaceTowerController(dragAndDropService, model, listFactory);
-        placeTowerController.register(view.getLanesView(), view.getCardsView());
+    public void registerDomainService(DomainService domainService) {
+        services.add(new GameServiceAdapter<>(domainService, this::domainServiceAdapter));
     }
 
-    private <S extends Sprite<?>> Window<? extends Renderer<S>> createWindow(WindowBuilder<? extends Window<? extends Renderer<S>>> builder) {
-        builder.setSize(new java.awt.Dimension(1280, 720));
-        builder.setResizable(true);
-        builder.setIcon("mario_icon.png");
-        return builder.build();
+    private Model domainServiceAdapter(Game<?> game) {
+        return game.getModel();
     }
 
-    private <S extends Sprite<?>> GameView<S> createView(Window<? extends Renderer<S>> window) {
-        TransformFactory transformFactory = ConcreteTransform.getFactory();
-
-        Vector3f worldSizeFactor = new Vector3f(0.7f, 0.7f);
-        Dimension windowSize = new Dimension(window.getWidth(), window.getHeight());
-
-        Dimension worldSize = new Dimension(windowSize.toVector().scale(worldSizeFactor));
-        Vector3f worldPos = new Vector3f(windowSize.getWidth() - (worldSize.getWidth() * 1.01f), windowSize.getHeight() - (worldSize.getHeight() * 1.10f));
-        Rectangle viewportRect = new Rectangle(worldPos, worldSize);
-
-        return new GameView<>(viewportRect, transformFactory);
+    public Window<? extends Renderer<S>> getWindow() {
+        return window;
     }
 
-    private List<TowerCard<?>> getCards() {
-        TowerCard<Tower> mario = new TowerCard<>(new Money(60), Towers::mario);
-        TowerCard<Tower> toad = new TowerCard<>(new Money(40), Towers::toad);
-        return Arrays.asList(mario, toad);
-    }
-
-    private Model createModel() {
-        Player player = new Player(new Money(100), getCards());
-        WorldBuilder worldBuilder = new WorldBuilder(new LaneBuilder(new ArrayListFactory()).setCells(7), new ArrayListFactory());
-        World world = worldBuilder.setLanes(5).build();
-        return new BaseModel(world, player);
+    public Model getModel() {
+        return model;
     }
 }
