@@ -11,7 +11,7 @@ import java.util.LinkedList;
 public class Wave {
 
     public LinkedList<Enemy> enemyWave;
-    public int numEnemies;
+    private final int numEnemies;
     Random rand = new Random();
 
 
@@ -20,6 +20,9 @@ public class Wave {
         this.enemyWave = new LinkedList<>();
     }
 
+    /**
+     * Adds same amount as numEnemies of random enemies to Wave
+     */
     public void addEnemyToWave(World world) {
         Enemies enemies = new Enemies();
         int randLane;

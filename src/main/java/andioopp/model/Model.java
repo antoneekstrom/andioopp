@@ -3,19 +3,21 @@ package andioopp.model;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.storage.ListFactory;
 import andioopp.common.time.Time;
+import andioopp.model.stats.Money;
 import andioopp.model.tower.Towers;
 import andioopp.model.waves.WaveQueue;
 import andioopp.model.world.LaneBuilder;
 import andioopp.model.world.World;
 import andioopp.model.world.WorldBuilder;
 
+/**
+ * Facade for the entire model.
+ */
 public class Model implements Updateable {
 
     private final World world;
     private final WaveQueue waves;
     private final ListFactory listFactory = new ArrayListFactory();
-    float timeSinceLastEnemy;
-    float deltaSeconds;
     private double delay = 1;
     private final Money money = new Money(100);
 
@@ -32,7 +34,6 @@ public class Model implements Updateable {
             if (waves.getWave().enemyWave.size() != 0) {
 
                 waves.addWaveToWorld(world);
-                System.out.println("new enemy");
                 waves.setDeltaSeconds(0);
                 this.delay = waves.getRandomDelay();
                 waves.updateTimeSinceLastEnemy(time);
@@ -51,6 +52,8 @@ public class Model implements Updateable {
         world.getCell(2, 4).setTower(Towers.toad());
         world.getCell(3, 7).setTower(Towers.toad());
         world.getCell(4, 6).setTower(Towers.mario());
+        world.getCell(4, 7).setTower(Towers.mario());
+        world.getCell(4, 8).setTower(Towers.mario());
         waves.addWavesToWaveQueue(world, 1);
 
         return world;

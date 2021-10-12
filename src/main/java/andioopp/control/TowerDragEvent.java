@@ -1,6 +1,7 @@
 package andioopp.control;
 
 import andioopp.model.tower.Tower;
+import andioopp.model.tower.Towers;
 
 public class TowerDragEvent {
 

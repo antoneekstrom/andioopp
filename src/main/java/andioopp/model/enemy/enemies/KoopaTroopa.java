@@ -18,7 +18,7 @@ public class KoopaTroopa extends Enemy{
     private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
 
     public KoopaTroopa(Vector3f position) {
-        super(SPRITE_PATH, transformFactory.createWithPosition(position), new Health(BASE_HEALTH), INIT_SPEED, 0.3f);
+        super(SPRITE_PATH, transformFactory.createWithPosition(position), new Health(BASE_HEALTH), INIT_SPEED, 1f);
         requirements.add(FilterRequirement.GROUND);
     }
 

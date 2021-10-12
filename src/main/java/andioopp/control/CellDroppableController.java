@@ -2,6 +2,7 @@ package andioopp.control;
 
 import andioopp.common.transform.Rectangle;
 import andioopp.model.Model;
+import andioopp.model.world.Cell;
 import andioopp.service.infrastructure.input.Droppable;
 
 public class CellDroppableController extends Droppable<TowerDragEvent> {
@@ -20,7 +21,12 @@ public class CellDroppableController extends Droppable<TowerDragEvent> {
     @Override
     public void onEvent(TowerDragEvent event) {
         if (event.getTower() != null) {
-            model.getWorld().getCell(row, col).setTower(event.getTower());
+            Cell cell = model.getWorld().getCell(row, col);
+            if(cell.getTower() == null) {
+                if (model.getWorld().getMoney().purchase(event.getTower().getCost())) {
+                    cell.setTower(event.getTower());
+                }
+            }
         }
     }
 }

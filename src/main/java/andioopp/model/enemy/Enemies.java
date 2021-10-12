@@ -9,8 +9,11 @@ import andioopp.model.world.World;
 
 import java.util.Random;
 
+/**
+ * Static enemy factory.
+ */
 public class Enemies {
-    Random rand = new Random();
+    private Random rand = new Random();
 
     public static Enemy goomba(World world, int row) {
         float worldEndX = world.getNumberOfCellsInLanes();
@@ -27,6 +30,10 @@ public class Enemies {
         return new Blooper(new Vector3f(worldEndX, row));
     }
 
+    /**
+     * Creates a random enemy.
+     * @return the enemy
+     */
     public Enemy createRandomEnemy(World world, int row) {
 
         float worldEndX = world.getNumberOfCellsInLanes();

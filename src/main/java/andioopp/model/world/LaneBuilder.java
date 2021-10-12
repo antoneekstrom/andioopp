@@ -6,6 +6,9 @@ import andioopp.model.enemy.Enemy;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Creates lanes.
+ */
 public class LaneBuilder {
 
     private final ListFactory listFactory;

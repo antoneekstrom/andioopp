@@ -1,9 +1,12 @@
 package andioopp.model.world;
 import andioopp.common.storage.ListFactory;
-import andioopp.model.Money;
+import andioopp.model.stats.Money;
 
 import java.util.List;
 
+/**
+ * Creates worlds.
+ */
 public class WorldBuilder {
 
     private final ListFactory listFactory;

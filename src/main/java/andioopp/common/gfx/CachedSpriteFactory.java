@@ -3,6 +3,10 @@ package andioopp.common.gfx;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * {@link SpriteFactory} which caches a sprite when loading it for the first time.
+ * @param <S> the type of sprite
+ */
 public class CachedSpriteFactory<S extends Sprite<?>> implements SpriteFactory<S> {
 
     private final SpriteFactory<S> spriteFactory;

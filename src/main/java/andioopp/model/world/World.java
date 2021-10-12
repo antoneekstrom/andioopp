@@ -4,7 +4,7 @@ import andioopp.common.time.Time;
 import andioopp.common.transform.Vector3f;
 import andioopp.model.FilterImmunity;
 import andioopp.model.FilterRequirement;
-import andioopp.model.Money;
+import andioopp.model.stats.Money;
 import andioopp.model.Updateable;
 import andioopp.model.enemy.Enemy;
 import andioopp.model.tower.Tower;
@@ -35,6 +35,21 @@ public class World implements Updateable {
         getEnemies().forEach((enemy) -> enemy.update(time));
         getProjectiles().forEach((projectile) -> projectile.update(time));
 
+        performAllTowerAttacks(time);
+
+        checkProjectileHitboxes();
+
+        updateProjectiles(time);
+
+        handleEnemyAttacks(time);
+
+        despawnOutOfBoundsProjectiles();
+
+        despawnOutOfBoundsEnemies();
+    }
+
+
+    private void performAllTowerAttacks(Time time) {
         for (int row = 0; row < getLanes().size(); row++) {
             for (int col = 0; col < getNumberOfCellsInLanes(); col++) {
                 Tower tower = getCell(row, col).getTower();
@@ -72,19 +87,16 @@ public class World implements Updateable {
                 }
             }
         }
-
-        checkProjectileHitboxes();
-
-        updateProjectiles(time);
-
-        handleEnemyAttacks(time);
-
-        DespawnOutOfBoundProjectiles();
     }
 
-    private void DespawnOutOfBoundProjectiles() {
+    private void despawnOutOfBoundsProjectiles() {
         //Checks if a projectile is out of bounds and removes it if true.
         projectiles.removeIf(projectile -> projectile.getPosition().getX() > getNumberOfCellsInLanes());
+    }
+
+    private void despawnOutOfBoundsEnemies() {
+        //Checks if a projectile is out of bounds and removes it if true.
+        enemies.removeIf(enemy -> enemy.getPosition().getX() < 0);
     }
 
     private void checkProjectileHitboxes(){
@@ -124,7 +136,6 @@ public class World implements Updateable {
         //the projectile will be destroyed.
         } else if(isImmune(projectile, enemy) && isContact(projectile, enemy) && !projectile.alreadyInteractedWith.contains(enemy)) {
             projectileIterator.remove();
-            System.out.println(" 2 ");
             projectile.alreadyInteractedWith.add(enemy);
 
         }
@@ -181,7 +192,7 @@ public class World implements Updateable {
      * @param enemy enemy to check if dead.
      * @return true if enemy health is zero.
      */
-    private boolean isEnemyDead(Enemy enemy) {
+    public boolean isEnemyDead(Enemy enemy) {
         return enemy.getHealth().isZero();
     }
 
@@ -201,23 +212,24 @@ public class World implements Updateable {
                 Tower tower = getCell(row, col).getTower();
 
                 if (tower != null) {
-                    if (enemy.getPosition().getX() - col < 0.5f) {
+                    float deltaX = enemy.getPosition().getX() - col;
+                    if (deltaX < 0.5f && deltaX > 0) {
                         enemy.setTowerAhead(true);
                         if (enemy.canAttack(time)) {
                             enemy.setTimeOfLastAttack(time);
                             tower.getHealth().decrease(1);
-                            System.out.println(enemy.getClass().getSimpleName() + " attacked " + tower.getClass().getSimpleName());
-
-                            if (tower.getHealth().isZero()) {
-                                getCell(row, col).setTower(null);
-                            }
                         }
+
                         else {
                             //System.out.println("Enemy couldnt attack");
                         }
                     }
                     else {
                         //System.out.println("Enemy isnt close enough to a tower");
+                    }
+
+                    if (tower.getHealth().isZero()) {
+                        getCell(row, col).setTower(null);
                     }
                 }
             }
