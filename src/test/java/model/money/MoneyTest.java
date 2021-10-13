@@ -1,7 +1,7 @@
-package model.player;
+package model.money;
 
-import andioopp.model.player.Money;
-import andioopp.model.player.SpendMoneyException;
+import andioopp.model.money.Money;
+import andioopp.model.money.exceptions.SpendMoneyException;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -16,7 +16,7 @@ public class MoneyTest {
 
     @Test
     public void moneyShouldHaveMoneyValue() {
-        assertEquals(BASE_MONEY.getMoney(), MONEY_VALUE);
+        assertEquals(BASE_MONEY.getValue(), MONEY_VALUE);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class MoneyTest {
 
     @Test
     public void spendingMoneyMakesNewMoneySmaller() {
-        Money expected = new Money(BASE_MONEY.getMoney() - SMALLER_MONEY.getMoney());
+        Money expected = new Money(BASE_MONEY.getValue() - SMALLER_MONEY.getValue());
         assertEquals(expected, BASE_MONEY.spend(SMALLER_MONEY));
     }
 
@@ -51,12 +51,12 @@ public class MoneyTest {
     }
 
     @Test
-    public void spendingNegativeMoneyThrowsException() {
+    public void spendingNegativeMoneyThrows() {
         assertThrows(SpendMoneyException.class, () -> BASE_MONEY.spend(NEGATIVE_MONEY));
     }
 
     @Test
-    public void spendingBiggerMoneyThrowsException() {
+    public void spendingBiggerMoneyThrows() {
         assertThrows(SpendMoneyException.class, () -> BASE_MONEY.spend(BIGGER_MONEY));
     }
 }

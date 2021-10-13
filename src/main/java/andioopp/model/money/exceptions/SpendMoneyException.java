@@ -1,4 +1,6 @@
-package andioopp.model.player;
+package andioopp.model.money.exceptions;
+
+import andioopp.model.money.Money;
 
 /**
  * Indicates that {@link Money#spend(Money)} was called with an invalid cost.

@@ -1,5 +1,10 @@
 package andioopp.model.player;
 
+import andioopp.model.money.Money;
+import andioopp.model.money.Transaction;
+import andioopp.model.money.TransactionSupplier;
+import andioopp.model.money.Wallet;
+
 import java.util.Collections;
 import java.util.List;
 

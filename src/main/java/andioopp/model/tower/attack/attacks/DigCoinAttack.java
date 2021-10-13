@@ -6,7 +6,7 @@ import andioopp.common.math.Vector3f;
 import andioopp.model.Model;
 import andioopp.model.damage.BaseDamageSource;
 import andioopp.model.damage.DamageType;
-import andioopp.model.player.Money;
+import andioopp.model.money.Money;
 import andioopp.model.tower.attack.Attack;
 import andioopp.model.tower.attack.strategies.NonTargeting;
 

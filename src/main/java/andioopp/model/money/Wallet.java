@@ -1,5 +1,9 @@
-package andioopp.model.player;
+package andioopp.model.money;
 
+/**
+ * Stores money.
+ * @author Anton Ekström
+ */
 public class Wallet {
 
     private Money money;

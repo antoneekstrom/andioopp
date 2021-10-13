@@ -1,7 +1,6 @@
 package andioopp.control;
 
 import andioopp.model.player.TowerCard;
-import andioopp.model.player.TransactionSupplier;
 import andioopp.model.tower.Tower;
 
 public class TowerCardDragEvent {

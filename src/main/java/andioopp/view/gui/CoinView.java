@@ -48,6 +48,6 @@ public class CoinView<S extends Sprite<?>> implements View<S> {
 
     private void displayCoins(Renderer<S> renderer, Player player) {
         Vector3f textPosition = getSpritePosition().add(new Vector3f(120, 120, 0));
-        renderer.writeText(textPosition, String.valueOf(player.getMoney().getMoney()), Color.BLACK, new Font("Comic Sans MS", 16));
+        renderer.writeText(textPosition, String.valueOf(player.getMoney().getValue()), Color.BLACK, new Font("Comic Sans MS", 16));
     }
 }

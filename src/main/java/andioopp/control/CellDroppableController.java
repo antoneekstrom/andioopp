@@ -2,7 +2,7 @@ package andioopp.control;
 
 import andioopp.common.math.rectangle.Rectangle;
 import andioopp.model.Model;
-import andioopp.model.player.Transaction;
+import andioopp.model.money.Transaction;
 import andioopp.model.tower.Tower;
 import andioopp.model.world.Cell;
 import andioopp.service.infrastructure.input.Droppable;

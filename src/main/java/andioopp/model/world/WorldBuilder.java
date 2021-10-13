@@ -1,6 +1,5 @@
 package andioopp.model.world;
 import andioopp.common.storage.ListFactory;
-import andioopp.model.player.Money;
 
 import java.util.List;
 
