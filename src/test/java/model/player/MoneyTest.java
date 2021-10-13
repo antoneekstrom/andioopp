@@ -1,6 +1,7 @@
 package model.player;
 
 import andioopp.model.player.Money;
+import andioopp.model.player.SpendMoneyException;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -50,12 +51,12 @@ public class MoneyTest {
     }
 
     @Test
-    public void spendingNegativeMoneyMakesNewMoneySame() {
-        assertEquals(BASE_MONEY, BASE_MONEY.spend(NEGATIVE_MONEY));
+    public void spendingNegativeMoneyThrowsException() {
+        assertThrows(SpendMoneyException.class, () -> BASE_MONEY.spend(NEGATIVE_MONEY));
     }
 
     @Test
-    public void spendingBiggerMoneyMakesNewMoneySame() {
-        assertEquals(BASE_MONEY, BASE_MONEY.spend(BIGGER_MONEY));
+    public void spendingBiggerMoneyThrowsException() {
+        assertThrows(SpendMoneyException.class, () -> BASE_MONEY.spend(BIGGER_MONEY));
     }
 }

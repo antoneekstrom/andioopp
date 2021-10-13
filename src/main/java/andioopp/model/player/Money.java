@@ -30,7 +30,7 @@ public class Money {
         if (canSpend(amount)) {
             return subtract(amount);
         } else {
-            throw new RuntimeException();
+            throw new SpendMoneyException();
         }
     }
 
@@ -38,7 +38,7 @@ public class Money {
         if (amount > 0) {
             return new Money(getMoney() + amount);
         } else {
-            throw new RuntimeException();
+            throw new SpendMoneyException();
         }
     }
 
