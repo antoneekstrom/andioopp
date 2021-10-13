@@ -1,3 +1,5 @@
+[![tests](https://github.com/zimbosaurus/andioopp/actions/workflows/test.yml/badge.svg)](https://github.com/zimbosaurus/andioopp/actions/workflows/test.yml)
+
 # andioopp
 TDA367 group project!
 
