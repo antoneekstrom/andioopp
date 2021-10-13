@@ -4,6 +4,7 @@ import andioopp.common.observer.Observable;
 import andioopp.common.observer.ObservableWithList;
 import andioopp.common.observer.Observer;
 import andioopp.common.storage.ListFactory;
+import andioopp.common.transform.Vector3f;
 
 public class DragAndDropService<T> extends MouseInputService {
 
@@ -11,6 +12,8 @@ public class DragAndDropService<T> extends MouseInputService {
     private final Observable<T, Droppable<T>> droppableObservable;
 
     private T dragData;
+    private boolean isDragging = false;
+    private Vector3f mousePosition = Vector3f.zero();
 
     public DragAndDropService(Observable<MouseEvent, Observer<MouseEvent>> mouseDataObservable, ListFactory listFactory) {
         super(mouseDataObservable);
@@ -23,6 +26,10 @@ public class DragAndDropService<T> extends MouseInputService {
             onMouseRelease(e);
         } else if (e.getType().equals(MouseEvent.MouseEventType.PRESS)) {
             onMouseDown(e);
+        } else if (e.getType().equals(MouseEvent.MouseEventType.DRAG)) {
+            mousePosition = e.getPosition();
+        } else if (e.getType().equals(MouseEvent.MouseEventType.MOVE)) {
+            mousePosition = e.getPosition();
         }
     }
 
@@ -31,7 +38,7 @@ public class DragAndDropService<T> extends MouseInputService {
             boolean isBeingClicked = d.getRectangle().contains(e.getPosition());
             if (isBeingClicked) {
                 d.onEvent(e);
-                setDragData(d.getDragData());
+                beginDragging(d.getDragData());
             }
         }
     }
@@ -43,15 +50,29 @@ public class DragAndDropService<T> extends MouseInputService {
                 d.onEvent(getDragData());
             }
         }
-        setDragData(null);
+        stopDragging();
     }
 
-    private T getDragData() {
+    private void beginDragging(T data) {
+        dragData = data;
+        isDragging = true;
+    }
+
+    private void stopDragging() {
+        dragData = null;
+        isDragging = false;
+    }
+
+    public Vector3f getMousePosition() {
+        return mousePosition;
+    }
+
+    public boolean isDragging() {
+        return isDragging;
+    }
+
+    public T getDragData() {
         return dragData;
-    }
-
-    private void setDragData(T dragData) {
-        this.dragData = dragData;
     }
 
     public void register() {

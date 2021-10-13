@@ -8,13 +8,13 @@ public class Player {
     private Money money;
     private final List<TowerCard<?>> cards;
 
-    public Player(Money money, List<TowerCard<?>> cards) {
+    public Player(List<TowerCard<?>> cards, Money money) {
         this.money = money;
         this.cards = cards;
     }
 
     public Player(List<TowerCard<?>> cards) {
-        this(new Money(0), cards);
+        this(cards, new Money(0));
     }
 
     public Money give(Money money) {

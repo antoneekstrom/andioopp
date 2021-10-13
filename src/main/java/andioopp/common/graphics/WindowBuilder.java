@@ -1,6 +1,6 @@
 package andioopp.common.graphics;
 
-import java.awt.*;
+import andioopp.common.transform.Dimension;
 
 /**
  * Builds {@link Window} objects.

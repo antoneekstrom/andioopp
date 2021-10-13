@@ -30,6 +30,10 @@ public class FxWindow implements Window<FxRenderer> {
             Vector3f position = new Vector3f((float) e.getX(), (float) e.getY());
             mouseObservable.notifyObservers(new MouseEvent(position, MouseEvent.MouseEventType.MOVE));
         });
+        stage.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_DRAGGED, (e) -> {
+            Vector3f position = new Vector3f((float) e.getX(), (float) e.getY());
+            mouseObservable.notifyObservers(new MouseEvent(position, MouseEvent.MouseEventType.DRAG));
+        });
         stage.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_PRESSED, (e) -> {
             Vector3f position = new Vector3f((float) e.getX(), (float) e.getY());
             mouseObservable.notifyObservers(new MouseEvent(position, MouseEvent.MouseEventType.PRESS));
