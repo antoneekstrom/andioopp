@@ -7,7 +7,8 @@ import andioopp.common.transform.Vector3f;
  */
 public class Color {
 
-    public final static Color WHITE = new Color(255, 255, 255);
+    public final static Color WHITE = new Color(255);
+    public final static Color BLACK = new Color(0);
 
     private final Vector3f rgb;
     private final float alpha;

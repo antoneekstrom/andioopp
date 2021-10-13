@@ -1,5 +1,9 @@
 package andioopp.model.enemy;
 
+import andioopp.common.math.IntRange;
+import andioopp.common.storage.ArrayListFactory;
+import andioopp.common.transform.ConcreteTransform;
+import andioopp.common.transform.Transform;
 import andioopp.common.transform.Vector3f;
 import andioopp.model.enemy.enemies.Blooper;
 import andioopp.model.enemy.enemies.BuzzyBeetle;
@@ -7,47 +11,54 @@ import andioopp.model.enemy.enemies.Goomba;
 import andioopp.model.enemy.enemies.KoopaTroopa;
 import andioopp.model.world.World;
 
-import java.util.Random;
+import java.util.List;
 
 /**
  * Static enemy factory.
  */
 public class Enemies {
-    private Random rand = new Random();
+
+    @FunctionalInterface
+    private interface EnemySupplier {
+        Enemy get(World world, int row);
+    }
+
+    private static final List<EnemySupplier> RANDOM_ENEMY_POOL = new ArrayListFactory().create(
+            Enemies::goomba,
+            Enemies::goomba,
+            Enemies::goomba,
+            Enemies::goomba,
+            Enemies::goomba,
+            Enemies::koopaTroopa,
+            Enemies::koopaTroopa,
+            Enemies::koopaTroopa,
+            Enemies::buzzyBeetle,
+            Enemies::blooper
+    );
+
+    public Enemy randomEnemy(World world, int row) {
+        return RANDOM_ENEMY_POOL.get(new IntRange(RANDOM_ENEMY_POOL).getRandom()).get(world, row);
+    }
+
 
     public static Enemy goomba(World world, int row) {
-        float worldEndX = world.getNumberOfCellsInLanes();
-        return new Goomba(new Vector3f(worldEndX, row));
+        return new Goomba(getTransform(world, row));
     }
 
     public static Enemy koopaTroopa(World world, int row) {
-        float worldEndX = world.getNumberOfCellsInLanes();
-        return new KoopaTroopa(new Vector3f(worldEndX, row));
+        return new KoopaTroopa(getTransform(world, row));
     }
 
     public static Enemy blooper(World world, int row) {
-        float worldEndX = world.getNumberOfCellsInLanes();
-        return new Blooper(new Vector3f(worldEndX, row));
-    }
-
-    /**
-     * Creates a random enemy.
-     * @return the enemy
-     */
-    public Enemy createRandomEnemy(World world, int row) {
-
-        float worldEndX = world.getNumberOfCellsInLanes();
-        int random = rand.nextInt(2);
-
-        if (random == 0) {
-            return new Goomba(new Vector3f(worldEndX, row));
-        }
-
-        return new KoopaTroopa(new Vector3f(worldEndX, row));
+        return new Blooper(getTransform(world, row));
     }
 
     public static Enemy buzzyBeetle(World world, int row) {
+        return new BuzzyBeetle(getTransform(world, row));
+    }
+
+    private static Transform getTransform(World world, int row) {
         float worldEndX = world.getNumberOfCellsInLanes();
-        return new BuzzyBeetle(new Vector3f(worldEndX, row));
+        return ConcreteTransform.getFactory().createWithPosition(new Vector3f(worldEndX, row));
     }
 }

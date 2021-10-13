@@ -1,5 +1,6 @@
 package andioopp.model.tower.towers;
 
+import andioopp.common.math.FloatRange;
 import andioopp.model.tower.Tower;
 import andioopp.model.tower.attack.Attack;
 import andioopp.model.tower.attack.attacks.DigCoinAttack;
@@ -16,6 +17,6 @@ public class Toad extends Tower {
 
     @Override
     protected List<Attack> createAttacks() {
-        return Arrays.asList(new DigCoinAttack(15f));
+        return Arrays.asList(new DigCoinAttack(15f, new FloatRange(15, 25)));
     }
 }

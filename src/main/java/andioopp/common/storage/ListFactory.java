@@ -1,5 +1,6 @@
 package andioopp.common.storage;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Supplier;
@@ -7,6 +8,7 @@ import java.util.function.Supplier;
 /**
  * Creates lists.
  */
+@FunctionalInterface
 public interface ListFactory {
 
     /**
@@ -38,6 +40,18 @@ public interface ListFactory {
         for (int i = 0; i < initialSize; i++) {
             list.add(supplier.get());
         }
+        return list;
+    }
+
+    /**
+     * Creates a new list instance from an array.
+     * @param array the array
+     * @param <T> the type of list
+     * @return the list
+     */
+    default <T> List<T> create(T ...array) {
+        List<T> list = create(array.length);
+        list.addAll(Arrays.asList(array));
         return list;
     }
 
