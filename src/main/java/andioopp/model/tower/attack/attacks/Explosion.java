@@ -1,42 +1,45 @@
 package andioopp.model.tower.attack.attacks;
 
 import andioopp.common.transform.Vector3f;
-import andioopp.model.FilterImmunity;
-import andioopp.model.FilterRequirement;
+import andioopp.model.Model;
+import andioopp.model.damage.BaseDamageSource;
+import andioopp.model.damage.DamageType;
 import andioopp.model.enemy.Enemy;
+import andioopp.model.tower.Tower;
 import andioopp.model.tower.attack.Attack;
 import andioopp.model.tower.attack.strategies.NonTargeting;
 import andioopp.model.world.World;
 
-import java.util.ArrayList;
 
 public class Explosion extends Attack {
 
-    //Enums
-    public ArrayList<FilterRequirement> requirements = new ArrayList<>();
-    public ArrayList<FilterImmunity> immunity = new ArrayList<>();
+    private static final BaseDamageSource DAMAGE_SOURCE = new BaseDamageSource(DamageType.BOMB, DamageType.DIG, DamageType.GROUND, DamageType.FLYING, DamageType.WATER);
 
-    public Explosion() {
-        super(0, new NonTargeting());
-        requirements.add(FilterRequirement.GROUND);
-        requirements.add(FilterRequirement.DIGGING);
-        requirements.add(FilterRequirement.FLYING);
-        requirements.add(FilterRequirement.WATER);
-        immunity.add(FilterImmunity.BOMB);
+    public Explosion(float cooldown) {
+        super(cooldown, new NonTargeting(), DAMAGE_SOURCE);
     }
+
+
 
     @Override
-    public void performAttack(World world, Vector3f position) {
-        for (Enemy e : world.getEnemies()) {
+    public void performAttack(Model model, Vector3f position) {
+        for (Enemy e : model.getWorld().getEnemies()) {
             if (isInRange(e, position)) {
-                eliminate(world, e);
+                eliminateEnemy(model.getWorld(), e);
             }
         }
+
+
+
+        /*Tower tower = model.getWorld().getCell((int) position.getX(), (int) position.getY()).getTower();
+
+        //Sets the towers' health to zero because it should be dead after dealing explosion damage.
+        tower.getHealth().decrease(tower.getHealth().get());*/
+
     }
 
-    //TODO vet inte ifall detta ska ligga i en projectile istället eftersom
-    // att det är där vi kollar requirements och immunities osv vilket
-    // behövs här också, dock är ju inte en explosion en projectile egentligen.. ??
+
+
 
     private boolean isInRange(Enemy e, Vector3f pos) {
         boolean isInRangeXAxis = (e.getPosition().getX() >= pos.getX() - 1  &&  pos.getX() + 1 >= e.getPosition().getX());
@@ -45,8 +48,11 @@ public class Explosion extends Attack {
         return isInRangeXAxis && isInRangeYAxis;
     }
 
-    private void eliminate(World world, Enemy e) {
-        e.getHealth().decrease(e.getHealth().get());
 
+    private void eliminateEnemy(World world, Enemy e) {
+        e.getHealth().decrease(e.getHealth().get());
     }
+
+
+
 }

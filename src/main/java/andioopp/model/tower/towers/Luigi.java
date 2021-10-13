@@ -18,7 +18,7 @@ public class Luigi extends Tower{
     private static final Attack[] attackList = {new FireballAttack(0.5f)};
 
     public Luigi() {
-        super(SPRITE_PATH, "Luigi", 200, 5);
+        super(SPRITE_PATH, "Luigi", 150, 5);
     }
 
     @Override

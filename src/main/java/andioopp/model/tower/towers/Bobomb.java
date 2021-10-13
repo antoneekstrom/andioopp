@@ -15,11 +15,11 @@ public class Bobomb extends Tower {
 
 
     public Bobomb() {
-        super(SPRITE_PATH, "Bobomb", 300, 5);
+        super(SPRITE_PATH, "Bobomb", 200, 0);
     }
 
     @Override
     protected List<Attack> createAttacks() {
-        return new ArrayList<>(Arrays.asList(new Explosion()));
+        return new ArrayList<>(Arrays.asList(new Explosion(0)));
     }
 }

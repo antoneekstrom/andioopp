@@ -13,6 +13,7 @@ public enum DamageType {
     BOOMERANG,
     ICE,
     GROUND,
+    WATER,
     FLYING,
     ANY
 }
