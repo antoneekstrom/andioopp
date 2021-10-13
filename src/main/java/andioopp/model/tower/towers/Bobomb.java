@@ -15,8 +15,6 @@ import java.util.List;
 public class Bobomb extends Tower {
     private static final String SPRITE_PATH = "bobomb-removebg-preview.png";
 
-
-
     public Bobomb() {
         super(SPRITE_PATH, "Bobomb", 200, 0);
     }
