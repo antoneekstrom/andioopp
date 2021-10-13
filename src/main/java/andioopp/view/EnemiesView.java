@@ -2,7 +2,10 @@ package andioopp.view;
 
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
-import andioopp.common.transform.*;
+import andioopp.common.math.*;
+import andioopp.common.math.rectangle.Rectangle;
+import andioopp.common.math.transform.Transform;
+import andioopp.common.math.transform.TransformFactory;
 import andioopp.model.Model;
 import andioopp.model.enemy.Enemy;
 import andioopp.model.world.World;
@@ -45,6 +48,6 @@ public class EnemiesView<S extends Sprite<?>> extends EntityView implements View
 
     private Dimension getEnemySize(World world, Rectangle enemyRect) {
         Dimension cellRes = getCellSize(world);
-        return enemyRect.getSize().scaleByHeight(cellRes.getHeight() * ENEMY_SIZE_BY_CELL_SCALE);
+        return enemyRect.getSize().setHeight(cellRes.getHeight() * ENEMY_SIZE_BY_CELL_SCALE);
     }
 }

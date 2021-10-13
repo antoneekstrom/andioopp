@@ -2,26 +2,30 @@ package andioopp.view;
 
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
-import andioopp.common.transform.*;
+import andioopp.common.math.Dimension;
+import andioopp.common.math.transform.Transform;
+import andioopp.common.math.transform.TransformFactory;
 import andioopp.control.TowerCardDragEvent;
 import andioopp.model.Model;
 import andioopp.service.infrastructure.input.DragAndDropService;
 
-public class TowerDragMouseView <S extends Sprite<?>> extends DependentView<S, DragAndDropService<TowerCardDragEvent>> {
+public class TowerDragMouseView <S extends Sprite<?>> implements View<S> {
 
-    public TowerDragMouseView(DragAndDropService<TowerCardDragEvent> dragAndDropService) {
-        super(dragAndDropService);
+    private final DragAndDropService<TowerCardDragEvent> dragAndDropService;
+    private final EnemiesView<S> enemiesView;
+    private final TransformFactory transformFactory;
+
+    public TowerDragMouseView(DragAndDropService<TowerCardDragEvent> dragAndDropService, EnemiesView<S> enemiesView, TransformFactory transformFactory) {
+        this.dragAndDropService = dragAndDropService;
+        this.enemiesView = enemiesView;
+        this.transformFactory = transformFactory;
     }
 
     @Override
     public void render(Renderer<S> renderer, Model model) {
-        DragAndDropService<TowerCardDragEvent> dragAndDropService = getDependency();
-        TransformFactory transformFactory = ConcreteTransform.getFactory();
-
-
         if (dragAndDropService.isDragging()) {
             S sprite = dragAndDropService.getDragData().getCard().getSupplier().get().getSprite(renderer.getSpriteFactory());
-            Dimension size = new EnemiesView<S>(new Rectangle(0, 0, 1280, 720*0.7f), transformFactory).getEntitySize(model.getWorld(), sprite);
+            Dimension size = enemiesView.getEntitySize(model.getWorld(), sprite);
             Transform transform = transformFactory.createWithPosition(dragAndDropService.getMousePosition().sub(size.toVector().scale(0.5f)));
 
             renderer.drawSprite(sprite, transform, size);

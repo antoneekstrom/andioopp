@@ -1,7 +1,7 @@
 package andioopp.model.tower.attack.projectiles;
 
 import andioopp.common.time.Time;
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.Vector3f;
 import andioopp.model.damage.DamageSource;
 
 public class FireballProjectile extends Projectile {

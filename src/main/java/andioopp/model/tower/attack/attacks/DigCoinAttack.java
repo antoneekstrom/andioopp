@@ -1,8 +1,8 @@
 package andioopp.model.tower.attack.attacks;
 
-import andioopp.common.math.FloatRange;
-import andioopp.common.time.FxClock;
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.range.FloatRange;
+import andioopp.common.javafx.time.FxClock;
+import andioopp.common.math.Vector3f;
 import andioopp.model.Model;
 import andioopp.model.damage.BaseDamageSource;
 import andioopp.model.damage.DamageType;

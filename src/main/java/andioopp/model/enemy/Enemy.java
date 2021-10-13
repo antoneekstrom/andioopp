@@ -2,10 +2,9 @@ package andioopp.model.enemy;
 
 import andioopp.common.graphics.SpriteFactory;
 import andioopp.common.time.Time;
-import andioopp.common.transform.Transform;
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.transform.Transform;
+import andioopp.common.math.Vector3f;
 import andioopp.model.damage.DamageFilter;
-import andioopp.model.damage.BaseDamageSource;
 import andioopp.model.damage.DamageSource;
 import andioopp.model.stats.Health;
 import andioopp.model.interfaces.Updateable;

@@ -1,7 +1,7 @@
 package andioopp.control;
 
 import andioopp.common.storage.ListFactory;
-import andioopp.common.transform.Rectangle;
+import andioopp.common.math.rectangle.Rectangle;
 import andioopp.model.Model;
 import andioopp.model.player.TowerCard;
 import andioopp.model.world.World;

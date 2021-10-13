@@ -1,6 +1,6 @@
 package andioopp.model.tower.attack.strategies;
 
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.Vector3f;
 import andioopp.model.tower.attack.AttackTargetArea;
 import andioopp.model.world.World;
 

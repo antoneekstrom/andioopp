@@ -2,7 +2,10 @@ package andioopp.view;
 
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
-import andioopp.common.transform.*;
+import andioopp.common.math.*;
+import andioopp.common.math.rectangle.Rectangle;
+import andioopp.common.math.transform.Transform;
+import andioopp.common.math.transform.TransformFactory;
 import andioopp.model.Model;
 import andioopp.model.tower.Tower;
 import andioopp.model.world.World;
@@ -44,11 +47,11 @@ public class TowersView<S extends Sprite<?>> extends CellView implements View<S>
 
     private Vector3f getTowerPosition(World world, int row, int col) {
         Rectangle cellRect = getCellRect(world, row, col);
-        return cellRect.getPosition().add(cellRect.getSize().toVector().scale(Vector3f.withY(TOWER_CELL_OFFSET_PERCENT)));
+        return cellRect.getPosition().add(cellRect.getSize().toVector().scale(Vector3f.fromY(TOWER_CELL_OFFSET_PERCENT)));
     }
 
     private Dimension getTowerSize(World world, S sprite) {
         Dimension cellRes = getCellSize(world);
-        return sprite.getSize().scaleByHeight(cellRes.getHeight());
+        return sprite.getSize().setHeight(cellRes.getHeight());
     }
 }

@@ -1,9 +1,10 @@
 package andioopp.view;
 
 import andioopp.common.graphics.Sprite;
-import andioopp.common.transform.Dimension;
-import andioopp.common.transform.Rectangle;
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.Dimension;
+import andioopp.common.math.rectangle.ImmutableRectangle;
+import andioopp.common.math.rectangle.Rectangle;
+import andioopp.common.math.Vector3f;
 import andioopp.model.world.World;
 
 public class EntityView extends CellView {
@@ -13,7 +14,7 @@ public class EntityView extends CellView {
     }
 
     protected Rectangle getEntityRect(World world, Vector3f position, Sprite<?> sprite) {
-        return new Rectangle(getEntityPosition(world, position), getEntitySize(world, sprite));
+        return new ImmutableRectangle(getEntityPosition(world, position), getEntitySize(world, sprite));
     }
 
     protected Vector3f getEntityPosition(World world, Vector3f position) {
@@ -21,6 +22,6 @@ public class EntityView extends CellView {
     }
 
     protected Dimension getEntitySize(World world, Sprite<?> sprite) {
-        return getViewport(world).toViewportSize(new Dimension(sprite.getSize().scaleByHeight(Dimension.unit().getHeight())));
+        return getViewport(world).toViewportSize(new Dimension(sprite.getSize().setHeight(Dimension.unit().getHeight())));
     }
 }

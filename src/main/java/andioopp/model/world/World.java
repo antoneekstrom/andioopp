@@ -1,6 +1,6 @@
 package andioopp.model.world;
 
-import andioopp.common.transform.Dimension;
+import andioopp.common.math.Dimension;
 import andioopp.model.enemy.Enemy;
 import andioopp.model.tower.attack.projectiles.Projectile;
 

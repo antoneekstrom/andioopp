@@ -1,6 +1,6 @@
 package andioopp.service.infrastructure.input;
 
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.Vector3f;
 
 /**
  * Event which is emitted when the user interacts with their mouse.

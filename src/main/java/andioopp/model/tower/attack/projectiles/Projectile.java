@@ -1,6 +1,8 @@
 package andioopp.model.tower.attack.projectiles;
 
-import andioopp.common.transform.*;
+import andioopp.common.math.transform.ConcreteTransform;
+import andioopp.common.math.transform.Transform;
+import andioopp.common.math.Vector3f;
 import andioopp.model.damage.DamageSource;
 import andioopp.model.damage.DamageType;
 import andioopp.model.interfaces.Updateable;

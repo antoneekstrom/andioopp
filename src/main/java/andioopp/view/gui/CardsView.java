@@ -2,9 +2,10 @@ package andioopp.view.gui;
 
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
-import andioopp.common.transform.Dimension;
-import andioopp.common.transform.Rectangle;
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.Dimension;
+import andioopp.common.math.rectangle.ImmutableRectangle;
+import andioopp.common.math.rectangle.Rectangle;
+import andioopp.common.math.Vector3f;
 import andioopp.model.Model;
 import andioopp.model.player.TowerCard;
 import andioopp.view.View;
@@ -31,12 +32,12 @@ public class CardsView<S extends Sprite<?>> implements View<S> {
     }
 
     public Rectangle getTowerCardRect(int cardIndex) {
-        return getTowerCardRect(getViewportPosition().sub(TowerCardView.getCardDimension().onlyY()), cardIndex);
+        return getTowerCardRect(getViewportPosition().sub(TowerCardView.getCardDimension().fromY()), cardIndex);
     }
 
     public Rectangle getTowerCardRect(Vector3f position, int cardIndex) {
-        Vector3f cardOffset = TowerCardView.getCardDimension().onlyX().add(CARD_OFFSET);
-        return new Rectangle(position.add(cardOffset.scale(cardIndex)), new Dimension(TowerCardView.getCardDimension()));
+        Vector3f cardOffset = TowerCardView.getCardDimension().fromX().add(CARD_OFFSET);
+        return new ImmutableRectangle(position.add(cardOffset.scale(cardIndex)), new Dimension(TowerCardView.getCardDimension()));
     }
 
     private Vector3f getViewportPosition() {

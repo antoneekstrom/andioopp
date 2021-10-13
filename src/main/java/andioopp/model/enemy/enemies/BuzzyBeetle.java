@@ -1,6 +1,6 @@
 package andioopp.model.enemy.enemies;
 
-import andioopp.common.transform.Transform;
+import andioopp.common.math.transform.Transform;
 import andioopp.model.damage.DamageFilter;
 import andioopp.model.damage.targets.FilterGrounded;
 import andioopp.model.enemy.Enemy;

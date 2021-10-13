@@ -1,6 +1,6 @@
 package andioopp.control;
 
-import andioopp.common.transform.Rectangle;
+import andioopp.common.math.rectangle.Rectangle;
 import andioopp.model.player.TowerCard;
 import andioopp.service.infrastructure.input.Draggable;
 import andioopp.service.infrastructure.input.MouseEvent;

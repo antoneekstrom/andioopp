@@ -1,12 +1,7 @@
 package andioopp.model.tower.attack;
 
-import andioopp.common.transform.Vector3f;
-import andioopp.model.enemy.Enemy;
-import andioopp.model.tower.Tower;
+import andioopp.common.math.Vector3f;
 import andioopp.model.world.World;
-
-import javax.swing.text.Position;
-import java.util.Vector;
 
 public interface AttackTargetArea {
     /**

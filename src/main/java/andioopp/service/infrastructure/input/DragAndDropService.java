@@ -1,10 +1,10 @@
 package andioopp.service.infrastructure.input;
 
 import andioopp.common.observer.Observable;
-import andioopp.common.observer.ObservableWithList;
+import andioopp.common.observer.ConcreteObservable;
 import andioopp.common.observer.Observer;
 import andioopp.common.storage.ListFactory;
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.Vector3f;
 
 public class DragAndDropService<T> extends MouseInputService {
 
@@ -17,8 +17,8 @@ public class DragAndDropService<T> extends MouseInputService {
 
     public DragAndDropService(Observable<MouseEvent, Observer<MouseEvent>> mouseDataObservable, ListFactory listFactory) {
         super(mouseDataObservable);
-        this.draggableObservable = new ObservableWithList<>(listFactory.create());
-        this.droppableObservable = new ObservableWithList<>(listFactory.create());
+        this.draggableObservable = new ConcreteObservable<>(listFactory.create());
+        this.droppableObservable = new ConcreteObservable<>(listFactory.create());
     }
 
     private void onMouseEvent(MouseEvent e) {

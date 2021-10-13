@@ -1,8 +1,9 @@
 package andioopp.view;
 
-import andioopp.common.transform.Dimension;
-import andioopp.common.transform.Rectangle;
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.Dimension;
+import andioopp.common.math.rectangle.ImmutableRectangle;
+import andioopp.common.math.rectangle.Rectangle;
+import andioopp.common.math.Vector3f;
 import andioopp.model.world.World;
 
 public class CellView {
@@ -16,7 +17,7 @@ public class CellView {
     protected Rectangle getCellRect(World world, int row, int col) {
         Vector3f position = getCellPosition(world, row, col);
         Dimension size = getCellSize(world);
-        return new Rectangle(position, size);
+        return new ImmutableRectangle(position, size);
     }
 
     protected Vector3f getCellPosition(World world, int row, int col) {

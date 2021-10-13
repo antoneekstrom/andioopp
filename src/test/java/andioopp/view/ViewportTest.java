@@ -1,8 +1,9 @@
 package andioopp.view;
 
-import andioopp.common.transform.Dimension;
-import andioopp.common.transform.Rectangle;
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.Dimension;
+import andioopp.common.math.rectangle.ImmutableRectangle;
+import andioopp.common.math.rectangle.Rectangle;
+import andioopp.common.math.Vector3f;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -18,7 +19,7 @@ public class ViewportTest {
     private static final float TEST_NUMBER = 7;
     private static final Vector3f TEST_POSITION = new Vector3f(TEST_NUMBER, TEST_NUMBER);
     private static final Dimension TEST_SIZE = new Dimension(TEST_NUMBER, TEST_NUMBER);
-    private static final Rectangle TEST_RECT = new Rectangle(TEST_POSITION, TEST_SIZE);
+    private static final Rectangle TEST_RECT = new ImmutableRectangle(TEST_POSITION, TEST_SIZE);
 
     @Test
     public void testTrivialPosition() {
@@ -61,7 +62,7 @@ public class ViewportTest {
     public void testHalfRect() {
         Viewport viewport = getHalfViewport();
         Rectangle rectangle = TEST_RECT;
-        Rectangle expected = new Rectangle(rectangle.getPosition().scale(HALF), new Dimension(rectangle.getSize().toVector().scale(HALF)));
+        Rectangle expected = new ImmutableRectangle(rectangle.getPosition().scale(HALF), new Dimension(rectangle.getSize().toVector().scale(HALF)));
         assertEquals(expected, viewport.toViewportRect(rectangle));
     }
 
@@ -70,31 +71,31 @@ public class ViewportTest {
         Viewport viewport = getScreenViewport();
         Dimension rect = new Dimension(0.5f, 0.5f);
         Vector3f centeredRectPos = viewport.getResolution().centerWithin(Vector3f.zero(), rect);
-        Rectangle centeredRect = new Rectangle(centeredRectPos, rect);
+        Rectangle centeredRect = new ImmutableRectangle(centeredRectPos, rect);
         Rectangle viewportRect = viewport.toViewportRect(centeredRect);
 
         Dimension expectedViewportSize = new Dimension(viewportRect.getSize().toVector());
         Vector3f expectedViewportPos = viewport.getViewport().getSize().toVector().scale(HALF).sub(expectedViewportSize.toVector().scale(HALF));
-        Rectangle expectedViewportRect = new Rectangle(expectedViewportPos, expectedViewportSize);
+        Rectangle expectedViewportRect = new ImmutableRectangle(expectedViewportPos, expectedViewportSize);
 
         assertEquals(expectedViewportRect.round(), viewportRect.round());
     }
 
     private Viewport getTrivialViewport() {
         Dimension resolution = BASE_RESOLUTION;
-        Rectangle viewport = new Rectangle(Vector3f.zero(), resolution);
+        Rectangle viewport = new ImmutableRectangle(Vector3f.zero(), resolution);
         return new Viewport(viewport, resolution);
     }
 
     private Viewport getHalfViewport() {
         Dimension resolution = BASE_RESOLUTION;
         Dimension resolutionHalf = new Dimension(resolution.toVector().scale(HALF));
-        Rectangle viewport = new Rectangle(Vector3f.zero(), resolutionHalf);
+        Rectangle viewport = new ImmutableRectangle(Vector3f.zero(), resolutionHalf);
         return new Viewport(viewport, resolution);
     }
 
     private Viewport getScreenViewport() {
-        Rectangle viewport = new Rectangle(Vector3f.zero(), SCREEN_RESOLUTION);
+        Rectangle viewport = new ImmutableRectangle(Vector3f.zero(), SCREEN_RESOLUTION);
         return new Viewport(viewport, MODEL_RESOLUTION);
     }
 }

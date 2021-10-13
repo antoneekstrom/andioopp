@@ -1,8 +1,9 @@
 package andioopp.view;
 
-import andioopp.common.transform.Dimension;
-import andioopp.common.transform.Rectangle;
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.Dimension;
+import andioopp.common.math.rectangle.ImmutableRectangle;
+import andioopp.common.math.rectangle.Rectangle;
+import andioopp.common.math.Vector3f;
 
 /**
  * Translates coordinates between a defined viewport and the resolution of the viewport.
@@ -48,7 +49,7 @@ public class Viewport {
     public Rectangle toViewportRect(Rectangle rectangle) {
         Vector3f position = toViewportPosition(rectangle.getPosition());
         Dimension size = toViewportSize(rectangle.getSize());
-        return new Rectangle(position, size);
+        return new ImmutableRectangle(position, size);
     }
 
     /**

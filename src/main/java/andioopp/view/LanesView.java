@@ -3,7 +3,7 @@ package andioopp.view;
 import andioopp.common.graphics.Color;
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
-import andioopp.common.transform.Rectangle;
+import andioopp.common.math.rectangle.Rectangle;
 import andioopp.model.Model;
 import andioopp.model.world.World;
 

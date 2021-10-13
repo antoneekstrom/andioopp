@@ -1,7 +1,7 @@
 package andioopp.service.domain;
 
 import andioopp.common.time.Time;
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.Vector3f;
 import andioopp.model.Model;
 import andioopp.model.enemy.Enemy;
 import andioopp.model.tower.Tower;

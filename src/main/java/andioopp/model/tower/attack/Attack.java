@@ -2,7 +2,7 @@ package andioopp.model.tower.attack;
 
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.time.Time;
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.Vector3f;
 import andioopp.model.Model;
 import andioopp.model.damage.DamageSource;
 import andioopp.model.damage.DamageType;

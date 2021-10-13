@@ -1,6 +1,6 @@
 package andioopp.model.tower.attack.attacks;
 
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.Vector3f;
 import andioopp.model.Model;
 import andioopp.model.damage.BaseDamageSource;
 import andioopp.model.damage.DamageSource;

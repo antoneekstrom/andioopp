@@ -1,6 +1,6 @@
 package andioopp.model.tower.towers;
 
-import andioopp.common.math.FloatRange;
+import andioopp.common.math.range.FloatRange;
 import andioopp.model.tower.Tower;
 import andioopp.model.tower.attack.Attack;
 import andioopp.model.tower.attack.attacks.DigCoinAttack;

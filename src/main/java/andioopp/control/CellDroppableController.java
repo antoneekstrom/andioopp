@@ -1,6 +1,6 @@
 package andioopp.control;
 
-import andioopp.common.transform.Rectangle;
+import andioopp.common.math.rectangle.Rectangle;
 import andioopp.model.Model;
 import andioopp.model.player.Transaction;
 import andioopp.model.tower.Tower;

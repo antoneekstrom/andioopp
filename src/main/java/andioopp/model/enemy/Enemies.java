@@ -1,10 +1,10 @@
 package andioopp.model.enemy;
 
-import andioopp.common.math.IntRange;
+import andioopp.common.math.range.IntRange;
 import andioopp.common.storage.ArrayListFactory;
-import andioopp.common.transform.ConcreteTransform;
-import andioopp.common.transform.Transform;
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.transform.ConcreteTransform;
+import andioopp.common.math.transform.Transform;
+import andioopp.common.math.Vector3f;
 import andioopp.model.enemy.enemies.Blooper;
 import andioopp.model.enemy.enemies.BuzzyBeetle;
 import andioopp.model.enemy.enemies.Goomba;
