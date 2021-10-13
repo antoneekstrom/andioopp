@@ -10,7 +10,9 @@ import andioopp.model.tower.attack.Attack;
 import andioopp.model.tower.attack.strategies.NonTargeting;
 import andioopp.model.world.World;
 
-
+/**
+ * @author Arvid Svedberg
+ */
 public class Explosion extends Attack {
 
     private static final BaseDamageSource DAMAGE_SOURCE = new BaseDamageSource(DamageType.BOMB, DamageType.DIG, DamageType.GROUND, DamageType.FLYING, DamageType.WATER);

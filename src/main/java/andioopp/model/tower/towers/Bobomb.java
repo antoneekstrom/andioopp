@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author Arvid Svedberg
+ */
 public class Bobomb extends Tower {
     private static final String SPRITE_PATH = "bobomb-removebg-preview.png";
 
