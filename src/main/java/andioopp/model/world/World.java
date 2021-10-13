@@ -11,7 +11,6 @@ import andioopp.model.enemy.Enemy;
 import andioopp.model.tower.Tower;
 import andioopp.model.tower.attack.Attack;
 import andioopp.model.tower.attack.projectiles.Projectile;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -82,6 +81,8 @@ public class World implements Updateable {
                         if (targetableEnemyExists){
                             attack.performAttack(this, new Vector3f(col, row));
                             attack.updateTimeOfLastAttack(time);
+                            checkEnemiesHealthState();
+                            //TODO check enemy health and eliminate if health zero.
                         }
                     }
                 }
@@ -184,6 +185,21 @@ public class World implements Updateable {
             }
         }
         return false;
+    }
+
+    private void checkEnemiesHealthState() {
+        for (Iterator<Enemy> enemyIterator = enemies.iterator(); enemyIterator.hasNext();) {
+            Enemy enemy = enemyIterator.next();
+
+            for(Enemy e : this.enemies) {
+                if (isEnemyDead(e)) {
+                    enemyIterator.remove();
+                }
+
+            }
+        }
+
+
     }
 
     /**
