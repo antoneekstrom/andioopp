@@ -6,7 +6,7 @@ import andioopp.model.damage.BaseDamageSource;
 import andioopp.model.damage.DamageSource;
 import andioopp.model.damage.DamageType;
 import andioopp.model.tower.attack.Attack;
-import andioopp.model.tower.attack.projectiles.Fireball;
+import andioopp.model.tower.attack.projectiles.FireballProjectile;
 import andioopp.model.tower.attack.strategies.SingleLaneForward;
 
 public class FireballAttack extends Attack {
@@ -25,6 +25,6 @@ public class FireballAttack extends Attack {
      */
     @Override
     public void performAttack(Model model, Vector3f position) {
-        model.getWorld().addProjectile(new Fireball(position, DAMAGE_SOURCE));
+        model.getWorld().addProjectile(new FireballProjectile(position, DAMAGE_SOURCE));
     }
 }

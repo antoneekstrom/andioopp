@@ -13,20 +13,20 @@ public class Money {
         return add(money.getMoney());
     }
 
-    public Money spend(Money cost) {
-        return spend(cost.getMoney());
+    public Money spend(Money money) {
+        return spend(money.getMoney());
     }
 
-    public boolean canSpend(Money cost) {
-        return canSpend(cost.getMoney());
+    public boolean canSpend(Money money) {
+        return canSpend(money.getMoney());
     }
 
     private Money spend(int amount) {
-        if (canSpend(money)) {
+        if (canSpend(amount)) {
             return subtract(amount);
         }
         else {
-            return this;
+            return new Money(getMoney());
         }
     }
 
@@ -35,7 +35,7 @@ public class Money {
             return new Money(getMoney() + amount);
         }
         else {
-            return this;
+            return new Money(getMoney());
         }
     }
 
@@ -44,7 +44,7 @@ public class Money {
     }
 
     private boolean canSpend(int amount) {
-        return getMoney() >= amount;
+        return getMoney() >= amount && 0 < amount;
     }
 
     public int getMoney() {
