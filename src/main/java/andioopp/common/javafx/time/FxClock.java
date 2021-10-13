@@ -1,7 +1,9 @@
-package andioopp.common.time;
+package andioopp.common.javafx.time;
 
 import andioopp.common.observer.Observable;
 import andioopp.common.observer.Observer;
+import andioopp.common.time.Clock;
+import andioopp.common.time.Time;
 import javafx.animation.AnimationTimer;
 
 /**

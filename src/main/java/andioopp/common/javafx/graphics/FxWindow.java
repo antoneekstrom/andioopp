@@ -1,12 +1,12 @@
-package andioopp.common.graphics.javafx;
+package andioopp.common.javafx.graphics;
 
 import andioopp.common.graphics.Window;
 import andioopp.common.observer.Observable;
-import andioopp.common.observer.ObservableWithList;
+import andioopp.common.observer.ConcreteObservable;
 import andioopp.common.observer.Observer;
 import andioopp.common.storage.ArrayListFactory;
-import andioopp.common.transform.Dimension;
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.Dimension;
+import andioopp.common.math.Vector3f;
 import andioopp.service.infrastructure.input.MouseEvent;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.canvas.Canvas;
@@ -27,7 +27,7 @@ public class FxWindow implements Window<FxRenderer> {
         this.stage = stage;
         this.canvas = canvas;
 
-        mouseObservable = new ObservableWithList<>(new ArrayListFactory().create());
+        mouseObservable = new ConcreteObservable<>(new ArrayListFactory().create());
         stage.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_MOVED, (e) -> {
             Vector3f position = new Vector3f((float) e.getX(), (float) e.getY());
             mouseObservable.notifyObservers(new MouseEvent(position, MouseEvent.MouseEventType.MOVE));
@@ -45,7 +45,7 @@ public class FxWindow implements Window<FxRenderer> {
             mouseObservable.notifyObservers(new MouseEvent(position, MouseEvent.MouseEventType.RELEASE));
         });
 
-        resizeObservable = new ObservableWithList<>(new ArrayListFactory().create());
+        resizeObservable = new ConcreteObservable<>(new ArrayListFactory().create());
         ChangeListener<Number> resizeListener = (observable, oldValue, newValue) -> {
             resizeObservable.notifyObservers(getSize());
             canvas.resize(getSize().getWidth(), getSize().getHeight());

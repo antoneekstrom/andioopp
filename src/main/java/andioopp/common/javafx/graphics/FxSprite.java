@@ -1,4 +1,4 @@
-package andioopp.common.graphics.javafx;
+package andioopp.common.javafx.graphics;
 
 import andioopp.common.graphics.Sprite;
 import javafx.scene.image.Image;

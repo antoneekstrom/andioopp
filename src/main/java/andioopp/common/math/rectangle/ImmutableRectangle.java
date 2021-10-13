@@ -1,4 +1,7 @@
-package andioopp.common.transform;
+package andioopp.common.math.rectangle;
+
+import andioopp.common.math.Dimension;
+import andioopp.common.math.Vector3f;
 
 import java.util.Objects;
 

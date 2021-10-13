@@ -1,8 +1,8 @@
 package andioopp.common.graphics;
 
-import andioopp.common.transform.Dimension;
-import andioopp.common.transform.Transform;
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.Dimension;
+import andioopp.common.math.transform.Transform;
+import andioopp.common.math.Vector3f;
 import javafx.scene.text.Font;
 
 /**

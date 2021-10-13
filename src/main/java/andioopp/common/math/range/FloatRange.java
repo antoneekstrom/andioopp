@@ -1,4 +1,4 @@
-package andioopp.common.math;
+package andioopp.common.math.range;
 
 import java.util.Random;
 

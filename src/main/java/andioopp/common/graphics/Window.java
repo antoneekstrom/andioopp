@@ -2,7 +2,7 @@ package andioopp.common.graphics;
 
 import andioopp.common.observer.Observable;
 import andioopp.common.observer.Observer;
-import andioopp.common.transform.Dimension;
+import andioopp.common.math.Dimension;
 import andioopp.service.infrastructure.input.MouseEvent;
 
 /**

@@ -1,9 +1,9 @@
-package andioopp.common.graphics.javafx;
+package andioopp.common.javafx.graphics;
 
 import andioopp.common.graphics.SpriteFactory;
-import andioopp.common.transform.Dimension;
-import andioopp.common.transform.Transform;
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.Dimension;
+import andioopp.common.math.transform.Transform;
+import andioopp.common.math.Vector3f;
 import andioopp.common.graphics.CachedSpriteFactory;
 import andioopp.common.graphics.Color;
 import andioopp.common.graphics.Renderer;
