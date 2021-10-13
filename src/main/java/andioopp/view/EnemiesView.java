@@ -14,7 +14,7 @@ public class EnemiesView<S extends Sprite<?>> extends EntityView implements View
 
     private final TransformFactory transformFactory;
 
-    public EnemiesView(TransformFactory transformFactory, Rectangle viewportRect) {
+    public EnemiesView(Rectangle viewportRect, TransformFactory transformFactory) {
         super(viewportRect);
         this.transformFactory = transformFactory;
     }

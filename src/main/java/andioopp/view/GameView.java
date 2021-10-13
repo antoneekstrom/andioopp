@@ -4,7 +4,9 @@ import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
 import andioopp.common.transform.Rectangle;
 import andioopp.common.transform.TransformFactory;
+import andioopp.control.TowerCardDragEvent;
 import andioopp.model.Model;
+import andioopp.service.infrastructure.input.DragAndDropService;
 import andioopp.view.gui.CardsView;
 import andioopp.view.gui.CoinView;
 
@@ -15,16 +17,17 @@ public class GameView<S extends Sprite<?>> implements View<S> {
     private final LanesView<S> lanesView;
     private final CardsView<S> cardsView;
 
-    public GameView(Rectangle viewportRect, TransformFactory transformFactory) {
+    public GameView(Rectangle viewportRect, TransformFactory transformFactory, DragAndDropService<TowerCardDragEvent> dragAndDropService) {
         lanesView = new LanesView<>(viewportRect);
         cardsView = new CardsView<>(viewportRect);
 
         TowersView<S> towersView = new TowersView<>(viewportRect, transformFactory);
-        EnemiesView<S> enemiesView = new EnemiesView<>(transformFactory, viewportRect);
+        EnemiesView<S> enemiesView = new EnemiesView<>(viewportRect, transformFactory);
         ProjectilesView<S> projectilesView = new ProjectilesView<>(viewportRect, transformFactory);
         CoinView<S> coinView = new CoinView<>(transformFactory);
+        TowerDragMouseView<S> towerDragMouseView = new TowerDragMouseView<>(dragAndDropService);
 
-        view = new ComposedView<>(lanesView, cardsView, towersView, enemiesView, projectilesView, coinView);
+        view = new ComposedView<>(lanesView, cardsView, towersView, enemiesView, projectilesView, coinView, towerDragMouseView);
     }
 
     @Override

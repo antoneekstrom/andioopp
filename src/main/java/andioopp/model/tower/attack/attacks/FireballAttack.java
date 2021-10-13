@@ -1,38 +1,30 @@
 package andioopp.model.tower.attack.attacks;
 
 import andioopp.common.transform.Vector3f;
-import andioopp.model.FilterImmunity;
-import andioopp.model.FilterRequirement;
-import andioopp.model.world.World;
-import andioopp.model.FilterImmunity;
-import andioopp.model.FilterRequirement;
-import andioopp.model.tower.Tower;
+import andioopp.model.Model;
+import andioopp.model.damage.BaseDamageSource;
+import andioopp.model.damage.DamageSource;
+import andioopp.model.damage.DamageType;
 import andioopp.model.tower.attack.Attack;
-import andioopp.model.tower.attack.AttackTargetArea;
 import andioopp.model.tower.attack.projectiles.FireballProjectile;
 import andioopp.model.tower.attack.strategies.SingleLaneForward;
 
-import java.util.ArrayList;
-
 public class FireballAttack extends Attack {
 
-    //Enums
-    public ArrayList<FilterRequirement> requirements = new ArrayList<>();
-    public ArrayList<FilterImmunity> immunity = new ArrayList<>();
+    private static final DamageSource DAMAGE_SOURCE = new BaseDamageSource(DamageType.FIRE, DamageType.GROUND);
 
     public FireballAttack(float coolDown) {
-        super(coolDown, new SingleLaneForward());
-        requirements.add(FilterRequirement.GROUND);
-        immunity.add(FilterImmunity.FIREBALL);
+        super(coolDown, new SingleLaneForward(), DAMAGE_SOURCE);
     }
 
     /**
      * Spawns a fireball projectile at the position of the tower that is attacking.
-     * @param world
+     *
+     * @param model    the model
      * @param position position of the tower, or wherever the attack is to be performed
      */
     @Override
-    public void performAttack(World world, Vector3f position) {
-        world.addProjectile( new FireballProjectile(position, requirements, immunity) );
+    public void performAttack(Model model, Vector3f position) {
+        model.getWorld().addProjectile(new FireballProjectile(position, DAMAGE_SOURCE));
     }
 }

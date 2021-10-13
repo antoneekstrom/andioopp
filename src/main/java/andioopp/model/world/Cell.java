@@ -13,6 +13,10 @@ public class Cell {
         this.tower = tower;
     }
 
+    public boolean hasTower() {
+        return tower != null;
+    }
+
     public Tower getTower() {
         return tower;
     }
