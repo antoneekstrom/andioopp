@@ -1,4 +1,4 @@
-package andioopp.view;
+package andioopp.view.views;
 
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
@@ -9,6 +9,7 @@ import andioopp.common.math.transform.TransformFactory;
 import andioopp.model.Model;
 import andioopp.model.enemy.Enemy;
 import andioopp.model.world.World;
+import andioopp.view.View;
 
 public class EnemiesView<S extends Sprite<?>> extends EntityView implements View<S> {
 

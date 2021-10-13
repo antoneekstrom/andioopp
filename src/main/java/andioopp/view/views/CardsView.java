@@ -1,4 +1,4 @@
-package andioopp.view.gui;
+package andioopp.view.views;
 
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;

@@ -28,9 +28,9 @@ import andioopp.model.world.WorldBuilder;
 import andioopp.service.domain.*;
 import andioopp.service.infrastructure.input.DragAndDropService;
 import andioopp.service.infrastructure.input.MouseEvent;
-import andioopp.view.*;
-import andioopp.view.gui.CardsView;
-import andioopp.view.gui.CoinView;
+import andioopp.view.views.CardsView;
+import andioopp.view.views.CoinView;
+import andioopp.view.views.*;
 
 import java.util.List;
 

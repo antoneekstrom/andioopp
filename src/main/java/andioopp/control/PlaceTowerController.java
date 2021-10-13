@@ -6,9 +6,9 @@ import andioopp.model.Model;
 import andioopp.model.player.TowerCard;
 import andioopp.model.world.World;
 import andioopp.service.infrastructure.input.DragAndDropService;
-import andioopp.view.LanesView;
-import andioopp.view.gui.CardsView;
-import andioopp.view.gui.TowerCardView;
+import andioopp.view.views.LanesView;
+import andioopp.view.views.CardsView;
+import andioopp.view.views.TowerCardView;
 
 import java.util.Collection;
 import java.util.List;

@@ -1,10 +1,11 @@
-package andioopp.view;
+package andioopp.view.views;
 
 import andioopp.common.math.Dimension;
 import andioopp.common.math.rectangle.ImmutableRectangle;
 import andioopp.common.math.rectangle.Rectangle;
 import andioopp.common.math.Vector3f;
 import andioopp.model.world.World;
+import andioopp.view.Viewport;
 
 public class CellView {
 

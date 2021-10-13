@@ -1,4 +1,4 @@
-package andioopp.view;
+package andioopp.view.views;
 
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
@@ -9,6 +9,7 @@ import andioopp.common.math.transform.TransformFactory;
 import andioopp.model.Model;
 import andioopp.model.tower.Tower;
 import andioopp.model.world.World;
+import andioopp.view.View;
 
 public class TowersView<S extends Sprite<?>> extends CellView implements View<S> {
 

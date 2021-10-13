@@ -1,4 +1,4 @@
-package andioopp.view;
+package andioopp.view.views;
 
 import andioopp.common.graphics.Color;
 import andioopp.common.graphics.Renderer;
@@ -6,6 +6,7 @@ import andioopp.common.graphics.Sprite;
 import andioopp.common.math.rectangle.Rectangle;
 import andioopp.model.Model;
 import andioopp.model.world.World;
+import andioopp.view.View;
 
 public class LanesView<S extends Sprite<?>> extends CellView implements View<S> {
 

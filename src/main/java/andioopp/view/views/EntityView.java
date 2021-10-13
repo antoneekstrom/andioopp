@@ -1,4 +1,4 @@
-package andioopp.view;
+package andioopp.view.views;
 
 import andioopp.common.graphics.Sprite;
 import andioopp.common.math.Dimension;

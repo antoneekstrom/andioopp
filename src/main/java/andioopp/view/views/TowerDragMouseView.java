@@ -1,4 +1,4 @@
-package andioopp.view;
+package andioopp.view.views;
 
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
@@ -8,6 +8,7 @@ import andioopp.common.math.transform.TransformFactory;
 import andioopp.control.TowerCardDragEvent;
 import andioopp.model.Model;
 import andioopp.service.infrastructure.input.DragAndDropService;
+import andioopp.view.View;
 
 public class TowerDragMouseView <S extends Sprite<?>> implements View<S> {
 
