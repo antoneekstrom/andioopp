@@ -1,4 +1,4 @@
-package andioopp.main;
+package andioopp.game;
 
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
@@ -13,11 +13,18 @@ import andioopp.view.View;
 
 import java.util.Collection;
 
+/**
+ * Encapsulates neccessary components for creating a game.
+ * Handles updating and initializing services and views.
+ *
+ * @author Anton Ekström
+ * @param <S> type of sprite in views
+ */
 public class Game<S extends Sprite<?>> implements Updateable {
 
     private final Model model;
-
     private final Window<? extends Renderer<S>> window;
+
     private final Collection<View<S>> views;
     private final Collection<Service<Game<?>>> services;
 
@@ -28,16 +35,38 @@ public class Game<S extends Sprite<?>> implements Updateable {
         this.services = listFactory.create();
     }
 
+    /**
+     * Invokes {@link Service#onSetup(Object)} on services.
+     */
     public void setup() {
         for (Service<Game<?>> service : services) {
             service.onSetup(this);
         }
     }
 
+    /**
+     * Invokes {@link Service#onDestroy(Object)} on services.
+     */
     public void destroy() {
         for (Service<Game<?>> service : services) {
             service.onDestroy(this);
         }
+    }
+
+    /**
+     * Returns the window.
+     * @return the window
+     */
+    public Window<? extends Renderer<S>> getWindow() {
+        return window;
+    }
+
+    /**
+     * Returns the model.
+     * @return the model
+     */
+    public Model getModel() {
+        return model;
     }
 
     @Override
@@ -68,13 +97,5 @@ public class Game<S extends Sprite<?>> implements Updateable {
 
     private Model domainServiceAdapter(Game<?> game) {
         return game.getModel();
-    }
-
-    public Window<? extends Renderer<S>> getWindow() {
-        return window;
-    }
-
-    public Model getModel() {
-        return model;
     }
 }
