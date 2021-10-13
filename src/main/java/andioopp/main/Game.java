@@ -29,17 +29,25 @@ public class Game<S extends Sprite<?>> implements Updateable {
     }
 
     public void setup() {
-        services.forEach((service) -> service.onSetup(this));
+        for (Service<Game<?>> service : services) {
+            service.onSetup(this);
+        }
     }
 
     public void destroy() {
-        services.forEach((service) -> service.onDestroy(this));
+        for (Service<Game<?>> service : services) {
+            service.onDestroy(this);
+        }
     }
 
     @Override
     public void update(Time time) {
-        services.forEach((service) -> updateService(service, time));
-        views.forEach(this::renderView);
+        for (Service<Game<?>> service : services) {
+            updateService(service, time);
+        }
+        for (View<S> view : views) {
+            renderView(view);
+        }
     }
 
     private void updateService(Service<Game<?>> service, Time time) {
