@@ -148,7 +148,7 @@ public class App extends Application {
                 new TowerCard<>(new Money(40), Towers::toad),
                 new TowerCard<>(new Money(60), Towers::mario),
                 new TowerCard<>(new Money(500), Towers::rosalina),
-                new TowerCard<>(new Money(5), Towers::bobomb),
+                new TowerCard<>(new Money(200), Towers::bobomb),
                 new TowerCard<>(new Money(83), Towers::yoshi),
                 new TowerCard<>(new Money(150), Towers::luigi)
         );
