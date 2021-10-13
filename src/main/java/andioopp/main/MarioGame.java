@@ -25,7 +25,7 @@ import andioopp.model.tower.Towers;
 import andioopp.model.world.LaneBuilder;
 import andioopp.model.world.World;
 import andioopp.model.world.WorldBuilder;
-import andioopp.service.domain.*;
+import andioopp.service.model.*;
 import andioopp.service.infrastructure.input.DragAndDropService;
 import andioopp.service.infrastructure.input.MouseEvent;
 import andioopp.view.views.CardsView;

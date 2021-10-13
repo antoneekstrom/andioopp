@@ -1,4 +1,4 @@
-package andioopp.service.domain;
+package andioopp.service.model;
 
 import andioopp.common.time.Time;
 import andioopp.common.math.Vector3f;
@@ -8,7 +8,7 @@ import andioopp.model.tower.Tower;
 import andioopp.model.tower.attack.Attack;
 import andioopp.model.world.World;
 
-public class PerformAttackService extends DomainService {
+public class PerformAttackService extends ModelService {
 
     @Override
     public void update(Model model, Time time) {

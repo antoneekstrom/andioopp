@@ -1,4 +1,4 @@
-package andioopp.service.domain;
+package andioopp.service.model;
 
 import andioopp.common.time.Time;
 import andioopp.model.Model;
@@ -6,7 +6,7 @@ import andioopp.model.enemy.Enemy;
 import andioopp.model.tower.Tower;
 import andioopp.model.world.World;
 
-public class HandleEnemyAttackService extends DomainService {
+public class HandleEnemyAttackService extends ModelService {
 
     @Override
     public void update(Model model, Time time) {

@@ -1,10 +1,10 @@
-package andioopp.service.domain;
+package andioopp.service.model;
 
 import andioopp.common.time.Time;
 import andioopp.model.Model;
 import andioopp.model.tower.attack.projectiles.Projectile;
 
-public class UpdateProjectileService extends DomainService {
+public class UpdateProjectileService extends ModelService {
 
     @Override
     public void update(Model model, Time time) {

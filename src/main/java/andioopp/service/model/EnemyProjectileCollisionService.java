@@ -1,4 +1,4 @@
-package andioopp.service.domain;
+package andioopp.service.model;
 
 import andioopp.common.time.Time;
 import andioopp.common.math.Vector3f;
@@ -10,7 +10,7 @@ import andioopp.model.world.World;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class EnemyProjectileCollisionService extends DomainService {
+public class EnemyProjectileCollisionService extends ModelService {
 
     @Override
     public void update(Model model, Time time) {

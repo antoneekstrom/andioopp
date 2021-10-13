@@ -1,10 +1,13 @@
-package andioopp.service.domain;
+package andioopp.service.model;
 
 import andioopp.common.time.Time;
 import andioopp.model.Model;
 import andioopp.service.Service;
 
-public abstract class DomainService implements Service<Model> {
+/**
+ * A service that operates on the {@link Model}.
+ */
+public abstract class ModelService implements Service<Model> {
 
     @Override
     public void onSetup(Model model) {}

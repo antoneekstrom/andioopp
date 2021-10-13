@@ -1,10 +1,10 @@
-package andioopp.service.domain;
+package andioopp.service.model;
 
 import andioopp.common.time.Time;
 import andioopp.model.Model;
 import andioopp.model.waves.WaveQueue;
 
-public class UpdateWavesService extends DomainService {
+public class UpdateWavesService extends ModelService {
 
     private final WaveQueue waves;
     private double delay = 1;

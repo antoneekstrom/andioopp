@@ -1,10 +1,10 @@
-package andioopp.service.domain;
+package andioopp.service.model;
 
 import andioopp.common.time.Time;
 import andioopp.model.Model;
 import andioopp.model.world.World;
 
-public class DespawnOutOfBoundsService extends DomainService {
+public class DespawnOutOfBoundsService extends ModelService {
 
     @Override
     public void update(Model model, Time time) {

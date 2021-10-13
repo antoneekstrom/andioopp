@@ -8,7 +8,7 @@ import andioopp.common.time.Time;
 import andioopp.model.Model;
 import andioopp.model.interfaces.Updateable;
 import andioopp.service.Service;
-import andioopp.service.domain.DomainService;
+import andioopp.service.model.ModelService;
 import andioopp.view.View;
 
 import java.util.Collection;
@@ -91,8 +91,8 @@ public class Game<S extends Sprite<?>> implements Updateable {
         views.add(view);
     }
 
-    public void registerDomainService(DomainService domainService) {
-        services.add(new GameServiceAdapter<>(domainService, this::domainServiceAdapter));
+    public void registerDomainService(ModelService modelService) {
+        services.add(new GameServiceAdapter<>(modelService, this::domainServiceAdapter));
     }
 
     private Model domainServiceAdapter(Game<?> game) {
