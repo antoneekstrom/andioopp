@@ -2,6 +2,11 @@ package andioopp.model.player;
 
 import java.util.Objects;
 
+/**
+ * An immutable type which represents an amount of money.
+ * <p>
+ * Any operation on Money will yield a new money object with the result.
+ */
 public class Money {
     private final int money;
 
@@ -24,18 +29,16 @@ public class Money {
     private Money spend(int amount) {
         if (canSpend(amount)) {
             return subtract(amount);
-        }
-        else {
-            return new Money(getMoney());
+        } else {
+            throw new RuntimeException();
         }
     }
 
     private Money add(int amount) {
         if (amount > 0) {
             return new Money(getMoney() + amount);
-        }
-        else {
-            return new Money(getMoney());
+        } else {
+            throw new RuntimeException();
         }
     }
 

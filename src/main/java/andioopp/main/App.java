@@ -20,6 +20,7 @@ import andioopp.model.Model;
 import andioopp.model.player.Money;
 import andioopp.model.player.Player;
 import andioopp.model.player.TowerCard;
+import andioopp.model.player.Wallet;
 import andioopp.model.tower.Towers;
 import andioopp.model.world.LaneBuilder;
 import andioopp.model.world.World;
@@ -151,7 +152,7 @@ public class App extends Application {
                 new TowerCard<>(new Money(-1), Towers::yoshi),
                 new TowerCard<>(new Money(-1), Towers::luigi)
         );
-        Player player = new Player(cards, new Money(100));
+        Player player = new Player(cards, new Wallet(new Money(100)));
 
         WorldBuilder worldBuilder = new WorldBuilder(new LaneBuilder(listFactory).setCells(7), listFactory).setLanes(5);
         World build = worldBuilder.build();

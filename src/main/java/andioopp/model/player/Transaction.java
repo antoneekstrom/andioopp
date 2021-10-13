@@ -9,7 +9,7 @@ public class Transaction<T> {
     Transaction(Money money, Money cost, T result) {
         this.result = result;
         this.successful = money.canSpend(cost);
-        this.remaining = money.spend(cost);
+        this.remaining = successful ? money.spend(cost) : money;
     }
 
     public Money remainingMoney() {

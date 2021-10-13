@@ -5,38 +5,31 @@ import java.util.List;
 
 public class Player {
 
-    private Money money;
+    private final Wallet wallet;
     private final List<TowerCard<?>> cards;
 
-    public Player(List<TowerCard<?>> cards, Money money) {
-        this.money = money;
+    public Player(List<TowerCard<?>> cards, Wallet wallet) {
+        this.wallet = wallet;
         this.cards = cards;
     }
 
     public Player(List<TowerCard<?>> cards) {
-        this(cards, new Money(0));
+        this(cards, new Wallet(new Money(10)));
     }
 
-    public Money give(Money money) {
-        setMoney(getMoney().add(money));
-        return getMoney();
+    public void giveMoney(Money money) {
+        wallet.add(money);
     }
 
     public <T> Transaction<T> buy(TransactionSupplier<T> supplier) {
-        Transaction<T> transaction = supplier.purchase(getMoney());
-        setMoney(transaction.remainingMoney());
-        return transaction;
+        return wallet.buy(supplier);
+    }
+
+    public Money getMoney() {
+        return wallet.getMoney();
     }
 
     public List<TowerCard<?>> getCards() {
         return Collections.unmodifiableList(cards);
-    }
-
-    public Money getMoney() {
-        return money;
-    }
-
-    private void setMoney(Money money) {
-        this.money = money;
     }
 }
