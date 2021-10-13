@@ -11,7 +11,7 @@ public class MouseEvent {
      * Type of mouse event.
      */
     public enum MouseEventType {
-        PRESS, RELEASE, MOVE
+        PRESS, RELEASE, MOVE, DRAG
     }
 
     private final Vector3f position;

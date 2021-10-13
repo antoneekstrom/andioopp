@@ -1,28 +1,25 @@
 package andioopp.control;
 
-import andioopp.service.infrastructure.input.MouseEvent;
 import andioopp.common.transform.Rectangle;
-import andioopp.model.tower.Tower;
+import andioopp.model.player.TowerCard;
 import andioopp.service.infrastructure.input.Draggable;
+import andioopp.service.infrastructure.input.MouseEvent;
 
-import java.util.function.Supplier;
+public class TowerCardDraggableController extends Draggable<TowerCardDragEvent> {
 
-public class TowerCardDraggableController extends Draggable<TowerDragEvent> {
+    private final TowerCard<?> card;
 
-    private final Supplier<Tower> towerSupplier;
-
-    public TowerCardDraggableController(Rectangle rectangle, Supplier<Tower> towerSupplier) {
+    public TowerCardDraggableController(Rectangle rectangle, TowerCard<?> card) {
         super(rectangle);
-        this.towerSupplier = towerSupplier;
+        this.card = card;
     }
 
     @Override
-    protected TowerDragEvent getDragData() {
-        return new TowerDragEvent(towerSupplier.get());
+    protected TowerCardDragEvent getDragData() {
+        return new TowerCardDragEvent(card);
     }
 
     @Override
     public void onEvent(MouseEvent event) {
-
     }
 }

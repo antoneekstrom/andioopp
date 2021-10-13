@@ -1,4 +1,4 @@
-package andioopp.model;
+package andioopp.model.interfaces;
 
 import andioopp.common.time.Time;
 

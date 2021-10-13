@@ -2,10 +2,12 @@ package andioopp.control;
 
 import andioopp.common.transform.Rectangle;
 import andioopp.model.Model;
+import andioopp.model.player.Transaction;
+import andioopp.model.tower.Tower;
 import andioopp.model.world.Cell;
 import andioopp.service.infrastructure.input.Droppable;
 
-public class CellDroppableController extends Droppable<TowerDragEvent> {
+public class CellDroppableController extends Droppable<TowerCardDragEvent> {
 
     private final Model model;
     private final int row;
@@ -19,14 +21,21 @@ public class CellDroppableController extends Droppable<TowerDragEvent> {
     }
 
     @Override
-    public void onEvent(TowerDragEvent event) {
-        if (event.getTower() != null) {
-            Cell cell = model.getWorld().getCell(row, col);
-            if(cell.getTower() == null) {
-                if (model.getWorld().getMoney().purchase(event.getTower().getCost())) {
-                    cell.setTower(event.getTower());
+    public void onEvent(TowerCardDragEvent event) {
+        Cell cell = getCell();
+        if (!cell.hasTower()) {
+            Transaction<? extends Tower> transaction = model.getPlayer().buy(event.getCard());
+            if (transaction.isSuccessful()) {
+                try {
+                    cell.setTower(transaction.getResult());
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }
+    }
+
+    private Cell getCell() {
+        return model.getWorld().getCell(row, col);
     }
 }

@@ -1,84 +1,33 @@
 package model.world;
 
-import andioopp.common.transform.Vector3f;
-import andioopp.model.FilterImmunity;
-import andioopp.model.FilterRequirement;
+import andioopp.common.storage.ArrayListFactory;
 import andioopp.model.Model;
-import andioopp.model.enemy.Enemies;
-import andioopp.model.enemy.Enemy;
-import andioopp.model.tower.attack.projectiles.FireballProjectile;
-import andioopp.model.tower.attack.projectiles.Projectile;
+import andioopp.model.player.Money;
+import andioopp.model.player.Player;
+import andioopp.model.player.TowerCard;
+import andioopp.model.tower.Tower;
+import andioopp.model.tower.Towers;
 import andioopp.model.waves.WaveQueue;
-import andioopp.model.world.Cell;
-import andioopp.model.world.Lane;
-import org.junit.Before;
+import andioopp.model.world.*;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class WorldTest {
 
-    private final WaveQueue waveQueue = new WaveQueue();
-    private final Model model = new Model(waveQueue, Collections.emptyList());
-    private final ArrayList<FilterRequirement> FireballRequirements = new ArrayList<>();
-    private final ArrayList<FilterImmunity> FireballImmunity = new ArrayList<>();
-
-
-    @Before
-    public void setup() {
-        FireballRequirements.add(FilterRequirement.GROUND);
-        FireballImmunity.add(FilterImmunity.FIREBALL);
-
-    }
+    private final World world = new WorldBuilder(new LaneBuilder(new ArrayListFactory()), new ArrayListFactory()).setLanes(5).build();
 
     @Test
-    public void testIsEnemyDead() {
-        Enemies enemies = new Enemies();
-        Enemy enemy1 = enemies.createRandomEnemy(model.getWorld(), 1);
-        Enemy enemy2 = enemies.createRandomEnemy(model.getWorld(), 1);
-        Enemy enemy3 = enemies.createRandomEnemy(model.getWorld(), 1);
-
-        //checks if enemy is dead if decreasing it´s health to 0.
-        enemy1.getHealth().decrease(enemy1.getHealth().get());
-        assertTrue(model.getWorld().isEnemyDead(enemy1));
-
-        //checks if enemy is dead when decreasing its health to 1.
-        enemy2.getHealth().decrease(enemy2.getHealth().get() - 1);
-        assertFalse(model.getWorld().isEnemyDead(enemy2));
-
-        //checks if enemy is dead when decreasing it´s health to -1.
-        enemy3.getHealth().decrease(enemy3.getHealth().get() + 1);
-        assertTrue(model.getWorld().isEnemyDead(enemy3));
-    }
-
-
-    @Test
-    public void testGetNumberOfLanes(){
+    public void testGetNumberOfLanes() {
         List<Cell> cells = new ArrayList<>();
-        Cell cell = new Cell();
-        cells.add(cell);
+        cells.add(new Cell());
         Lane lane = new Lane(cells);
-        //Clears all lanes from the world
-        model.getWorld().getLanes().clear();
-        //Adds one single lane
-        model.getWorld().getLanes().add(lane);
-        //checks if number of lanes is 1.
-        assertEquals(1, model.getWorld().getNumberOfLanes());
+        world.getLanes().clear();
+        world.getLanes().add(lane);
+        assertEquals(1, world.getNumberOfLanes());
     }
-
-    @Test
-    public void testAddProjectiles() {
-        Vector3f v = new Vector3f(1, 1);
-        Collection<Projectile> projectiles = new ArrayList<>();
-        Projectile projectile = new FireballProjectile(v, FireballRequirements, FireballImmunity);
-        projectiles.add(projectile);
-        model.getWorld().addProjectile(projectile);
-
-        assertTrue(projectiles.contains(projectile));
-    }
-
-
 }
