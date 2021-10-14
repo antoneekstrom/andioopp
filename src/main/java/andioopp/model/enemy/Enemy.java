@@ -21,19 +21,21 @@ public abstract class Enemy implements Updateable, DamageFilter {
     private final String spritePath;
     private final float attackCooldown;
     private final float speed;
+    private final int loot;
 
     private boolean towerAhead = false;
     private float timeOfLastAttack;
 
     private final DamageFilter damageFilter;
 
-    protected Enemy(String spritePath, Transform transform, Health health, float speed, float attackCooldown, DamageFilter damageFilter) {
+    protected Enemy(String spritePath, Transform transform, Health health, float speed, float attackCooldown, DamageFilter damageFilter, int loot) {
         this.spritePath = spritePath;
         this.transform = transform;
         this.health = health;
         this.speed = speed; // Negative speed since enemies come from the left
         this.attackCooldown = attackCooldown;
         this.damageFilter = damageFilter;
+        this.loot = loot;
     }
 
     @Override
@@ -94,5 +96,9 @@ public abstract class Enemy implements Updateable, DamageFilter {
 
     public void setTowerAhead(boolean state) {
         towerAhead = state;
+    }
+
+    public int getLoot() {
+        return loot;
     }
 }

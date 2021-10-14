@@ -8,7 +8,7 @@ import andioopp.control.TowerCardDragEvent;
 import andioopp.model.Model;
 import andioopp.service.infrastructure.input.DragAndDropService;
 import andioopp.view.gui.CardsView;
-import andioopp.view.gui.CoinView;
+import andioopp.view.gui.MoneyView;
 
 public class GameView<S extends Sprite<?>> implements View<S> {
 
@@ -24,10 +24,11 @@ public class GameView<S extends Sprite<?>> implements View<S> {
         TowersView<S> towersView = new TowersView<>(viewportRect, transformFactory);
         EnemiesView<S> enemiesView = new EnemiesView<>(viewportRect, transformFactory);
         ProjectilesView<S> projectilesView = new ProjectilesView<>(viewportRect, transformFactory);
-        CoinView<S> coinView = new CoinView<>(transformFactory);
+        DroppedCoinsView<S> droppedCoinsView = new DroppedCoinsView<>(viewportRect, transformFactory);
+        MoneyView<S> moneyView = new MoneyView<>(transformFactory);
         TowerDragMouseView<S> towerDragMouseView = new TowerDragMouseView<>(dragAndDropService);
 
-        view = new ComposedView<>(lanesView, cardsView, towersView, enemiesView, projectilesView, coinView, towerDragMouseView);
+        view = new ComposedView<>(lanesView, cardsView, towersView, enemiesView, projectilesView, droppedCoinsView, moneyView, towerDragMouseView);
     }
 
     @Override
