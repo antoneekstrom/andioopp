@@ -29,7 +29,7 @@ import andioopp.service.infrastructure.input.DragAndDropService;
 import andioopp.service.infrastructure.input.MouseEvent;
 import andioopp.view.*;
 import andioopp.view.gui.CardsView;
-import andioopp.view.gui.CoinView;
+import andioopp.view.gui.MoneyView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -82,9 +82,10 @@ public class App extends Application {
         Rectangle viewportRect = getViewportRect(game);
 
         CardsView<S> cardsView = new CardsView<>(viewportRect);
-        CoinView<S> coinView = new CoinView<>(transformFactory);
+        MoneyView<S> moneyView = new MoneyView<>(transformFactory);
         LanesView<S> lanesView = new LanesView<>(viewportRect);
         ProjectilesView<S> projectilesView = new ProjectilesView<>(viewportRect, transformFactory);
+        DroppedCoinsView<S> droppedCoinsView = new DroppedCoinsView<>(viewportRect, transformFactory);
         EnemiesView<S> enemiesView = new EnemiesView<>(viewportRect, transformFactory);
         TowersView<S> towersView = new TowersView<>(viewportRect, transformFactory);
 
@@ -94,7 +95,8 @@ public class App extends Application {
         game.registerView(towersView);
         game.registerView(enemiesView);
         game.registerView(projectilesView);
-        game.registerView(coinView);
+        game.registerView(droppedCoinsView);
+        game.registerView(moneyView);
         game.registerView(cardsView);
 
         registerTowerDragControllerAndView(game, lanesView, cardsView);

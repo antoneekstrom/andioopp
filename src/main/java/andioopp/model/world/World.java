@@ -2,6 +2,7 @@ package andioopp.model.world;
 
 import andioopp.common.transform.Dimension;
 import andioopp.model.enemy.Enemy;
+import andioopp.model.entity.DroppedCoinEntity;
 import andioopp.model.tower.attack.projectiles.Projectile;
 
 import java.util.Collection;
@@ -13,11 +14,13 @@ public class World {
     private final List<Lane> lanes;
     private final Collection<Enemy> enemies;
     private final Collection<Projectile> projectiles;
+    private final Collection<DroppedCoinEntity> droppedCoins;
 
-    World(List<Lane> lanes, Collection<Enemy> enemies, Collection<Projectile> projectiles) {
+    World(List<Lane> lanes, Collection<Enemy> enemies, Collection<Projectile> projectiles, Collection<DroppedCoinEntity> droppedCoins) {
         this.lanes = lanes;
         this.enemies = enemies;
         this.projectiles = projectiles;
+        this.droppedCoins = droppedCoins;
     }
 
     public Dimension getGridSize() {
@@ -62,5 +65,9 @@ public class World {
 
     public Collection<Projectile> getProjectiles() {
         return projectiles;
+    }
+
+    public Collection<DroppedCoinEntity> getDroppedCoins() {
+        return droppedCoins;
     }
 }

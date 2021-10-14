@@ -13,13 +13,13 @@ import andioopp.model.player.Player;
 import andioopp.view.View;
 import javafx.scene.text.Font;
 
-public class CoinView<S extends Sprite<?>> implements View<S> {
+public class MoneyView<S extends Sprite<?>> implements View<S> {
 
     private static final String sprite = "coinBox.png";
 
     private final TransformFactory transformFactory;
 
-    public CoinView(TransformFactory transformFactory) {
+    public MoneyView(TransformFactory transformFactory) {
         this.transformFactory = transformFactory;
     }
 

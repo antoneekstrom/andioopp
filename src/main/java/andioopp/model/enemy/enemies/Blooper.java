@@ -15,7 +15,7 @@ public class Blooper extends Enemy {
     private static final DamageFilter DAMAGE_FILTER = new FilterGrounded();
 
     public Blooper(Transform transform) {
-        super(SPRITE_PATH, transform, new Health(BASE_HEALTH), BASE_SPEED, BASE_ATTACK_COOLDOWN, DAMAGE_FILTER);
+        super(SPRITE_PATH, transform, new Health(BASE_HEALTH), BASE_SPEED, BASE_ATTACK_COOLDOWN, DAMAGE_FILTER, 8);
     }
 }
 
