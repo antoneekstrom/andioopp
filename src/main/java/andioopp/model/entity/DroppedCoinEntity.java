@@ -14,12 +14,10 @@ public class DroppedCoinEntity {
     private final Rectangle rectangle;
 
     private final int value;
-    private final Vector3f position;
     private boolean collected = false;
 
     public DroppedCoinEntity(int value, Vector3f position) {
         this.value = value;
-        this.position = position;
         rectangle = new Rectangle(position, new Dimension(0.3f, 0.4f));
     }
 
