@@ -28,8 +28,8 @@ import andioopp.model.world.WorldBuilder;
 import andioopp.service.model.*;
 import andioopp.service.infrastructure.input.DragAndDropService;
 import andioopp.service.infrastructure.input.MouseEvent;
+import andioopp.view.DroppedCoinsView;
 import andioopp.view.views.CardsView;
-import andioopp.view.views.CoinView;
 import andioopp.view.views.*;
 
 import java.util.List;
@@ -79,7 +79,7 @@ public class MarioGame {
         Rectangle viewportRect = getViewportRect(game);
 
         CardsView<S> cardsView = new CardsView<>(viewportRect);
-        CoinView<S> coinView = new CoinView<>(transformFactory);
+        DroppedCoinsView<S> coinView = new DroppedCoinsView<>(viewportRect, transformFactory);
         LanesView<S> lanesView = new LanesView<>(viewportRect);
         ProjectilesView<S> projectilesView = new ProjectilesView<>(viewportRect, transformFactory);
         EnemiesView<S> enemiesView = new EnemiesView<>(viewportRect, transformFactory);

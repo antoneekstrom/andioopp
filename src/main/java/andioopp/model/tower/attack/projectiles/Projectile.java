@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * A projectile.
- * Usually part of an attack from a tower, i.e. a fireball.
+ * Usually part of an attack from a tower, an example being a fireball.
  */
 public abstract class Projectile implements Updateable, DamageSource {
 

@@ -4,6 +4,7 @@ import andioopp.common.time.Time;
 import andioopp.common.math.Vector3f;
 import andioopp.model.Model;
 import andioopp.model.enemy.Enemy;
+import andioopp.model.entity.DroppedCoinEntity;
 import andioopp.model.tower.attack.projectiles.Projectile;
 import andioopp.model.world.World;
 
@@ -15,10 +16,10 @@ public class EnemyProjectileCollisionService extends ModelService {
     @Override
     public void update(Model model, Time time) {
         World world = model.getWorld();
-        checkProjectileHitboxes(world.getProjectiles(), world.getEnemies());
+        checkProjectileHitboxes(world.getProjectiles(), world.getEnemies(), world);
     }
 
-    private void checkProjectileHitboxes(Collection<Projectile> projectiles, Collection<Enemy> enemies) {
+    private void checkProjectileHitboxes(Collection<Projectile> projectiles, Collection<Enemy> enemies, World world) {
         for (Iterator<Projectile> projectileIterator = projectiles.iterator(); projectileIterator.hasNext(); ) {
             Projectile projectile = projectileIterator.next();
 
@@ -29,7 +30,7 @@ public class EnemyProjectileCollisionService extends ModelService {
                 float dm = 0.2f; //dm stands for delta max
 
                 if (Math.abs(pp.getX() - ep.getX()) < dm && Math.abs(pp.getY() - ep.getY()) < dm) {
-                    evaluateProjectileHit(projectile, enemy, projectileIterator, enemyIterator);
+                    evaluateProjectileHit(projectile, enemy, projectileIterator, enemyIterator, world);
                 }
             }
         }
@@ -43,7 +44,7 @@ public class EnemyProjectileCollisionService extends ModelService {
      * @param projectileIterator to edit list of projectiles
      * @param enemyIterator      to edit list of enemies
      */
-    private void evaluateProjectileHit(Projectile projectile, Enemy enemy, Iterator<Projectile> projectileIterator, Iterator<Enemy> enemyIterator) {
+    private void evaluateProjectileHit(Projectile projectile, Enemy enemy, Iterator<Projectile> projectileIterator, Iterator<Enemy> enemyIterator, World world) {
         if (projectile.alreadyInteractedWith.contains(enemy)) {
             return;
         }
@@ -54,6 +55,7 @@ public class EnemyProjectileCollisionService extends ModelService {
         if (enemy.canBeDamagedBy(projectile)) {
             enemy.getHealth().decrease(1);
             if (enemy.isDead()) {
+                world.getDroppedCoins().add(new DroppedCoinEntity(enemy.getLoot(), enemy.getPosition()));
                 enemyIterator.remove();
             }
         }
