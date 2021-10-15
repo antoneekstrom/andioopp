@@ -5,8 +5,11 @@ import andioopp.common.observer.Observable;
 import andioopp.common.observer.Observer;
 import andioopp.common.storage.ListFactory;
 import andioopp.common.observer.ConcreteObservable;
+import andioopp.controller.service.MouseService;
 
-public class DragAndDropService<T> extends MouseInputService {
+public class DragAndDropService<T> {
+
+    private final MouseService mouseService;
 
     private final Observable<MouseEvent, Draggable<T>> draggableObservable;
     private final Observable<T, Droppable<T>> droppableObservable;
@@ -15,10 +18,12 @@ public class DragAndDropService<T> extends MouseInputService {
     private boolean isDragging = false;
     private Vector3f mousePosition = Vector3f.zero();
 
-    public DragAndDropService(Observable<MouseEvent, Observer<MouseEvent>> mouseDataObservable, ListFactory listFactory) {
-        super(mouseDataObservable);
+    public DragAndDropService(MouseService mouseService, ListFactory listFactory) {
+        this.mouseService = mouseService;
         this.draggableObservable = new ConcreteObservable<>(listFactory.create());
         this.droppableObservable = new ConcreteObservable<>(listFactory.create());
+
+        this.mouseService.addObserver(this::onMouseEvent);
     }
 
     private void onMouseEvent(MouseEvent e) {
@@ -73,14 +78,6 @@ public class DragAndDropService<T> extends MouseInputService {
 
     public T getDragData() {
         return dragData;
-    }
-
-    public void register() {
-        getMouseDataObservable().addObserver(this::onMouseEvent);
-    }
-
-    public void unregister() {
-        getMouseDataObservable().removeObserver(this::onMouseEvent);
     }
 
     public Observable<MouseEvent, Draggable<T>> getDraggableObservable() {

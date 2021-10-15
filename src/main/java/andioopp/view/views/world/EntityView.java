@@ -9,11 +9,11 @@ import andioopp.model.domain.world.World;
 
 public class EntityView {
 
-    protected EntityView(Rectangle viewportRect) {
+    protected EntityView(RectanglePlupp viewportRect) {
         super(viewportRect);
     }
 
-    protected Rectangle getEntityRect(World world, Vector3f position, Sprite<?> sprite) {
+    protected RectanglePlupp getEntityRect(World world, Vector3f position, Sprite<?> sprite) {
         return new ImmutableRectangle(getEntityPosition(world, position), getEntitySize(world, sprite));
     }
 

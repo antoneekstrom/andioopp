@@ -1,41 +1,41 @@
-package andioopp.common.math.rectangle;
 
+import andioopp.common.math.Rectangle;
 import andioopp.common.math.Vector3f;
 import andioopp.common.math.Dimension;
 
 import java.util.Objects;
 
-public class ImmutableRectangle implements Rectangle {
+public class ImmutableRectangle<V extends Vector3f> implements Rectangle<V> {
 
-    private final Vector3f position;
-    private final Dimension size;
+    private final V position;
+    private final Dimension<V> size;
 
-    public ImmutableRectangle(Vector3f position, Dimension size) {
+    public ImmutableRectangle(V position, Dimension<V> size) {
         this.position = position;
         this.size = size;
     }
 
     public ImmutableRectangle(float x, float y, float w, float h) {
-        this(new Vector3f(x, y), new Dimension(w, h));
+        this(new Vector3f(x, y), new Dimension<>(w, h));
     }
 
     @Override
-    public Vector3f getPosition() {
+    public V getPosition() {
         return position;
     }
 
     @Override
-    public Dimension getSize() {
+    public Dimension<V> getSize() {
         return size;
     }
 
     @Override
-    public Rectangle setPosition(Vector3f position) {
+    public Rectangle<V> setPosition(Vector3f position) {
         return new ImmutableRectangle(position, size);
     }
 
     @Override
-    public Rectangle setSize(Dimension size) {
+    public Rectangle<V> setSize(Dimension size) {
         return new ImmutableRectangle(position, size);
     }
 
@@ -51,7 +51,7 @@ public class ImmutableRectangle implements Rectangle {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Rectangle rectangle = (Rectangle) o;
+        Rectangle<?> rectangle = (Rectangle<?>) o;
         return getPosition().equals(rectangle.getPosition()) && getSize().equals(rectangle.getSize());
     }
 

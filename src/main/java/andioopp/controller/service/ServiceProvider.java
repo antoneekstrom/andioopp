@@ -10,12 +10,16 @@ import andioopp.common.storage.ListFactory;
 public class ServiceProvider {
 
     private final ListFactory listFactory;
+    private final MouseService mouseService;
 
-    public ServiceProvider(ListFactory listFactory) {
+    public ServiceProvider(ListFactory listFactory, MouseService mouseService) {
         this.listFactory = listFactory;
+        this.mouseService = mouseService;
     }
 
     public ListFactory getListFactory() {
         return listFactory;
     }
+
+    public MouseService mouseService() { return mouseService; }
 }
