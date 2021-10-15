@@ -14,7 +14,7 @@ import andioopp.model.domain.interfaces.Updateable;
 /**
  * An enemy.
  */
-public abstract class Enemy implements Updateable, DamageFilter {
+public abstract class Enemy implements DamageFilter {
 
     private final Health health;
     private final String spritePath;
