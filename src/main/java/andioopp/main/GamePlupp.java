@@ -70,6 +70,7 @@ public class GamePlupp implements GfxProgram {
         addService(new HandleEnemyAttackService(), model, clock);
         addService(new DespawnOutOfBoundsService(), model, clock);
         addService(new UpdateWavesService(), model, clock);
+        addService(new RemoveSingleUseTower(), model, clock);
     }
 
     private void addService(DomainService service, Model model, Clock clock) {

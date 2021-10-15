@@ -3,7 +3,6 @@ package andioopp.model.world;
 import andioopp.common.transform.Dimension;
 import andioopp.model.enemy.Enemy;
 import andioopp.model.tower.attack.projectiles.Projectile;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;

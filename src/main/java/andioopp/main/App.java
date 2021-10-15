@@ -117,6 +117,7 @@ public class App extends Application {
         game.registerDomainService(new HandleEnemyAttackService());
         game.registerDomainService(new DespawnOutOfBoundsService());
         game.registerDomainService(new UpdateWavesService());
+        game.registerDomainService(new RemoveSingleUseTower());
     }
 
     private FxWindow getWindow(Stage stage) {
@@ -146,10 +147,10 @@ public class App extends Application {
         List<TowerCard<?>> cards = listFactory.create(
                 new TowerCard<>(new Money(40), Towers::toad),
                 new TowerCard<>(new Money(60), Towers::mario),
-                new TowerCard<>(new Money(-1), Towers::rosalina),
-                new TowerCard<>(new Money(-1), Towers::bobomb),
-                new TowerCard<>(new Money(-1), Towers::yoshi),
-                new TowerCard<>(new Money(-1), Towers::luigi)
+                new TowerCard<>(new Money(500), Towers::rosalina),
+                new TowerCard<>(new Money(200), Towers::bobomb),
+                new TowerCard<>(new Money(83), Towers::yoshi),
+                new TowerCard<>(new Money(150), Towers::luigi)
         );
         Player player = new Player(cards, new Money(100));
 
