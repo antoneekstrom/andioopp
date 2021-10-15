@@ -1,6 +1,6 @@
 package andioopp.controller.controllers;
 
-import andioopp.common.math.rectangle.Rectangle;
+import andioopp.common.math.rectangle.RectanglePlupp;
 import andioopp.controller.service.input.Droppable;
 import andioopp.model.Model;
 import andioopp.model.domain.money.Transaction;
@@ -13,7 +13,7 @@ public class CellDroppableController extends Droppable<TowerCardDragEvent> {
     private final int row;
     private final int col;
 
-    public CellDroppableController(Rectangle rectangle, Model model, int row, int col) {
+    public CellDroppableController(RectanglePlupp rectangle, Model model, int row, int col) {
         super(rectangle);
         this.model = model;
         this.row = row;

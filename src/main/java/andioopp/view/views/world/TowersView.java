@@ -4,7 +4,7 @@ import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
 import andioopp.common.math.Dimension;
 import andioopp.common.math.Vector3f;
-import andioopp.common.math.rectangle.Rectangle;
+import andioopp.common.math.rectangle.RectanglePlupp;
 import andioopp.common.math.transform.Transform;
 import andioopp.common.math.transform.TransformFactory;
 import andioopp.model.Model;
@@ -17,7 +17,7 @@ public class TowersView<S extends Sprite<?>> extends CellView implements View<S>
 
     private final TransformFactory transformFactory;
 
-    public TowersView(Rectangle viewportRect, TransformFactory transformFactory) {
+    public TowersView(RectanglePlupp viewportRect, TransformFactory transformFactory) {
         super(viewportRect);
         this.transformFactory = transformFactory;
     }
@@ -47,7 +47,7 @@ public class TowersView<S extends Sprite<?>> extends CellView implements View<S>
     }
 
     private Vector3f getTowerPosition(World world, int row, int col) {
-        Rectangle cellRect = getCellRect(world, row, col);
+        RectanglePlupp cellRect = getCellRect(world, row, col);
         return cellRect.getPosition().add(cellRect.getSize().toVector().scale(Vector3f.fromY(TOWER_CELL_OFFSET_PERCENT)));
     }
 

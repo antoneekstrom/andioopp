@@ -3,11 +3,11 @@ package andioopp.common.math.rectangle;
 import andioopp.common.math.Dimension;
 import andioopp.common.math.Vector3f;
 
-public class MutableRectangle implements Rectangle {
+public class MutableRectangle implements RectanglePlupp {
 
-    private Rectangle rectangle;
+    private RectanglePlupp rectangle;
 
-    public MutableRectangle(Rectangle rectangle) {
+    public MutableRectangle(RectanglePlupp rectangle) {
         this.rectangle = rectangle;
     }
 
@@ -19,7 +19,7 @@ public class MutableRectangle implements Rectangle {
         this(new Vector3f(x, y), new Dimension(w, h));
     }
 
-    private void setRectangle(Rectangle rectangle) {
+    private void setRectangle(RectanglePlupp rectangle) {
         this.rectangle = rectangle;
     }
 
