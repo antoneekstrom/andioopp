@@ -1,7 +1,7 @@
-package andioopp.plupp.controller;
+package andioopp.controller;
 
-import andioopp.plupp.service.ServiceProvider;
-import andioopp.plupp.view.View;
+import andioopp.controller.service.ServiceProvider;
+import andioopp.view.View;
 
 /**
  * Handles and translates user input from the view into actions on the model.

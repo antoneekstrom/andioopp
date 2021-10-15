@@ -1,10 +1,11 @@
-package andioopp.service.infrastructure.input;
+package andioopp.controller.service.input;
 
+import andioopp.common.graphics.Window;
 import andioopp.common.observer.Observable;
 import andioopp.common.observer.Observer;
 
 /**
- * Middleman which communicates with {@link andioopp.common.graphics.Window}.
+ * Middleman which communicates with {@link Window}.
  */
 public class MouseInputService {
 

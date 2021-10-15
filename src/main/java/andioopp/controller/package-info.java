@@ -3,4 +3,4 @@
  *
  * @author Anton Ekström, Jacob Bengtsson, Arvid Svedberg, Amanda Papacosta, Elin Nilsson
  */
-package andioopp.plupp.controller;
+package andioopp.controller;

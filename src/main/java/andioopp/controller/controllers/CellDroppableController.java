@@ -1,11 +1,11 @@
-package andioopp.control;
+package andioopp.controller.controllers;
 
 import andioopp.common.math.rectangle.Rectangle;
+import andioopp.controller.service.input.Droppable;
 import andioopp.model.Model;
-import andioopp.model.money.Transaction;
-import andioopp.model.tower.Tower;
-import andioopp.model.world.Cell;
-import andioopp.service.infrastructure.input.Droppable;
+import andioopp.model.domain.money.Transaction;
+import andioopp.model.domain.tower.Tower;
+import andioopp.model.domain.world.Cell;
 
 public class CellDroppableController extends Droppable<TowerCardDragEvent> {
 

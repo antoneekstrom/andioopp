@@ -1,9 +1,9 @@
-package andioopp.control;
+package andioopp.controller.controllers;
 
 import andioopp.common.math.rectangle.Rectangle;
-import andioopp.model.player.TowerCard;
-import andioopp.service.infrastructure.input.Draggable;
-import andioopp.service.infrastructure.input.MouseEvent;
+import andioopp.controller.service.input.Draggable;
+import andioopp.controller.service.input.MouseEvent;
+import andioopp.model.domain.player.TowerCard;
 
 public class TowerCardDraggableController extends Draggable<TowerCardDragEvent> {
 

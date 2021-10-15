@@ -1,8 +1,8 @@
-package andioopp.plupp.controller;
+package andioopp.controller;
 
-import andioopp.plupp.model.Model;
-import andioopp.plupp.service.ServiceProvider;
-import andioopp.plupp.view.views.DroppedCoinsView;
+import andioopp.controller.service.ServiceProvider;
+import andioopp.model.Model;
+import andioopp.view.views.world.DroppedCoinsView;
 
 public class ClickCoinController implements Controller<Model, DroppedCoinsView> {
     @Override

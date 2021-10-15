@@ -1,14 +1,13 @@
-package andioopp.control;
+package andioopp.controller.controllers;
 
-import andioopp.common.storage.ListFactory;
 import andioopp.common.math.rectangle.Rectangle;
+import andioopp.common.storage.ListFactory;
 import andioopp.model.Model;
-import andioopp.model.player.TowerCard;
-import andioopp.model.world.World;
-import andioopp.service.infrastructure.input.DragAndDropService;
-import andioopp.view.views.LanesView;
-import andioopp.view.views.CardsView;
-import andioopp.view.views.TowerCardView;
+import andioopp.model.domain.player.TowerCard;
+import andioopp.controller.service.input.DragAndDropService;
+import andioopp.view.views.world.LanesView;
+import andioopp.view.views.gui.CardsView;
+import andioopp.view.views.gui.TowerCardView;
 
 import java.util.Collection;
 import java.util.List;

@@ -1,7 +1,7 @@
-package andioopp.service.infrastructure.input;
+package andioopp.controller.service.input;
 
-import andioopp.common.observer.Observer;
 import andioopp.common.math.rectangle.Rectangle;
+import andioopp.common.observer.Observer;
 
 public abstract class Draggable<T> implements Observer<MouseEvent> {
     private final Rectangle rectangle;
