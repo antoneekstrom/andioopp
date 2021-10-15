@@ -4,9 +4,10 @@ import andioopp.common.graphics.Sprite;
 import andioopp.common.math.Dimension;
 import andioopp.common.math.Vector3f;
 import andioopp.common.math.rectangle.ImmutableRectangle;
-import andioopp.common.math.rectangle.RectanglePlupp;
+import andioopp.common.math.rectangle.Rectangle;
+import andioopp.model.domain.world.World;
 
-public class EntityView extends CellView {
+public class EntityView {
 
     protected EntityView(RectanglePlupp viewportRect) {
         super(viewportRect);
