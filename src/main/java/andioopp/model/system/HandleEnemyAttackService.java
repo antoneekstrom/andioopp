@@ -4,6 +4,7 @@ import andioopp.common.time.Time;
 import andioopp.model.Model;
 import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.tower.Tower;
+import andioopp.model.domain.world.World;
 
 public class HandleEnemyAttackService extends ModelService {
 

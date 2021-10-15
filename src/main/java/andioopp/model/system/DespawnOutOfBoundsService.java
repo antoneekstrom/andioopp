@@ -2,6 +2,7 @@ package andioopp.model.system;
 
 import andioopp.common.time.Time;
 import andioopp.model.Model;
+import andioopp.model.domain.world.World;
 
 public class DespawnOutOfBoundsService extends ModelService {
 
