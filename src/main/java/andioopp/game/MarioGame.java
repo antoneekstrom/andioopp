@@ -1,19 +1,19 @@
-package andioopp.plupp.game;
+package andioopp.game;
 
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.storage.ListFactory;
+import andioopp.controller.Controller;
+import andioopp.controller.service.ServiceProvider;
 import andioopp.model.Model;
-import andioopp.model.money.Money;
-import andioopp.model.money.Wallet;
-import andioopp.model.player.Player;
-import andioopp.model.player.TowerCard;
-import andioopp.model.tower.Towers;
-import andioopp.model.world.LaneBuilder;
-import andioopp.model.world.World;
-import andioopp.model.world.WorldBuilder;
-import andioopp.plupp.controller.Controller;
-import andioopp.plupp.service.ServiceProvider;
-import andioopp.plupp.view.View;
+import andioopp.model.domain.money.Money;
+import andioopp.model.domain.money.Wallet;
+import andioopp.model.domain.player.Player;
+import andioopp.model.domain.player.TowerCard;
+import andioopp.model.domain.tower.Towers;
+import andioopp.model.domain.world.LaneBuilder;
+import andioopp.model.domain.world.World;
+import andioopp.model.domain.world.WorldBuilder;
+import andioopp.view.View;
 
 import java.util.List;
 
