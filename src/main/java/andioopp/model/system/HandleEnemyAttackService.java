@@ -6,7 +6,7 @@ import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.tower.Tower;
 import andioopp.model.domain.world.World;
 
-public class HandleEnemyAttackService extends ModelService {
+public class HandleEnemyAttackService implements System<Model> {
 
     @Override
     public void update(Model model, Time time) {

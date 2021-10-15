@@ -4,7 +4,6 @@ import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
 import andioopp.common.math.Dimension;
 import andioopp.common.math.Vector3f;
-import andioopp.common.math.rectangle.Rectangle;
 import andioopp.common.math.transform.Transform;
 import andioopp.common.math.transform.TransformFactory;
 import andioopp.model.Model;

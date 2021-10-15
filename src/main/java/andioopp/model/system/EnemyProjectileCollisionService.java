@@ -6,11 +6,12 @@ import andioopp.model.Model;
 import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.entity.DroppedCoinEntity;
 import andioopp.model.domain.tower.attack.projectiles.Projectile;
+import andioopp.model.domain.world.World;
 
 import java.util.Collection;
 import java.util.Iterator;
 
-public class EnemyProjectileCollisionService extends ModelService {
+public class EnemyProjectileCollisionService implements System<Model> {
 
     @Override
     public void update(Model model, Time time) {
@@ -54,7 +55,7 @@ public class EnemyProjectileCollisionService extends ModelService {
         if (enemy.canBeDamagedBy(projectile)) {
             enemy.getHealth().decrease(1);
             if (enemy.isDead()) {
-                world.getDroppedCoins().add(new DroppedCoinEntity(enemy.getLoot(), enemy.getPosition()));
+                world.getDroppedCoins().add(new DroppedCoinEntity(enemy.getPosition(), enemy.getReward()));
                 enemyIterator.remove();
             }
         }

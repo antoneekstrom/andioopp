@@ -5,6 +5,7 @@ import andioopp.common.graphics.SpriteFactory;
 import andioopp.common.math.Dimension;
 import andioopp.common.math.Rectangle;
 import andioopp.common.time.Time;
+import andioopp.model.domain.money.Money;
 import andioopp.model.util.ModelCoordinate;
 import andioopp.model.domain.damage.DamageFilter;
 import andioopp.model.domain.damage.DamageSource;
@@ -20,7 +21,7 @@ public abstract class Enemy implements DamageFilter {
     private final String spritePath;
     private final float attackCooldown;
     private final float speed;
-    private final int loot;
+    private final Money reward;
 
     private boolean towerAhead = false;
     private float timeOfLastAttack;
@@ -28,13 +29,13 @@ public abstract class Enemy implements DamageFilter {
 
     private final DamageFilter damageFilter;
 
-    protected Enemy(String spritePath, Health health, Rectangle<ModelCoordinate> rectangle, float speed, float attackCooldown, DamageFilter damageFilter, int loot) {
+    protected Enemy(String spritePath, Health health, Rectangle<ModelCoordinate> rectangle, float speed, float attackCooldown, DamageFilter damageFilter, Money reward) {
         this.spritePath = spritePath;
         this.health = health;
         this.speed = speed; // Negative speed since enemies come from the left
         this.attackCooldown = attackCooldown;
         this.damageFilter = damageFilter;
-        this.loot = loot;
+        this.reward = reward;
         this.rectangle = rectangle;
     }
 
@@ -77,6 +78,10 @@ public abstract class Enemy implements DamageFilter {
 
     public Dimension<ModelCoordinate> getSize() { return rectangle.getSize(); }
 
+    public void move() {
+        rectangle.getPosition().add(new ModelCoordinate(speed));
+    }
+
     public boolean isDead() {
         return getHealth().isZero();
     }
@@ -85,7 +90,9 @@ public abstract class Enemy implements DamageFilter {
         towerAhead = state;
     }
 
-    public int getLoot() {
-        return loot;
+    public boolean isTowerAhead() {return towerAhead;}
+
+    public Money getReward() {
+        return reward;
     }
 }

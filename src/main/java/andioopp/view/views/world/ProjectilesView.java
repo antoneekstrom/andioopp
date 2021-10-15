@@ -3,7 +3,7 @@ package andioopp.view.views.world;
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
 import andioopp.common.math.Dimension;
-import andioopp.common.math.rectangle.Rectangle;
+import andioopp.common.math.rectangle.RectanglePlupp;
 import andioopp.common.math.transform.Transform;
 import andioopp.common.math.transform.TransformFactory;
 import andioopp.model.domain.tower.attack.projectiles.Projectile;
@@ -18,7 +18,7 @@ public class ProjectilesView<S extends Sprite<?>> extends EntityView implements 
 
     private final TransformFactory transformFactory;
 
-    public ProjectilesView(Rectangle viewportRect, TransformFactory transformFactory) {
+    public ProjectilesView(RectanglePlupp viewportRect, TransformFactory transformFactory) {
         super(viewportRect);
         this.transformFactory = transformFactory;
     }
@@ -26,7 +26,7 @@ public class ProjectilesView<S extends Sprite<?>> extends EntityView implements 
 
     private void renderProjectile(Renderer<S> renderer, World world, Projectile projectile) {
         S sprite = renderer.getSpriteFactory().get(projectile.getSpritePath());
-        Rectangle enemyRect = getEntityRect(world, projectile.getPosition(), sprite);
+        RectanglePlupp enemyRect = getEntityRect(world, projectile.getPosition(), sprite);
         Transform enemyTransform = transformFactory.createWithPosition(enemyRect.getPosition());
         renderer.drawSprite(sprite, enemyTransform, enemyRect.getSize());
     }
