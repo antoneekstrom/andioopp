@@ -5,8 +5,10 @@ import andioopp.controller.service.input.Draggable;
 import andioopp.controller.service.input.MouseEvent;
 import andioopp.model.domain.player.TowerCard;
 
+/**
+ * Controls dragging behaviour for a {@link TowerCard}.
+ */
 public class TowerCardDraggableController extends Draggable<TowerCardDragEvent> {
-
     private final TowerCard<?> card;
 
     public TowerCardDraggableController(RectanglePlupp rectangle, TowerCard<?> card) {
