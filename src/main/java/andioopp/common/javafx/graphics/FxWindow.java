@@ -1,13 +1,13 @@
 package andioopp.common.javafx.graphics;
 
+import andioopp.common.math.Dimension;
+import andioopp.common.math.Vector3f;
+import andioopp.common.storage.ArrayListFactory;
+import andioopp.controller.service.input.MouseEvent;
 import andioopp.common.graphics.Window;
 import andioopp.common.observer.Observable;
 import andioopp.common.observer.ConcreteObservable;
 import andioopp.common.observer.Observer;
-import andioopp.common.storage.ArrayListFactory;
-import andioopp.common.math.Dimension;
-import andioopp.common.math.Vector3f;
-import andioopp.service.infrastructure.input.MouseEvent;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;

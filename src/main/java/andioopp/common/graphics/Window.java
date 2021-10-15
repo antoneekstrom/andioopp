@@ -1,9 +1,9 @@
 package andioopp.common.graphics;
 
+import andioopp.common.math.Dimension;
 import andioopp.common.observer.Observable;
 import andioopp.common.observer.Observer;
-import andioopp.common.math.Dimension;
-import andioopp.service.infrastructure.input.MouseEvent;
+import andioopp.controller.service.input.MouseEvent;
 
 /**
  * Represents the application window.

@@ -1,9 +1,9 @@
 package model.money;
 
-import andioopp.model.money.Money;
-import andioopp.model.money.Transaction;
-import andioopp.model.money.TransactionSupplier;
-import andioopp.model.money.Wallet;
+import andioopp.model.domain.money.Money;
+import andioopp.model.domain.money.Transaction;
+import andioopp.model.domain.money.TransactionSupplier;
+import andioopp.model.domain.money.Wallet;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

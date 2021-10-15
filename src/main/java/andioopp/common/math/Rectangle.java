@@ -1,7 +1,4 @@
-package andioopp.plupp.common.math;
-
-import andioopp.common.math.Dimension;
-import andioopp.common.math.Vector3f;
+package andioopp.common.math;
 
 public interface Rectangle<V extends Vector3f> {
     /**
@@ -18,7 +15,7 @@ public interface Rectangle<V extends Vector3f> {
      * @param size the new size
      * @return the result, may be the same object
      */
-    Rectangle<V> setSize(Dimension size);
+    Rectangle<V> setSize(Dimension<V> size);
 
     /**
      * Returns the position.
@@ -30,5 +27,5 @@ public interface Rectangle<V extends Vector3f> {
      * Returns the size.
      * @return the size
      */
-    Dimension getSize();
+    Dimension<V> getSize();
 }

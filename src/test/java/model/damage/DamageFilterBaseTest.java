@@ -1,12 +1,12 @@
 package model.damage;
 
-import andioopp.model.damage.DamageFilter;
-import andioopp.model.damage.BaseDamageSource;
-import andioopp.model.damage.DamageType;
-import andioopp.model.damage.targets.FilterAny;
-import andioopp.model.damage.targets.FilterFlying;
-import andioopp.model.damage.targets.FilterGhost;
-import andioopp.model.damage.targets.FilterGrounded;
+import andioopp.model.domain.damage.DamageFilter;
+import andioopp.model.domain.damage.BaseDamageSource;
+import andioopp.model.domain.damage.DamageType;
+import andioopp.model.domain.damage.targets.FilterAny;
+import andioopp.model.domain.damage.targets.FilterFlying;
+import andioopp.model.domain.damage.targets.FilterGhost;
+import andioopp.model.domain.damage.targets.FilterGrounded;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -2,7 +2,7 @@ package plupp.view.util;
 
 import andioopp.common.math.Dimension;
 import andioopp.common.math.Vector3f;
-import andioopp.plupp.view.util.Viewport;
+import andioopp.view.util.Viewport;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
