@@ -1,8 +1,9 @@
-package andioopp.plupp.game;
+package andioopp.game;
 
-import andioopp.plupp.controller.Controller;
-import andioopp.plupp.service.ServiceProvider;
-import andioopp.plupp.view.View;
+import andioopp.common.time.Time;
+import andioopp.controller.Controller;
+import andioopp.controller.service.ServiceProvider;
+import andioopp.view.View;
 
 import java.util.List;
 

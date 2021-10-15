@@ -1,6 +1,7 @@
 package andioopp.main;
 
 import andioopp.common.javafx.graphics.FxWindowBuilder;
+import andioopp.game.MarioGame;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -17,7 +18,6 @@ public class App extends Application {
     private void run(Stage stage) {
         FxWindowBuilder windowBuilder = new FxWindowBuilder(stage);
         MarioGame game = new MarioGame();
-        game.start(windowBuilder);
     }
 
     @Override
