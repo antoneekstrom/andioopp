@@ -7,12 +7,15 @@ import andioopp.common.math.Vector3f;
 import andioopp.common.math.rectangle.ImmutableRectangle;
 import andioopp.common.math.rectangle.Rectangle;
 import andioopp.model.Model;
+import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.player.TowerCard;
 import andioopp.view.View;
+import andioopp.view.util.ModelViewport;
+import andioopp.view.util.ViewCoordinate;
 
 import java.util.List;
 
-public class CardsView<S extends Sprite<?>> implements View<S> {
+public class CardsView implements View<Model> {
 
     private final static Vector3f CARD_OFFSET = new Vector3f(20);
 
@@ -22,14 +25,6 @@ public class CardsView<S extends Sprite<?>> implements View<S> {
         this.viewport = viewportRect;
     }
 
-    @Override
-    public void render(Renderer<S> renderer, Model model) {
-        List<TowerCard<?>> cards = model.getPlayer().getCards();
-        for (int i = 0; i < cards.size(); i++) {
-            Vector3f cardPosition = getTowerCardRect(i).getPosition();
-            new TowerCardView<S>(cards.get(i)).renderTowerCard(renderer, cardPosition);
-        }
-    }
 
     public Rectangle getTowerCardRect(int cardIndex) {
         return getTowerCardRect(getViewportPosition().sub(TowerCardView.getCardDimension().fromY()), cardIndex);
@@ -47,4 +42,16 @@ public class CardsView<S extends Sprite<?>> implements View<S> {
     private Rectangle getViewport() {
         return viewport;
     }
+
+
+    @Override
+    public <S extends Sprite<?>> void render(Model model, Renderer<S> renderer, ModelViewport viewport) {
+        List<TowerCard<?>> cards = model.getPlayer().getCards();
+        for (int i = 0; i < cards.size(); i++) {
+            Vector3f cardPosition = getTowerCardRect(i).getPosition();
+            new TowerCardView(cards.get(i)).renderTowerCard(renderer, cardPosition, viewport);
+        }
+    }
+
+
 }
