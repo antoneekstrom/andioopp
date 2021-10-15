@@ -9,8 +9,8 @@ import static org.junit.Assert.*;
 
 public class ViewportTest {
 
-    private final Dimension SCREEN_DIMENSION = new Dimension(1280, 720);
-    private final Dimension HALF_SCREEN_DIMENSION = SCREEN_DIMENSION.halved();
+    private final Dimension<Vector3f> SCREEN_DIMENSION = new Dimension<>(new Vector3f(1280, 720));
+    private final Dimension<Vector3f> HALF_SCREEN_DIMENSION = SCREEN_DIMENSION.halved();
     private final Vector3f HALF_SCREEN_OFFSET = SCREEN_DIMENSION.halved().toVector();
     private final Vector3f NO_OFFSET = Vector3f.zero();
 

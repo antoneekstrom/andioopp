@@ -5,40 +5,24 @@ import java.util.Objects;
 /**
  * Represents a two-dimensional size or dimension.
  */
-public class Dimension {
+public class Dimension<V extends Vector3f> {
 
-    private final Vector3f dimension;
+    private final V dimension;
 
-    public Dimension(Dimension dimension) {
-        this.dimension = dimension.toVector();
-    }
-
-    public Dimension(Vector3f dimension) {
+    public Dimension(V dimension) {
         this.dimension = dimension;
     }
 
-    public Dimension(float width, float height) {
-        this(new Vector3f(width, height));
+    public Dimension(Dimension<V> dimension) {
+        this.dimension = dimension.toVector();
     }
 
-    /**
-     * Creates a dimension with each side set to one.
-     *
-     * @return the dimension
-     */
-    public static Dimension unit() {
-        return new Dimension(Vector3f.one());
-    }
 
-    public Vector3f toVector() {
+    public V toVector() {
         return dimension;
     }
 
-    public Dimension round() {
-        return new Dimension(toVector().round());
-    }
-
-    public Dimension halved() { return new Dimension(getWidth() / 2, getHeight() / 2); }
+    public Dimension<Vector3f> halved() { return new Dimension<>(new Vector3f(getWidth() / 2, getHeight() / 2)); }
 
 
     /**
@@ -46,9 +30,9 @@ public class Dimension {
      * @param width the new width
      * @return the result
      */
-    public Dimension setWidth(float width) {
+    public Dimension<Vector3f> setWidth(float width) {
         float ratio = getWidth() / getHeight();
-        return new Dimension(width, width / ratio);
+        return new Dimension<>(new Vector3f(width, width / ratio));
     }
 
     /**
@@ -56,9 +40,9 @@ public class Dimension {
      * @param height the new width
      * @return the result
      */
-    public Dimension setHeight(float height) {
+    public Dimension<Vector3f> setHeight(float height) {
         float ratio = getWidth() / getHeight();
-        return new Dimension(height * ratio, height);
+        return new Dimension<>(new Vector3f(height * ratio, height));
     }
 
 
@@ -68,28 +52,6 @@ public class Dimension {
 
     public float getHeight() {
         return toVector().getY();
-    }
-
-
-    /**
-     * @param position the position
-     * @param other    the other
-     * @return the result
-     * @deprecated
-     */
-    public Vector3f centerWithin(Vector3f position, Dimension other) {
-        Vector3f center = getCenter(position);
-        Vector3f offset = other.toVector().scale(-0.5f);
-        return center.add(offset);
-    }
-
-    /**
-     * @param position the position
-     * @return the result
-     * @deprecated
-     */
-    public Vector3f getCenter(Vector3f position) {
-        return position.add(toVector().scale(0.5f));
     }
 
 
@@ -104,7 +66,7 @@ public class Dimension {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Dimension dimension1 = (Dimension) o;
+        Dimension<?> dimension1 = (Dimension<?>) o;
         return dimension.equals(dimension1.dimension);
     }
 
