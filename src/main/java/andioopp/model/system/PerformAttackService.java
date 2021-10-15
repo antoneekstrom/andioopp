@@ -6,6 +6,7 @@ import andioopp.model.Model;
 import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.tower.Tower;
 import andioopp.model.domain.tower.attack.Attack;
+import andioopp.model.domain.world.World;
 
 public class PerformAttackService extends ModelService {
 

@@ -5,6 +5,7 @@ import andioopp.model.domain.tower.attack.AttackTargetArea;
 import andioopp.model.domain.world.World;
 
 public class NonTargeting implements AttackTargetArea {
+
     @Override
     public boolean enemyIsInRange(Vector3f towerPosition, Vector3f enemyPosition, World world) {
         return true;

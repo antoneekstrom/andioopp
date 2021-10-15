@@ -9,7 +9,7 @@ import andioopp.common.time.Time;
  * @author Anton Ekström, Jacob Bengtsson
  */
 @FunctionalInterface
-public interface System<M> {
+public interface    System<M> {
 
     /**
      * Applies the system on the model.
