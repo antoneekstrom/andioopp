@@ -32,7 +32,7 @@ public class LanesView implements View<Model> {
 
     private <S extends Sprite<?>> void renderCell(Renderer<S> renderer, ModelViewport viewport, int row, int col) {
         ViewCoordinate viewPosition = viewport.getViewCoordinate(new ModelCoordinate(row, col));
-        Dimension<ViewCoordinate> viewSize = viewport.getViewSize(new Dimension<>(new ModelCoordinate(1, 1)));
+        Dimension viewSize = viewport.getViewSize(new Dimension(new ModelCoordinate(1, 1)));
         Color cellColor = getCellColor(row, col);
         renderer.drawRectangle(viewPosition, viewSize, cellColor);
     }

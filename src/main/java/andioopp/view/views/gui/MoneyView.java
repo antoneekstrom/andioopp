@@ -47,7 +47,7 @@ public class MoneyView implements View<Model> {
         S coinViewSprite = renderer.getSpriteFactory().get("");
         ViewCoordinate viewPosition = viewport.getViewCoordinate(new ModelCoordinate(getSpritePosition()));
 
-        Dimension <ViewCoordinate> coinViewScreenSize = viewport.getViewSize(new Dimension(new Vector3f(WIDTH,HEIGHT,0)));
+        Dimension coinViewScreenSize = viewport.getViewSize(new Dimension(new Vector3f(WIDTH,HEIGHT,0)));
 
         //Transform coinViewScreenTransform = transformFactory.createWithPosition(getSpritePosition());
         renderer.drawSprite(coinViewSprite, viewPosition, coinViewScreenSize);

@@ -36,7 +36,7 @@ public class TowersView implements View<Model> {
         S sprite = tower.getSprite(renderer.getSpriteFactory());
 
         ViewCoordinate viewPosition = viewport.getViewCoordinate(new ModelCoordinate(row, col));
-        Dimension<ViewCoordinate> viewSize = viewport.getViewSize(tower.getSize());
+        Dimension viewSize = viewport.getViewSize(tower.getSize());
 
         renderer.drawSprite(sprite, viewPosition, viewSize);
     }

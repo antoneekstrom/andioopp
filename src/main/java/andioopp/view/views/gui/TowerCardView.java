@@ -57,7 +57,7 @@ public class TowerCardView  {
     public <S extends Sprite<?>> void renderTowerCard(Renderer<S> renderer, Vector3f towerCardPosition, ModelViewport viewport) {
         S sprite = tower.getSprite(renderer.getSpriteFactory());
         ViewCoordinate viewPosition = viewport.getViewCoordinate(new ModelCoordinate(new Vector3f(towerCardPosition.getX() + 15, towerCardPosition.getY())));
-        Dimension<ViewCoordinate> viewSize = viewport.getViewSize(new Dimension(getCardDimension()));
+        Dimension viewSize = viewport.getViewSize(new Dimension(getCardDimension()));
 
         renderer.drawRectangle(towerCardPosition, new Dimension(new Vector3f(WIDTH, HEIGHT)), new Color(150, 150, 150));
         renderer.drawSprite(sprite,viewPosition,viewSize);

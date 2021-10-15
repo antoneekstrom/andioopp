@@ -45,7 +45,7 @@ public class TowerDragMouseView implements View<Model> {
         if (dragAndDropService.isDragging()) {
             Tower tower = dragAndDropService.getDragData().getCard().getSupplier().get();
             S sprite = dragAndDropService.getDragData().getCard().getSupplier().get().getSprite(renderer.getSpriteFactory());
-            Dimension<ViewCoordinate> viewSize = viewport.getViewSize(tower.getSize());
+            Dimension viewSize = viewport.getViewSize(tower.getSize());
             //Dimension<ViewCoordinate> viewSize = enemiesView.getEntitySize(model.getWorld(), sprite);viewport.getViewSize(getSize());
             ViewCoordinate viewPosition = viewport.getViewCoordinate(new ModelCoordinate(dragAndDropService.getMousePosition().sub(viewSize.toVector().scale(0.5f))));
 

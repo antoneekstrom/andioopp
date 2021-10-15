@@ -11,7 +11,7 @@ import andioopp.model.domain.world.World;
 import andioopp.view.View;
 import andioopp.view.util.ModelViewport;
 
-public class ProjectilesView<S extends Sprite<?>> extends EntityView implements View<S> {
+public class ProjectilesView<S extends Sprite<?>> implements View<S> {
 
     private static final float TOWER_CELL_OFFSET_PERCENT = -0.3f;
 
