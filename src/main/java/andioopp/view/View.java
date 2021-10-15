@@ -2,17 +2,24 @@ package andioopp.view;
 
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
-import andioopp.model.Model;
+import andioopp.view.util.ModelViewport;
 
 /**
- * @author Anton Ekström
- * @param <S>
+ * Represents a view of the model.
+ *
+ * @param <M> the type of the model
+ * @author Anton Ekström, Jacob Bengtsson
  */
 @FunctionalInterface
-public interface View<S extends Sprite<?>> {
+public interface View<M> {
+
     /**
-     * Renders the model.
-     * @param model the model to render
+     * Renders the model using a renderer.
+     *
+     * @param model    the model to render
+     * @param renderer the renderer to use
+     * @param viewport the viewport in which to render
      */
-    void render(Renderer<S> renderer, Model model);
+    <S extends Sprite<?>> void render(M model, Renderer<S> renderer, ModelViewport viewport);
+
 }

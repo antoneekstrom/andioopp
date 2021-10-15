@@ -1,14 +1,15 @@
-package andioopp.view.views;
+package andioopp.view.views.gui;
 
 import andioopp.common.graphics.Color;
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
-import andioopp.common.math.*;
+import andioopp.common.math.Dimension;
+import andioopp.common.math.Vector3f;
 import andioopp.common.math.transform.ConcreteTransform;
 import andioopp.common.math.transform.Transform;
 import andioopp.common.math.transform.TransformFactory;
-import andioopp.model.player.TowerCard;
-import andioopp.model.tower.Tower;
+import andioopp.model.domain.player.TowerCard;
+import andioopp.model.domain.tower.Tower;
 import javafx.scene.text.Font;
 
 public class TowerCardView<S extends Sprite<?>> {

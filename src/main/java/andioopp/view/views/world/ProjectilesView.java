@@ -1,4 +1,4 @@
-package andioopp.view.views;
+package andioopp.view.views.world;
 
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
@@ -6,9 +6,8 @@ import andioopp.common.math.Dimension;
 import andioopp.common.math.rectangle.Rectangle;
 import andioopp.common.math.transform.Transform;
 import andioopp.common.math.transform.TransformFactory;
+import andioopp.model.domain.tower.attack.projectiles.Projectile;
 import andioopp.model.Model;
-import andioopp.model.tower.attack.projectiles.Projectile;
-import andioopp.model.world.World;
 import andioopp.view.View;
 
 public class ProjectilesView<S extends Sprite<?>> extends EntityView implements View<S> {

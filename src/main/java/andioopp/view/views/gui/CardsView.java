@@ -1,13 +1,13 @@
-package andioopp.view.views;
+package andioopp.view.views.gui;
 
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
 import andioopp.common.math.Dimension;
+import andioopp.common.math.Vector3f;
 import andioopp.common.math.rectangle.ImmutableRectangle;
 import andioopp.common.math.rectangle.Rectangle;
-import andioopp.common.math.Vector3f;
 import andioopp.model.Model;
-import andioopp.model.player.TowerCard;
+import andioopp.model.domain.player.TowerCard;
 import andioopp.view.View;
 
 import java.util.List;

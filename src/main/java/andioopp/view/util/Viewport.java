@@ -1,4 +1,4 @@
-package andioopp.plupp.view.util;
+package andioopp.view.util;
 
 import andioopp.common.math.Dimension;
 import andioopp.common.math.Vector3f;
@@ -16,6 +16,10 @@ public class Viewport {
         this.insideDimension = insideDimension;
         this.outsideDimension = outsideDimension;
         this.outsideOffset = outsideOffset;
+    }
+
+    public Vector3f getSizeOutside(Vector3f sizeInside) {
+        return sizeInside.scale(getInsideToOutsideScaling());
     }
 
     public Vector3f getPositionOutside(Vector3f positionInside) {

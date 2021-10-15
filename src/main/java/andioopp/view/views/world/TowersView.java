@@ -1,14 +1,14 @@
-package andioopp.view.views;
+package andioopp.view.views.world;
 
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
-import andioopp.common.math.*;
+import andioopp.common.math.Dimension;
+import andioopp.common.math.Vector3f;
 import andioopp.common.math.rectangle.Rectangle;
 import andioopp.common.math.transform.Transform;
 import andioopp.common.math.transform.TransformFactory;
 import andioopp.model.Model;
-import andioopp.model.tower.Tower;
-import andioopp.model.world.World;
+import andioopp.model.domain.tower.Tower;
 import andioopp.view.View;
 
 public class TowersView<S extends Sprite<?>> extends CellView implements View<S> {

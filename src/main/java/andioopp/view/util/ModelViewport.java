@@ -1,9 +1,9 @@
-package andioopp.plupp.view.util;
+package andioopp.view.util;
 
 import andioopp.common.math.Dimension;
 import andioopp.common.math.Vector3f;
+import andioopp.model.util.ModelCoordinate;
 import andioopp.model.Model;
-import andioopp.plupp.model.util.ModelCoordinate;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -23,6 +23,10 @@ public class ModelViewport {
 
     public ViewCoordinate getViewCoordinate(ModelCoordinate modelCoordinate) {
         return new ViewCoordinate(viewport.getPositionOutside(modelCoordinate));
+    }
+
+    public Dimension<ViewCoordinate> getViewSize(Dimension<ModelCoordinate> modelSize) {
+        return new Dimension<>(new ViewCoordinate(viewport.getSizeOutside(modelSize.toVector())));
     }
 
     private Dimension getInsideDimensionFromModel(Model model) {

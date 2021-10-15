@@ -1,11 +1,10 @@
-package andioopp.view.views;
+package andioopp.view.views.world;
 
 import andioopp.common.graphics.Sprite;
 import andioopp.common.math.Dimension;
+import andioopp.common.math.Vector3f;
 import andioopp.common.math.rectangle.ImmutableRectangle;
 import andioopp.common.math.rectangle.Rectangle;
-import andioopp.common.math.Vector3f;
-import andioopp.model.world.World;
 
 public class EntityView extends CellView {
 
