@@ -95,6 +95,10 @@ public abstract class Enemy implements DamageFilter {
 
     public Dimension<ModelCoordinate> getSize() { return rectangle.getSize(); }
 
+    public void move() {
+        rectangle.getPosition().add(new ModelCoordinate(speed));
+    }
+
     public boolean isDead() {
         return getHealth().isZero();
     }
@@ -102,6 +106,8 @@ public abstract class Enemy implements DamageFilter {
     public void setTowerAhead(boolean state) {
         towerAhead = state;
     }
+
+    public boolean isTowerAhead() {return towerAhead;}
 
     public Money getLoot() {
         return loot;

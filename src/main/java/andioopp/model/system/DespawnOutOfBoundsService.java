@@ -3,8 +3,9 @@ package andioopp.model.system;
 import andioopp.common.time.Time;
 import andioopp.model.Model;
 import andioopp.model.domain.world.World;
+import andioopp.model.util.ModelCoordinate;
 
-public class DespawnOutOfBoundsService extends ModelService {
+public class DespawnOutOfBoundsService implements System<Model> {
 
     @Override
     public void update(Model model, Time time) {
