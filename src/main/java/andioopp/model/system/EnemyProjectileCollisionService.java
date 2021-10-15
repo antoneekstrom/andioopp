@@ -6,6 +6,7 @@ import andioopp.model.Model;
 import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.entity.DroppedCoinEntity;
 import andioopp.model.domain.tower.attack.projectiles.Projectile;
+import andioopp.model.domain.world.World;
 
 import java.util.Collection;
 import java.util.Iterator;
