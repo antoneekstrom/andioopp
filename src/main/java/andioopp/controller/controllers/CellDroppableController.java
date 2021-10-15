@@ -7,6 +7,9 @@ import andioopp.model.domain.money.Transaction;
 import andioopp.model.domain.tower.Tower;
 import andioopp.model.domain.world.Cell;
 
+/**
+ * Controls dropping behaviour for a {@link Cell}.
+ */
 public class CellDroppableController extends Droppable<TowerCardDragEvent> {
 
     private final Model model;
@@ -18,6 +21,10 @@ public class CellDroppableController extends Droppable<TowerCardDragEvent> {
         this.model = model;
         this.row = row;
         this.col = col;
+    }
+
+    private Cell getCell() {
+        return model.getWorld().getCell(row, col);
     }
 
     @Override
@@ -33,9 +40,5 @@ public class CellDroppableController extends Droppable<TowerCardDragEvent> {
                 }
             }
         }
-    }
-
-    private Cell getCell() {
-        return model.getWorld().getCell(row, col);
     }
 }

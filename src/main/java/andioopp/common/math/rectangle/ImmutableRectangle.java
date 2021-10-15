@@ -1,4 +1,3 @@
-package andioopp.common.math.rectangle;
 
 import andioopp.common.math.Rectangle;
 import andioopp.common.math.Vector3f;
@@ -9,15 +8,15 @@ import java.util.Objects;
 public class ImmutableRectangle<V extends Vector3f> implements Rectangle<V> {
 
     private final V position;
-    private final Dimension size;
+    private final Dimension<V> size;
 
-    public ImmutableRectangle(V position, Dimension size) {
+    public ImmutableRectangle(V position, Dimension<V> size) {
         this.position = position;
         this.size = size;
     }
 
     public ImmutableRectangle(float x, float y, float w, float h) {
-        this(new Vector3f(x, y), new Dimension(w, h));
+        this(new Vector3f(x, y), new Dimension<>(w, h));
     }
 
     @Override
@@ -26,7 +25,7 @@ public class ImmutableRectangle<V extends Vector3f> implements Rectangle<V> {
     }
 
     @Override
-    public Dimension getSize() {
+    public Dimension<V> getSize() {
         return size;
     }
 
@@ -52,7 +51,7 @@ public class ImmutableRectangle<V extends Vector3f> implements Rectangle<V> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RectanglePlupp rectangle = (RectanglePlupp) o;
+        Rectangle<?> rectangle = (Rectangle<?>) o;
         return getPosition().equals(rectangle.getPosition()) && getSize().equals(rectangle.getSize());
     }
 
