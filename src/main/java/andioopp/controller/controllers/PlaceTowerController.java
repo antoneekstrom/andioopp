@@ -1,5 +1,6 @@
 package andioopp.controller.controllers;
 
+import andioopp.controller.Controller;
 import andioopp.controller.service.ServiceProvider;
 import andioopp.model.Model;
 import andioopp.model.domain.player.TowerCard;
@@ -11,7 +12,7 @@ import andioopp.view.views.gui.TowerCardView;
 import java.util.Collection;
 import java.util.List;
 
-public class PlaceTowerController {
+public class PlaceTowerController implements Controller<Model> {
 
     private Model model;
     private ModelViewport viewport;

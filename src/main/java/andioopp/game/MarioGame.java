@@ -1,8 +1,10 @@
 package andioopp.game;
 
+import andioopp.common.graphics.Window;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.storage.ListFactory;
 import andioopp.controller.Controller;
+import andioopp.controller.service.MouseService;
 import andioopp.controller.service.ServiceProvider;
 import andioopp.model.Model;
 import andioopp.model.domain.money.Money;
@@ -13,18 +15,25 @@ import andioopp.model.domain.tower.Towers;
 import andioopp.model.domain.world.LaneBuilder;
 import andioopp.model.domain.world.World;
 import andioopp.model.domain.world.WorldBuilder;
+import andioopp.model.system.System;
 import andioopp.view.View;
 
+import javax.naming.ldap.Control;
 import java.util.List;
 
 public class MarioGame extends Game<Model> {
 
-    public MarioGame() {
-        super(new ServiceProvider(new ArrayListFactory(), mouseService));
+    public MarioGame(Window<?> window) {
+        super(new ServiceProvider(new ArrayListFactory(), new MouseService(window)), window);
     }
 
     @Override
-    protected List<Controller<Model, ?>> initControllers() {
+    protected List<System<Model>> initSystems() {
+        return getServices().getListFactory().create();
+    }
+
+    @Override
+    protected List<Controller<Model>> initControllers() {
         return getServices().getListFactory().create();
     }
 

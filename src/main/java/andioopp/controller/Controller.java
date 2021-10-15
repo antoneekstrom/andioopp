@@ -1,5 +1,6 @@
 package andioopp.controller;
 
+import andioopp.common.graphics.Window;
 import andioopp.controller.service.ServiceProvider;
 import andioopp.view.View;
 
@@ -7,10 +8,9 @@ import andioopp.view.View;
  * Handles and translates user input from the view into actions on the model.
  *
  * @param <M> the type of the model
- * @param <V> the type of the view
  * @author Anton Ekström, Jacob Bengtsson
  */
-public interface Controller<M, V extends View<M>> {
+public interface Controller<M> {
 
     /**
      * Initializes the controller and provides it with dependencies.
@@ -19,7 +19,7 @@ public interface Controller<M, V extends View<M>> {
      * @param view            the view
      * @param serviceProvider the services
      */
-    void init(M model, V view, ServiceProvider serviceProvider);
+    void init(M model, Window<?> window, ServiceProvider serviceProvider);
 
     /**
      * Deinitializes the controller.

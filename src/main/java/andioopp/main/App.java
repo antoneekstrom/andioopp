@@ -1,9 +1,14 @@
 package andioopp.main;
 
 import andioopp.common.javafx.graphics.FxWindowBuilder;
+import andioopp.common.javafx.time.FxClock;
+import andioopp.common.observer.ConcreteObservable;
+import andioopp.common.time.Clock;
 import andioopp.game.MarioGame;
 import javafx.application.Application;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 /**
  * Application entrypoint.
@@ -17,7 +22,13 @@ public class App extends Application {
 
     private void run(Stage stage) {
         FxWindowBuilder windowBuilder = new FxWindowBuilder(stage);
-        MarioGame game = new MarioGame();
+        MarioGame game = new MarioGame(windowBuilder.build());
+
+        Clock clock = new FxClock(new ConcreteObservable<>(new ArrayList<>()));
+        clock.listen(game::update);
+
+        game.init();
+        clock.start();
     }
 
     @Override
