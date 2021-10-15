@@ -1,3 +1,4 @@
+package andioopp.common.math.rectangle;
 
 import andioopp.common.math.Rectangle;
 import andioopp.common.math.Vector3f;

@@ -1,6 +1,6 @@
 package andioopp.model.domain.waves;
 
-import andioopp.model.domain.enemy.Enemies;
+import andioopp.model.domain.enemy.EnemyFactory;
 import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.world.World;
 
@@ -24,7 +24,7 @@ public class Wave {
      * Adds same amount as numEnemies of random enemies to Wave
      */
     public void addEnemyToWave(World world) {
-        Enemies enemies = new Enemies();
+        EnemyFactory enemies = new EnemyFactory();
         int randLane;
         for (int i = 0; i < numEnemies; i++) {
             randLane = rand.nextInt(5);

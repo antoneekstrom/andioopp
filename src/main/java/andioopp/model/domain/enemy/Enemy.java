@@ -21,7 +21,7 @@ public abstract class Enemy implements DamageFilter {
     private final String spritePath;
     private final float attackCooldown;
     private final float speed;
-    private final Money loot;
+    private final Money reward;
 
     private boolean towerAhead = false;
     private float timeOfLastAttack;
@@ -29,13 +29,13 @@ public abstract class Enemy implements DamageFilter {
 
     private final DamageFilter damageFilter;
 
-    protected Enemy(String spritePath, Health health, Rectangle<ModelCoordinate> rectangle, float speed, float attackCooldown, DamageFilter damageFilter, Money loot) {
+    protected Enemy(String spritePath, Health health, Rectangle<ModelCoordinate> rectangle, float speed, float attackCooldown, DamageFilter damageFilter, Money reward) {
         this.spritePath = spritePath;
         this.health = health;
         this.speed = speed; // Negative speed since enemies come from the left
         this.attackCooldown = attackCooldown;
         this.damageFilter = damageFilter;
-        this.loot = loot;
+        this.reward = reward;
         this.rectangle = rectangle;
     }
 
@@ -109,7 +109,7 @@ public abstract class Enemy implements DamageFilter {
 
     public boolean isTowerAhead() {return towerAhead;}
 
-    public Money getLoot() {
-        return loot;
+    public Money getReward() {
+        return reward;
     }
 }
