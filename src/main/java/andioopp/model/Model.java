@@ -1,7 +1,7 @@
 package andioopp.model;
 
-import andioopp.model.player.Player;
-import andioopp.model.world.World;
+import andioopp.model.domain.world.World;
+import andioopp.model.domain.player.Player;
 
 public class Model {
 
