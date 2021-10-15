@@ -4,7 +4,7 @@ import andioopp.common.time.Time;
 import andioopp.model.Model;
 import andioopp.model.domain.waves.WaveQueue;
 
-public class UpdateWavesService extends ModelService {
+public class UpdateWavesService implements System<Model> {
 
     private final WaveQueue waves;
     private double delay = 1;
@@ -13,10 +13,6 @@ public class UpdateWavesService extends ModelService {
         this.waves = new WaveQueue();
     }
 
-    @Override
-    public void onSetup(Model model) {
-        waves.addWavesToWaveQueue(model.getWorld(), 3);
-    }
 
     @Override
     public void update(Model model, Time time) {
@@ -33,5 +29,4 @@ public class UpdateWavesService extends ModelService {
             }
         }
     }
-
 }

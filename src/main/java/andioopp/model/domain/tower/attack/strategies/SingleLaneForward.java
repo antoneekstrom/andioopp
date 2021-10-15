@@ -2,7 +2,7 @@ package andioopp.model.domain.tower.attack.strategies;
 
 import andioopp.common.math.Vector3f;
 import andioopp.model.domain.tower.attack.AttackTargetArea;
-//import andioopp.model.domain.world.World;
+import andioopp.model.domain.world.World;
 
 public class SingleLaneForward implements AttackTargetArea {
 

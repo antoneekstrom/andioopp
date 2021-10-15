@@ -2,6 +2,7 @@ package andioopp.model.domain.waves;
 
 import andioopp.model.domain.enemy.Enemies;
 import andioopp.model.domain.enemy.Enemy;
+import andioopp.model.domain.world.World;
 
 import java.util.Random;
 
