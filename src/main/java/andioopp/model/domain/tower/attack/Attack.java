@@ -7,6 +7,7 @@ import andioopp.model.Model;
 import andioopp.model.domain.damage.DamageSource;
 import andioopp.model.domain.damage.DamageType;
 import andioopp.model.domain.enemy.Enemy;
+import andioopp.model.domain.world.World;
 
 import java.util.Collection;
 import java.util.List;
