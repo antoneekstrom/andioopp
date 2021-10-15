@@ -3,4 +3,4 @@
  *
  * @author Anton Ekström
  */
-package andioopp.plupp.service;
+package andioopp.controller.service;

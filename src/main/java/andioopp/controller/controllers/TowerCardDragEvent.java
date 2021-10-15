@@ -1,7 +1,7 @@
-package andioopp.control;
+package andioopp.controller.controllers;
 
-import andioopp.model.player.TowerCard;
-import andioopp.model.tower.Tower;
+import andioopp.model.domain.player.TowerCard;
+import andioopp.model.domain.tower.Tower;
 
 public class TowerCardDragEvent {
 

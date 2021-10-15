@@ -1,4 +1,4 @@
-package andioopp.service.infrastructure.input;
+package andioopp.controller.service.input;
 
 import andioopp.common.math.Vector3f;
 

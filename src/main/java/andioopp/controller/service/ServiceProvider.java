@@ -1,4 +1,4 @@
-package andioopp.plupp.service;
+package andioopp.controller.service;
 
 /**
  * Provides a way to access services.
