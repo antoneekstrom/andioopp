@@ -1,6 +1,7 @@
 package andioopp.common.graphics;
 
 import andioopp.common.math.Dimension;
+import andioopp.common.math.transform.ConcreteTransform;
 import andioopp.common.math.transform.Transform;
 import andioopp.common.math.Vector3f;
 import javafx.scene.text.Font;
@@ -15,6 +16,15 @@ public interface Renderer<S extends Sprite<?>> {
      * @param sprite {@link Sprite} to draw
      */
     void drawSprite(S sprite, Transform transform, Dimension size);
+
+    /**
+     * Draws a sprite.
+     * @param sprite the sprite to draw
+     * @param position where the sprite should be drawn
+     */
+    default void drawSprite(S sprite, Vector3f position) {
+        drawSprite(sprite, ConcreteTransform.getFactory().createWithPosition(position), sprite.getSize());
+    }
 
     /**
      * Draws a sprite.
