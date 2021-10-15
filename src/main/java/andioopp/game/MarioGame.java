@@ -20,7 +20,7 @@ import java.util.List;
 public class MarioGame extends Game<Model> {
 
     public MarioGame() {
-        super(new ServiceProvider(new ArrayListFactory()));
+        super(new ServiceProvider(new ArrayListFactory(), mouseService));
     }
 
     @Override
