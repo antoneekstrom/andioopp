@@ -9,6 +9,7 @@ import andioopp.model.domain.enemy.enemies.Blooper;
 import andioopp.model.domain.enemy.enemies.BuzzyBeetle;
 import andioopp.model.domain.enemy.enemies.Goomba;
 import andioopp.model.domain.enemy.enemies.KoopaTroopa;
+import andioopp.model.domain.world.World;
 
 import java.util.List;
 
