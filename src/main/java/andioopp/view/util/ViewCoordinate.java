@@ -1,4 +1,4 @@
-package andioopp.plupp.view.util;
+package andioopp.view.util;
 
 import andioopp.common.math.Vector3f;
 

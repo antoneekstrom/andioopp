@@ -1,4 +1,4 @@
-package andioopp.view.views;
+package andioopp.view.views.gui;
 
 import andioopp.common.graphics.Color;
 import andioopp.common.graphics.Renderer;
@@ -9,7 +9,7 @@ import andioopp.common.math.Vector3f;
 import andioopp.common.math.transform.Transform;
 import andioopp.common.math.transform.TransformFactory;
 import andioopp.model.Model;
-import andioopp.model.player.Player;
+import andioopp.model.domain.player.Player;
 import andioopp.view.View;
 import javafx.scene.text.Font;
 

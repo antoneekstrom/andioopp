@@ -3,4 +3,4 @@
  *
  * @author Anton Ekström, Jacob Bengtsson, Arvid Svedberg
  */
-package andioopp.plupp.view;
+package andioopp.view;
