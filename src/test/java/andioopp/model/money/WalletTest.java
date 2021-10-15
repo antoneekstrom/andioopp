@@ -1,4 +1,4 @@
-package model.money;
+package andioopp.model.money;
 
 import andioopp.model.domain.money.Money;
 import andioopp.model.domain.money.Transaction;

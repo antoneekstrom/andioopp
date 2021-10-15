@@ -5,24 +5,28 @@ import java.util.Objects;
 /**
  * Represents a two-dimensional size or dimension.
  */
-public class Dimension<V extends Vector3f> {
+public class Dimension {
 
-    private final V dimension;
+    private final Vector3f dimension;
 
-    public Dimension(V dimension) {
-        this.dimension = dimension;
+    public Dimension(Vector3f vector) {
+        this.dimension = vector;
     }
 
-    public Dimension(Dimension<V> dimension) {
+    public Dimension(Dimension dimension) {
         this.dimension = dimension.toVector();
     }
 
+    public Dimension(float width, float height) {
+        this(new Vector3f(width, height));
+    }
 
-    public V toVector() {
+
+    public Vector3f toVector() {
         return dimension;
     }
 
-    public Dimension<Vector3f> halved() { return new Dimension<>(new Vector3f(getWidth() / 2, getHeight() / 2)); }
+    public Dimension halved() { return new Dimension(new Vector3f(getWidth() / 2, getHeight() / 2)); }
 
 
     /**
@@ -30,9 +34,9 @@ public class Dimension<V extends Vector3f> {
      * @param width the new width
      * @return the result
      */
-    public Dimension<Vector3f> setWidth(float width) {
+    public Dimension setWidth(float width) {
         float ratio = getWidth() / getHeight();
-        return new Dimension<>(new Vector3f(width, width / ratio));
+        return new Dimension(new Vector3f(width, width / ratio));
     }
 
     /**
@@ -40,9 +44,9 @@ public class Dimension<V extends Vector3f> {
      * @param height the new width
      * @return the result
      */
-    public Dimension<Vector3f> setHeight(float height) {
+    public Dimension setHeight(float height) {
         float ratio = getWidth() / getHeight();
-        return new Dimension<>(new Vector3f(height * ratio, height));
+        return new Dimension(new Vector3f(height * ratio, height));
     }
 
 
@@ -66,7 +70,7 @@ public class Dimension<V extends Vector3f> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Dimension<?> dimension1 = (Dimension<?>) o;
+        Dimension dimension1 = (Dimension) o;
         return dimension.equals(dimension1.dimension);
     }
 

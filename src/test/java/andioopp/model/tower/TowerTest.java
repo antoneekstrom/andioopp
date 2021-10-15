@@ -1,4 +1,4 @@
-package model.tower;
+package andioopp.model.tower;
 
 import andioopp.model.Model;
 import andioopp.model.domain.enemy.Enemy;

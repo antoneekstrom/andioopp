@@ -3,7 +3,6 @@ package andioopp.view.views.world;
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
 import andioopp.common.math.Dimension;
-import andioopp.common.math.rectangle.RectanglePlupp;
 import andioopp.common.math.transform.Transform;
 import andioopp.common.math.transform.TransformFactory;
 import andioopp.model.domain.tower.attack.projectiles.Projectile;

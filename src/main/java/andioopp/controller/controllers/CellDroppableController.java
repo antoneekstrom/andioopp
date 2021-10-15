@@ -1,6 +1,5 @@
 package andioopp.controller.controllers;
 
-import andioopp.common.math.rectangle.RectanglePlupp;
 import andioopp.controller.service.input.Droppable;
 import andioopp.model.Model;
 import andioopp.model.domain.money.Transaction;

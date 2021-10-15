@@ -1,6 +1,5 @@
 package andioopp.controller.controllers;
 
-import andioopp.common.math.rectangle.RectanglePlupp;
 import andioopp.controller.service.input.Draggable;
 import andioopp.controller.service.input.MouseEvent;
 import andioopp.model.domain.player.TowerCard;

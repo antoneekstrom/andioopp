@@ -1,4 +1,4 @@
-package model.world;
+package andioopp.model.world;
 
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.model.domain.world.*;

@@ -1,4 +1,4 @@
-package model.damage;
+package andioopp.model.damage;
 
 import andioopp.model.domain.damage.DamageFilter;
 import andioopp.model.domain.damage.BaseDamageSource;

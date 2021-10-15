@@ -5,7 +5,6 @@ import andioopp.common.graphics.Sprite;
 import andioopp.common.math.Dimension;
 import andioopp.common.math.Vector3f;
 import andioopp.common.math.rectangle.ImmutableRectangle;
-import andioopp.common.math.rectangle.RectanglePlupp;
 import andioopp.model.Model;
 import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.player.TowerCard;

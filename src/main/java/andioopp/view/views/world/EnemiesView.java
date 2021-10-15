@@ -25,7 +25,7 @@ public class EnemiesView implements View<Model> {
         S sprite = enemy.getSprite(renderer.getSpriteFactory());
 
         ViewCoordinate viewPosition = viewport.getViewCoordinate(enemy.getPosition());
-        Dimension<ViewCoordinate> viewSize = viewport.getViewSize(enemy.getSize());
+        Dimension viewSize = viewport.getViewSize(enemy.getSize());
 
         renderer.drawSprite(sprite, viewPosition, viewSize);
     }

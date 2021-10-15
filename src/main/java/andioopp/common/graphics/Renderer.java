@@ -22,7 +22,7 @@ public interface Renderer<S extends Sprite<?>> {
      * @param sprite the sprite to draw
      * @param position where the sprite should be drawn
      */
-    default void drawSprite(S sprite, Vector3f position, Dimension<?> size) {
+    default void drawSprite(S sprite, Vector3f position, Dimension size) {
         drawSprite(sprite, ConcreteTransform.getFactory().createWithPosition(position), size);
     }
 

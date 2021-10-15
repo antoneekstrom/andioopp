@@ -25,8 +25,8 @@ public class ModelViewport {
         return new ViewCoordinate(viewport.getPositionOutside(modelCoordinate));
     }
 
-    public Dimension<ViewCoordinate> getViewSize(Dimension<ModelCoordinate> modelSize) {
-        return new Dimension<>(new ViewCoordinate(viewport.getSizeOutside(modelSize.toVector())));
+    public Dimension getViewSize(Dimension modelSize) {
+        return new Dimension(new ViewCoordinate(viewport.getSizeOutside(modelSize.toVector())));
     }
 
     private Dimension getInsideDimensionFromModel(Model model) {
