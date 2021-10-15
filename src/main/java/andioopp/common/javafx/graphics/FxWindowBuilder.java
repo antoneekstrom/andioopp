@@ -1,7 +1,7 @@
 package andioopp.common.javafx.graphics;
 
-import andioopp.common.graphics.WindowBuilder;
 import andioopp.common.math.Dimension;
+import andioopp.common.graphics.WindowBuilder;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;

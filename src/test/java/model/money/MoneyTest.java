@@ -1,7 +1,7 @@
 package model.money;
 
-import andioopp.model.money.Money;
-import andioopp.model.money.exceptions.SpendMoneyException;
+import andioopp.model.domain.money.Money;
+import andioopp.model.domain.money.exceptions.SpendMoneyException;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

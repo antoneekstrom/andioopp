@@ -1,9 +1,9 @@
 package model.tower;
 
-import andioopp.model.*;
-import andioopp.model.enemy.Enemy;
-import andioopp.model.tower.Tower;
-import andioopp.model.tower.towers.Mario;
+import andioopp.model.Model;
+import andioopp.model.domain.enemy.Enemy;
+import andioopp.model.domain.tower.Tower;
+import andioopp.model.domain.tower.towers.Mario;
 
 public class TowerTest {
 

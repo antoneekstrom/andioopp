@@ -1,7 +1,7 @@
 package model.world;
 
 import andioopp.common.storage.ArrayListFactory;
-import andioopp.model.world.*;
+import andioopp.model.domain.world.*;
 import org.junit.Test;
 
 import java.util.ArrayList;

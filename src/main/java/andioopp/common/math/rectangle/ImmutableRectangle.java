@@ -1,7 +1,7 @@
 package andioopp.common.math.rectangle;
 
-import andioopp.common.math.Dimension;
 import andioopp.common.math.Vector3f;
+import andioopp.common.math.Dimension;
 
 import java.util.Objects;
 
