@@ -5,7 +5,7 @@ import andioopp.common.graphics.Sprite;
 import andioopp.common.math.Dimension;
 import andioopp.common.math.Vector3f;
 import andioopp.common.math.rectangle.ImmutableRectangle;
-import andioopp.common.math.rectangle.Rectangle;
+import andioopp.common.math.rectangle.RectanglePlupp;
 import andioopp.model.Model;
 import andioopp.model.domain.player.TowerCard;
 import andioopp.view.View;
@@ -16,9 +16,9 @@ public class CardsView<S extends Sprite<?>> implements View<S> {
 
     private final static Vector3f CARD_OFFSET = new Vector3f(20);
 
-    private final Rectangle viewport;
+    private final RectanglePlupp viewport;
 
-    public CardsView(Rectangle viewportRect) {
+    public CardsView(RectanglePlupp viewportRect) {
         this.viewport = viewportRect;
     }
 
@@ -31,11 +31,11 @@ public class CardsView<S extends Sprite<?>> implements View<S> {
         }
     }
 
-    public Rectangle getTowerCardRect(int cardIndex) {
+    public RectanglePlupp getTowerCardRect(int cardIndex) {
         return getTowerCardRect(getViewportPosition().sub(TowerCardView.getCardDimension().fromY()), cardIndex);
     }
 
-    public Rectangle getTowerCardRect(Vector3f position, int cardIndex) {
+    public RectanglePlupp getTowerCardRect(Vector3f position, int cardIndex) {
         Vector3f cardOffset = TowerCardView.getCardDimension().fromX().add(CARD_OFFSET);
         return new ImmutableRectangle(position.add(cardOffset.scale(cardIndex)), new Dimension(TowerCardView.getCardDimension()));
     }
@@ -44,7 +44,7 @@ public class CardsView<S extends Sprite<?>> implements View<S> {
         return getViewport().getPosition();
     }
 
-    private Rectangle getViewport() {
+    private RectanglePlupp getViewport() {
         return viewport;
     }
 }

@@ -6,7 +6,7 @@ import andioopp.common.math.Vector3f;
 /**
  * Represents a two-dimensional rectangle with a position and size.
  */
-public interface Rectangle {
+public interface RectanglePlupp {
 
     /**
      * Sets the position of the rectangle. May or may not mutate this object.
@@ -14,7 +14,7 @@ public interface Rectangle {
      * @param position the new position
      * @return the result, may be the same object
      */
-    Rectangle setPosition(Vector3f position);
+    RectanglePlupp setPosition(Vector3f position);
 
     /**
      * Sets the position of the rectangle. May or may not mutate this object.
@@ -22,7 +22,7 @@ public interface Rectangle {
      * @param size the new size
      * @return the result, may be the same object
      */
-    Rectangle setSize(Dimension size);
+    RectanglePlupp setSize(Dimension size);
 
     /**
      * Returns the position.
@@ -41,7 +41,7 @@ public interface Rectangle {
      * @param other the other rectangle
      * @return the centered rectangle
      */
-    default Rectangle centerWithin(Rectangle other) {
+    default RectanglePlupp centerWithin(RectanglePlupp other) {
         return other.setPosition(getCenter().sub(other.getSize().halved().toVector()));
     }
 
@@ -60,7 +60,7 @@ public interface Rectangle {
      * @param size the new size
      * @return the result, may be the same object
      */
-    default Rectangle set(Vector3f position, Dimension size) {
+    default RectanglePlupp set(Vector3f position, Dimension size) {
         return setPosition(position).setSize(size);
     }
 
@@ -79,7 +79,7 @@ public interface Rectangle {
      * Rounds each value on the rectangle.
      * @return the result
      */
-    default Rectangle round() {
+    default RectanglePlupp round() {
         return set(getPosition().round(), getSize().round());
     }
 

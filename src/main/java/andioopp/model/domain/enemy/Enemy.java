@@ -5,6 +5,7 @@ import andioopp.common.graphics.SpriteFactory;
 import andioopp.common.math.Dimension;
 import andioopp.common.math.Rectangle;
 import andioopp.common.time.Time;
+import andioopp.model.domain.money.Money;
 import andioopp.model.util.ModelCoordinate;
 import andioopp.model.domain.damage.DamageFilter;
 import andioopp.model.domain.damage.DamageSource;
@@ -20,7 +21,7 @@ public abstract class Enemy implements Updateable, DamageFilter {
     private final String spritePath;
     private final float attackCooldown;
     private final float speed;
-    private final int loot;
+    private final Money loot;
 
     private boolean towerAhead = false;
     private float timeOfLastAttack;
@@ -28,7 +29,7 @@ public abstract class Enemy implements Updateable, DamageFilter {
 
     private final DamageFilter damageFilter;
 
-    protected Enemy(String spritePath, Health health, Rectangle<ModelCoordinate> rectangle, float speed, float attackCooldown, DamageFilter damageFilter, int loot) {
+    protected Enemy(String spritePath, Health health, Rectangle<ModelCoordinate> rectangle, float speed, float attackCooldown, DamageFilter damageFilter, Money loot) {
         this.spritePath = spritePath;
         this.health = health;
         this.speed = speed; // Negative speed since enemies come from the left
@@ -102,7 +103,7 @@ public abstract class Enemy implements Updateable, DamageFilter {
         towerAhead = state;
     }
 
-    public int getLoot() {
+    public Money getLoot() {
         return loot;
     }
 }

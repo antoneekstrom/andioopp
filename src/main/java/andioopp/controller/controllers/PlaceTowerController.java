@@ -1,6 +1,6 @@
 package andioopp.controller.controllers;
 
-import andioopp.common.math.rectangle.Rectangle;
+import andioopp.common.math.rectangle.RectanglePlupp;
 import andioopp.common.storage.ListFactory;
 import andioopp.model.Model;
 import andioopp.model.domain.player.TowerCard;
@@ -68,13 +68,13 @@ public class PlaceTowerController {
     }
 
     private CellDroppableController createCellDroppable(LanesView<?> lanesView, World world, int row, int col) {
-        Rectangle rectangle = lanesView.getCellRect(world, row, col);
+        RectanglePlupp rectangle = lanesView.getCellRect(world, row, col);
         return new CellDroppableController(rectangle, model, row, col);
     }
 
     private TowerCardDraggableController createCardDraggable(CardsView<?> cardsView, List<TowerCard<?>> cards, int i) {
         TowerCardView<?> card = new TowerCardView<>(cards.get(i));
-        Rectangle rectangle = cardsView.getTowerCardRect(i);
+        RectanglePlupp rectangle = cardsView.getTowerCardRect(i);
         return new TowerCardDraggableController(rectangle, card.getCard());
     }
 

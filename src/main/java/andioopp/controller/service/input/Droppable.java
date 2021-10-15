@@ -1,17 +1,17 @@
 package andioopp.controller.service.input;
 
-import andioopp.common.math.rectangle.Rectangle;
+import andioopp.common.math.rectangle.RectanglePlupp;
 import andioopp.common.observer.Observer;
 
 public abstract class Droppable<T> implements Observer<T> {
 
-    private final Rectangle rectangle;
+    private final RectanglePlupp rectangle;
 
-    public Droppable(Rectangle rectangle) {
+    public Droppable(RectanglePlupp rectangle) {
         this.rectangle = rectangle;
     }
 
-    public Rectangle getRectangle() {
+    public RectanglePlupp getRectangle() {
         return rectangle;
     }
 }
