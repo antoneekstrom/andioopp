@@ -2,8 +2,11 @@ package andioopp.model.domain.tower;
 
 import andioopp.common.graphics.Sprite;
 import andioopp.common.graphics.SpriteFactory;
+import andioopp.common.math.Dimension;
+import andioopp.common.math.Rectangle;
 import andioopp.model.domain.tower.attack.Attack;
 import andioopp.model.domain.stats.Health;
+import andioopp.model.util.ModelCoordinate;
 
 import java.util.List;
 
@@ -18,8 +21,11 @@ public abstract class Tower {
     private final List<Attack> attacks;
     private final String name;
 
-    public Tower(String spritePath, String name, int cost, int health) {
+    private final Rectangle<ModelCoordinate> rectangle;
+
+    public Tower(String spritePath, Rectangle<ModelCoordinate> rectangle, String name, int cost, int health) {
         this.sprite = spritePath;
+        this.rectangle = rectangle;
         this.name = name;
         this.cost = cost;
         this.health = new Health(health);
@@ -46,4 +52,9 @@ public abstract class Tower {
         return cost;
     }
     public String getName(){ return name;}
+
+    public ModelCoordinate getPosition() {
+        return rectangle.getPosition();
+    }
+    public Dimension<ModelCoordinate> getSize() { return rectangle.getSize(); }
 }

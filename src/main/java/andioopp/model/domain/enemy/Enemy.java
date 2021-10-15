@@ -38,23 +38,6 @@ public abstract class Enemy implements DamageFilter {
         this.rectangle = rectangle;
     }
 
-   /*@Override
-    public void update(Time time) {
-        move();
-    }
-
-    */
-
-    /*
-    private void move() {
-        // Enemy should stop moving if there is a tower in front of it
-        if (!towerAhead) {
-            getTransform().translate(new Vector3f(-speed, 0, 0));
-        }
-    }
-
-     */
-
     @Override
     public boolean canBeDamagedBy(DamageSource src) {
         return damageFilter.canBeDamagedBy(src);

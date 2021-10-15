@@ -8,7 +8,9 @@ import andioopp.common.math.transform.Transform;
 import andioopp.common.math.transform.TransformFactory;
 import andioopp.model.domain.tower.attack.projectiles.Projectile;
 import andioopp.model.Model;
+import andioopp.model.domain.world.World;
 import andioopp.view.View;
+import andioopp.view.util.ModelViewport;
 
 public class ProjectilesView<S extends Sprite<?>> extends EntityView implements View<S> {
 
@@ -21,13 +23,6 @@ public class ProjectilesView<S extends Sprite<?>> extends EntityView implements 
         this.transformFactory = transformFactory;
     }
 
-    @Override
-    public void render(Renderer<S> renderer, Model model) {
-        World world = model.getWorld();
-        for (Projectile projectile : world.getProjectiles()) {
-            renderProjectile(renderer, world, projectile);
-        }
-    }
 
     private void renderProjectile(Renderer<S> renderer, World world, Projectile projectile) {
         S sprite = renderer.getSpriteFactory().get(projectile.getSpritePath());
@@ -39,5 +34,13 @@ public class ProjectilesView<S extends Sprite<?>> extends EntityView implements 
     @Override
     protected Dimension getEntitySize(World world, Sprite<?> sprite) {
         return new Dimension(super.getEntitySize(world, sprite).toVector().scale(0.7f));
+    }
+
+    @Override
+    public <S1 extends Sprite<?>> void render(S model, Renderer<S1> renderer, ModelViewport viewport) {
+        World world = model.getWorld();
+        for (Projectile projectile : world.getProjectiles()) {
+            renderProjectile(renderer, world, projectile);
+        }
     }
 }

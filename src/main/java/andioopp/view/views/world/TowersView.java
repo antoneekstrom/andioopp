@@ -9,50 +9,37 @@ import andioopp.common.math.transform.Transform;
 import andioopp.common.math.transform.TransformFactory;
 import andioopp.model.Model;
 import andioopp.model.domain.tower.Tower;
+import andioopp.model.domain.world.Cell;
+import andioopp.model.domain.world.World;
+import andioopp.model.util.ModelCoordinate;
 import andioopp.view.View;
+import andioopp.view.util.ModelViewport;
+import andioopp.view.util.ViewCoordinate;
 
-public class TowersView<S extends Sprite<?>> extends CellView implements View<S> {
+public class TowersView implements View<Model> {
 
     private static final float TOWER_CELL_OFFSET_PERCENT = -0.3f;
 
-    private final TransformFactory transformFactory;
-
-    public TowersView(Rectangle viewportRect, TransformFactory transformFactory) {
-        super(viewportRect);
-        this.transformFactory = transformFactory;
-    }
-
     @Override
-    public void render(Renderer<S> renderer, Model model) {
-        World world = model.getWorld();
-        for (int row = 0; row < world.getNumberOfLanes(); row++) {
-            for (int col = 0; col < world.getNumberOfCellsInLanes(); col++) {
-                renderTower(renderer, world, row, col);
+    public <S extends Sprite<?>> void render(Model model, Renderer<S> renderer, ModelViewport viewport) {
+        for(int row = 0; row < model.getWorld().getNumberOfLanes(); row++) {
+            for(int col = 0 ; col < model.getWorld().getNumberOfCellsInLanes(); col ++ ) {
+
+                Cell cell = model.getWorld().getCell(row, col);
+                renderTower(renderer, model.getWorld(), cell.getTower(), viewport, row, col);
+
             }
         }
+
     }
 
-    private void renderTower(Renderer<S> renderer, World world, int row, int col) {
-        Tower tower = world.getCell(row, col).getTower();
+    private <S extends Sprite<?>> void renderTower(Renderer<S> renderer, World world, Tower tower, ModelViewport viewport, int row, int col) {
+        S sprite = tower.getSprite(renderer.getSpriteFactory());
 
-        if (tower != null) {
-            S towerSprite = tower.getSprite(renderer.getSpriteFactory());
-            Dimension towerSize = getTowerSize(world, towerSprite);
+        ViewCoordinate viewPosition = viewport.getViewCoordinate(new ModelCoordinate(row, col));
+        Dimension<ViewCoordinate> viewSize = viewport.getViewSize(tower.getSize());
 
-            Vector3f towerPosition = getTowerPosition(world, row, col);
-            Transform towerTransform = transformFactory.createWithPosition(towerPosition);
-
-            renderer.drawSprite(towerSprite, towerTransform, towerSize);
-        }
+        renderer.drawSprite(sprite, viewPosition, viewSize);
     }
 
-    private Vector3f getTowerPosition(World world, int row, int col) {
-        Rectangle cellRect = getCellRect(world, row, col);
-        return cellRect.getPosition().add(cellRect.getSize().toVector().scale(Vector3f.fromY(TOWER_CELL_OFFSET_PERCENT)));
-    }
-
-    private Dimension getTowerSize(World world, S sprite) {
-        Dimension cellRes = getCellSize(world);
-        return sprite.getSize().setHeight(cellRes.getHeight());
-    }
 }
