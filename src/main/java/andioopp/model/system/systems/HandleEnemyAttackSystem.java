@@ -21,17 +21,19 @@ public class HandleEnemyAttackSystem implements System<Model> {
 
             for (int row = 0; row < world.getNumberOfLanes(); row++) {
                 for (int col = 0; col < world.getNumberOfCellsInLanes(); col++) {
-                    Cell cell = world.getCell(row, col);
+                    if (!isTowerWithinRange(enemy, col, row)) {
+                        continue;
+                    }
+
+                    Cell cell = world.getCell(col, row);
                     if (cell.hasTower()) {
                         Tower tower = cell.getTower();
-                        float deltaX = enemy.getPosition().getX() - col;
-                        if (deltaX < 0.5f && deltaX > 0) {
-                            enemy.setTowerAhead(true);
-                            if (enemy.canAttack(time)) {
-                                enemy.setTimeOfLastAttack(time);
-                                tower.getHealth().decrease(1);
-                            }
+
+                        enemy.setTowerAhead(true);
+                        if (enemy.canAttack(time)) {
+                            enemy.attack(time, tower);
                         }
+
                         if (tower.getHealth().isZero()) {
                             cell.setTower(null);
                         }
@@ -39,5 +41,16 @@ public class HandleEnemyAttackSystem implements System<Model> {
                 }
             }
         }
+    }
+
+    private void attackTower() {
+
+    }
+
+    private boolean isTowerWithinRange(Enemy enemy, int col, int row) {
+        float deltaX = enemy.getPosition().getX() - col;
+        boolean closeX = deltaX < 0.5f && deltaX > 0;
+        boolean closeY = enemy.getRow() == row;
+        return closeX && closeY;
     }
 }
