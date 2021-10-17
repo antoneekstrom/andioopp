@@ -1,11 +1,7 @@
 package andioopp.model;
 
-import andioopp.common.time.Time;
-import andioopp.model.domain.world.World;
 import andioopp.model.domain.player.Player;
-import andioopp.model.system.System;
-
-import java.util.List;
+import andioopp.model.domain.world.World;
 
 public class Model {
 

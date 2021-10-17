@@ -1,29 +1,44 @@
 package andioopp.controller.controllers;
 
+import andioopp.common.graphics.Window;
+import andioopp.common.math.dimension.Dimension;
+import andioopp.common.math.rectangle.ImmutableRectangle;
+import andioopp.common.math.rectangle.Rectangle;
+import andioopp.common.math.vector.Vector3f;
+import andioopp.common.storage.ListFactory;
 import andioopp.controller.Controller;
-import andioopp.controller.service.ServiceProvider;
 import andioopp.model.Model;
 import andioopp.model.domain.player.TowerCard;
-import andioopp.controller.service.input.DragAndDropService;
+import andioopp.controller.input.DragAndDrop;
 import andioopp.model.domain.world.World;
-import andioopp.view.util.ModelViewport;
-import andioopp.view.views.gui.TowerCardView;
+import andioopp.view.views.gui.CardsView;
+import andioopp.view.views.world.LanesView;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class PlaceTowerController implements Controller<Model> {
 
     private Model model;
-    private ModelViewport viewport;
-    private DragAndDropService<TowerCardDragEvent> dragAndDropService;
     private Collection<CellDroppableController> droppables;
     private Collection<TowerCardDraggableController> draggables;
 
-    public void init(Model model, ModelViewport viewport, ServiceProvider serviceProvider) {
-        this.viewport = viewport;
+    private final DragAndDrop<TowerCardDragEvent> dragAndDrop;
+    private final CardsView cardsView;
+    private final LanesView lanesView;
+
+    public PlaceTowerController(DragAndDrop<TowerCardDragEvent> dragAndDrop, CardsView cardsView, LanesView lanesView) {
+        this.dragAndDrop = dragAndDrop;
+        this.cardsView = cardsView;
+        this.lanesView = lanesView;
+    }
+
+    public void init(Model model, Window<?> window) {
+        ListFactory listFactory = ArrayList::new;
         this.model = model;
-        dragAndDropService = new DragAndDropService<>(serviceProvider.mouseService(), serviceProvider.getListFactory());
+        this.droppables = listFactory.create();
+        this.draggables = listFactory.create();
         registerDroppableCells();
         registerDraggableCards();
     }
@@ -34,12 +49,12 @@ public class PlaceTowerController implements Controller<Model> {
     }
 
     private void unregisterDroppableCells() {
-        droppables.forEach(d -> dragAndDropService.getDroppableObservable().removeObserver(d));
+        droppables.forEach(d -> dragAndDrop.getDroppableObservable().removeObserver(d));
         droppables.clear();
     }
 
     private void unregisterDraggableCells() {
-        draggables.forEach(d -> dragAndDropService.getDraggableObservable().removeObserver(d));
+        draggables.forEach(d -> dragAndDrop.getDraggableObservable().removeObserver(d));
         draggables.clear();
     }
 
@@ -55,28 +70,29 @@ public class PlaceTowerController implements Controller<Model> {
     private void registerDraggableCards() {
         List<TowerCard<?>> cards = model.getPlayer().getCards();
         for (int i = 0; i < cards.size(); i++) {
-            addDraggable(createCardDraggable(cards, i));
+            addDraggable(createCardDraggable(cards.get(i), i));
         }
     }
 
     private void addDroppable(CellDroppableController droppable) {
-        dragAndDropService.getDroppableObservable().addObserver(droppable);
+        dragAndDrop.getDroppableObservable().addObserver(droppable);
         droppables.add(droppable);
     }
 
     private void addDraggable(TowerCardDraggableController draggable) {
-        dragAndDropService.getDraggableObservable().addObserver(draggable);
+        dragAndDrop.getDraggableObservable().addObserver(draggable);
         draggables.add(draggable);
     }
 
     private CellDroppableController createCellDroppable(int row, int col) {
-        Rectangle cell = null;
-        return new CellDroppableController(cell, model, row, col);
+        Vector3f position = lanesView.getCellPosition(col, row);
+        Dimension size = lanesView.getCellSize();
+        Rectangle rectangle = new ImmutableRectangle(position, size);
+        return new CellDroppableController(rectangle, model, row, col);
     }
 
-    private TowerCardDraggableController createCardDraggable(List<TowerCard<?>> cards, int i) {
-        Rectangle rectangle = null;
-        TowerCardView<?> card = new TowerCardView<>(cards.get(i));
-        return new TowerCardDraggableController(rectangle, card.getCard());
+    private TowerCardDraggableController createCardDraggable(TowerCard<?> card, int i) {
+        Rectangle rectangle = cardsView.getCardView(card, i).getCardViewRectangle();
+        return new TowerCardDraggableController(rectangle, card);
     }
 }

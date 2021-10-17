@@ -1,10 +1,14 @@
 package andioopp.controller.controllers;
 
-import andioopp.controller.service.input.Droppable;
+import andioopp.common.math.rectangle.Rectangle;
+import andioopp.controller.input.Droppable;
 import andioopp.model.Model;
 import andioopp.model.domain.money.Transaction;
+import andioopp.model.domain.player.TowerCard;
 import andioopp.model.domain.tower.Tower;
+import andioopp.model.domain.tower.TowerSupplier;
 import andioopp.model.domain.world.Cell;
+import andioopp.model.util.ModelCoordinate;
 
 /**
  * Controls dropping behaviour for a {@link Cell}.
@@ -15,11 +19,15 @@ public class CellDroppableController extends Droppable<TowerCardDragEvent> {
     private final int row;
     private final int col;
 
-    public CellDroppableController(RectanglePlupp rectangle, Model model, int row, int col) {
+    public CellDroppableController(Rectangle rectangle, Model model, int row, int col) {
         super(rectangle);
         this.model = model;
         this.row = row;
         this.col = col;
+    }
+
+    private ModelCoordinate getTowerPosition() {
+        return new ModelCoordinate(row, col);
     }
 
     private Cell getCell() {
@@ -29,14 +37,13 @@ public class CellDroppableController extends Droppable<TowerCardDragEvent> {
     @Override
     public void onEvent(TowerCardDragEvent event) {
         Cell cell = getCell();
+
         if (!cell.hasTower()) {
-            Transaction<? extends Tower> transaction = model.getPlayer().buy(event.getCard());
+            TowerCard<? extends Tower> card = event.getCard();
+            Transaction<? extends TowerSupplier<? extends Tower>> transaction = model.getPlayer().buy(card);
             if (transaction.isSuccessful()) {
-                try {
-                    cell.setTower(transaction.getResult());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                Tower result = transaction.getResult().create(getTowerPosition());
+                cell.setTower(result);
             }
         }
     }

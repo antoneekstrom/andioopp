@@ -2,54 +2,41 @@ package andioopp.view.views.gui;
 
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
-import andioopp.common.math.Dimension;
-import andioopp.common.math.Vector3f;
-import andioopp.common.math.transform.Transform;
-import andioopp.common.math.transform.TransformFactory;
+import andioopp.common.math.dimension.Dimension;
+import andioopp.common.math.vector.Vector3f;
 import andioopp.controller.controllers.TowerCardDragEvent;
 import andioopp.model.Model;
-import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.tower.Tower;
 import andioopp.model.util.ModelCoordinate;
-import andioopp.view.util.ModelViewport;
-import andioopp.view.util.ViewCoordinate;
-import andioopp.view.views.world.EnemiesView;
-import andioopp.controller.service.input.DragAndDropService;
+import andioopp.controller.input.DragAndDrop;
 import andioopp.view.View;
+import andioopp.view.views.world.TowersView;
 
 public class TowerDragMouseView implements View<Model> {
 
-    private final DragAndDropService<TowerCardDragEvent> dragAndDropService;
-    private final EnemiesView enemiesView;
+    private final DragAndDrop<TowerCardDragEvent> dragAndDrop;
+    private final TowersView towersView;
 
-
-    public TowerDragMouseView(DragAndDropService<TowerCardDragEvent> dragAndDropService, EnemiesView enemiesView) {
-        this.dragAndDropService = dragAndDropService;
-        this.enemiesView = enemiesView;
-
+    public TowerDragMouseView(DragAndDrop<TowerCardDragEvent> dragAndDrop, TowersView towersView) {
+        this.dragAndDrop = dragAndDrop;
+        this.towersView = towersView;
     }
 
-  /*  @Override
-    public <S extends Sprite<?>> void render(Model model, Renderer<S> renderer, ModelViewport viewport) {
-        if (dragAndDropService.isDragging()) {
-            S sprite = dragAndDropService.getDragData().getCard().getSupplier().get().getSprite(renderer.getSpriteFactory());
-            Dimension size = enemiesView.getEntitySize(model.getWorld(), sprite);
-            Transform transform = transformFactory.createWithPosition(dragAndDropService.getMousePosition().sub(size.toVector().scale(0.5f)));
-
-            renderer.drawSprite(sprite, transform, size);
-        }
-    }*/
-
     @Override
-    public <S extends Sprite<?>> void render(Model model, Renderer<S> renderer, ModelViewport viewport) {
-        if (dragAndDropService.isDragging()) {
-            Tower tower = dragAndDropService.getDragData().getCard().getSupplier().get();
-            S sprite = dragAndDropService.getDragData().getCard().getSupplier().get().getSprite(renderer.getSpriteFactory());
-            Dimension viewSize = viewport.getViewSize(tower.getSize());
-            //Dimension<ViewCoordinate> viewSize = enemiesView.getEntitySize(model.getWorld(), sprite);viewport.getViewSize(getSize());
-            ViewCoordinate viewPosition = viewport.getViewCoordinate(new ModelCoordinate(dragAndDropService.getMousePosition().sub(viewSize.toVector().scale(0.5f))));
+    public <S extends Sprite<?>> void render(Model model, Renderer<S> renderer) {
+        if (dragAndDrop.isDragging()) {
+            Tower tower = getTower();
+            S sprite = renderer.getSpriteFactory().get(tower.getSprite());
 
-            renderer.drawSprite(sprite, viewPosition, viewSize);
+            Dimension size = towersView.getTowerSize(tower);
+            Vector3f mouse = dragAndDrop.getMousePosition();
+            Vector3f position = mouse.sub(size.halved().toVector());
+
+            renderer.drawSprite(sprite, position, size);
         }
+    }
+
+    private Tower getTower() {
+        return dragAndDrop.getDragData().getCard().getSupplier().create(new ModelCoordinate(Vector3f.ZERO));
     }
 }

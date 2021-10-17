@@ -1,7 +1,7 @@
 package andioopp.view.util;
 
-import andioopp.common.math.Dimension;
-import andioopp.common.math.Vector3f;
+import andioopp.common.math.dimension.Dimension;
+import andioopp.common.math.vector.Vector3f;
 import andioopp.model.util.ModelCoordinate;
 import andioopp.model.Model;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -26,7 +26,7 @@ public class ModelViewport {
     }
 
     public Dimension getViewSize(Dimension modelSize) {
-        return new Dimension(new ViewCoordinate(viewport.getSizeOutside(modelSize.toVector())));
+        return new Dimension(viewport.getSizeOutside(modelSize));
     }
 
     private Dimension getInsideDimensionFromModel(Model model) {

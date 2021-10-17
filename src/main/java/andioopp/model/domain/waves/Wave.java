@@ -25,11 +25,9 @@ public class Wave {
      */
     public void addEnemyToWave(World world) {
         EnemyFactory enemies = new EnemyFactory();
-        int randLane;
         for (int i = 0; i < numEnemies; i++) {
-            randLane = rand.nextInt(5);
-            Enemy enemy = enemies.randomEnemy(world, randLane);
-            Enemy enemy2 = enemies.randomEnemy(world, 4);
+            Enemy enemy = enemies.randomEnemy(world, rand.nextInt(world.getNumberOfLanes()));
+            Enemy enemy2 = enemies.randomEnemy(world, rand.nextInt(world.getNumberOfLanes()));
             enemyWave.add(enemy);
             enemyWave.add(enemy2);
         }

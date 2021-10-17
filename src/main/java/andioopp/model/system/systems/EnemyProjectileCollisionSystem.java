@@ -1,17 +1,18 @@
-package andioopp.model.system;
+package andioopp.model.system.systems;
 
-import andioopp.common.math.Vector3f;
+import andioopp.common.math.vector.Vector3f;
 import andioopp.common.time.Time;
 import andioopp.model.Model;
 import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.entity.DroppedCoinEntity;
 import andioopp.model.domain.tower.attack.projectiles.Projectile;
 import andioopp.model.domain.world.World;
+import andioopp.model.system.System;
 
 import java.util.Collection;
 import java.util.Iterator;
 
-public class EnemyProjectileCollisionService implements System<Model> {
+public class EnemyProjectileCollisionSystem implements System<Model> {
 
     @Override
     public void update(Model model, Time time) {

@@ -1,9 +1,9 @@
 package andioopp.common.graphics;
 
-import andioopp.common.math.Dimension;
+import andioopp.common.math.dimension.Dimension;
 import andioopp.common.observer.Observable;
 import andioopp.common.observer.Observer;
-import andioopp.controller.service.input.MouseEvent;
+import andioopp.controller.input.MouseInputEvent;
 
 /**
  * Represents the application window.
@@ -30,7 +30,7 @@ public interface Window<R extends Renderer<?>> {
      *
      * @return the observable
      */
-    Observable<MouseEvent, Observer<MouseEvent>> getMouseObservable();
+    Observable<MouseInputEvent, Observer<MouseInputEvent>> getMouseObservable();
 
     /**
      * Returns an observable that emits events when the window is resized.

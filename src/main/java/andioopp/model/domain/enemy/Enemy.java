@@ -2,15 +2,15 @@ package andioopp.model.domain.enemy;
 
 import andioopp.common.graphics.Sprite;
 import andioopp.common.graphics.SpriteFactory;
-import andioopp.common.math.Dimension;
-import andioopp.common.math.Rectangle;
+import andioopp.common.math.dimension.Dimension;
+import andioopp.common.math.rectangle.MutableRectangle;
+import andioopp.common.math.rectangle.Rectangle;
 import andioopp.common.time.Time;
 import andioopp.model.domain.money.Money;
 import andioopp.model.util.ModelCoordinate;
 import andioopp.model.domain.damage.DamageFilter;
 import andioopp.model.domain.damage.DamageSource;
 import andioopp.model.domain.stats.Health;
-import andioopp.model.domain.interfaces.Updateable;
 
 /**
  * An enemy.
@@ -25,18 +25,18 @@ public abstract class Enemy implements DamageFilter {
 
     private boolean towerAhead = false;
     private float timeOfLastAttack;
-    private final Rectangle<ModelCoordinate> rectangle;
+    private final MutableRectangle rectangle;
 
     private final DamageFilter damageFilter;
 
-    protected Enemy(String spritePath, Health health, Rectangle<ModelCoordinate> rectangle, float speed, float attackCooldown, DamageFilter damageFilter, Money reward) {
+    protected Enemy(String spritePath, Health health, Rectangle rectangle, float speed, float attackCooldown, DamageFilter damageFilter, Money reward) {
         this.spritePath = spritePath;
         this.health = health;
         this.speed = speed; // Negative speed since enemies come from the left
         this.attackCooldown = attackCooldown;
         this.damageFilter = damageFilter;
         this.reward = reward;
-        this.rectangle = rectangle;
+        this.rectangle = new MutableRectangle(rectangle);
     }
 
     @Override
@@ -50,7 +50,7 @@ public abstract class Enemy implements DamageFilter {
      * @param time the current time of the attack
      */
     public void setTimeOfLastAttack(Time time) {
-        timeOfLastAttack = time.getElapsedSeconds();
+        timeOfLastAttack = time.getTime();
     }
 
     /**
@@ -59,7 +59,7 @@ public abstract class Enemy implements DamageFilter {
      * @return true if the tower is able to attack.
      */
     public boolean canAttack(Time time) {
-        float deltaTime = time.getElapsedSeconds() - timeOfLastAttack;
+        float deltaTime = time.getTime() - timeOfLastAttack;
         return (deltaTime > attackCooldown);
     }
 
@@ -71,15 +71,14 @@ public abstract class Enemy implements DamageFilter {
         return health;
     }
 
-
     public ModelCoordinate getPosition() {
-        return rectangle.getPosition();
+        return new ModelCoordinate(rectangle.getPosition());
     }
 
-    public Dimension<ModelCoordinate> getSize() { return rectangle.getSize(); }
+    public Dimension getSize() { return rectangle.getSize(); }
 
-    public void move() {
-        rectangle.getPosition().add(new ModelCoordinate(speed));
+    public void move(Time time) {
+        rectangle.translate(new ModelCoordinate(-speed * time.getDeltaTime()));
     }
 
     public boolean isDead() {

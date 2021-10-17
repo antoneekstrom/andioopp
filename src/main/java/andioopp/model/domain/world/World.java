@@ -1,6 +1,6 @@
 package andioopp.model.domain.world;
 
-import andioopp.common.math.Dimension;
+import andioopp.common.math.dimension.Dimension;
 import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.entity.DroppedCoinEntity;
 import andioopp.model.domain.tower.attack.projectiles.Projectile;
@@ -24,8 +24,8 @@ public class World {
         this.droppedCoins = droppedCoins;
     }
 
-    public Dimension<ModelCoordinate> getGridSize() {
-        return new Dimension<>(new ModelCoordinate(getNumberOfCellsInLanes(), getNumberOfLanes()));
+    public Dimension getGridSize() {
+        return new Dimension(new ModelCoordinate(getNumberOfCellsInLanes(), getNumberOfLanes()));
     }
 
     public void addEnemy(Enemy enemy) {

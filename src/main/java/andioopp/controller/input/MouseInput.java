@@ -1,22 +1,21 @@
-package andioopp.controller.service;
+package andioopp.controller.input;
 
 import andioopp.common.graphics.Window;
 import andioopp.common.observer.Observable;
 import andioopp.common.observer.Observer;
-import andioopp.controller.service.input.MouseEvent;
 
 import java.util.Collection;
 
-public class MouseService implements Observable<MouseEvent, Observer<MouseEvent>> {
+public class MouseInput implements Observable<MouseInputEvent, Observer<MouseInputEvent>> {
 
     private final Window<?> window;
 
-    public MouseService(Window<?> window) {
+    public MouseInput(Window<?> window) {
         this.window = window;
     }
 
     @Override
-    public Collection<Observer<MouseEvent>> getObservers() {
+    public Collection<Observer<MouseInputEvent>> getObservers() {
         return window.getMouseObservable().getObservers();
     }
 }

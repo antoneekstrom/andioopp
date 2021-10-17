@@ -2,55 +2,45 @@ package andioopp.view.views.gui;
 
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
-import andioopp.common.math.Dimension;
-import andioopp.common.math.Vector3f;
-import andioopp.common.math.rectangle.ImmutableRectangle;
+import andioopp.common.math.dimension.Dimension;
+import andioopp.common.math.vector.Vector3f;
 import andioopp.model.Model;
-import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.player.TowerCard;
 import andioopp.view.View;
-import andioopp.view.util.ModelViewport;
-import andioopp.view.util.ViewCoordinate;
+import andioopp.view.util.Viewport;
 
 import java.util.List;
 
 public class CardsView implements View<Model> {
 
-    private final static Vector3f CARD_OFFSET = new Vector3f(20);
+    private final static float CARD_OFFSET = 20;
 
-    private final RectanglePlupp viewport;
+    private final Vector3f position;
 
-    public CardsView(RectanglePlupp viewportRect) {
-        this.viewport = viewportRect;
+    public CardsView(Vector3f position) {
+        this.position = position;
     }
-
-
-    public RectanglePlupp getTowerCardRect(int cardIndex) {
-        return getTowerCardRect(getViewportPosition().sub(TowerCardView.getCardDimension().fromY()), cardIndex);
-    }
-
-    public RectanglePlupp getTowerCardRect(Vector3f position, int cardIndex) {
-        Vector3f cardOffset = TowerCardView.getCardDimension().fromX().add(CARD_OFFSET);
-        return new ImmutableRectangle(position.add(cardOffset.scale(cardIndex)), new Dimension(TowerCardView.getCardDimension()));
-    }
-
-    private Vector3f getViewportPosition() {
-        return getViewport().getPosition();
-    }
-
-    private RectanglePlupp getViewport() {
-        return viewport;
-    }
-
 
     @Override
-    public <S extends Sprite<?>> void render(Model model, Renderer<S> renderer, ModelViewport viewport) {
+    public <S extends Sprite<?>> void render(Model model, Renderer<S> renderer) {
         List<TowerCard<?>> cards = model.getPlayer().getCards();
         for (int i = 0; i < cards.size(); i++) {
-            Vector3f cardPosition = getTowerCardRect(i).getPosition();
-            new TowerCardView(cards.get(i)).renderTowerCard(renderer, cardPosition, viewport);
+            TowerCard<?> card = cards.get(i);
+            TowerCardView cardView = getCardView(card, i);
+            cardView.render(model, renderer);
         }
     }
 
+    public TowerCardView getCardView(TowerCard<?> card, int i) {
+        Viewport cardViewport = getCardViewport(i);
+        return new TowerCardView(cardViewport, card);
+    }
 
+    private Viewport getCardViewport(int i) {
+        return new Viewport(Dimension.UNIT, TowerCardView.CARD_SIZE, getCardPosition(i));
+    }
+
+    private Vector3f getCardPosition(int i) {
+        return position.add(Vector3f.fromX((TowerCardView.CARD_SIZE.getWidth() + CARD_OFFSET) * i));
+    }
 }

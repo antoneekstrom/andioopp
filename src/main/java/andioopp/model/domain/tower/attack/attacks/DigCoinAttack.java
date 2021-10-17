@@ -1,7 +1,7 @@
 package andioopp.model.domain.tower.attack.attacks;
 
 import andioopp.common.javafx.time.FxClock;
-import andioopp.common.math.Vector3f;
+import andioopp.common.math.vector.Vector3f;
 import andioopp.common.math.range.FloatRange;
 import andioopp.model.Model;
 import andioopp.model.domain.money.Money;
@@ -24,7 +24,7 @@ public class DigCoinAttack extends Attack {
     }
 
     @Override
-    public void performAttack(Model model, Vector3f position) {
+    public void onAttack(Model model, Vector3f position) {
         model.getPlayer().giveMoney(getRandomMoney());
     }
 

@@ -1,12 +1,12 @@
 package andioopp.common.javafx.graphics;
 
-import andioopp.common.math.Dimension;
-import andioopp.common.math.Vector3f;
+import andioopp.common.math.dimension.Dimension;
+import andioopp.common.math.vector.Vector3f;
+import andioopp.common.observer.CollectionObservable;
 import andioopp.common.storage.ArrayListFactory;
-import andioopp.controller.service.input.MouseEvent;
+import andioopp.controller.input.MouseInputEvent;
 import andioopp.common.graphics.Window;
 import andioopp.common.observer.Observable;
-import andioopp.common.observer.ConcreteObservable;
 import andioopp.common.observer.Observer;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.canvas.Canvas;
@@ -20,32 +20,32 @@ public class FxWindow implements Window<FxRenderer> {
     private final Stage stage;
     private final Canvas canvas;
 
-    private final Observable<MouseEvent, Observer<MouseEvent>> mouseObservable;
+    private final Observable<MouseInputEvent, Observer<MouseInputEvent>> mouseObservable;
     private final Observable<Dimension, Observer<Dimension>> resizeObservable;
 
     public FxWindow(Stage stage, Canvas canvas) {
         this.stage = stage;
         this.canvas = canvas;
 
-        mouseObservable = new ConcreteObservable<>(new ArrayListFactory().create());
+        mouseObservable = new CollectionObservable<>(new ArrayListFactory().create());
         stage.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_MOVED, (e) -> {
             Vector3f position = new Vector3f((float) e.getX(), (float) e.getY());
-            mouseObservable.notifyObservers(new MouseEvent(position, MouseEvent.MouseEventType.MOVE));
+            mouseObservable.notifyObservers(new MouseInputEvent(position, MouseInputEvent.MouseEventType.MOVE));
         });
         stage.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_DRAGGED, (e) -> {
             Vector3f position = new Vector3f((float) e.getX(), (float) e.getY());
-            mouseObservable.notifyObservers(new MouseEvent(position, MouseEvent.MouseEventType.DRAG));
+            mouseObservable.notifyObservers(new MouseInputEvent(position, MouseInputEvent.MouseEventType.DRAG));
         });
         stage.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_PRESSED, (e) -> {
             Vector3f position = new Vector3f((float) e.getX(), (float) e.getY());
-            mouseObservable.notifyObservers(new MouseEvent(position, MouseEvent.MouseEventType.PRESS));
+            mouseObservable.notifyObservers(new MouseInputEvent(position, MouseInputEvent.MouseEventType.PRESS));
         });
         stage.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_RELEASED, (e) -> {
             Vector3f position = new Vector3f((float) e.getX(), (float) e.getY());
-            mouseObservable.notifyObservers(new MouseEvent(position, MouseEvent.MouseEventType.RELEASE));
+            mouseObservable.notifyObservers(new MouseInputEvent(position, MouseInputEvent.MouseEventType.RELEASE));
         });
 
-        resizeObservable = new ConcreteObservable<>(new ArrayListFactory().create());
+        resizeObservable = new CollectionObservable<>(new ArrayListFactory().create());
         ChangeListener<Number> resizeListener = (observable, oldValue, newValue) -> {
             resizeObservable.notifyObservers(getSize());
             canvas.resize(getSize().getWidth(), getSize().getHeight());
@@ -55,7 +55,7 @@ public class FxWindow implements Window<FxRenderer> {
     }
 
     @Override
-    public Observable<MouseEvent, Observer<MouseEvent>> getMouseObservable() {
+    public Observable<MouseInputEvent, Observer<MouseInputEvent>> getMouseObservable() {
         return mouseObservable;
     }
 

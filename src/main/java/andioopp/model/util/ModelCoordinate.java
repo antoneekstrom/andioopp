@@ -1,6 +1,6 @@
 package andioopp.model.util;
 
-import andioopp.common.math.Vector3f;
+import andioopp.common.math.vector.Vector3f;
 
 public class ModelCoordinate extends Vector3f {
     public ModelCoordinate(float x, float y, float z) {

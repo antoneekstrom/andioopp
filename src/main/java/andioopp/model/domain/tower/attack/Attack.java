@@ -1,6 +1,6 @@
 package andioopp.model.domain.tower.attack;
 
-import andioopp.common.math.Vector3f;
+import andioopp.common.math.vector.Vector3f;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.time.Time;
 import andioopp.model.Model;
@@ -32,6 +32,13 @@ public abstract class Attack implements DamageSource {
         return damageSource.getTypes();
     }
 
+    public void perform(Time time, Model model, Vector3f position) {
+        if (isAvailableForAttack(time)) {
+            onAttack(model, position);
+            updateTimeOfLastAttack(time);
+        }
+    }
+
     /**
      * Executes the attack. Can vary depending on the attack.
      * Usually spawns a projectile in the game model.
@@ -39,7 +46,7 @@ public abstract class Attack implements DamageSource {
      * @param model
      * @param position position of the tower, or wherever the attack is to be performed
      */
-    public abstract void performAttack(Model model, Vector3f position);
+    protected abstract void onAttack(Model model, Vector3f position);
 
     /**
      * Checks if the tower has waited long enough since its last attak.
@@ -48,7 +55,7 @@ public abstract class Attack implements DamageSource {
      * @return true if enough time has passed since the last attack.
      */
     public boolean isAvailableForAttack(Time time) {
-        float deltaSeconds = time.getElapsedSeconds() - timeOfLastAttack;
+        float deltaSeconds = time.getTime() - timeOfLastAttack;
         return (deltaSeconds > this.cooldown);
     }
 
@@ -57,8 +64,8 @@ public abstract class Attack implements DamageSource {
      *
      * @param time the current time
      */
-    public void updateTimeOfLastAttack(Time time) {
-        this.timeOfLastAttack = time.getElapsedSeconds();
+    private void updateTimeOfLastAttack(Time time) {
+        this.timeOfLastAttack = time.getTime();
     }
 
     /**

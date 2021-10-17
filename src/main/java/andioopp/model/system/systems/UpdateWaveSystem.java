@@ -1,18 +1,18 @@
-package andioopp.model.system;
+package andioopp.model.system.systems;
 
 import andioopp.common.time.Time;
 import andioopp.model.Model;
 import andioopp.model.domain.waves.WaveQueue;
+import andioopp.model.system.System;
 
-public class UpdateWavesService implements System<Model> {
+public class UpdateWaveSystem implements System<Model> {
 
     private final WaveQueue waves;
     private double delay = 1;
 
-    public UpdateWavesService() {
-        this.waves = new WaveQueue();
+    public UpdateWaveSystem(WaveQueue waves) {
+        this.waves = waves;
     }
-
 
     @Override
     public void update(Model model, Time time) {

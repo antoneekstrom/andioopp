@@ -1,4 +1,8 @@
-package andioopp.common.math;
+package andioopp.common.math.dimension;
+
+import andioopp.common.math.vector.Vector3f;
+import com.sun.jmx.interceptor.DefaultMBeanServerInterceptor;
+import sun.java2d.marlin.DMarlinRenderingEngine;
 
 import java.util.Objects;
 
@@ -6,6 +10,8 @@ import java.util.Objects;
  * Represents a two-dimensional size or dimension.
  */
 public class Dimension {
+
+    public static final Dimension UNIT = new Dimension(1, 1);
 
     private final Vector3f dimension;
 
@@ -26,11 +32,24 @@ public class Dimension {
         return dimension;
     }
 
-    public Dimension halved() { return new Dimension(new Vector3f(getWidth() / 2, getHeight() / 2)); }
+    public Dimension halved() {
+        return scale(0.5f);
+    }
 
 
     /**
+     * Scales the dimension by the given scalar.
+     *
+     * @param scalar the value to scale by
+     * @return the resulting dimension
+     */
+    public Dimension scale(float scalar) {
+        return new Dimension(toVector().scale(scalar));
+    }
+
+    /**
      * Sets the width of the dimension while preserving the ratio between width and height.
+     *
      * @param width the new width
      * @return the result
      */
@@ -41,6 +60,7 @@ public class Dimension {
 
     /**
      * Sets the height of the dimension while preserving the ratio between width and height.
+     *
      * @param height the new width
      * @return the result
      */

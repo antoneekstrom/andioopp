@@ -1,6 +1,6 @@
 package andioopp.common.javafx.graphics;
 
-import andioopp.common.math.Dimension;
+import andioopp.common.math.dimension.Dimension;
 import andioopp.common.graphics.WindowBuilder;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -37,6 +37,30 @@ public class FxWindowBuilder implements WindowBuilder<FxWindow> {
         Canvas canvas = createCanvas();
         configureStageWithScene(createScene(canvas));
         return createWindowWithCanvas(canvas);
+    }
+
+    @Override
+    public FxWindowBuilder setIcon(String path) {
+        icon = new Image(path);
+        return this;
+    }
+
+    @Override
+    public FxWindowBuilder setResizable(boolean isResizable) {
+        this.isResizable = isResizable;
+        return this;
+    }
+
+    @Override
+    public FxWindowBuilder setSize(Dimension size) {
+        this.size = size;
+        return this;
+    }
+
+    @Override
+    public FxWindowBuilder setTitle(String title) {
+        this.title = title;
+        return this;
     }
 
     private void configureStageWithScene(Scene scene) {
@@ -89,35 +113,15 @@ public class FxWindowBuilder implements WindowBuilder<FxWindow> {
         return size;
     }
 
-    @Override
-    public void setSize(Dimension size) {
-        this.size = size;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    @Override
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public Image getIcon() {
         return icon;
     }
 
-    @Override
-    public void setIcon(String path) {
-        icon = new Image(path);
-    }
-
     public boolean isResizable() {
         return isResizable;
-    }
-
-    @Override
-    public void setResizable(boolean isResizable) {
-        this.isResizable = isResizable;
     }
 }

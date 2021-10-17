@@ -1,10 +1,7 @@
 package andioopp.model.domain.enemy.enemies;
 
-import andioopp.common.math.Dimension;
-import andioopp.common.math.Rectangle;
+import andioopp.common.math.dimension.Dimension;
 import andioopp.common.math.rectangle.ImmutableRectangle;
-import andioopp.common.math.transform.Transform;
-import andioopp.common.time.Time;
 import andioopp.model.domain.damage.DamageFilter;
 import andioopp.model.domain.damage.targets.FilterGrounded;
 import andioopp.model.domain.enemy.Enemy;
@@ -20,10 +17,10 @@ public class Blooper extends Enemy {
     private static final float BASE_ATTACK_COOLDOWN = 0.3f;
     private static final DamageFilter DAMAGE_FILTER = new FilterGrounded();
     private static final Money REWARD = new Money(8);
-    private static final Dimension<ModelCoordinate> size = new Dimension<>(new ModelCoordinate(1,1));
+    private static final Dimension size = new Dimension(new ModelCoordinate(1,1));
 
     public Blooper(ModelCoordinate position) {
-        super(SPRITE_PATH, new Health(BASE_HEALTH), new ImmutableRectangle<ModelCoordinate>(position, size), BASE_SPEED, BASE_ATTACK_COOLDOWN, DAMAGE_FILTER, REWARD);
+        super(SPRITE_PATH, new Health(BASE_HEALTH), new ImmutableRectangle(position, size), BASE_SPEED, BASE_ATTACK_COOLDOWN, DAMAGE_FILTER, REWARD);
     }
 }
 

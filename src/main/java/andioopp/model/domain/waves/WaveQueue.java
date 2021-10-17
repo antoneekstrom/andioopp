@@ -59,7 +59,7 @@ public class WaveQueue {
      * Delays enemies so they don't appear on screen at the same time.
      */
     public boolean delayEnemies(Time time, double delay) {
-        this.deltaSeconds = time.getElapsedSeconds() - timeSinceLastEnemy;
+        this.deltaSeconds = time.getTime() - timeSinceLastEnemy;
         return (this.deltaSeconds > delay);
 
     }
@@ -68,7 +68,7 @@ public class WaveQueue {
     }
 
     public void updateTimeSinceLastEnemy(Time time) {
-        this.timeSinceLastEnemy = time.getElapsedSeconds();
+        this.timeSinceLastEnemy = time.getTime();
     }
 
     /**

@@ -1,4 +1,4 @@
-package andioopp.common.math;
+package andioopp.common.math.vector;
 
 import java.util.Objects;
 
@@ -7,13 +7,16 @@ import java.util.Objects;
  */
 public class Vector3f {
 
+    public static final Vector3f ONE = new Vector3f(1, 1, 0);
+    public static final Vector3f ZERO = new Vector3f(0, 0, 0);
+
     private final float x;
     private final float y;
     private final float z;
 
-
     /**
      * Creates a vector.
+     *
      * @param x the value of x
      * @param y the value of y
      * @param z the value of z
@@ -26,6 +29,7 @@ public class Vector3f {
 
     /**
      * Creates a vector with only the x and y components, and z set to zero.
+     *
      * @param x the value of x
      * @param y the value of y
      */
@@ -35,6 +39,7 @@ public class Vector3f {
 
     /**
      * Creates a vector with only the x component, and the rest set to zero.
+     *
      * @param x the value of x
      */
     public Vector3f(float x) {
@@ -43,6 +48,7 @@ public class Vector3f {
 
     /**
      * Copies the values from another vector.
+     *
      * @param other the other vector
      */
     public Vector3f(Vector3f other) {
@@ -52,6 +58,7 @@ public class Vector3f {
 
     /**
      * Creates a vector with only the x component, and the rest set to zero.
+     *
      * @param x the value of x
      */
     public static Vector3f fromX(float x) {
@@ -60,6 +67,7 @@ public class Vector3f {
 
     /**
      * Creates a vector with only the y component, and the rest set to zero.
+     *
      * @param y the value of y
      */
     public static Vector3f fromY(float y) {
@@ -68,6 +76,7 @@ public class Vector3f {
 
     /**
      * Creates a vector with only the z component, and the rest set to zero.
+     *
      * @param z the value of z
      */
     public static Vector3f fromZ(float z) {
@@ -77,7 +86,9 @@ public class Vector3f {
 
     /**
      * Creates a vector with all components set to one.
+     *
      * @return the vector
+     * @deprecated use constant {@link #ONE} instead
      */
     public static Vector3f one() {
         return Vector3f.all(1);
@@ -85,7 +96,9 @@ public class Vector3f {
 
     /**
      * Creates a vector with all components set to zero.
+     *
      * @return the vector
+     * @deprecated use constant {@link #ZERO} instead
      */
     public static Vector3f zero() {
         return Vector3f.all(0);
@@ -93,6 +106,7 @@ public class Vector3f {
 
     /**
      * Creates a vector with all components set to the given value.
+     *
      * @param v the value
      * @return the vector
      */
@@ -103,6 +117,7 @@ public class Vector3f {
 
     /**
      * Creates another vector with the value of x from this one, and the other components set to zero.
+     *
      * @return the vector
      */
     public Vector3f fromX() {
@@ -111,6 +126,7 @@ public class Vector3f {
 
     /**
      * Creates another vector with the value of y from this one, and the other components set to zero.
+     *
      * @return the vector
      */
     public Vector3f fromY() {
@@ -119,6 +135,7 @@ public class Vector3f {
 
     /**
      * Creates another vector with the value of z from this one, and the other components set to zero.
+     *
      * @return the vector
      */
     public Vector3f fromZ() {
@@ -128,6 +145,7 @@ public class Vector3f {
 
     /**
      * Rounds the value of each component.
+     *
      * @return the resulting vector
      */
     public Vector3f round() {
@@ -136,6 +154,7 @@ public class Vector3f {
 
     /**
      * Negates the value of each component.
+     *
      * @return the resulting vector
      */
     public Vector3f negate() {
@@ -144,6 +163,7 @@ public class Vector3f {
 
     /**
      * Returns a vector such that multiplying the result with this one yields a vector with the value of one for each component.
+     *
      * @return the resulting vector
      */
     public Vector3f inverse() {
@@ -153,6 +173,7 @@ public class Vector3f {
 
     /**
      * Multiplies each component of this vector and the other vector.
+     *
      * @param other the other vector
      * @return the result
      */
@@ -162,6 +183,7 @@ public class Vector3f {
 
     /**
      * Scales each component by a scalar.
+     *
      * @param scalar the scalar
      * @return the result
      */

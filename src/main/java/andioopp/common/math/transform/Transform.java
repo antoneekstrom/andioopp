@@ -1,6 +1,6 @@
 package andioopp.common.math.transform;
 
-import andioopp.common.math.Vector3f;
+import andioopp.common.math.vector.Vector3f;
 
 public interface Transform {
     Vector3f getPosition();

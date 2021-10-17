@@ -6,6 +6,8 @@ import andioopp.common.time.Clock;
 import andioopp.common.time.Time;
 import javafx.animation.AnimationTimer;
 
+import java.util.Collection;
+
 /**
  * Implementation of {@link Clock} which uses {@link AnimationTimer} from javafx.
  */
@@ -28,33 +30,23 @@ public class FxClock extends AnimationTimer implements Clock {
         return (float) nanos * 0.000_000_001f;
     }
 
+    public static long getNowTimeNanos() {
+        return System.nanoTime();
+    }
+
+    @Override
+    public Collection<Observer<Time>> getObservers() {
+        return observable.getObservers();
+    }
+
     @Override
     public void start() {
         super.start();
         previousTime = getNowTimeNanos();
     }
 
-    public static long getNowTimeNanos() {
-        return System.nanoTime();
-    }
-
     @Override
     public void handle(long time) {
         observable.notifyObservers(new Time(nanosToSeconds(getNowTimeNanos()), nanosToSeconds(getDeltaTime(time))));
-    }
-
-    @Override
-    public void listen(Observer<Time> listener) {
-        observable.addObserver(listener);
-    }
-
-    @Override
-    public void unlisten(Observer<Time> listener) {
-        observable.removeObserver(listener);
-    }
-
-    @Override
-    public void unlistenAll() {
-        observable.getObservers().clear();
     }
 }

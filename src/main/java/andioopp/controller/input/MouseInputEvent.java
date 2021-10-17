@@ -1,11 +1,11 @@
-package andioopp.controller.service.input;
+package andioopp.controller.input;
 
-import andioopp.common.math.Vector3f;
+import andioopp.common.math.vector.Vector3f;
 
 /**
  * Event which is emitted when the user interacts with their mouse.
  */
-public class MouseEvent {
+public class MouseInputEvent {
 
     /**
      * Type of mouse event.
@@ -17,7 +17,7 @@ public class MouseEvent {
     private final Vector3f position;
     private final MouseEventType type;
 
-    public MouseEvent(Vector3f position, MouseEventType type) {
+    public MouseInputEvent(Vector3f position, MouseEventType type) {
         this.position = position;
         this.type = type;
     }

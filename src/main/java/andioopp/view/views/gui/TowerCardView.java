@@ -3,97 +3,85 @@ package andioopp.view.views.gui;
 import andioopp.common.graphics.Color;
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
-import andioopp.common.math.Dimension;
-import andioopp.common.math.Vector3f;
+import andioopp.common.math.dimension.Dimension;
+import andioopp.common.math.rectangle.ImmutableRectangle;
+import andioopp.common.math.rectangle.Rectangle;
+import andioopp.common.math.vector.Vector3f;
 import andioopp.common.math.transform.ConcreteTransform;
-import andioopp.common.math.transform.Transform;
 import andioopp.common.math.transform.TransformFactory;
 import andioopp.model.Model;
-import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.player.TowerCard;
 import andioopp.model.domain.tower.Tower;
 import andioopp.model.util.ModelCoordinate;
 import andioopp.view.View;
 import andioopp.view.util.ModelViewport;
 import andioopp.view.util.ViewCoordinate;
+import andioopp.view.util.Viewport;
 import javafx.scene.text.Font;
 
-public class TowerCardView  {
+public class TowerCardView implements View<Model> {
 
-    private final static int HEIGHT = 150;
-    private final static int WIDTH = 115;
-    private final static int IMAGE_HEIGHT = 100;
-    private final static int IMAGE_WIDTH = 70;
-    private static final TransformFactory transformFactory = ConcreteTransform.getFactory();
-    private final TowerCard<?> card;
+    public final static Dimension CARD_SIZE = new Dimension(110, 170);
+    public static final Color BACKGROUND_COLOR = new Color(150, 150, 150);
+    public static final Dimension IMAGE_ASPECT_RATIO = new Dimension(1, 1.2f);
+
+    private final Viewport viewport;
     private final Tower tower;
 
-    public TowerCardView(TowerCard<?> card) {
-        this.card = card;
-        this.tower = card.getSupplier().get();
+    public TowerCardView(Viewport viewport, TowerCard<?> card) {
+        this.viewport = viewport;
+        this.tower = card.getSupplier().create(new ModelCoordinate(Vector3f.zero()));
     }
 
-    /**
-     * Returns dimension for whole TowerCardView
-     */
-    public static Vector3f getCardDimension() {
-        return new Vector3f(WIDTH, HEIGHT);
-    }
+    @Override
+    public <S extends Sprite<?>> void render(Model model, Renderer<S> renderer) {
+        S sprite = renderer.getSpriteFactory().get(tower.getSprite());
+        Rectangle cardViewRectangle = getCardViewRectangle();
+        Rectangle imageViewRectangle = getImageViewRectangle(cardViewRectangle);
+        Vector3f textPosition = getTextPosition(imageViewRectangle);
+        Vector3f costPosition = getCostPosition(textPosition);
+        String costStr = String.valueOf(tower.getCost().getValue());
+        String nameStr = tower.getName();
 
-    /**
-     * Returns dimension for image on TowerCardView
-     */
-    public static Vector3f getImageDimension() {
-        return new Vector3f(WIDTH,HEIGHT);
-    }
-
-    /**
-     * Uses a renderer to render one TowerCardView on the screen.
-     *
-     * @param renderer          is used for drawing TowerCardView on screen.
-     * @param towerCardPosition the position where TowerCardView will be drawn.
-     */
-
-    public <S extends Sprite<?>> void renderTowerCard(Renderer<S> renderer, Vector3f towerCardPosition, ModelViewport viewport) {
-        S sprite = tower.getSprite(renderer.getSpriteFactory());
-        ViewCoordinate viewPosition = viewport.getViewCoordinate(new ModelCoordinate(new Vector3f(towerCardPosition.getX() + 15, towerCardPosition.getY())));
-        Dimension viewSize = viewport.getViewSize(new Dimension(getCardDimension()));
-
-        renderer.drawRectangle(towerCardPosition, new Dimension(new Vector3f(WIDTH, HEIGHT)), new Color(150, 150, 150));
-        renderer.drawSprite(sprite,viewPosition,viewSize);
-        renderer.writeText(getTextPosition(towerCardPosition), tower.getName(), new Color(0, 0, 0), new Font("Comic Sans MS", 20));  //Writes name of Towe
-        renderer.writeText(getCostPosition(towerCardPosition), String.valueOf(tower.getCost()), new Color(0, 0, 0), new Font("Comic Sans MS", 25)); //Writes cost of Tower
-
-
-    }
-
-
-
-
-    /**
-     * Returns position for name of tower
-     *
-     * @param towerCardPos where the whole TowerCardView is placed.
-     */
-
-    private Vector3f getTextPosition(Vector3f towerCardPos) {
-        return new Vector3f(towerCardPos.getX() + 30, towerCardPos.getY() + IMAGE_HEIGHT + 18);
-    }
-
-    public TowerCard<?> getCard() {
-        return card;
+        renderer.drawRectangle(cardViewRectangle, BACKGROUND_COLOR);
+        renderer.drawSprite(sprite, imageViewRectangle);
+        renderer.writeText(textPosition, nameStr, Color.BLACK, new Font("Comic Sans MS", 16));
+        renderer.writeText(costPosition, costStr, Color.BLACK, new Font("Comic Sans MS", 22));
     }
 
     /**
      * Returns position for cost of Tower
      *
-     * @param towerCardPos where the whole TowerCardView is placed.
+     * @param textPosition position of the text
      */
-    private Vector3f getCostPosition(Vector3f towerCardPos) {
-        return new Vector3f(towerCardPos.getX() + 35, towerCardPos.getY() + IMAGE_HEIGHT + 40);
-
+    private Vector3f getCostPosition(Vector3f textPosition) {
+        return textPosition.add(Vector3f.fromY(20)).add(Vector3f.fromX(-10));
     }
 
+    /**
+     * Returns position for name of tower
+     *
+     * @param cardViewRectangle rectangle of the card
+     */
+    private Vector3f getTextPosition(Rectangle cardViewRectangle) {
+        Vector3f bottom = cardViewRectangle.getPosition().add(cardViewRectangle.getSize().toVector());
+        bottom = bottom.add(Vector3f.fromY(20)).add(Vector3f.fromX(-50));
+        return bottom;
+    }
 
+    public Rectangle getCardViewRectangle() {
+        Vector3f cardPosition = viewport.getPositionOutside(Vector3f.ZERO);
+        Dimension cardSize = viewport.getSizeOutside(Dimension.UNIT);
+        return new ImmutableRectangle(cardPosition, cardSize);
+    }
 
+    private Rectangle getImageViewRectangle(Rectangle cardViewRectangle) {
+        float cardWidth = cardViewRectangle.getSize().getWidth();
+        float padding = cardWidth * 0.2f;
+        Dimension imageSize = IMAGE_ASPECT_RATIO.setWidth(cardWidth - padding);
+        Rectangle imageViewRectangle = new ImmutableRectangle(Vector3f.ZERO, imageSize);
+        imageViewRectangle = cardViewRectangle.centerWithin(imageViewRectangle);
+        imageViewRectangle = imageViewRectangle.setPosition(imageViewRectangle.getPosition().setY(padding));
+        return imageViewRectangle;
+    }
 }

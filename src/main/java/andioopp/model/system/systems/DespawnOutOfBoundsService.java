@@ -1,8 +1,9 @@
-package andioopp.model.system;
+package andioopp.model.system.systems;
 
 import andioopp.common.time.Time;
 import andioopp.model.Model;
 import andioopp.model.domain.world.World;
+import andioopp.model.system.System;
 import andioopp.model.util.ModelCoordinate;
 
 public class DespawnOutOfBoundsService implements System<Model> {

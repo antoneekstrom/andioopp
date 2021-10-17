@@ -1,6 +1,6 @@
 package andioopp.model.domain.tower.attack;
 
-import andioopp.common.math.Vector3f;
+import andioopp.common.math.vector.Vector3f;
 import andioopp.model.domain.world.World;
 
 public interface AttackTargetArea {

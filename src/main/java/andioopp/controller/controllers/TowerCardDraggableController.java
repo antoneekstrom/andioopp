@@ -1,16 +1,18 @@
 package andioopp.controller.controllers;
 
-import andioopp.controller.service.input.Draggable;
-import andioopp.controller.service.input.MouseEvent;
+import andioopp.common.math.rectangle.Rectangle;
+import andioopp.controller.input.Draggable;
+import andioopp.controller.input.MouseInputEvent;
 import andioopp.model.domain.player.TowerCard;
+import andioopp.model.domain.tower.Tower;
 
 /**
  * Controls dragging behaviour for a {@link TowerCard}.
  */
 public class TowerCardDraggableController extends Draggable<TowerCardDragEvent> {
-    private final TowerCard<?> card;
+    private final TowerCard<? extends Tower> card;
 
-    public TowerCardDraggableController(RectanglePlupp rectangle, TowerCard<?> card) {
+    public TowerCardDraggableController(Rectangle rectangle, TowerCard<?> card) {
         super(rectangle);
         this.card = card;
     }
@@ -21,6 +23,6 @@ public class TowerCardDraggableController extends Draggable<TowerCardDragEvent> 
     }
 
     @Override
-    public void onEvent(MouseEvent event) {
+    public void onEvent(MouseInputEvent event) {
     }
 }

@@ -1,10 +1,11 @@
 package andioopp.game;
 
+import andioopp.common.graphics.Color;
 import andioopp.common.graphics.Window;
+import andioopp.common.graphics.WindowBuilder;
+import andioopp.common.storage.ListFactory;
 import andioopp.common.time.Time;
 import andioopp.controller.Controller;
-import andioopp.controller.service.ServiceProvider;
-import andioopp.model.Model;
 import andioopp.model.system.System;
 import andioopp.view.View;
 
@@ -15,25 +16,28 @@ import java.util.List;
  * @param <M>
  */
 public abstract class Game<M> {
+    private final ListFactory listFactory;
+
     private final M model;
+    private final List<System<M>> systems;
+
     private final List<Controller<M>> controllers;
     private final List<View<M>> views;
-    private final List<System<M>> systems;
-    private final ServiceProvider services;
-    private final Window<?> window;
 
-    public Game(ServiceProvider services, Window<?> window) {
-        this.window = window;
-        this.services = services;
-        this.systems = initSystems();
+    private Window<?> window;
+
+    public Game(ListFactory listFactory, WindowBuilder<? extends Window<?>> windowBuilder) {
+        this.listFactory = listFactory;
+        this.window = initWindow(windowBuilder);
         this.model = initModel();
+        this.systems = initSystems();
         this.views = initViews();
         this.controllers = initControllers();
     }
 
     public void init() {
         for (Controller<M> controller : controllers) {
-            controller.init(model, window, services);
+            controller.init(model, window);
         }
     }
 
@@ -49,12 +53,28 @@ public abstract class Game<M> {
         }
     }
 
-    protected ServiceProvider getServices() {
-        return services;
+    public void render(Time time) {
+        window.getRenderer().clear(Color.WHITE);
+        for (View<M> view : views) {
+            view.render(model, window.getRenderer());
+        }
     }
 
+    protected abstract Window<?> initWindow(WindowBuilder<? extends Window<?>> windowBuilder);
     protected abstract M initModel();
     protected abstract List<System<M>> initSystems();
     protected abstract List<Controller<M>> initControllers();
     protected abstract List<View<M>> initViews();
+
+    protected M getModel() {
+        return model;
+    }
+
+    protected Window<?> getWindow() {
+        return window;
+    }
+
+    protected ListFactory getListFactory() {
+        return listFactory;
+    }
 }

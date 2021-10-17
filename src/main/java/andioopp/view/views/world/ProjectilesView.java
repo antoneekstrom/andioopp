@@ -2,44 +2,36 @@ package andioopp.view.views.world;
 
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
-import andioopp.common.math.Dimension;
-import andioopp.common.math.transform.Transform;
-import andioopp.common.math.transform.TransformFactory;
+import andioopp.common.math.dimension.Dimension;
 import andioopp.model.domain.tower.attack.projectiles.Projectile;
 import andioopp.model.Model;
 import andioopp.model.domain.world.World;
 import andioopp.view.View;
 import andioopp.view.util.ModelViewport;
+import andioopp.view.util.ViewCoordinate;
 
-public class ProjectilesView<S extends Sprite<?>> implements View<S> {
+public class ProjectilesView implements View<Model> {
 
     private static final float TOWER_CELL_OFFSET_PERCENT = -0.3f;
 
-    private final TransformFactory transformFactory;
+    private final ModelViewport viewport;
 
-    public ProjectilesView(RectanglePlupp viewportRect, TransformFactory transformFactory) {
-        super(viewportRect);
-        this.transformFactory = transformFactory;
-    }
-
-
-    private void renderProjectile(Renderer<S> renderer, World world, Projectile projectile) {
-        S sprite = renderer.getSpriteFactory().get(projectile.getSpritePath());
-        RectanglePlupp enemyRect = getEntityRect(world, projectile.getPosition(), sprite);
-        Transform enemyTransform = transformFactory.createWithPosition(enemyRect.getPosition());
-        renderer.drawSprite(sprite, enemyTransform, enemyRect.getSize());
+    public ProjectilesView(ModelViewport viewport) {
+        this.viewport = viewport;
     }
 
     @Override
-    protected Dimension getEntitySize(World world, Sprite<?> sprite) {
-        return new Dimension(super.getEntitySize(world, sprite).toVector().scale(0.7f));
-    }
-
-    @Override
-    public <S1 extends Sprite<?>> void render(S model, Renderer<S1> renderer, ModelViewport viewport) {
+    public <S extends Sprite<?>> void render(Model model, Renderer<S> renderer) {
         World world = model.getWorld();
         for (Projectile projectile : world.getProjectiles()) {
-            renderProjectile(renderer, world, projectile);
+            renderProjectile(renderer, projectile);
         }
+    }
+
+    private <S extends Sprite<?>> void renderProjectile(Renderer<S> renderer, Projectile projectile) {
+        S sprite = renderer.getSpriteFactory().get(projectile.getSprite());
+        ViewCoordinate position = viewport.getViewCoordinate(projectile.getPosition());
+        Dimension size = viewport.getViewSize(projectile.getSize());
+        renderer.drawSprite(sprite, position, size);
     }
 }

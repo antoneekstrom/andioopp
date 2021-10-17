@@ -4,6 +4,7 @@ import andioopp.model.domain.money.Money;
 import andioopp.model.domain.money.Transaction;
 import andioopp.model.domain.money.TransactionSupplier;
 import andioopp.model.domain.tower.Tower;
+import andioopp.model.domain.tower.TowerSupplier;
 
 import java.util.function.Supplier;
 
@@ -12,27 +13,27 @@ import java.util.function.Supplier;
  * @author Anton Ekström
  * @param <T>
  */
-public class TowerCard<T extends Tower> implements TransactionSupplier<T> {
+public class TowerCard<T extends Tower> implements TransactionSupplier<TowerSupplier<T>> {
 
     private final Money cost;
-    private final Supplier<T> supplier;
+    private final TowerSupplier<T> supplier;
 
     /**
      * Creates a tower card.
      * @param cost the cost of purchasing the tower
      * @param supplier the supplier which creates towers
      */
-    public TowerCard(Money cost, Supplier<T> supplier) {
+    public TowerCard(Money cost, TowerSupplier<T> supplier) {
         this.cost = cost;
         this.supplier = supplier;
     }
 
     @Override
-    public Transaction<T> purchase(Money money) {
-        return Transaction.perform(money, cost, supplier.get());
+    public Transaction<TowerSupplier<T>> purchase(Money money) {
+        return Transaction.perform(money, cost, supplier);
     }
 
-    public Supplier<T> getSupplier() {
+    public TowerSupplier<T> getSupplier() {
         return supplier;
     }
 
