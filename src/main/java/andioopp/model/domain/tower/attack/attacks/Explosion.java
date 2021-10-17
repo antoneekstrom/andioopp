@@ -1,12 +1,13 @@
-package andioopp.model.tower.attack.attacks;
+package andioopp.model.domain.tower.attack.attacks;
 
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.vector.Vector3f;
 import andioopp.model.Model;
-import andioopp.model.damage.BaseDamageSource;
-import andioopp.model.damage.DamageType;
-import andioopp.model.enemy.Enemy;
-import andioopp.model.tower.attack.Attack;
-import andioopp.model.tower.attack.strategies.NonTargeting;
+import andioopp.model.domain.damage.BaseDamageSource;
+import andioopp.model.domain.damage.DamageType;
+import andioopp.model.domain.enemy.Enemy;
+import andioopp.model.domain.tower.Tower;
+import andioopp.model.domain.tower.attack.Attack;
+import andioopp.model.domain.tower.attack.strategies.NonTargeting;
 
 /**
  * @author Arvid Svedberg
@@ -21,15 +22,15 @@ public class Explosion extends Attack {
             DamageType.WATER
     );
 
-    public Explosion(float cooldown) {
-        super(cooldown, new NonTargeting(), DAMAGE_SOURCE);
+    public Explosion() {
+        super(1f, new NonTargeting(), DAMAGE_SOURCE);
     }
 
     @Override
-    public void performAttack(Model model, Vector3f position) {
+    public void onAttack(Model model, Vector3f position) {
         for (Enemy e : model.getWorld().getEnemies()) {
             if (isInRange(e, position)) {
-                eliminateEnemy(e);
+                eliminateTowerAndEnemy(model.getWorld().getCell((int)position.getX(), (int)position.getY()).getTower(), e);
             }
         }
     }
@@ -41,7 +42,8 @@ public class Explosion extends Attack {
         return isInRangeXAxis && isInRangeYAxis;
     }
 
-    private void eliminateEnemy(Enemy e) {
+    private void eliminateTowerAndEnemy(Tower tower, Enemy e) {
+        tower.getHealth().decrease(tower.getHealth().get());
         e.getHealth().decrease(e.getHealth().get());
     }
 }

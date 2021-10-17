@@ -72,7 +72,8 @@ public class MarioGame extends Game<Model> {
                 new UpdateProjectileSystem(),
                 new EnemyProjectileCollisionSystem(),
                 new HandleEnemyAttackSystem(),
-                new DespawnOutOfBoundsSystem()
+                new DespawnOutOfBoundsSystem(),
+                new RemoveSingleUseTowerSystem()
         );
     }
 
@@ -139,7 +140,7 @@ public class MarioGame extends Game<Model> {
                 new TowerCard<>(new Money(40), Towers::toad),
                 new TowerCard<>(new Money(60), Towers::mario),
                 new TowerCard<>(new Money(-1), Towers::rosalina),
-                new TowerCard<>(new Money(-1), Towers::bobomb),
+                new TowerCard<>(new Money(10), Towers::bobomb),
                 new TowerCard<>(new Money(-1), Towers::yoshi),
                 new TowerCard<>(new Money(-1), Towers::luigi)
         );
