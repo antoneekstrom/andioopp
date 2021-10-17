@@ -7,6 +7,7 @@ import andioopp.common.math.rectangle.MutableRectangle;
 import andioopp.common.math.rectangle.Rectangle;
 import andioopp.common.time.Time;
 import andioopp.model.domain.money.Money;
+import andioopp.model.domain.tower.Tower;
 import andioopp.model.util.ModelCoordinate;
 import andioopp.model.domain.damage.DamageFilter;
 import andioopp.model.domain.damage.DamageSource;
@@ -44,23 +45,34 @@ public abstract class Enemy implements DamageFilter {
         return damageFilter.canBeDamagedBy(src);
     }
 
+    public void attack(Time time, Tower tower) {
+        setTimeOfLastAttack(time);
+        tower.getHealth().decrease(1);
+    }
+
     /**
      * Sets the time of the enemy's latest attack.
      * It is used to calculate when its next attack can be performed.
+     *
      * @param time the current time of the attack
      */
-    public void setTimeOfLastAttack(Time time) {
+    private void setTimeOfLastAttack(Time time) {
         timeOfLastAttack = time.getTime();
     }
 
     /**
      * Calculates if the tower is able to attack depending on when it attacked the last time.
+     *
      * @param time the current time.
      * @return true if the tower is able to attack.
      */
     public boolean canAttack(Time time) {
         float deltaTime = time.getTime() - timeOfLastAttack;
         return (deltaTime > attackCooldown);
+    }
+
+    public int getRow() {
+        return (int) getPosition().getY();
     }
 
     public <S extends Sprite<?>> S getSprite(SpriteFactory<S> spriteFactory) {
@@ -75,7 +87,9 @@ public abstract class Enemy implements DamageFilter {
         return new ModelCoordinate(rectangle.getPosition());
     }
 
-    public Dimension getSize() { return rectangle.getSize(); }
+    public Dimension getSize() {
+        return rectangle.getSize();
+    }
 
     public void move(Time time) {
         rectangle.translate(new ModelCoordinate(-speed * time.getDeltaTime()));
@@ -89,7 +103,9 @@ public abstract class Enemy implements DamageFilter {
         towerAhead = state;
     }
 
-    public boolean isTowerAhead() {return towerAhead;}
+    public boolean isTowerAhead() {
+        return towerAhead;
+    }
 
     public Money getReward() {
         return reward;

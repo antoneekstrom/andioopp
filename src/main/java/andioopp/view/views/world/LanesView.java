@@ -32,14 +32,14 @@ public class LanesView implements View<Model> {
 
     private <S extends Sprite<?>> void renderLane(Renderer<S> renderer, World world, int row) {
         for (int col = 0; col < world.getNumberOfCellsInLanes(); col++) {
-            renderCell(renderer, row, col);
+            renderCell(renderer, col, row);
         }
     }
 
-    private <S extends Sprite<?>> void renderCell(Renderer<S> renderer, int row, int col) {
-        ViewCoordinate position = getCellPosition(row, col);
+    private <S extends Sprite<?>> void renderCell(Renderer<S> renderer, int col, int row) {
+        ViewCoordinate position = getCellPosition(col, row);
         Dimension size = getCellSize();
-        Color cellColor = getCellColor(row, col);
+        Color cellColor = getCellColor(col, row);
         renderer.drawRectangle(position, size, cellColor);
     }
 
@@ -47,11 +47,11 @@ public class LanesView implements View<Model> {
         return viewport.getViewSize(Dimension.UNIT);
     }
 
-    public ViewCoordinate getCellPosition(int row, int col) {
+    public ViewCoordinate getCellPosition(int col, int row) {
         return viewport.getViewCoordinate(new ModelCoordinate(col, row));
     }
 
-    private Color getCellColor(int row, int col) {
+    private Color getCellColor(int col, int row) {
         if (row % 2 == col % 2) {
             return COLOR_CELL_EVEN;
         }

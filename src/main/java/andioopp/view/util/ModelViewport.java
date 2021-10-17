@@ -17,7 +17,7 @@ public class ModelViewport {
         viewport = new Viewport(getInsideDimensionFromModel(model), outsideDimension, outsideOffset);
     }
 
-    public ViewCoordinate getCenterWithinCell(int row, int col) {
+    public ViewCoordinate getCenterWithinCell(int col, int row) {
         throw new NotImplementedException();
     }
 

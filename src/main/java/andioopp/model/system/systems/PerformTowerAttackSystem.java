@@ -17,25 +17,25 @@ public class PerformTowerAttackSystem implements System<Model> {
 
         for (int row = 0; row < world.getNumberOfLanes(); row++) {
             for (int col = 0; col < world.getNumberOfCellsInLanes(); col++) {
-                Cell cell = world.getCell(row, col);
+                Cell cell = world.getCell(col, row);
                 if (!cell.hasTower()) {
                     continue;
                 }
                 Tower tower = cell.getTower();
 
                 for (Attack attack : tower.getAttacks()) {
-                    doAttack(model, time, world, row, col, attack);
+                    doAttack(model, time, world, col, row, attack);
                 }
             }
         }
     }
 
-    private void doAttack(Model model, Time time, World world, int row, int col, Attack attack) {
+    private void doAttack(Model model, Time time, World world, int col, int row, Attack attack) {
         if (!attack.isAvailableForAttack(time)) {
             return;
         }
 
-        Vector3f position = new Vector3f(row, col);
+        Vector3f position = new Vector3f(col, row);
         for (Enemy enemy : attack.getEnemiesInRange(world, position)) {
             if (enemy.canBeDamagedBy(attack)) {
                 attack.perform(time, model, position);

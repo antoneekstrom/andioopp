@@ -71,7 +71,8 @@ public class MarioGame extends Game<Model> {
                 new UpdateWaveSystem(waves),
                 new UpdateProjectileSystem(),
                 new EnemyProjectileCollisionSystem(),
-                new HandleEnemyAttackSystem()
+                new HandleEnemyAttackSystem(),
+                new DespawnOutOfBoundsSystem()
         );
     }
 

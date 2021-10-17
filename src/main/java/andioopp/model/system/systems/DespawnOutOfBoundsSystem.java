@@ -6,7 +6,7 @@ import andioopp.model.domain.world.World;
 import andioopp.model.system.System;
 import andioopp.model.util.ModelCoordinate;
 
-public class DespawnOutOfBoundsService implements System<Model> {
+public class DespawnOutOfBoundsSystem implements System<Model> {
 
     @Override
     public void update(Model model, Time time) {

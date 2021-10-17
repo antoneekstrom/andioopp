@@ -40,7 +40,7 @@ public class World {
         return getLanes().get(row);
     }
 
-    public Cell getCell(int row, int col) {
+    public Cell getCell(int col, int row) {
         return getLane(row).getCell(col);
     }
 

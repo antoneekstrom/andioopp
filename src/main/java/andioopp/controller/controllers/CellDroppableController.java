@@ -19,7 +19,7 @@ public class CellDroppableController extends Droppable<TowerCardDragEvent> {
     private final int row;
     private final int col;
 
-    public CellDroppableController(Rectangle rectangle, Model model, int row, int col) {
+    public CellDroppableController(Rectangle rectangle, Model model, int col, int row) {
         super(rectangle);
         this.model = model;
         this.row = row;
@@ -27,11 +27,11 @@ public class CellDroppableController extends Droppable<TowerCardDragEvent> {
     }
 
     private ModelCoordinate getTowerPosition() {
-        return new ModelCoordinate(row, col);
+        return new ModelCoordinate(col, row);
     }
 
     private Cell getCell() {
-        return model.getWorld().getCell(row, col);
+        return model.getWorld().getCell(col, row);
     }
 
     @Override

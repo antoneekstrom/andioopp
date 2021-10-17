@@ -1,5 +1,6 @@
 package andioopp.view.views.world;
 
+import andioopp.common.graphics.Color;
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
 import andioopp.common.math.dimension.Dimension;
@@ -30,9 +31,9 @@ public class EnemiesView implements View<Model> {
     private <S extends Sprite<?>> void renderEnemy(Renderer<S> renderer, Enemy enemy) {
         S sprite = enemy.getSprite(renderer.getSpriteFactory());
 
-        ViewCoordinate viewPosition = viewport.getViewCoordinate(enemy.getPosition());
+        ViewCoordinate position = viewport.getViewCoordinate(enemy.getPosition());
         Dimension viewSize = viewport.getViewSize(enemy.getSize());
 
-        renderer.drawSprite(sprite, viewPosition, viewSize);
+        renderer.drawSprite(sprite, position, viewSize);
     }
 }

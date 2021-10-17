@@ -27,13 +27,13 @@ public class TowersView implements View<Model> {
         World world = model.getWorld();
         for (int row = 0; row < world.getNumberOfLanes(); row++) {
             for (int col = 0; col < world.getNumberOfCellsInLanes(); col++) {
-                renderTower(renderer, world, row, col);
+                renderTower(renderer, world, col, row);
             }
         }
     }
 
-    private <S extends Sprite<?>> void renderTower(Renderer<S> renderer, World world, int row, int col) {
-        Cell cell = world.getCell(row, col);
+    private <S extends Sprite<?>> void renderTower(Renderer<S> renderer, World world, int col, int row) {
+        Cell cell = world.getCell(col, row);
         if (!cell.hasTower()) {
             return;
         }
@@ -41,7 +41,7 @@ public class TowersView implements View<Model> {
         Tower tower = cell.getTower();
         S sprite = renderer.getSpriteFactory().get(tower.getSprite());
 
-        ViewCoordinate position = viewport.getViewCoordinate(new ModelCoordinate(row, col));
+        ViewCoordinate position = viewport.getViewCoordinate(new ModelCoordinate(col, row));
         Dimension size = getTowerSize(tower);
 
         renderer.drawSprite(sprite, position, size);

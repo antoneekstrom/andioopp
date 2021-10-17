@@ -62,7 +62,7 @@ public class PlaceTowerController implements Controller<Model> {
         World world = model.getWorld();
         for (int row = 0; row < world.getNumberOfLanes(); row++) {
             for (int col = 0; col < world.getNumberOfCellsInLanes(); col++) {
-                addDroppable(createCellDroppable(row, col));
+                addDroppable(createCellDroppable(col, row));
             }
         }
     }
@@ -84,11 +84,11 @@ public class PlaceTowerController implements Controller<Model> {
         draggables.add(draggable);
     }
 
-    private CellDroppableController createCellDroppable(int row, int col) {
+    private CellDroppableController createCellDroppable(int col, int row) {
         Vector3f position = lanesView.getCellPosition(col, row);
         Dimension size = lanesView.getCellSize();
         Rectangle rectangle = new ImmutableRectangle(position, size);
-        return new CellDroppableController(rectangle, model, row, col);
+        return new CellDroppableController(rectangle, model, col, row);
     }
 
     private TowerCardDraggableController createCardDraggable(TowerCard<?> card, int i) {
