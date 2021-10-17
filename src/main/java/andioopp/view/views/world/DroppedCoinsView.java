@@ -20,7 +20,7 @@ public class DroppedCoinsView implements View<Model> {
     @Override
     public <S extends Sprite<?>> void render(Model model, Renderer<S> renderer) {
         for (DroppedCoinEntity droppedCoin : model.getWorld().getDroppedCoins()) {
-            S sprite = renderer.getSpriteFactory().get("coin.jpg");
+            S sprite = renderer.getSpriteFactory().get("coin.png");
             ViewCoordinate position = viewport.getViewCoordinate(droppedCoin.getPosition());
             Dimension size = viewport.getViewSize(droppedCoin.getSize());
             renderer.drawSprite(sprite, position, size);

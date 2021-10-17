@@ -12,6 +12,8 @@ import andioopp.controller.controllers.PlaceTowerController;
 import andioopp.controller.controllers.TowerCardDragEvent;
 import andioopp.controller.input.DragAndDrop;
 import andioopp.model.Model;
+import andioopp.model.domain.enemy.Enemy;
+import andioopp.model.domain.entity.DroppedCoinEntity;
 import andioopp.model.domain.money.Money;
 import andioopp.model.domain.money.Wallet;
 import andioopp.model.domain.player.Player;
@@ -22,6 +24,7 @@ import andioopp.model.domain.world.LaneBuilder;
 import andioopp.model.domain.world.World;
 import andioopp.model.domain.world.WorldBuilder;
 import andioopp.model.system.System;
+import andioopp.model.system.events.EnemyDeathEvent;
 import andioopp.model.system.systems.*;
 import andioopp.view.View;
 import andioopp.view.util.ModelViewport;
@@ -40,6 +43,7 @@ public class MarioGame extends Game<Model> {
     private LanesView lanesView;
     private DragAndDrop<TowerCardDragEvent> dragAndDrop;
     private TowersView towersView;
+    private RemoveDeadEnemiesSystem removeDeadEnemiesSystem;
 
     public MarioGame(WindowBuilder<? extends Window<?>> windowBuilder, ListFactory listFactory) {
         super(listFactory, windowBuilder);
@@ -64,6 +68,9 @@ public class MarioGame extends Game<Model> {
     protected List<System<Model>> initSystems() {
         WaveQueue waves = new WaveQueue();
         waves.addWavesToWaveQueue(getModel().getWorld(), 7);
+        removeDeadEnemiesSystem = new RemoveDeadEnemiesSystem(getListFactory().create());
+
+        removeDeadEnemiesSystem.addObserver(this::spawnCoinTest);
 
         return getListFactory().create(
                 new PerformTowerAttackSystem(),
@@ -73,8 +80,14 @@ public class MarioGame extends Game<Model> {
                 new EnemyProjectileCollisionSystem(),
                 new HandleEnemyAttackSystem(),
                 new DespawnOutOfBoundsSystem(),
-                new RemoveSingleUseTowerSystem()
+                new RemoveDeadTowersSystem(),
+                removeDeadEnemiesSystem
         );
+    }
+
+    private void spawnCoinTest(EnemyDeathEvent enemyDeathEvent) {
+        Enemy e = enemyDeathEvent.getEnemy();
+        getModel().getWorld().getDroppedCoins().add(new DroppedCoinEntity(e.getPosition(), e.getReward()));
     }
 
     @Override
@@ -101,8 +114,8 @@ public class MarioGame extends Game<Model> {
                 towersView,
                 new EnemiesView(modelViewport),
                 new TowerDragMouseView(dragAndDrop, towersView),
-                new ProjectilesView(modelViewport)
-                // new DroppedCoinsView(modelViewport),
+                new ProjectilesView(modelViewport),
+                new DroppedCoinsView(modelViewport)
         );
     }
 
