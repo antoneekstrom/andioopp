@@ -45,7 +45,7 @@ public interface Rectangle {
     Dimension getSize();
 
     default Rectangle setCenter(Vector3f position) {
-        return setPosition(position.sub(getCenter()));
+        return setPosition(position.sub(getSize().halved().toVector()));
     }
 
     default Rectangle setBottomRightCorner(Vector3f position) {

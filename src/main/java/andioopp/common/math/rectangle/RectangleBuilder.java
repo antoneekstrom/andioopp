@@ -40,6 +40,21 @@ public class RectangleBuilder {
         return this;
     }
 
+    public RectangleBuilder setPosition(Vector3f position) {
+        rectangle.setPosition(position);
+        return this;
+    }
+
+    public RectangleBuilder setSize(Dimension size) {
+        rectangle.setSize(size);
+        return this;
+    }
+
+    public RectangleBuilder translate(Vector3f translation) {
+        rectangle.translate(translation);
+        return this;
+    }
+
     public Rectangle build() {
         return new ImmutableRectangle(rectangle);
     }
