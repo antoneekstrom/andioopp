@@ -8,6 +8,7 @@ import andioopp.common.math.rectangle.Rectangle;
 import andioopp.common.math.vector.Vector3f;
 import andioopp.common.storage.ListFactory;
 import andioopp.controller.Controller;
+import andioopp.controller.controllers.DroppedCoinsController;
 import andioopp.controller.controllers.PlaceTowerController;
 import andioopp.controller.controllers.TowerCardDragEvent;
 import andioopp.controller.input.DragAndDrop;
@@ -44,6 +45,7 @@ public class MarioGame extends Game<Model> {
     private DragAndDrop<TowerCardDragEvent> dragAndDrop;
     private TowersView towersView;
     private RemoveDeadEnemiesSystem removeDeadEnemiesSystem;
+    private DroppedCoinsView droppedCoinsView;
 
     public MarioGame(WindowBuilder<? extends Window<?>> windowBuilder, ListFactory listFactory) {
         super(listFactory, windowBuilder);
@@ -93,7 +95,8 @@ public class MarioGame extends Game<Model> {
     @Override
     protected List<Controller<Model>> initControllers() {
         return getListFactory().create(
-                new PlaceTowerController(dragAndDrop, cardsView, lanesView)
+                new PlaceTowerController(dragAndDrop, cardsView, lanesView),
+                new DroppedCoinsController(droppedCoinsView)
         );
     }
 
@@ -106,6 +109,7 @@ public class MarioGame extends Game<Model> {
         cardsView = new CardsView(cardsViewPosition);
         lanesView = new LanesView(modelViewport);
         towersView = new TowersView(modelViewport);
+        droppedCoinsView = new DroppedCoinsView(modelViewport);
 
         return getListFactory().create(
                 lanesView,
@@ -115,7 +119,7 @@ public class MarioGame extends Game<Model> {
                 new EnemiesView(modelViewport),
                 new TowerDragMouseView(dragAndDrop, towersView),
                 new ProjectilesView(modelViewport),
-                new DroppedCoinsView(modelViewport)
+                droppedCoinsView
         );
     }
 
