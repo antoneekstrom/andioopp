@@ -44,6 +44,15 @@ public interface Rectangle {
     Dimension getSize();
 
     /**
+     * Returns the bottom-right corner of the rectangle, which is the point with the largest value in the rectangle.
+     *
+     * @return the bottom-right corner
+     */
+    default Vector3f getMaxPosition() {
+        return getPosition().add(getSize().toVector());
+    }
+
+    /**
      * Translates the position of the rectangle.
      *
      * @param translation the translation to apply
@@ -93,6 +102,34 @@ public interface Rectangle {
         Vector3f min = getPosition();
         Vector3f max = getPosition().add(getSize().toVector());
         return point.getX() >= min.getX() && point.getX() <= max.getX() && point.getY() >= min.getY() && point.getY() <= max.getY();
+    }
+
+    /**
+     * Returns true if two rectangles have any points in common which they contain.
+     *
+     * @param other the other rectangle
+     * @return true if the rectangles intersect
+     */
+    default boolean intersects(Rectangle other) {
+        if (other == null) {
+            return false;
+        }
+        if (this.equals(other)) {
+            return true;
+        }
+        if (getPosition().equals(other.getPosition())) {
+            return true;
+        }
+
+        Vector3f a = getPosition();
+        Vector3f aMax = getMaxPosition();
+        Vector3f b = other.getPosition();
+        Vector3f bMax = other.getMaxPosition();
+
+        return a.getX() < bMax.getX()
+                && aMax.getX() > b.getX()
+                && a.getY() < bMax.getY()
+                && aMax.getY() > b.getY();
     }
 
     /**
