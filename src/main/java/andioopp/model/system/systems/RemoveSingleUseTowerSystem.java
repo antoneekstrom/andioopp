@@ -22,7 +22,7 @@ public class RemoveSingleUseTowerSystem implements System<Model> {
     private void checkTowersHealthState(World world) {
         //Goes through all cells and its towers and removes the tower if its health is zero.
         for (Cell cell : world.getCells()) {
-            if(cell.hasTower() && cell.getTower().getHealth().isZero()) {
+            if(cell.hasTower() && cell.getTower().getHealth().isDead()) {
                 //This removes the tower.
                 cell.setTower(null);
             }
@@ -31,6 +31,6 @@ public class RemoveSingleUseTowerSystem implements System<Model> {
 
     private void checkEnemiesHealthState(World world) {
         //removes enemy if its health is zero
-        world.getEnemies().removeIf(enemy -> enemy.getHealth().isZero());
+        world.getEnemies().removeIf(enemy -> enemy.getHealth().isDead());
     }
 }

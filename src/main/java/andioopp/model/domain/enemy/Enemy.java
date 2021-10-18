@@ -96,7 +96,7 @@ public abstract class Enemy implements DamageFilter {
     }
 
     public boolean isDead() {
-        return getHealth().isZero();
+        return getHealth().isDead();
     }
 
     public void setTowerAhead(boolean state) {
