@@ -18,15 +18,21 @@ import javafx.stage.Stage;
 public class FxWindow implements Window<FxRenderer> {
 
     private final Stage stage;
-    private final Canvas canvas;
 
     private final Observable<MouseInputEvent, Observer<MouseInputEvent>> mouseObservable;
     private final Observable<Dimension, Observer<Dimension>> resizeObservable;
+    private final FxRenderer renderer;
 
     public FxWindow(Stage stage, Canvas canvas) {
         this.stage = stage;
-        this.canvas = canvas;
 
+        renderer = new FxRenderer(canvas.getGraphicsContext2D());
+        mouseObservable = createMouseInputObservable(stage);
+        resizeObservable = createResizeObservable(stage, canvas);
+    }
+
+    private Observable<MouseInputEvent, Observer<MouseInputEvent>> createMouseInputObservable(Stage stage) {
+        final Observable<MouseInputEvent, Observer<MouseInputEvent>> mouseObservable;
         mouseObservable = new CollectionObservable<>(new ArrayListFactory().create());
         stage.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_MOVED, (e) -> {
             Vector3f position = new Vector3f((float) e.getX(), (float) e.getY());
@@ -44,7 +50,11 @@ public class FxWindow implements Window<FxRenderer> {
             Vector3f position = new Vector3f((float) e.getX(), (float) e.getY());
             mouseObservable.notifyObservers(new MouseInputEvent(position, MouseInputEvent.MouseEventType.RELEASE));
         });
+        return mouseObservable;
+    }
 
+    private Observable<Dimension, Observer<Dimension>> createResizeObservable(Stage stage, Canvas canvas) {
+        final Observable<Dimension, Observer<Dimension>> resizeObservable;
         resizeObservable = new CollectionObservable<>(new ArrayListFactory().create());
         ChangeListener<Number> resizeListener = (observable, oldValue, newValue) -> {
             resizeObservable.notifyObservers(getSize());
@@ -52,6 +62,7 @@ public class FxWindow implements Window<FxRenderer> {
         };
         stage.widthProperty().addListener(resizeListener);
         stage.heightProperty().addListener(resizeListener);
+        return resizeObservable;
     }
 
     @Override
@@ -71,7 +82,7 @@ public class FxWindow implements Window<FxRenderer> {
 
     @Override
     public FxRenderer getRenderer() {
-        return new FxRenderer(canvas.getGraphicsContext2D());
+        return renderer;
     }
 
     @Override
