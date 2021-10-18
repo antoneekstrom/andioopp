@@ -13,6 +13,7 @@ import andioopp.common.math.vector.Vector3f;
  * @author Anton Ekström
  */
 public interface Rectangle {
+
     /**
      * Sets the position of the rectangle. May or may not mutate this object.
      *
@@ -43,12 +44,20 @@ public interface Rectangle {
      */
     Dimension getSize();
 
+    default Rectangle setCenter(Vector3f position) {
+        return setPosition(position.sub(getCenter()));
+    }
+
+    default Rectangle setBottomRightCorner(Vector3f position) {
+        return setPosition(position.sub(getSize().toVector()));
+    }
+
     /**
      * Returns the bottom-right corner of the rectangle, which is the point with the largest value in the rectangle.
      *
      * @return the bottom-right corner
      */
-    default Vector3f getMaxPosition() {
+    default Vector3f getBottomRightCorner() {
         return getPosition().add(getSize().toVector());
     }
 
@@ -122,9 +131,9 @@ public interface Rectangle {
         }
 
         Vector3f a = getPosition();
-        Vector3f aMax = getMaxPosition();
+        Vector3f aMax = getBottomRightCorner();
         Vector3f b = other.getPosition();
-        Vector3f bMax = other.getMaxPosition();
+        Vector3f bMax = other.getBottomRightCorner();
 
         return a.getX() < bMax.getX()
                 && aMax.getX() > b.getX()
