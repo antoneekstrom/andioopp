@@ -30,8 +30,8 @@ public class ProjectilesView implements View<Model> {
 
     private <S extends Sprite<?>> void renderProjectile(Renderer<S> renderer, Projectile projectile) {
         S sprite = renderer.getSpriteFactory().get(projectile.getSprite());
-        ViewCoordinate position = viewport.getViewCoordinate(projectile.getPosition());
-        Dimension size = viewport.getViewSize(projectile.getSize());
+        ViewCoordinate position = viewport.getPosition(projectile.getPosition());
+        Dimension size = viewport.getSize(projectile.getSize());
         renderer.drawSprite(sprite, position, size);
     }
 }

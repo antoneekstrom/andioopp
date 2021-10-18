@@ -17,10 +17,9 @@ public class Goomba extends Enemy {
     private static final float BASE_ATTACK_COOLDOWN = 0.3f;
     private static final DamageFilter DAMAGE_FILTER = new FilterGrounded();
     private static final Money REWARD = new Money(10);
-    private static final Dimension size = new Dimension(new ModelCoordinate(1,1));
 
 
     public Goomba(ModelCoordinate position) {
-        super(SPRITE_PATH, new Health(BASE_HEALTH), new ImmutableRectangle(position, size), BASE_SPEED, BASE_ATTACK_COOLDOWN, DAMAGE_FILTER, REWARD);
+        super(SPRITE_PATH, new Health(BASE_HEALTH), position, BASE_SPEED, BASE_ATTACK_COOLDOWN, DAMAGE_FILTER, REWARD);
     }
 }

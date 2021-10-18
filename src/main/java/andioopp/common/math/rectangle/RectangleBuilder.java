@@ -12,6 +12,10 @@ public class RectangleBuilder {
 
     private final MutableRectangle rectangle;
 
+    public RectangleBuilder(Vector3f position, Dimension size) {
+        this(new ImmutableRectangle(position, size));
+    }
+
     public RectangleBuilder(Rectangle rectangle) {
         this.rectangle = new MutableRectangle(rectangle);
     }

@@ -41,13 +41,13 @@ public class TowersView implements View<Model> {
         Tower tower = cell.getTower();
         S sprite = renderer.getSpriteFactory().get(tower.getSprite());
 
-        ViewCoordinate position = viewport.getViewCoordinate(new ModelCoordinate(col, row));
+        ViewCoordinate position = viewport.getPosition(new ModelCoordinate(col, row));
         Dimension size = getTowerSize(tower);
 
         renderer.drawSprite(sprite, position, size);
     }
 
     public Dimension getTowerSize(Tower tower) {
-        return viewport.getViewSize(tower.getSize());
+        return viewport.getSize(tower.getSize());
     }
 }
