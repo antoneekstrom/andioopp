@@ -3,6 +3,15 @@ package andioopp.common.math.rectangle;
 import andioopp.common.math.dimension.Dimension;
 import andioopp.common.math.vector.Vector3f;
 
+/**
+ * Represents a rectangle which has a position and size.
+ * <p>
+ * The position is the point in the top-left corner of the rectangle.
+ * The size is the width and height which extends from the position
+ * downwards and to the right, forming a rectangle.
+ *
+ * @author Anton Ekström
+ */
 public interface Rectangle {
     /**
      * Sets the position of the rectangle. May or may not mutate this object.
@@ -35,9 +44,10 @@ public interface Rectangle {
     Dimension getSize();
 
     /**
+     * Translates the position of the rectangle.
      *
-     * @param translation
-     * @return
+     * @param translation the translation to apply
+     * @return the translated rectangle
      */
     default Rectangle translate(Vector3f translation) {
         return setPosition(getPosition().add(translation));
