@@ -43,7 +43,7 @@ public abstract class Game<M> {
 
     public void deinit() {
         for (Controller<M> controller : controllers) {
-            controller.deinit();
+            controller.deinit(model, window);
         }
     }
 

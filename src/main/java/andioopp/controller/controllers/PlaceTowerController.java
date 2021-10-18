@@ -34,6 +34,7 @@ public class PlaceTowerController implements Controller<Model> {
         this.lanesView = lanesView;
     }
 
+    @Override
     public void init(Model model, Window<?> window) {
         ListFactory listFactory = ArrayList::new;
         this.model = model;
@@ -43,7 +44,8 @@ public class PlaceTowerController implements Controller<Model> {
         registerDraggableCards();
     }
 
-    public void deinit() {
+    @Override
+    public void deinit(Model model, Window<?> window) {
         unregisterDroppableCells();
         unregisterDraggableCells();
     }
