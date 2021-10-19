@@ -55,10 +55,6 @@ public class EnemyProjectileCollisionSystem implements System<Model> {
 
         if (enemy.canBeDamagedBy(projectile)) {
             enemy.getHealth().decrease(1);
-            if (enemy.isDead()) {
-                world.getDroppedCoins().add(new DroppedCoinEntity(enemy.getPosition(), enemy.getReward()));
-                enemyIterator.remove();
-            }
         }
     }
 }

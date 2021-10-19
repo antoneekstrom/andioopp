@@ -42,5 +42,4 @@ public class PerformTowerAttackSystem implements System<Model> {
             }
         }
     }
-
 }
