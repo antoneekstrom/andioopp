@@ -1,5 +1,6 @@
 package andioopp.controller.controllers;
 
+import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Window;
 import andioopp.common.math.dimension.Dimension;
 import andioopp.common.math.rectangle.ImmutableRectangle;
@@ -18,7 +19,7 @@ import java.util.Iterator;
 public class DroppedCoinsController implements Controller<Model>, Observer<MouseInputEvent> {
 
     private final DroppedCoinsView droppedCoinsView;
-
+    private Renderer<?> renderer;
     private Model model;
 
     public DroppedCoinsController(DroppedCoinsView droppedCoinsView) {
@@ -28,6 +29,7 @@ public class DroppedCoinsController implements Controller<Model>, Observer<Mouse
     @Override
     public void init(Model model, Window<?> window) {
         this.model = model;
+        this.renderer = window.getRenderer();
         window.getMouseObservable().addObserver(this);
     }
 
@@ -57,7 +59,7 @@ public class DroppedCoinsController implements Controller<Model>, Observer<Mouse
 
     private ImmutableRectangle getRectangle(DroppedCoinEntity droppedCoin) {
         ViewCoordinate position = droppedCoinsView.getPosition(droppedCoin);
-        Dimension size = droppedCoinsView.getSize(droppedCoin);
+        Dimension size = droppedCoinsView.getSize(renderer.getSpriteFactory().get("coin.png"));
         return new ImmutableRectangle(position, size);
     }
 

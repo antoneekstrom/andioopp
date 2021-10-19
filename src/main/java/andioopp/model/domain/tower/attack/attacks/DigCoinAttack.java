@@ -27,7 +27,7 @@ public class DigCoinAttack extends Attack {
 
     @Override
     public void onAttack(Model model, Vector3f position) {
-        model.getWorld().getDroppedCoins().add(new DroppedCoinEntity(position, getRandomMoney()));
+        model.getWorld().getDroppedCoins().add(new DroppedCoinEntity(new ModelCoordinate(position), getRandomMoney()));
     }
 
     private Money getRandomMoney() {

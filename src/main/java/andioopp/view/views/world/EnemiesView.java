@@ -39,6 +39,5 @@ public class EnemiesView implements View<Model> {
         Vector3f withAddedOffset = alignedWithCellBottom.sub(cellSize.toVector().fromY().scale(OFFSET_FROM_CELL_BOTTOM));
 
         renderer.drawSprite(sprite, withAddedOffset, size);
-        renderer.drawRectangle(new ImmutableRectangle(position, new Dimension(5, 5)), new Color(255, 0, 0));
     }
 }
