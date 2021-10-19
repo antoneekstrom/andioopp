@@ -9,6 +9,7 @@ import andioopp.model.domain.tower.attack.Attack;
 import andioopp.model.domain.world.Cell;
 import andioopp.model.domain.world.World;
 import andioopp.model.system.System;
+import andioopp.model.util.ModelCoordinate;
 
 public class PerformTowerAttackSystem implements System<Model> {
     @Override
@@ -35,7 +36,7 @@ public class PerformTowerAttackSystem implements System<Model> {
             return;
         }
 
-        Vector3f position = new Vector3f(col, row);
+        ModelCoordinate position = new ModelCoordinate(col, row);
         for (Enemy enemy : attack.getEnemiesInRange(world, position)) {
             if (enemy.canBeDamagedBy(attack)) {
                 attack.perform(time, model, position);

@@ -8,6 +8,7 @@ import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.tower.Tower;
 import andioopp.model.domain.tower.attack.Attack;
 import andioopp.model.domain.tower.attack.strategies.NonTargeting;
+import andioopp.model.util.ModelCoordinate;
 
 /**
  * @author Arvid Svedberg
@@ -27,7 +28,7 @@ public class Explosion extends Attack {
     }
 
     @Override
-    public void onAttack(Model model, Vector3f position) {
+    public void onAttack(Model model, ModelCoordinate position) {
         for (Enemy e : model.getWorld().getEnemies()) {
             if (isInRange(e, position)) {
                 eliminateTowerAndEnemy(model.getWorld().getCell((int)position.getX(), (int)position.getY()).getTower(), e);

@@ -8,6 +8,7 @@ import andioopp.model.domain.damage.DamageSource;
 import andioopp.model.domain.damage.DamageType;
 import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.world.World;
+import andioopp.model.util.ModelCoordinate;
 
 import java.util.Collection;
 import java.util.List;
@@ -32,7 +33,7 @@ public abstract class Attack implements DamageSource {
         return damageSource.getTypes();
     }
 
-    public void perform(Time time, Model model, Vector3f position) {
+    public void perform(Time time, Model model, ModelCoordinate position) {
         if (isAvailableForAttack(time)) {
             onAttack(model, position);
             updateTimeOfLastAttack(time);
@@ -46,7 +47,7 @@ public abstract class Attack implements DamageSource {
      * @param model
      * @param position position of the tower, or wherever the attack is to be performed
      */
-    protected abstract void onAttack(Model model, Vector3f position);
+    protected abstract void onAttack(Model model, ModelCoordinate position);
 
     /**
      * Checks if the tower has waited long enough since its last attak.
