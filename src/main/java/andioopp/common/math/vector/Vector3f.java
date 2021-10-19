@@ -1,6 +1,11 @@
 package andioopp.common.math.vector;
 
+import andioopp.common.math.interpolation.InterpolationFunction;
+import andioopp.common.math.interpolation.Interpolations;
+
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * Represents a three-dimensional floating-point vector.
@@ -142,6 +147,18 @@ public class Vector3f {
         return Vector3f.fromZ(getZ());
     }
 
+
+    public float sum() {
+        return getX() + getY() + getZ();
+    }
+
+    public float magnitudeSquared() {
+        return scale(this).sum();
+    }
+
+    public float magnitude() {
+        return (float) Math.sqrt(magnitudeSquared());
+    }
 
     /**
      * Rounds the value of each component.
