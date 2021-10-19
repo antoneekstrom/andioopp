@@ -34,7 +34,7 @@ public class HandleEnemyAttackSystem implements System<Model> {
                             enemy.attack(time, tower);
                         }
 
-                        if (tower.getHealth().isZero()) {
+                        if (tower.getHealth().isDead()) {
                             cell.setTower(null);
                         }
                     }
