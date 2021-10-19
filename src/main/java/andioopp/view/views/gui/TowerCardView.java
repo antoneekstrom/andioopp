@@ -42,7 +42,7 @@ public class TowerCardView implements View<Model> {
         Rectangle imageViewRectangle = getImageViewRectangle(cardViewRectangle, sprite);
         Vector3f textPosition = getTextPosition(imageViewRectangle);
         Vector3f costPosition = getCostPosition(textPosition);
-        String costStr = String.valueOf(card.getCost());
+        String costStr = String.valueOf(card.getCost().getValue());
         String nameStr = tower.getName();
 
         renderer.drawRectangle(cardViewRectangle, BACKGROUND_COLOR);
