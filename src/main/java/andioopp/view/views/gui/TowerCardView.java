@@ -37,7 +37,7 @@ public class TowerCardView implements View<Model> {
     public <S extends Sprite<?>> void render(Model model, Renderer<S> renderer) {
         S sprite = renderer.getSpriteFactory().get(tower.getSprite());
         Rectangle cardViewRectangle = getCardViewRectangle();
-        Rectangle imageViewRectangle = getImageViewRectangle(cardViewRectangle);
+        Rectangle imageViewRectangle = getImageViewRectangle(cardViewRectangle, sprite);
         Vector3f textPosition = getTextPosition(imageViewRectangle);
         Vector3f costPosition = getCostPosition(textPosition);
         String costStr = String.valueOf(tower.getCost().getValue());
@@ -75,10 +75,11 @@ public class TowerCardView implements View<Model> {
         return new ImmutableRectangle(cardPosition, cardSize);
     }
 
-    private Rectangle getImageViewRectangle(Rectangle cardViewRectangle) {
+    private Rectangle getImageViewRectangle(Rectangle cardViewRectangle, Sprite sprite) {
         float cardWidth = cardViewRectangle.getSize().getWidth();
-        float padding = cardWidth * 0.2f;
-        Dimension imageSize = IMAGE_ASPECT_RATIO.setWidth(cardWidth - padding);
+        float padding = cardWidth * 0.3f;
+        Dimension imageSize = sprite.getSize().setHeight(80);
+        //Dimension imageSize = IMAGE_ASPECT_RATIO.setWidth(cardWidth - padding);
         Rectangle imageViewRectangle = new ImmutableRectangle(Vector3f.ZERO, imageSize);
         imageViewRectangle = cardViewRectangle.centerWithin(imageViewRectangle);
         imageViewRectangle = imageViewRectangle.setPosition(imageViewRectangle.getPosition().setY(padding));
