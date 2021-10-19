@@ -1,6 +1,5 @@
 package andioopp.model.domain.tower.towers;
 
-import andioopp.model.domain.money.Money;
 import andioopp.model.domain.stats.Health;
 import andioopp.model.domain.tower.attack.Attack;
 import andioopp.model.domain.tower.attack.attacks.FireballAttack;
@@ -15,7 +14,7 @@ public class Yoshi extends Tower {
     private static final String SPRITE_PATH = "yoshi-removebg-preview.png";
 
     public Yoshi(ModelCoordinate position) {
-        super(position, SPRITE_PATH, "Yoshi", new Money(83), new Health(9));
+        super(position, SPRITE_PATH, "Yoshi", new Health(9));
     }
 
     @Override

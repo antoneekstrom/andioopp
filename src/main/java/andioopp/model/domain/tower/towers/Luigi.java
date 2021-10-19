@@ -1,6 +1,5 @@
 package andioopp.model.domain.tower.towers;
 
-import andioopp.model.domain.money.Money;
 import andioopp.model.domain.stats.Health;
 import andioopp.model.domain.tower.Tower;
 import andioopp.model.domain.tower.attack.Attack;
@@ -14,7 +13,7 @@ public class Luigi extends Tower {
     private static final String SPRITE_PATH = "luigi.png";
 
     public Luigi(ModelCoordinate position) {
-        super(position, SPRITE_PATH, "Mario", new Money(200), new Health(5));
+        super(position, SPRITE_PATH, "Mario", new Health(5));
     }
 
     @Override

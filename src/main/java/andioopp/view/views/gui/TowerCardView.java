@@ -26,11 +26,13 @@ public class TowerCardView implements View<Model> {
     public static final Dimension IMAGE_ASPECT_RATIO = new Dimension(1, 1.2f);
 
     private final Viewport viewport;
+    private final TowerCard<?> card;
     private final Tower tower;
 
     public TowerCardView(Viewport viewport, TowerCard<?> card) {
         this.viewport = viewport;
-        this.tower = card.getSupplier().create(new ModelCoordinate(Vector3f.zero()));
+        this.card = card;
+        this.tower = card.getSupplier().create(new ModelCoordinate(Vector3f.ZERO));
     }
 
     @Override
@@ -40,7 +42,7 @@ public class TowerCardView implements View<Model> {
         Rectangle imageViewRectangle = getImageViewRectangle(cardViewRectangle);
         Vector3f textPosition = getTextPosition(imageViewRectangle);
         Vector3f costPosition = getCostPosition(textPosition);
-        String costStr = String.valueOf(tower.getCost().getValue());
+        String costStr = String.valueOf(card.getCost());
         String nameStr = tower.getName();
 
         renderer.drawRectangle(cardViewRectangle, BACKGROUND_COLOR);

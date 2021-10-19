@@ -1,7 +1,6 @@
 package andioopp.model.domain.tower.towers;
 
 import andioopp.common.math.range.FloatRange;
-import andioopp.model.domain.money.Money;
 import andioopp.model.domain.stats.Health;
 import andioopp.model.domain.tower.attack.Attack;
 import andioopp.model.domain.tower.Tower;
@@ -15,7 +14,7 @@ public class Toad extends Tower {
     private static final String SPRITE_PATH = "toad.png";
 
     public Toad(ModelCoordinate position) {
-        super(position, SPRITE_PATH, "Toad", new Money(40), new Health(3));
+        super(position, SPRITE_PATH, "Toad", new Health(3));
     }
 
     @Override
