@@ -1,5 +1,7 @@
 package andioopp.model.system.systems;
 
+import andioopp.common.math.rectangle.ImmutableRectangle;
+import andioopp.common.math.rectangle.Rectangle;
 import andioopp.common.math.vector.Vector3f;
 import andioopp.common.time.Time;
 import andioopp.model.Model;
@@ -8,6 +10,7 @@ import andioopp.model.domain.entity.DroppedCoinEntity;
 import andioopp.model.domain.tower.attack.projectiles.Projectile;
 import andioopp.model.domain.world.World;
 import andioopp.model.system.System;
+import andioopp.model.util.ModelCoordinate;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -26,11 +29,12 @@ public class EnemyProjectileCollisionSystem implements System<Model> {
 
             for (Iterator<Enemy> enemyIterator = enemies.iterator(); enemyIterator.hasNext(); ) {
                 Enemy enemy = enemyIterator.next();
-                Vector3f pp = projectile.getPosition();
-                Vector3f ep = enemy.getPosition();
-                float dm = 0.2f; //dm stands for delta max
+                Rectangle pr = projectile.getRectangle();
+                ModelCoordinate ep = enemy.getPosition();
+                boolean withinX = pr.getPosition().getX() < ep.getX() && pr.getPosition().getX() + pr.getSize().getWidth() > ep.getX();
+                boolean withinY = pr.getPosition().getY() < ep.getY() && pr.getPosition().getY() + pr.getSize().getHeight() > ep.getY();
 
-                if (Math.abs(pp.getX() - ep.getX()) < dm && Math.abs(pp.getY() - ep.getY()) < dm) {
+                if(withinX && withinY) {
                     evaluateProjectileHit(projectile, enemy, projectileIterator, enemyIterator, world);
                 }
             }
@@ -51,7 +55,10 @@ public class EnemyProjectileCollisionSystem implements System<Model> {
         }
 
         projectile.alreadyInteractedWith.add(enemy);
-        projectileIterator.remove();
+        projectile.getHealth().decrease(1);
+        if(projectile.getHealth().isDead()){
+            projectileIterator.remove();
+        }
 
         if (enemy.canBeDamagedBy(projectile)) {
             enemy.getHealth().decrease(1);

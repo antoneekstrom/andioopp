@@ -1,8 +1,10 @@
 package andioopp.view.views.world;
 
+import andioopp.common.graphics.Color;
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
 import andioopp.common.math.dimension.Dimension;
+import andioopp.common.math.rectangle.ImmutableRectangle;
 import andioopp.model.domain.tower.attack.projectiles.Projectile;
 import andioopp.model.Model;
 import andioopp.model.domain.world.World;

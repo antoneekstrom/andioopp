@@ -15,7 +15,7 @@ public class FireballAttack extends Attack {
     private static final DamageSource DAMAGE_SOURCE = new BaseDamageSource(DamageType.FIRE, DamageType.GROUND);
 
     public FireballAttack(float coolDown) {
-        super(coolDown, new SingleLaneForward(), DAMAGE_SOURCE);
+        super(coolDown, new SingleLaneForward(20), DAMAGE_SOURCE);
     }
 
     /**
@@ -25,7 +25,8 @@ public class FireballAttack extends Attack {
      * @param position position of the tower, or wherever the attack is to be performed
      */
     @Override
-    public void onAttack(Model model, ModelCoordinate position) {
+    public void onAttack(Model model, Vector3f position) {
+        System.out.println("HEJ JAG SPAWNAR EN eldboll");
         model.getWorld().addProjectile(new FireballProjectile(position, DAMAGE_SOURCE));
     }
 }

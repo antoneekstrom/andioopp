@@ -7,6 +7,7 @@ import andioopp.common.math.rectangle.ImmutableRectangle;
 import andioopp.common.math.rectangle.Rectangle;
 import andioopp.common.math.vector.Vector3f;
 import andioopp.common.storage.ListFactory;
+import andioopp.common.time.Time;
 import andioopp.controller.Controller;
 import andioopp.controller.controllers.DroppedCoinsController;
 import andioopp.controller.controllers.PlaceTowerController;
@@ -46,8 +47,17 @@ public class MarioGame extends Game<Model> {
     private TowersView towersView;
     private DroppedCoinsView droppedCoinsView;
 
+    private boolean gameOver = false;
+
     public MarioGame(WindowBuilder<? extends Window<?>> windowBuilder, ListFactory listFactory) {
         super(listFactory, windowBuilder);
+    }
+
+    @Override
+    public void update(Time time) {
+        if(!gameOver) {
+            super.update(time);
+        }
     }
 
     @Override
@@ -77,7 +87,7 @@ public class MarioGame extends Game<Model> {
                 new UpdateProjectileSystem(),
                 new EnemyProjectileCollisionSystem(),
                 new HandleEnemyAttackSystem(),
-                new DespawnOutOfBoundsSystem(),
+                new DespawnOutOfBoundsSystem(this),
                 new RemoveDeadTowersSystem(),
                 new RemoveDeadEnemiesSystem()
         );
@@ -150,7 +160,7 @@ public class MarioGame extends Game<Model> {
                 new TowerCard<>(new Money(-1), Towers::rosalina),
                 new TowerCard<>(new Money(10), Towers::bobomb),
                 new TowerCard<>(new Money(-1), Towers::yoshi),
-                new TowerCard<>(new Money(-1), Towers::luigi)
+                new TowerCard<>(new Money(2), Towers::luigi)
         );
     }
 
@@ -160,5 +170,9 @@ public class MarioGame extends Game<Model> {
 
     private WorldBuilder getWorldBuilder(ListFactory listFactory) {
         return new WorldBuilder(new LaneBuilder(listFactory).setCells(9), listFactory).setLanes(5);
+    }
+
+    public void setGameOver(boolean state) {
+        this.gameOver = state;
     }
 }

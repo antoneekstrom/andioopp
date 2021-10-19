@@ -47,7 +47,7 @@ public abstract class Attack implements DamageSource {
      * @param model
      * @param position position of the tower, or wherever the attack is to be performed
      */
-    protected abstract void onAttack(Model model, ModelCoordinate position);
+    protected abstract void onAttack(Model model, Vector3f position);
 
     /**
      * Checks if the tower has waited long enough since its last attak.

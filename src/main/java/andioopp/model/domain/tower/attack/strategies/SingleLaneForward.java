@@ -7,6 +7,11 @@ import andioopp.model.domain.world.World;
 public class SingleLaneForward implements AttackTargetArea {
 
     float enemyPosOffset = 0.4f;
+    float maxRange;
+
+    public SingleLaneForward(float maxRange) {
+        this.maxRange = maxRange;
+    }
 
     /**
      * Checks if the enemy is in front of the tower in the same lane.
@@ -17,8 +22,12 @@ public class SingleLaneForward implements AttackTargetArea {
      */
     @Override
     public boolean enemyIsInRange(Vector3f towerPosition, Vector3f enemyPosition, World world) {
+
+        if (maxRange > world.getNumberOfCellsInLanes()) {
+            maxRange = world.getNumberOfCellsInLanes();
+        }
         // Makes sure the enemy and tower is in the same lane and enemy is infront of tower.
         // Offset makes sure that the tower wont attack a enemy that appears to be out of the map.
-        return (enemyPosition.getY() == towerPosition.getY() && enemyPosition.getX() > towerPosition.getX() && enemyPosition.getX() < world.getNumberOfCellsInLanes() - enemyPosOffset);
+        return (enemyPosition.getY() == towerPosition.getY() && enemyPosition.getX() > towerPosition.getX() && enemyPosition.getX() < towerPosition.getX() + maxRange - enemyPosOffset);
     }
 }

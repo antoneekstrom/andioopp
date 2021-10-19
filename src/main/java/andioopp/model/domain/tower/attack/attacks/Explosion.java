@@ -28,7 +28,7 @@ public class Explosion extends Attack {
     }
 
     @Override
-    public void onAttack(Model model, ModelCoordinate position) {
+    public void onAttack(Model model, Vector3f position) {
         for (Enemy e : model.getWorld().getEnemies()) {
             if (isInRange(e, position)) {
                 eliminateTowerAndEnemy(model.getWorld().getCell((int)position.getX(), (int)position.getY()).getTower(), e);

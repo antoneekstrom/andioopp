@@ -1,12 +1,19 @@
 package andioopp.model.system.systems;
 
 import andioopp.common.time.Time;
+import andioopp.game.MarioGame;
 import andioopp.model.Model;
 import andioopp.model.domain.world.World;
 import andioopp.model.system.System;
 import andioopp.model.util.ModelCoordinate;
 
 public class DespawnOutOfBoundsSystem implements System<Model> {
+
+    private final MarioGame marioGame;
+
+    public DespawnOutOfBoundsSystem(MarioGame marioGame) {
+        this.marioGame = marioGame;
+    }
 
     @Override
     public void update(Model model, Time time) {
@@ -26,7 +33,7 @@ public class DespawnOutOfBoundsSystem implements System<Model> {
             boolean enemyOutOfBounds = enemy.getPosition().getX() < -1;
 
             if(enemyOutOfBounds) {
-
+                marioGame.setGameOver(true);
             }
 
             return enemyOutOfBounds;
