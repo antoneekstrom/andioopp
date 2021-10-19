@@ -19,8 +19,12 @@ public class FxRenderer implements Renderer<FxSprite> {
     private final SpriteFactory<FxSprite> spriteFactory;
 
     public FxRenderer(GraphicsContext ctx) {
+        this(ctx, new CachedSpriteFactory<>(FxSprite::new));
+    }
+
+    public FxRenderer(GraphicsContext ctx, SpriteFactory<FxSprite> spriteFactory) {
         this.ctx = ctx;
-        spriteFactory = new CachedSpriteFactory<>(FxSprite::new);
+        this.spriteFactory = spriteFactory;
     }
 
     @Override
