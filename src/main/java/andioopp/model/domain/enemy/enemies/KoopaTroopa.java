@@ -12,7 +12,7 @@ import andioopp.model.util.ModelCoordinate;
 public class KoopaTroopa extends Enemy {
 
     private static final String SPRITE_PATH = "koopaTroopa.png";
-    private static final int BASE_HEALTH = 8;
+    private static final int BASE_HEALTH = 4;
     private static final float BASE_SPEED = 0.15f;
     private static final float BASE_ATTACK_COOLDOWN = 1f;
     private static final DamageFilter DAMAGE_FILTER = new FilterGrounded();

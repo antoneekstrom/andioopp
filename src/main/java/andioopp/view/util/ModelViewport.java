@@ -4,7 +4,7 @@ import andioopp.common.math.dimension.Dimension;
 import andioopp.common.math.vector.Vector3f;
 import andioopp.model.util.ModelCoordinate;
 import andioopp.model.Model;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 
 /**
  * Specifically translates model coordinates to window coordinates.
@@ -19,10 +19,6 @@ public class ModelViewport {
 
     public Dimension getCellSize() {
         return getSize(Dimension.UNIT);
-    }
-
-    public ViewCoordinate getCenterOfCell(int col, int row) {
-        throw new NotImplementedException();
     }
 
     public ViewCoordinate getPosition(ModelCoordinate modelCoordinate) {
