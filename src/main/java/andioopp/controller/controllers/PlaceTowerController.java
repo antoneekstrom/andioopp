@@ -95,6 +95,6 @@ public class PlaceTowerController implements Controller<Model> {
 
     private TowerCardDraggableController createCardDraggable(TowerCard<?> card, int i) {
         Rectangle rectangle = cardsView.getCardView(card, i).getCardViewRectangle();
-        return new TowerCardDraggableController(rectangle, card);
+        return new TowerCardDraggableController(rectangle, card, model);
     }
 }

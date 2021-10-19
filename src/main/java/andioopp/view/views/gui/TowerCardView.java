@@ -9,6 +9,7 @@ import andioopp.common.math.rectangle.Rectangle;
 import andioopp.common.math.vector.Vector3f;
 import andioopp.common.math.transform.ConcreteTransform;
 import andioopp.common.math.transform.TransformFactory;
+import andioopp.controller.input.Droppable;
 import andioopp.model.Model;
 import andioopp.model.domain.player.Player;
 import andioopp.model.domain.player.TowerCard;
@@ -63,6 +64,9 @@ public class TowerCardView implements View<Model> {
     boolean towerIsAvailable(Player player, Tower tower){
         return player.getMoney().canSpend(tower.getCost());
     }
+
+
+
 
     /**
      * Returns position for cost of Tower
