@@ -14,8 +14,6 @@ import andioopp.controller.controllers.PlaceTowerController;
 import andioopp.controller.controllers.TowerCardDragEvent;
 import andioopp.controller.input.DragAndDrop;
 import andioopp.model.Model;
-import andioopp.model.domain.enemy.Enemy;
-import andioopp.model.domain.entity.DroppedCoinEntity;
 import andioopp.model.domain.money.Money;
 import andioopp.model.domain.money.Wallet;
 import andioopp.model.domain.player.Player;
@@ -26,12 +24,12 @@ import andioopp.model.domain.world.LaneBuilder;
 import andioopp.model.domain.world.World;
 import andioopp.model.domain.world.WorldBuilder;
 import andioopp.model.system.System;
-import andioopp.model.system.singleUseSystems.EndGameSystem;
 import andioopp.model.system.systems.*;
 import andioopp.view.View;
 import andioopp.view.util.ModelViewport;
 import andioopp.view.util.Viewport;
 import andioopp.view.views.gui.CardsView;
+import andioopp.view.views.gui.CellHighlightView;
 import andioopp.view.views.gui.MoneyView;
 import andioopp.view.views.gui.TowerDragMouseView;
 import andioopp.view.views.world.*;
@@ -44,13 +42,19 @@ public class MarioGame extends Game<Model> {
     private CardsView cardsView;
     private LanesView lanesView;
     private DragAndDrop<TowerCardDragEvent> dragAndDrop;
-    private TowersView towersView;
     private DroppedCoinsView droppedCoinsView;
 
     private boolean gameOver = false;
+    private PlaceTowerController placeTowerController;
 
     public MarioGame(WindowBuilder<? extends Window<?>> windowBuilder, ListFactory listFactory) {
         super(listFactory, windowBuilder);
+    }
+
+    @Override
+    public void init() {
+        super.init();
+        initCellHighlightView();
     }
 
     @Override
@@ -95,8 +99,9 @@ public class MarioGame extends Game<Model> {
 
     @Override
     protected List<Controller<Model>> initControllers() {
+        placeTowerController = new PlaceTowerController(dragAndDrop, cardsView, lanesView);
         return getListFactory().create(
-                new PlaceTowerController(dragAndDrop, cardsView, lanesView),
+                placeTowerController,
                 new DroppedCoinsController(droppedCoinsView)
         );
     }
@@ -109,7 +114,7 @@ public class MarioGame extends Game<Model> {
 
         cardsView = new CardsView(cardsViewPosition);
         lanesView = new LanesView(modelViewport);
-        towersView = new TowersView(modelViewport);
+        TowersView towersView = new TowersView(modelViewport);
         droppedCoinsView = new DroppedCoinsView(modelViewport);
 
         return getListFactory().create(
@@ -131,6 +136,13 @@ public class MarioGame extends Game<Model> {
         WorldBuilder worldBuilder = getWorldBuilder(getListFactory());
         World build = worldBuilder.build();
         return new Model(build, player);
+    }
+
+    // Controllers are initialized after views, but we need a controller for this view!
+    private void initCellHighlightView() {
+        CellHighlightView cellHighlightView = new CellHighlightView(dragAndDrop, placeTowerController.getDroppables());
+        int i = getViews().indexOf(lanesView) + 1;
+        getViews().add(i, cellHighlightView);
     }
 
     private Vector3f getCardsViewPosition() {

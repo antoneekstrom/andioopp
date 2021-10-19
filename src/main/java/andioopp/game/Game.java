@@ -66,6 +66,14 @@ public abstract class Game<M> {
     protected abstract List<Controller<M>> initControllers();
     protected abstract List<View<M>> initViews();
 
+    protected List<Controller<M>> getControllers() {
+        return controllers;
+    }
+
+    protected List<View<M>> getViews() {
+        return views;
+    }
+
     protected M getModel() {
         return model;
     }

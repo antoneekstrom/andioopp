@@ -97,4 +97,8 @@ public class PlaceTowerController implements Controller<Model> {
         Rectangle rectangle = cardsView.getCardView(card, i).getCardViewRectangle();
         return new TowerCardDraggableController(rectangle, card, model);
     }
+
+    public Collection<CellDroppableController> getDroppables() {
+        return droppables;
+    }
 }
