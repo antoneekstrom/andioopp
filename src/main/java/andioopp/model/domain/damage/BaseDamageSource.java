@@ -4,8 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class
-BaseDamageSource implements DamageSource {
+public class BaseDamageSource implements DamageSource {
 
     private final List<DamageType> types;
 
