@@ -1,6 +1,6 @@
 package andioopp.common.graphics;
 
-import andioopp.common.transform.Dimension;
+import andioopp.common.math.dimension.Dimension;
 
 /**
  * Image which can be rendered onto a {@link Window}.
