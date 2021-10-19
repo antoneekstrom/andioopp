@@ -23,12 +23,13 @@ public class DespawnOutOfBoundsSystem implements System<Model> {
     private void despawnOutOfBoundsEnemies(World world) {
         //Checks if a projectile is out of bounds and removes it if true.
         world.getEnemies().removeIf(enemy -> {
-            boolean enemyOutOfOfBounds = enemy.getPosition().getX() < -1;
+            boolean enemyOutOfBounds = enemy.getPosition().getX() < -1;
 
-            if(enemyOutOfOfBounds) {
-                //TODO notify observers
+            if(enemyOutOfBounds) {
+
             }
-            return enemyOutOfOfBounds;
+
+            return enemyOutOfBounds;
         });
     }
 }

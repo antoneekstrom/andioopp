@@ -55,7 +55,7 @@ public class TowerCardView implements View<Model> {
      * @param textPosition position of the text
      */
     private Vector3f getCostPosition(Vector3f textPosition) {
-        return textPosition.add(Vector3f.fromY(20)).add(Vector3f.fromX(-10));
+        return textPosition.add(Vector3f.fromY(20)).add(Vector3f.fromX(10));
     }
 
     /**
@@ -65,7 +65,7 @@ public class TowerCardView implements View<Model> {
      */
     private Vector3f getTextPosition(Rectangle cardViewRectangle) {
         Vector3f bottom = cardViewRectangle.getPosition().add(cardViewRectangle.getSize().toVector());
-        bottom = bottom.add(Vector3f.fromY(20)).add(Vector3f.fromX(-50));
+        bottom = bottom.add(Vector3f.fromY(20)).add(Vector3f.fromX(-75));
         return bottom;
     }
 

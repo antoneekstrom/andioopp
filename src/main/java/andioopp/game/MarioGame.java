@@ -159,6 +159,6 @@ public class MarioGame extends Game<Model> {
     }
 
     private WorldBuilder getWorldBuilder(ListFactory listFactory) {
-        return new WorldBuilder(new LaneBuilder(listFactory).setCells(7), listFactory).setLanes(5);
+        return new WorldBuilder(new LaneBuilder(listFactory).setCells(9), listFactory).setLanes(5);
     }
 }
