@@ -1,6 +1,6 @@
 package andioopp.common.graphics;
 
-import andioopp.common.transform.Dimension;
+import andioopp.common.math.dimension.Dimension;
 
 /**
  * Builds {@link Window} objects.
@@ -17,23 +17,23 @@ public interface WindowBuilder<W extends Window<?>> {
      * Sets the size of the {@link Window}.
      * @param size Size as a {@link Dimension}
      */
-    void setSize(Dimension size);
+    WindowBuilder<W> setSize(Dimension size);
 
     /**
      * Sets the title of the {@link Window}.
      * @param title Title of the {@link Window}
      */
-    void setTitle(String title);
+    WindowBuilder<W> setTitle(String title);
 
     /**
      * Sets the icon of the {@link Window}.
      * @param path Location of the image file
      */
-    void setIcon(String path);
+    WindowBuilder<W> setIcon(String path);
 
     /**
      * Sets if the window should be resizable.
      * @param isResizable If the window should be resizable
      */
-    void setResizable(boolean isResizable);
+    WindowBuilder<W> setResizable(boolean isResizable);
 }
