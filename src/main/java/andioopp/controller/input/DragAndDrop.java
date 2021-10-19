@@ -6,31 +6,30 @@ import andioopp.common.observer.Observer;
 import andioopp.common.observer.StrictObservable;
 import andioopp.common.storage.ListFactory;
 
-public class DragAndDrop<T> implements Observer<MouseInputEvent> {
+public class DragAndDrop<T> {
 
     private final StrictObservable<MouseInputEvent, Draggable<T>> draggableObservable;
     private final StrictObservable<T, Droppable<T>> droppableObservable;
 
     private T dragData;
     private boolean isDragging = false;
-    private Vector3f mousePosition = Vector3f.ZERO;
+    private MouseMoveEvent mouseEvent;
 
     public DragAndDrop(ListFactory listFactory) {
         this.draggableObservable = new StrictObservableCollection<>(listFactory.create());
         this.droppableObservable = new StrictObservableCollection<>(listFactory.create());
     }
 
-    @Override
-    public void onEvent(MouseInputEvent e) {
+    public void onClickEvent(MouseInputEvent e) {
         if (e.getType().equals(MouseEventType.RELEASE)) {
             onMouseRelease(e);
         } else if (e.getType().equals(MouseEventType.PRESS)) {
             onMouseDown(e);
-        } else if (e.getType().equals(MouseEventType.DRAG)) {
-            mousePosition = e.getMousePosition();
-        } else if (e.getType().equals(MouseEventType.MOVE)) {
-            mousePosition = e.getMousePosition();
         }
+    }
+
+    public void onMoveEvent(MouseMoveEvent e) {
+        mouseEvent = e;
     }
 
     private void onMouseDown(MouseInputEvent e) {
@@ -64,7 +63,7 @@ public class DragAndDrop<T> implements Observer<MouseInputEvent> {
     }
 
     public Vector3f getMousePosition() {
-        return mousePosition;
+        return mouseEvent.getMousePosition();
     }
 
     public boolean isDragging() {

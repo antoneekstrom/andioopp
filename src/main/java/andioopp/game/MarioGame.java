@@ -61,8 +61,8 @@ public class MarioGame extends Game<Model> {
                 .build();
 
         dragAndDrop = new DragAndDrop<>(getListFactory());
-        window.getMouseInput().getMouseMoveObservable().addObserver(e -> dragAndDrop.onEvent(e));
-        window.getMouseInput().getMouseClickObservable().addObserver(e -> dragAndDrop.onEvent(e));
+        window.getMouseInput().getMouseMoveObservable().addObserver(dragAndDrop::onMoveEvent);
+        window.getMouseInput().getMouseClickObservable().addObserver(dragAndDrop::onClickEvent);
 
         return window;
     }
