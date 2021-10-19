@@ -44,11 +44,11 @@ public class LanesView implements View<Model> {
     }
 
     public Dimension getCellSize() {
-        return viewport.getViewSize(Dimension.UNIT);
+        return viewport.getSize(Dimension.UNIT);
     }
 
     public ViewCoordinate getCellPosition(int col, int row) {
-        return viewport.getViewCoordinate(new ModelCoordinate(col, row));
+        return viewport.getPosition(new ModelCoordinate(col, row));
     }
 
     private Color getCellColor(int col, int row) {

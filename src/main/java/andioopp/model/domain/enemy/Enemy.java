@@ -5,6 +5,7 @@ import andioopp.common.graphics.SpriteFactory;
 import andioopp.common.math.dimension.Dimension;
 import andioopp.common.math.rectangle.MutableRectangle;
 import andioopp.common.math.rectangle.Rectangle;
+import andioopp.common.math.vector.Vector3f;
 import andioopp.common.time.Time;
 import andioopp.model.domain.money.Money;
 import andioopp.model.domain.tower.Tower;
@@ -26,18 +27,18 @@ public abstract class Enemy implements DamageFilter {
 
     private boolean towerAhead = false;
     private float timeOfLastAttack;
-    private final MutableRectangle rectangle;
+    private ModelCoordinate position;
 
     private final DamageFilter damageFilter;
 
-    protected Enemy(String spritePath, Health health, Rectangle rectangle, float speed, float attackCooldown, DamageFilter damageFilter, Money reward) {
+    protected Enemy(String spritePath, Health health, ModelCoordinate position, float speed, float attackCooldown, DamageFilter damageFilter, Money reward) {
         this.spritePath = spritePath;
         this.health = health;
         this.speed = speed; // Negative speed since enemies come from the left
         this.attackCooldown = attackCooldown;
         this.damageFilter = damageFilter;
         this.reward = reward;
-        this.rectangle = new MutableRectangle(rectangle);
+        this.position = position;
     }
 
     @Override
@@ -84,15 +85,15 @@ public abstract class Enemy implements DamageFilter {
     }
 
     public ModelCoordinate getPosition() {
-        return new ModelCoordinate(rectangle.getPosition());
-    }
-
-    public Dimension getSize() {
-        return rectangle.getSize();
+        return position;
     }
 
     public void move(Time time) {
-        rectangle.translate(new ModelCoordinate(-speed * time.getDeltaTime()));
+        translate(new ModelCoordinate(-speed * time.getDeltaTime()));
+    }
+
+    private void translate(Vector3f translation) {
+        position = new ModelCoordinate(position.add(translation));
     }
 
     public boolean isDead() {

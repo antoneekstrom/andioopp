@@ -17,15 +17,19 @@ public class ModelViewport {
         viewport = new Viewport(getInsideDimensionFromModel(model), outsideDimension, outsideOffset);
     }
 
-    public ViewCoordinate getCenterWithinCell(int col, int row) {
+    public Dimension getCellSize() {
+        return getSize(Dimension.UNIT);
+    }
+
+    public ViewCoordinate getCenterOfCell(int col, int row) {
         throw new NotImplementedException();
     }
 
-    public ViewCoordinate getViewCoordinate(ModelCoordinate modelCoordinate) {
+    public ViewCoordinate getPosition(ModelCoordinate modelCoordinate) {
         return new ViewCoordinate(viewport.getPositionOutside(modelCoordinate));
     }
 
-    public Dimension getViewSize(Dimension modelSize) {
+    public Dimension getSize(Dimension modelSize) {
         return new Dimension(viewport.getSizeOutside(modelSize));
     }
 

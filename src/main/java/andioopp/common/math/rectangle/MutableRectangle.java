@@ -24,24 +24,24 @@ public class MutableRectangle implements Rectangle {
     }
 
     @Override
-    public Vector3f getPosition() {
-        return rectangle.getPosition();
-    }
-
-    @Override
     public MutableRectangle setPosition(Vector3f position) {
         setRectangle(rectangle.setPosition(position));
         return this;
     }
 
     @Override
-    public Dimension getSize() {
-        return rectangle.getSize();
-    }
-
-    @Override
     public MutableRectangle setSize(Dimension size) {
         setRectangle(rectangle.setSize(size));
         return this;
+    }
+
+    @Override
+    public Vector3f getPosition() {
+        return rectangle.getPosition();
+    }
+
+    @Override
+    public Dimension getSize() {
+        return rectangle.getSize();
     }
 }

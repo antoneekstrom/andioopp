@@ -28,7 +28,7 @@ public class TowerDragMouseView implements View<Model> {
             Tower tower = getTower();
             S sprite = renderer.getSpriteFactory().get(tower.getSprite());
 
-            Dimension size = towersView.getTowerSize(tower);
+            Dimension size = towersView.getTowerSizeFromSprite(sprite);
             Vector3f mouse = dragAndDrop.getMousePosition();
             Vector3f position = mouse.sub(size.halved().toVector());
 

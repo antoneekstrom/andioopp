@@ -15,19 +15,17 @@ import java.util.List;
  */
 public abstract class Tower {
 
-    private static final Dimension SIZE = new Dimension(0.7f, 0.7f);
-
     private final Money cost;
     private final Health health;
     private final String sprite;
     private final List<Attack> attacks;
     private final String name;
 
-    private final Rectangle rectangle;
+    private final ModelCoordinate position;
 
     public Tower(ModelCoordinate position, String spritePath, String name, Money cost, Health health) {
         this.sprite = spritePath;
-        this.rectangle = new ImmutableRectangle(position, SIZE);
+        this.position = position;
         this.name = name;
         this.cost = cost;
         this.health = health;
@@ -57,10 +55,6 @@ public abstract class Tower {
     }
 
     public ModelCoordinate getPosition() {
-        return new ModelCoordinate(rectangle.getPosition());
-    }
-
-    public Dimension getSize() {
-        return rectangle.getSize();
+        return getPosition();
     }
 }

@@ -3,7 +3,17 @@ package andioopp.common.math.rectangle;
 import andioopp.common.math.dimension.Dimension;
 import andioopp.common.math.vector.Vector3f;
 
+/**
+ * Represents a rectangle which has a position and size.
+ * <p>
+ * The position is the point in the top-left corner of the rectangle.
+ * The size is the width and height which extends from the position
+ * downwards and to the right, forming a rectangle.
+ *
+ * @author Anton Ekström
+ */
 public interface Rectangle {
+
     /**
      * Sets the position of the rectangle. May or may not mutate this object.
      *
@@ -34,10 +44,28 @@ public interface Rectangle {
      */
     Dimension getSize();
 
+    default Rectangle setCenter(Vector3f position) {
+        return setPosition(position.sub(getSize().halved().toVector()));
+    }
+
+    default Rectangle setBottomRightCorner(Vector3f position) {
+        return setPosition(position.sub(getSize().toVector()));
+    }
+
     /**
+     * Returns the bottom-right corner of the rectangle, which is the point with the largest value in the rectangle.
      *
-     * @param translation
-     * @return
+     * @return the bottom-right corner
+     */
+    default Vector3f getBottomRightCorner() {
+        return getPosition().add(getSize().toVector());
+    }
+
+    /**
+     * Translates the position of the rectangle.
+     *
+     * @param translation the translation to apply
+     * @return the translated rectangle
      */
     default Rectangle translate(Vector3f translation) {
         return setPosition(getPosition().add(translation));
@@ -83,6 +111,34 @@ public interface Rectangle {
         Vector3f min = getPosition();
         Vector3f max = getPosition().add(getSize().toVector());
         return point.getX() >= min.getX() && point.getX() <= max.getX() && point.getY() >= min.getY() && point.getY() <= max.getY();
+    }
+
+    /**
+     * Returns true if two rectangles have any points in common which they contain.
+     *
+     * @param other the other rectangle
+     * @return true if the rectangles intersect
+     */
+    default boolean intersects(Rectangle other) {
+        if (other == null) {
+            return false;
+        }
+        if (this.equals(other)) {
+            return true;
+        }
+        if (getPosition().equals(other.getPosition())) {
+            return true;
+        }
+
+        Vector3f a = getPosition();
+        Vector3f aMax = getBottomRightCorner();
+        Vector3f b = other.getPosition();
+        Vector3f bMax = other.getBottomRightCorner();
+
+        return a.getX() < bMax.getX()
+                && aMax.getX() > b.getX()
+                && a.getY() < bMax.getY()
+                && aMax.getY() > b.getY();
     }
 
     /**

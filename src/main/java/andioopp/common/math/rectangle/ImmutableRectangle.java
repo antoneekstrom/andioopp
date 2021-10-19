@@ -19,6 +19,10 @@ public class ImmutableRectangle implements Rectangle {
         this(new Vector3f(x, y), new Dimension(w, h));
     }
 
+    public ImmutableRectangle(Rectangle rectangle) {
+        this(rectangle.getPosition(), rectangle.getSize());
+    }
+
     @Override
     public Vector3f getPosition() {
         return position;
