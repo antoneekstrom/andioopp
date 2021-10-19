@@ -6,8 +6,8 @@ import andioopp.common.math.rectangle.ImmutableRectangle;
 import andioopp.common.observer.Observer;
 import andioopp.controller.Controller;
 import andioopp.controller.input.MouseInputEvent;
+import andioopp.controller.input.MouseEventType;
 import andioopp.model.Model;
-import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.entity.DroppedCoinEntity;
 import andioopp.view.util.ViewCoordinate;
 import andioopp.view.views.world.DroppedCoinsView;
@@ -28,12 +28,12 @@ public class DroppedCoinsController implements Controller<Model>, Observer<Mouse
     @Override
     public void init(Model model, Window<?> window) {
         this.model = model;
-        window.getMouseObservable().addObserver(this);
+        window.getMouseInput().getMouseClickObservable().addObserver(this);
     }
 
     @Override
     public void deinit(Model model, Window<?> window) {
-        window.getMouseObservable().removeObserver(this);
+        window.getMouseInput().getMouseClickObservable().removeObserver(this);
     }
 
     @Override
@@ -49,10 +49,10 @@ public class DroppedCoinsController implements Controller<Model>, Observer<Mouse
     }
 
     private boolean clickedOnCoin(MouseInputEvent event, DroppedCoinEntity droppedCoin) {
-        if (event.getType() != MouseInputEvent.MouseEventType.RELEASE) {
+        if (event.getType() != MouseEventType.RELEASE) {
             return false;
         }
-        return getRectangle(droppedCoin).contains(event.getPosition());
+        return getRectangle(droppedCoin).contains(event.getMousePosition());
     }
 
     private ImmutableRectangle getRectangle(DroppedCoinEntity droppedCoin) {

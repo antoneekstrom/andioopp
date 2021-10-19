@@ -10,7 +10,7 @@ import andioopp.model.system.events.EnemyDeathEvent;
 
 import java.util.Collection;
 
-public class RemoveDeadEnemiesSystem implements System<Model>, Observable<EnemyDeathEvent, Observer<EnemyDeathEvent>> {
+public class RemoveDeadEnemiesSystem implements System<Model>, Observable<EnemyDeathEvent> {
 
     private final Collection<Observer<EnemyDeathEvent>> observers;
 
