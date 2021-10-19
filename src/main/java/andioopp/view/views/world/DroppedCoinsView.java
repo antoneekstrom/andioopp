@@ -29,10 +29,10 @@ public class DroppedCoinsView implements View<Model> {
     }
 
     public ViewCoordinate getPosition(DroppedCoinEntity droppedCoin) {
-        return viewport.getViewCoordinate(droppedCoin.getPosition());
+        return viewport.getPosition(droppedCoin.getPosition());
     }
 
     public Dimension getSize(DroppedCoinEntity droppedCoin) {
-        return viewport.getViewSize(droppedCoin.getSize());
+        return viewport.getSize(droppedCoin.getSize());
     }
 }
