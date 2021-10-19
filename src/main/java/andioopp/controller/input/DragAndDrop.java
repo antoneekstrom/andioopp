@@ -68,7 +68,7 @@ public class DragAndDrop<T> implements Observer<MouseInputEvent> {
     }
 
     public boolean isDragging() {
-        return isDragging;
+        return isDragging && getDragData() != null;
     }
 
     public T getDragData() {
