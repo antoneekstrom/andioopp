@@ -27,14 +27,24 @@ public class FxRenderer implements Renderer<FxSprite> {
     }
 
     @Override
+    public void rotate(Vector3f origin, float angle) {
+        getCtx().save();
+        getCtx().translate(origin.getX(), origin.getY());
+        getCtx().rotate(angle);
+        getCtx().translate(-origin.getX(), -origin.getY());
+    }
+
+    @Override
     public void drawSprite(FxSprite sprite, Vector3f position, Dimension size) {
         getCtx().drawImage(sprite.getImage(), position.getX(), position.getY(), size.getWidth(), size.getHeight());
+        getCtx().restore();
     }
 
     @Override
     public void drawRectangle(Vector3f position, Dimension dimensions, Color color) {
         getCtx().setFill(getFxColor(color));
         getCtx().fillRect(position.getX(), position.getY(), dimensions.getWidth(), dimensions.getHeight());
+        getCtx().restore();
     }
 
     @Override
@@ -48,6 +58,7 @@ public class FxRenderer implements Renderer<FxSprite> {
         getCtx().setFill(getFxColor(color));
         getCtx().setFont(font);
         getCtx().fillText(text, position.getX(), position.getY());
+        getCtx().restore();
     }
 
     @Override

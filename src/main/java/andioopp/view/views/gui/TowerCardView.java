@@ -7,15 +7,11 @@ import andioopp.common.math.dimension.Dimension;
 import andioopp.common.math.rectangle.ImmutableRectangle;
 import andioopp.common.math.rectangle.Rectangle;
 import andioopp.common.math.vector.Vector3f;
-import andioopp.common.math.transform.ConcreteTransform;
-import andioopp.common.math.transform.TransformFactory;
 import andioopp.model.Model;
 import andioopp.model.domain.player.TowerCard;
 import andioopp.model.domain.tower.Tower;
 import andioopp.model.util.ModelCoordinate;
 import andioopp.view.View;
-import andioopp.view.util.ModelViewport;
-import andioopp.view.util.ViewCoordinate;
 import andioopp.view.util.Viewport;
 import javafx.scene.text.Font;
 

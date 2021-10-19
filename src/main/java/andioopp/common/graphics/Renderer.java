@@ -12,6 +12,14 @@ import javafx.scene.text.Font;
 public interface Renderer<S extends Sprite<?>> {
 
     /**
+     * Rotates the next draw call around the given point.
+     *
+     * @param origin the point to rotate around
+     * @param angle the amount in radians to rotate by
+     */
+    void rotate(Vector3f origin, float angle);
+
+    /**
      * Draws a {@link Sprite}.
      * @param sprite {@link Sprite} to draw
      * @param position where the sprite is to be drawn

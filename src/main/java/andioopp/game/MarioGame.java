@@ -12,6 +12,7 @@ import andioopp.controller.controllers.DroppedCoinsController;
 import andioopp.controller.controllers.PlaceTowerController;
 import andioopp.controller.controllers.TowerCardDragEvent;
 import andioopp.controller.input.DragAndDrop;
+import andioopp.controller.input.MouseInput;
 import andioopp.model.Model;
 import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.entity.DroppedCoinEntity;
@@ -106,11 +107,14 @@ public class MarioGame extends Game<Model> {
         ModelViewport modelViewport = getModelViewport();
         Viewport moneyViewport = getMoneyViewport();
         Vector3f cardsViewPosition = getCardsViewPosition();
+        MouseInput mouseInput = getWindow().getMouseInput();
 
         cardsView = new CardsView(cardsViewPosition);
         lanesView = new LanesView(modelViewport);
         towersView = new TowersView(modelViewport);
         droppedCoinsView = new DroppedCoinsView(modelViewport);
+        TowerDragMouseView towerDragMouseView = new TowerDragMouseView(dragAndDrop, towersView);
+        mouseInput.getMouseMoveObservable().addObserver(towerDragMouseView);
 
         return getListFactory().create(
                 lanesView,
@@ -118,7 +122,7 @@ public class MarioGame extends Game<Model> {
                 new MoneyView(moneyViewport),
                 towersView,
                 new EnemiesView(modelViewport),
-                new TowerDragMouseView(dragAndDrop, towersView),
+                towerDragMouseView,
                 new ProjectilesView(modelViewport),
                 droppedCoinsView
         );
