@@ -1,6 +1,6 @@
 package andioopp.common.graphics;
 
-import andioopp.common.transform.Vector3f;
+import andioopp.common.math.vector.Vector3f;
 
 /**
  * Represents a color.

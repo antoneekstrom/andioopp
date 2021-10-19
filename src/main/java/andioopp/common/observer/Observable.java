@@ -8,6 +8,7 @@ import java.util.Collection;
  * @param <T> type of the event
  * @param <O> type of the observer
  */
+@FunctionalInterface
 public interface Observable<T, O extends Observer<T>> {
 
     /**

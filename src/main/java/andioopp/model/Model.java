@@ -1,15 +1,23 @@
 package andioopp.model;
 
-import andioopp.model.player.Player;
-import andioopp.model.world.World;
+import andioopp.model.domain.player.Player;
+import andioopp.model.domain.world.World;
 
-/**
- * Facade for the entire model.
- */
-public interface Model {
-    Player getPlayer();
-    World getWorld();
+public class Model {
+
+    private final World world;
+    private final Player player;
+
+    public Model(World world, Player player) {
+        this.player = player;
+        this.world = world;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public World getWorld() {
+        return world;
+    }
 }
-
-
-
