@@ -1,6 +1,7 @@
 package andioopp.common.math.vector;
 
 import java.util.Objects;
+import java.util.Random;
 
 /**
  * Represents a three-dimensional floating-point vector.
@@ -113,6 +114,23 @@ public class Vector3f {
     public static Vector3f all(float v) {
         return new Vector3f(v, v, v);
     }
+
+    /**
+     * Creates a vector with random values in range [0, 1] for each component.
+     *
+     * @param r the random
+     * @return the vector
+     */
+    public static Vector3f random(Random r) {
+        return new Vector3f(r.nextFloat(), r.nextFloat(), r.nextFloat());
+    }
+
+    /**
+     * Creates a vector with random values in range [0, 1] for each component.
+     *
+     * @return the vector
+     */
+    public static Vector3f random() { return random(new Random()); }
 
 
     /**
