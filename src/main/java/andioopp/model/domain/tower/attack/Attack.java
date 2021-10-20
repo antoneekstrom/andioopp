@@ -1,5 +1,6 @@
 package andioopp.model.domain.tower.attack;
 
+import andioopp.common.javafx.time.FxClock;
 import andioopp.common.math.vector.Vector3f;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.time.Time;
@@ -26,6 +27,7 @@ public abstract class Attack implements DamageSource {
         this.cooldown = cooldown;
         this.targetArea = targetArea;
         this.damageSource = damageSource;
+        timeOfLastAttack = FxClock.nanosToSeconds(FxClock.getNowTimeNanos());
     }
 
     @Override
