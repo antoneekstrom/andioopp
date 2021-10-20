@@ -3,6 +3,7 @@ package andioopp.view.views.gui;
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
 import andioopp.common.math.dimension.Dimension;
+import andioopp.common.math.interpolation.Interpolations;
 import andioopp.common.math.vector.Vector3f;
 import andioopp.common.observer.Observer;
 import andioopp.controller.controllers.TowerCardDragEvent;
@@ -16,6 +17,10 @@ import andioopp.view.views.world.TowersView;
 
 public class TowerDragMouseView implements View<Model>, Observer<MouseMoveEvent> {
 
+    public static final double MAX_ANGLE = Math.toRadians(70);
+    public static final float LERP_AMOUNT = 0.00003f;
+    public static final float MOUSE_DELTA_SCALE = 80f;
+    public static final float MAX_MOUSE_DELTA_MAG = 40f;
     private final DragAndDrop<TowerCardDragEvent> dragAndDrop;
     private final TowersView towersView;
 
@@ -37,8 +42,8 @@ public class TowerDragMouseView implements View<Model>, Observer<MouseMoveEvent>
             Vector3f mouse = dragAndDrop.getMousePosition();
             Vector3f position = mouse.sub(size.halved().toVector().fromX());
 
-            // double angle = getSpriteRotationAngle(sprite.getHeight());
-            // renderer.rotate(mouse, (float) angle);
+            double angle = getSpriteRotationAngle(sprite.getHeight());
+            renderer.rotate(mouse, (float) angle);
 
             renderer.drawSprite(sprite, position, size);
         }
@@ -51,8 +56,8 @@ public class TowerDragMouseView implements View<Model>, Observer<MouseMoveEvent>
 
     private float getSpriteRotationAngle(float spriteHeight) {
         float nextAngle = (float) Math.toDegrees(getAngleFromVelocity(spriteHeight));
-        updateTowerVelocity();
-        previousAngle = nextAngle;
+        previousAngle = Interpolations.linear(previousAngle, nextAngle, 0.5f);
+        updateTowerVelocity(LERP_AMOUNT);
         return previousAngle;
     }
 
@@ -61,18 +66,19 @@ public class TowerDragMouseView implements View<Model>, Observer<MouseMoveEvent>
         float opposite = velocityDiff.magnitude();
         float dir = Math.signum(velocityDiff.getX());
         double angle = Math.abs(Math.tan(opposite / centerOfMassHeight));
-        double maxAngle = Math.PI / 2;
-        angle = Math.min(angle, maxAngle);
+        angle = Math.min(angle, MAX_ANGLE);
         angle *= -dir;
         return (float) angle;
     }
 
     private void setMouseVelocity(MouseMoveEvent e) {
-        mouseVelocity = (e.getMouseDelta().scale(70f)).fromX();
+        Vector3f delta = e.getMouseDelta().scale(MOUSE_DELTA_SCALE);
+        delta = delta.limitMagnitude(MAX_MOUSE_DELTA_MAG);
+        mouseVelocity = delta.fromX();
     }
 
-    private void updateTowerVelocity() {
-        towerVelocity = towerVelocity.lerp(mouseVelocity, 0.001f);
+    private void updateTowerVelocity(float lerpAmount) {
+        towerVelocity = towerVelocity.lerp(mouseVelocity, lerpAmount);
     }
 
     private Tower getTower() {
