@@ -13,10 +13,10 @@ import java.util.Collection;
  */
 public class FxClock extends AnimationTimer implements Clock {
 
-    private final Observable<Time, Observer<Time>> observable;
+    private final Observable<Time> observable;
     private long previousTime = 0L;
 
-    public FxClock(Observable<Time, Observer<Time>> observable) {
+    public FxClock(Observable<Time> observable) {
         this.observable = observable;
     }
 

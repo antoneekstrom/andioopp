@@ -3,8 +3,6 @@ package andioopp.common.graphics;
 import andioopp.common.math.dimension.Dimension;
 import andioopp.common.math.rectangle.Rectangle;
 import andioopp.common.math.vector.Vector3f;
-import andioopp.common.math.transform.ConcreteTransform;
-import andioopp.common.math.transform.Transform;
 import javafx.scene.text.Font;
 
 /**
@@ -12,37 +10,30 @@ import javafx.scene.text.Font;
  * @param <S> Describes the type of {@link Sprite}
  */
 public interface Renderer<S extends Sprite<?>> {
+
+    /**
+     * Rotates the next draw call around the given point.
+     *
+     * @param origin the point to rotate around
+     * @param angle the amount in radians to rotate by
+     */
+    void rotate(Vector3f origin, float angle);
+
     /**
      * Draws a {@link Sprite}.
      * @param sprite {@link Sprite} to draw
+     * @param position where the sprite is to be drawn
+     * @param size how large the sprite is to be drawn
      */
-    void drawSprite(S sprite, Transform transform, Dimension size);
+    void drawSprite(S sprite, Vector3f position, Dimension size);
 
     /**
-     * Draws a sprite.
-     * @param sprite the sprite to draw
-     * @param position where the sprite should be drawn
-     */
-    default void drawSprite(S sprite, Vector3f position, Dimension size) {
-        drawSprite(sprite, ConcreteTransform.getFactory().createWithPosition(position), size);
-    }
-
-    /**
-     * Draws a sprite with the position and size of a given rectangle.
-     * @param sprite the sprite
-     * @param rectangle the rectangle
+     * Draws a {@link Sprite}.
+     * @param sprite {@link Sprite} to draw
+     * @param rectangle where the sprite is to be drawn and how large to draw it
      */
     default void drawSprite(S sprite, Rectangle rectangle) {
         drawSprite(sprite, rectangle.getPosition(), rectangle.getSize());
-    }
-
-    /**
-     * Draws a sprite.
-     * @param sprite the sprite to draw
-     * @param transform how the sprite should be drawn
-     */
-    default void drawSprite(S sprite, Transform transform) {
-        drawSprite(sprite, transform, sprite.getSize());
     }
 
     /**
@@ -62,6 +53,13 @@ public interface Renderer<S extends Sprite<?>> {
     }
 
     /**
+     * Draws text to the canvas.
+     * @param position Where the text should be written
+     * @param text  The actual text that should be displayed
+     */
+    void writeText(Vector3f position, String text, Color color, Font font);
+
+    /**
      * Clears the canvas by filling with a certain color.
      * @param color the color to fill with
      */
@@ -72,12 +70,5 @@ public interface Renderer<S extends Sprite<?>> {
      * @return The {@link SpriteFactory}
      */
     SpriteFactory<S> getSpriteFactory();
-
-    /**
-     * Draws text to the canvas.
-     * @param position Where the text should be written
-     * @param text  The actual text that should be displayed
-     */
-    void writeText(Vector3f position, String text, Color color, Font font);
 
 }

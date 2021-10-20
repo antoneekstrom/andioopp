@@ -5,7 +5,13 @@ import andioopp.model.Model;
 import andioopp.model.domain.entity.DroppedCoinEntity;
 import andioopp.model.system.System;
 
-public class RemoveDeadEnemiesSystem implements System<Model> {
+public class RemoveDeadEnemiesSystem implements System<Model>, Observable<EnemyDeathEvent> {
+
+    private final Collection<Observer<EnemyDeathEvent>> observers;
+
+    public RemoveDeadEnemiesSystem(Collection<Observer<EnemyDeathEvent>> observers) {
+        this.observers = observers;
+    }
 
     @Override
     public void update(Model model, Time time) {
