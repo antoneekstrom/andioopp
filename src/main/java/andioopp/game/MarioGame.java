@@ -24,6 +24,7 @@ import andioopp.model.domain.waves.WaveQueue;
 import andioopp.model.domain.world.LaneBuilder;
 import andioopp.model.domain.world.World;
 import andioopp.model.domain.world.WorldBuilder;
+import andioopp.model.services.EnemyDropCoinService;
 import andioopp.model.system.System;
 import andioopp.model.system.systems.*;
 import andioopp.view.View;
@@ -50,9 +51,17 @@ public class MarioGame extends Game<Model> {
     private DragAndDrop<TowerCardDragEvent> dragAndDrop;
     private DroppedCoinsView droppedCoinsView;
 
-    private boolean gameOver = false;
     private PlaceTowerController placeTowerController;
+    private RemoveDeadEnemiesSystem removeDeadEnemiesSystem;
 
+    private boolean gameOver = false;
+
+    /**
+     * Creates the mario game.
+     *
+     * @param windowBuilder the window builder
+     * @param listFactory the listfactory
+     */
     public MarioGame(WindowBuilder<? extends Window<?>> windowBuilder, ListFactory listFactory) {
         super(listFactory, windowBuilder);
     }
@@ -90,6 +99,7 @@ public class MarioGame extends Game<Model> {
     protected List<System<Model>> initSystems() {
         WaveQueue waves = new WaveQueue();
         waves.addWavesToWaveQueue(getModel().getWorld(), 7);
+        removeDeadEnemiesSystem = new RemoveDeadEnemiesSystem(getListFactory().create());
 
         return getListFactory().create(
                 new PerformTowerAttackSystem(),
@@ -100,16 +110,7 @@ public class MarioGame extends Game<Model> {
                 new HandleEnemyAttackSystem(),
                 new DespawnOutOfBoundsSystem(this),
                 new RemoveDeadTowersSystem(),
-                new RemoveDeadEnemiesSystem()
-        );
-    }
-
-    @Override
-    protected List<Controller<Model>> initControllers() {
-        placeTowerController = new PlaceTowerController(dragAndDrop, cardsView, lanesView);
-        return getListFactory().create(
-                placeTowerController,
-                new DroppedCoinsController(droppedCoinsView)
+                removeDeadEnemiesSystem
         );
     }
 
@@ -140,12 +141,35 @@ public class MarioGame extends Game<Model> {
     }
 
     @Override
+    protected List<Controller<Model>> initControllers() {
+        placeTowerController = new PlaceTowerController(dragAndDrop, cardsView, lanesView);
+        return getListFactory().create(
+                placeTowerController,
+                new DroppedCoinsController(droppedCoinsView)
+        );
+    }
+
+    @Override
     protected Model initModel() {
         List<TowerCard<?>> cards = getCards();
         Player player = getPlayer(cards);
         WorldBuilder worldBuilder = getWorldBuilder(getListFactory());
         World build = worldBuilder.build();
         return new Model(build, player);
+    }
+
+    @Override
+    protected void initServices() {
+        removeDeadEnemiesSystem.addObserver(new EnemyDropCoinService(getModel()));
+    }
+
+    /**
+     * Sets the gameover state. If set to true then the game will won't update.
+     *
+     * @param state the state
+     */
+    public void setGameOver(boolean state) {
+        this.gameOver = state;
     }
 
     // Controllers are initialized after views, but we need a controller for this view!
@@ -192,9 +216,5 @@ public class MarioGame extends Game<Model> {
 
     private WorldBuilder getWorldBuilder(ListFactory listFactory) {
         return new WorldBuilder(new LaneBuilder(listFactory).setCells(9), listFactory).setLanes(5);
-    }
-
-    public void setGameOver(boolean state) {
-        this.gameOver = state;
     }
 }

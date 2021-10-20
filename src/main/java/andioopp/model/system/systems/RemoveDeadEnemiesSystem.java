@@ -1,16 +1,19 @@
 package andioopp.model.system.systems;
 
+import andioopp.common.observer.Observable;
+import andioopp.common.observer.ObservableCollection;
+import andioopp.common.observer.Observer;
 import andioopp.common.time.Time;
 import andioopp.model.Model;
-import andioopp.model.domain.entity.DroppedCoinEntity;
 import andioopp.model.system.System;
+import andioopp.model.system.events.EnemyDeathEvent;
 
-public class RemoveDeadEnemiesSystem implements System<Model>, Observable<EnemyDeathEvent> {
+import java.util.Collection;
 
-    private final Collection<Observer<EnemyDeathEvent>> observers;
+public class RemoveDeadEnemiesSystem extends ObservableCollection<EnemyDeathEvent> implements System<Model> {
 
     public RemoveDeadEnemiesSystem(Collection<Observer<EnemyDeathEvent>> observers) {
-        this.observers = observers;
+        super(observers);
     }
 
     @Override
@@ -18,7 +21,7 @@ public class RemoveDeadEnemiesSystem implements System<Model>, Observable<EnemyD
         model.getWorld().getEnemies().removeIf(enemy -> {
             boolean isDead = enemy.isDead();
             if(isDead) {
-                model.getWorld().getDroppedCoins().add(new DroppedCoinEntity(enemy.getPosition(), enemy.getReward()));
+                notifyObservers(new EnemyDeathEvent(enemy));
             }
             return enemy.isDead();
         });

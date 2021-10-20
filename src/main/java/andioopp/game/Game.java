@@ -50,6 +50,7 @@ public abstract class Game<M> {
      * - Initializes the systems
      * - Initializes the views
      * - Initializes the controllers
+     * - Initializes the services
      */
     public void init() {
         this.window = initWindow(windowBuilder);
@@ -57,6 +58,7 @@ public abstract class Game<M> {
         this.systems = initSystems();
         this.views = initViews();
         this.controllers = initControllers();
+        initServices();
 
         for (Controller<M> controller : controllers) {
             controller.init(model, window);
@@ -118,6 +120,13 @@ public abstract class Game<M> {
     protected abstract List<System<M>> initSystems();
 
     /**
+     * Creates and initializes the views.
+     *
+     * @return the list of views
+     */
+    protected abstract List<View<M>> initViews();
+
+    /**
      * Creates and initializes the controllers.
      *
      * @return the list of controllers
@@ -125,11 +134,9 @@ public abstract class Game<M> {
     protected abstract List<Controller<M>> initControllers();
 
     /**
-     * Creates and initializes the views.
-     *
-     * @return the list of views
+     * Initializes services.
      */
-    protected abstract List<View<M>> initViews();
+    protected abstract void initServices();
 
     /**
      * Returns the list of controllers.

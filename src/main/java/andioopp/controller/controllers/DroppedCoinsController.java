@@ -1,10 +1,12 @@
 package andioopp.controller.controllers;
 
+import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Window;
 import andioopp.common.math.dimension.Dimension;
 import andioopp.common.math.rectangle.ImmutableRectangle;
 import andioopp.common.observer.Observer;
 import andioopp.controller.Controller;
+import andioopp.controller.input.MouseEventType;
 import andioopp.controller.input.MouseInputEvent;
 import andioopp.model.Model;
 import andioopp.model.domain.entity.DroppedCoinEntity;
@@ -49,7 +51,7 @@ public class DroppedCoinsController implements Controller<Model>, Observer<Mouse
     }
 
     private boolean clickedOnCoin(MouseInputEvent event, DroppedCoinEntity droppedCoin) {
-        if (event.getType() != MouseInputEvent.MouseEventType.RELEASE) {
+        if (event.getType() != MouseEventType.RELEASE) {
             return false;
         }
         return getRectangle(droppedCoin).contains(event.getMousePosition());
