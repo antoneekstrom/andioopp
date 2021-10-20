@@ -26,18 +26,18 @@ public class RemoveDeadProjectileSystemTest {
     private final Model model = getModel();
     private final BaseDamageSource fireDamageSource = new BaseDamageSource(DamageType.FIRE);
 
-    private final Projectile p1 = new FireballProjectile(new Vector3f(1,1), fireDamageSource);
+    private final Projectile p = new FireballProjectile(new Vector3f(1,1), fireDamageSource);
 
     RemoveDeadProjectilesSystem removeDeadProjectilesSystem = new RemoveDeadProjectilesSystem();
 
     @Before
     public void init() {
-        model.getWorld().getProjectiles().add(p1);
+        model.getWorld().getProjectiles().add(p);
     }
 
     @Test
     public void ProjectileShouldStillExist() {
-        p1.getHealth().decrease(p1.getHealth().get()-1);  //Sets health of projectile to 1;
+        p.getHealth().decrease(p.getHealth().get()-1);  //Sets health of projectile to 1;
 
         int sizeBefore = model.getWorld().getProjectiles().size();
 
@@ -51,7 +51,7 @@ public class RemoveDeadProjectileSystemTest {
 
     @Test
     public void ProjectileShouldBeRemoved() {
-        p1.getHealth().decrease(p1.getHealth().get());  //Sets health of projectile to 0;
+        p.getHealth().decrease(p.getHealth().get());  //Sets health of projectile to 0;
 
         int sizeBefore = model.getWorld().getProjectiles().size();
 
