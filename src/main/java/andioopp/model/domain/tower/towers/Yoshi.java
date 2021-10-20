@@ -10,6 +10,9 @@ import andioopp.model.util.ModelCoordinate;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Tower Yoshi with specific properties.
+ */
 public class Yoshi extends Tower {
 
     private static final String SPRITE_PATH = "yoshi-removebg-preview.png";

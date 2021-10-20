@@ -8,7 +8,9 @@ import andioopp.model.domain.tower.Tower;
 import andioopp.model.util.ModelCoordinate;
 
 import java.util.List;
-
+/**
+ * Tower Rosalina with specific properties.
+ */
 public class Rosalina extends Tower {
     private static final String SPRITE_PATH = "rosalina-removebg-preview.png";
 

@@ -11,7 +11,9 @@ import andioopp.model.util.ModelCoordinate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+/**
+ * Tower Bobomb with specific properties. Bobomb is a single-use Tower, and kills all enemies around him.
+ */
 public class Bobomb extends Tower {
     private static final String SPRITE_PATH = "bobomb-removebg-preview.png";
 

@@ -10,13 +10,15 @@ import andioopp.model.util.ModelCoordinate;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * Tower Mario with specific properties. Mario is a basic Tower with a fireball attack
+ */
 public class Mario extends Tower {
 
     private static final String SPRITE_PATH = "mario.png";
 
     public Mario(ModelCoordinate position) {
-        super(position, SPRITE_PATH, "Luigi", new Money(60), new Health(5));
+        super(position, SPRITE_PATH, "Mario", new Money(60), new Health(5));
     }
 
     @Override
