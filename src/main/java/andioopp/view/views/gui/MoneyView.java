@@ -11,8 +11,13 @@ import andioopp.view.View;
 import andioopp.view.util.Viewport;
 import javafx.scene.text.Font;
 
+/**
+ * A View for displaying amount of Money.
+ */
 public class MoneyView implements View<Model> {
-
+    /**
+     * A Dimension for size of the MoneyView.
+     */
     public static final Dimension DEFAULT_SIZE = new Dimension(276, 176).setHeight(150);
     private static final String BACKGROUND_SPRITE = "coinBox.png";
 
@@ -32,6 +37,10 @@ public class MoneyView implements View<Model> {
         renderer.drawSprite(backgroundSprite, position, size);
         displayCoins(renderer, model.getPlayer());
     }
+
+    /**
+     * Uses a renderer to displaying the amount of Money a player currently has on the MoneyView.
+     */
 
     private void displayCoins(Renderer<?> renderer, Player player) {
         Vector3f textOffset = getSize().toVector().scale(new Vector3f(0.45f, 0.69f));
