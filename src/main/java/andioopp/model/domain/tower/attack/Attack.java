@@ -49,7 +49,7 @@ public abstract class Attack implements DamageSource {
     protected abstract void onAttack(Model model, Vector3f position);
 
     /**
-     * Checks if the tower has waited long enough since its last attak.
+     * Checks if the tower has waited long enough since its last attack.
      *
      * @param time the current time
      * @return true if enough time has passed since the last attack.
