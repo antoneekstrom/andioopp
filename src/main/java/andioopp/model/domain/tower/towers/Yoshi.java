@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Yoshi extends Tower {
 
-    private static final String SPRITE_PATH = "yoshi-removebg-preview.png";
+    private static final String SPRITE_PATH = "yoshi.png";
 
     public Yoshi(ModelCoordinate position) {
         super(position, SPRITE_PATH, "Yoshi", new Health(9));

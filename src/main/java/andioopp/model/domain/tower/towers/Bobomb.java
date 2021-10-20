@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Bobomb extends Tower {
-    private static final String SPRITE_PATH = "bobomb-removebg-preview.png";
+    private static final String SPRITE_PATH = "bobomb.png";
 
     public Bobomb(ModelCoordinate position) {
         super(position, SPRITE_PATH, "Bobomb", new Health(5));

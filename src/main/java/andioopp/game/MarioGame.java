@@ -36,6 +36,11 @@ import andioopp.view.views.world.*;
 
 import java.util.List;
 
+/**
+ * An implementation of {@link Game} for the mario game.
+ *
+ * @author Anton Ekström
+ */
 public class MarioGame extends Game<Model> {
 
     private static final Dimension WINDOW_SIZE = new Dimension(1280, 720);

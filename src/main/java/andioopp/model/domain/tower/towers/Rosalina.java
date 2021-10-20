@@ -9,7 +9,7 @@ import andioopp.model.util.ModelCoordinate;
 import java.util.List;
 
 public class Rosalina extends Tower {
-    private static final String SPRITE_PATH = "rosalina-removebg-preview.png";
+    private static final String SPRITE_PATH = "rosalina.png";
 
     public Rosalina(ModelCoordinate position) {
         super(position, SPRITE_PATH, "Rosalina", new Health(10));
