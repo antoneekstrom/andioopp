@@ -5,6 +5,9 @@ import andioopp.model.Model;
 import andioopp.model.domain.tower.attack.projectiles.Projectile;
 import andioopp.model.system.System;
 
+/**
+ * A class that handles updating Projectiles.
+ */
 public class UpdateProjectileSystem implements System<Model> {
 
     @Override

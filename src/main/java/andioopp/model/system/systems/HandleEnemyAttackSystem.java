@@ -8,12 +8,16 @@ import andioopp.model.domain.world.Cell;
 import andioopp.model.domain.world.World;
 import andioopp.model.system.System;
 
+/**
+ * A class that handles attacks performed by Enemies.
+ */
 public class HandleEnemyAttackSystem implements System<Model> {
 
     @Override
     public void update(Model model, Time time) {
         handleEnemyAttacks(time, model.getWorld());
     }
+
 
     private void handleEnemyAttacks(Time time, World world) {
         for (Enemy enemy : world.getEnemies()) {
@@ -41,10 +45,6 @@ public class HandleEnemyAttackSystem implements System<Model> {
                 }
             }
         }
-    }
-
-    private void attackTower() {
-
     }
 
     private boolean isTowerWithinRange(Enemy enemy, int col, int row) {

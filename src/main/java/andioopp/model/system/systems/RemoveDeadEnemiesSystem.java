@@ -10,6 +10,9 @@ import andioopp.model.system.events.EnemyDeathEvent;
 
 import java.util.Collection;
 
+/**
+ * A class that handles removal of defeated Enemies.
+ */
 public class RemoveDeadEnemiesSystem implements System<Model>, Observable<EnemyDeathEvent, Observer<EnemyDeathEvent>> {
 
     private final Collection<Observer<EnemyDeathEvent>> observers;

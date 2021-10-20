@@ -3,6 +3,9 @@ package andioopp.model;
 import andioopp.model.domain.player.Player;
 import andioopp.model.domain.world.World;
 
+/**
+ *
+ */
 public class Model {
 
     private final World world;
