@@ -17,6 +17,9 @@ public class ModelViewport {
         viewport = new Viewport(getInsideDimensionFromModel(model), outsideDimension, outsideOffset);
     }
 
+    /**
+     * Returns a Dimension of 1x1 for a Cell.
+     */
     public Dimension getCellSize() {
         return getSize(Dimension.UNIT);
     }
@@ -25,10 +28,18 @@ public class ModelViewport {
         throw new NotImplementedException();
     }
 
+    /**
+     * Translates a coordinate from the model to the View.
+     * @return a ViewCoordinate translated from a ModelCoordinate.
+     */
     public ViewCoordinate getPosition(ModelCoordinate modelCoordinate) {
         return new ViewCoordinate(viewport.getPositionOutside(modelCoordinate));
     }
 
+    /**
+     * Translates a dimension from the model to the View.
+     * @return a Dimension for a View translated from a Dimension from the Model.
+     */
     public Dimension getSize(Dimension modelSize) {
         return new Dimension(viewport.getSizeOutside(modelSize));
     }

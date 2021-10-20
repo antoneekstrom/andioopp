@@ -4,7 +4,7 @@ import andioopp.common.math.dimension.Dimension;
 import andioopp.common.math.vector.Vector3f;
 
 /**
- * Translates coordinates from an outside coordinatesystem to an inside coordinatesystem.
+ * Translates coordinates from an outside coordinate-system of the whole window to an inside coordinate-system of a specific part of the window.
  */
 public class Viewport {
 
@@ -18,10 +18,15 @@ public class Viewport {
         this.outsideOffset = outsideOffset;
     }
 
+    /**
+     * Returns a Vector for the outside coordinate-system from the inside coordinate-system.
+     */
     public Vector3f getPositionOutside(Vector3f positionInside) {
         return outsideOffset.add(positionInside.scale(getInsideToOutsideScaling()));
     }
-
+    /**
+     * Returns a Dimension for the outside coordinate-system from the inside coordinate-system.
+     */
     public Dimension getSizeOutside(Dimension sizeInside) {
         return new Dimension(sizeInside.toVector().scale(getInsideToOutsideScaling()));
     }
