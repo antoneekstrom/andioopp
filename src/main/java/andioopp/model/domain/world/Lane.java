@@ -12,14 +12,23 @@ public class Lane {
         this.cells = cells;
     }
 
+    /**
+     * Returns the number of Cells.
+     */
     public int getNumberOfCells() {
         return getCells().size();
     }
 
+    /**
+     * Returns a List of the Cells in a column.
+     */
     public Cell getCell(int col) {
         return getCells().get(col);
     }
 
+    /**
+     * Returns a List of the Cells in the Lane.
+     */
     public List<Cell> getCells() {
         return cells;
     }

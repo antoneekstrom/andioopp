@@ -8,6 +8,9 @@ import java.util.Random;
 
 import java.util.LinkedList;
 
+/**
+ * A Wave consists of {@link Enemy}.
+ */
 public class Wave {
 
     public LinkedList<Enemy> enemyWave;
@@ -21,7 +24,7 @@ public class Wave {
     }
 
     /**
-     * Adds same amount as numEnemies of random enemies to Wave
+     * Adds same amount as numEnemies of random enemies to Wave.
      */
     public void addEnemyToWave(World world) {
         EnemyFactory enemies = new EnemyFactory();

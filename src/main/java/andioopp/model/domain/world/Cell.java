@@ -9,14 +9,23 @@ import andioopp.model.domain.tower.Tower;
 public class Cell {
     private Tower tower;
 
+    /**
+     * Adds a Tower to a cell.
+     */
     public void setTower(Tower tower) {
         this.tower = tower;
     }
 
+    /**
+     * Checks if Cell has a Tower.
+     */
     public boolean hasTower() {
         return tower != null;
     }
 
+    /**
+     * Returns a Tower from a Cell.
+     */
     public Tower getTower() {
         return tower;
     }
