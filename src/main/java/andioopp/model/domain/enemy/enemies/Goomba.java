@@ -15,7 +15,7 @@ import andioopp.model.util.ModelCoordinate;
 public class Goomba extends Enemy {
 
     private static final String SPRITE_PATH = "goomba.png";
-    private static final int BASE_HEALTH = 10;
+    private static final int BASE_HEALTH = 5;
     private static final float BASE_SPEED = 0.2f;
     private static final float BASE_ATTACK_COOLDOWN = 0.3f;
     private static final DamageFilter DAMAGE_FILTER = new DamageFilterBase(

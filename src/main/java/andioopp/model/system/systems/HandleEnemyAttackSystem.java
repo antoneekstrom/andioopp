@@ -18,7 +18,6 @@ public class HandleEnemyAttackSystem implements System<Model> {
     private void handleEnemyAttacks(Time time, World world) {
         for (Enemy enemy : world.getEnemies()) {
             enemy.setTowerAhead(false);
-
             for (int row = 0; row < world.getNumberOfLanes(); row++) {
                 for (int col = 0; col < world.getNumberOfCellsInLanes(); col++) {
                     if (!isTowerWithinRange(enemy, col, row)) {
