@@ -6,6 +6,7 @@ import andioopp.common.storage.ListFactory;
 import andioopp.common.time.Time;
 import andioopp.model.Model;
 import andioopp.model.domain.enemy.Enemy;
+import andioopp.model.domain.enemy.EnemyFactory;
 import andioopp.model.domain.enemy.enemies.Goomba;
 import andioopp.model.domain.player.Player;
 import andioopp.model.domain.stats.Health;
@@ -83,6 +84,16 @@ public class RemoveDeadEnemiesSystemTest {
         // The number of enemies should still be the same as before the call of the systems update method becuase the enemy still har health left.
         assertEquals(sizeBefore, sizeAfter);
 
+    }
+
+    @Test
+    public void DoesAKilledEnemyDropACoin() {
+        model.getWorld().addEnemy(EnemyFactory.createGoomba(model.getWorld(), 0));
+        for(Enemy enemy : model.getWorld().getEnemies()){
+            enemy.getHealth().decrease(500);
+        }
+        removeDeadEnemiesSystem.update(model, new Time(1, 1));
+        assertTrue(model.getWorld().getDroppedCoins().size() > 0);
     }
 
 

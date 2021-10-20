@@ -40,12 +40,4 @@ public class EnemyFactory {
     public static Enemy createBoo(World world, int row) {
         return new Boo(new ModelCoordinate(world.getNumberOfCellsInLanes(), row));
     }
-
-    public static Enemy createBlooper(World world, int row) {
-        return new Blooper(new ModelCoordinate(world.getNumberOfCellsInLanes(), row));
-    }
-
-    public static Enemy createBuzzyBeetle(World world, int row) {
-        return new BuzzyBeetle(new ModelCoordinate(world.getNumberOfCellsInLanes(), row));
-    }
 }
