@@ -246,6 +246,26 @@ public class Vector3f {
         return new Vector3f(x, y, z);
     }
 
+    /**
+     * Sets the magnitude of the vector.
+     *
+     * @param magnitude the magnitude to set
+     * @return the resulting vector
+     */
+    public Vector3f setMagnitude(float magnitude) {
+        return scale((1f / magnitude()) * magnitude);
+    }
+
+    /**
+     * Limits the magnitude of the vector to a given value.
+     *
+     * @param max the maximum magnitude
+     * @return the resulting vector
+     */
+    public Vector3f limitMagnitude(float max) {
+        return setMagnitude(Math.max(max, magnitude()));
+    }
+
 
     /**
      * Multiplies each component of this vector and the other vector.
