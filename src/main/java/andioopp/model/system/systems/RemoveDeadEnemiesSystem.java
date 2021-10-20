@@ -1,6 +1,5 @@
 package andioopp.model.system.systems;
 
-import andioopp.common.observer.Observable;
 import andioopp.common.observer.ObservableCollection;
 import andioopp.common.observer.Observer;
 import andioopp.common.time.Time;
@@ -19,8 +18,6 @@ public class RemoveDeadEnemiesSystem extends ObservableCollection<EnemyDeathEven
     @Override
     public void update(Model model, Time time) {
         removeDeadEnemies(model);
-
-        removeDeadProjectiles(model);
     }
 
     private void removeDeadEnemies(Model model) {
@@ -28,16 +25,6 @@ public class RemoveDeadEnemiesSystem extends ObservableCollection<EnemyDeathEven
             boolean isDead = enemy.isDead();
             if(isDead) {
                 notifyObservers(new EnemyDeathEvent(enemy));
-            }
-            return isDead;
-        });
-    }
-
-    private void removeDeadProjectiles(Model model) {
-        model.getWorld().getProjectiles().removeIf(projectile -> {
-            boolean isDead = projectile.getHealth().isDead();
-            if(isDead) {
-
             }
             return isDead;
         });

@@ -110,6 +110,7 @@ public class MarioGame extends Game<Model> {
                 new HandleEnemyAttackSystem(),
                 new DespawnOutOfBoundsSystem(this),
                 new RemoveDeadTowersSystem(),
+                new RemoveDeadProjectilesSystem(),
                 removeDeadEnemiesSystem
         );
     }
