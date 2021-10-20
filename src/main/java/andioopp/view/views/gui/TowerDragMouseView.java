@@ -40,10 +40,7 @@ public class TowerDragMouseView implements View<Model>, Observer<MouseMoveEvent>
 
             Dimension size = towersView.getTowerSizeFromSprite(sprite);
             Vector3f mouse = dragAndDrop.getMousePosition();
-            Vector3f position = mouse.sub(size.halved().toVector().fromX());
-
-            double angle = getSpriteRotationAngle(sprite.getHeight());
-            renderer.rotate(mouse, (float) angle);
+            Vector3f position = mouse.sub(size.halved().toVector());
 
             renderer.drawSprite(sprite, position, size);
         }
