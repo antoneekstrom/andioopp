@@ -22,4 +22,5 @@ public interface Controller<M> {
      * Deinitializes the controller.
      */
     void deinit(M model, Window<?> window);
+
 }

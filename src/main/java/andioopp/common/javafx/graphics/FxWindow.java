@@ -1,16 +1,16 @@
 package andioopp.common.javafx.graphics;
 
-import andioopp.common.math.dimension.Dimension;
-import andioopp.common.math.vector.Vector3f;
-import andioopp.common.observer.CollectionObservable;
-import andioopp.common.storage.ArrayListFactory;
-import andioopp.controller.input.MouseInputEvent;
 import andioopp.common.graphics.Window;
-import andioopp.common.observer.Observable;
-import andioopp.common.observer.Observer;
+import andioopp.common.javafx.input.FxMouseInputAdapter;
+import andioopp.common.math.dimension.Dimension;
+import andioopp.common.observer.*;
+import andioopp.common.storage.ArrayListFactory;
+import andioopp.controller.input.MouseInput;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 /**
  * {@link Window} implementation for JavaFX. Encapsulates a {@link Stage} and {@link Canvas} instance.
@@ -19,43 +19,21 @@ public class FxWindow implements Window<FxRenderer> {
 
     private final Stage stage;
 
-    private final Observable<MouseInputEvent, Observer<MouseInputEvent>> mouseObservable;
-    private final Observable<Dimension, Observer<Dimension>> resizeObservable;
+    private final MouseInput mouseInput;
+    private final Observable<Dimension> resizeObservable;
     private final FxRenderer renderer;
 
     public FxWindow(Stage stage, Canvas canvas) {
         this.stage = stage;
 
         renderer = new FxRenderer(canvas.getGraphicsContext2D());
-        mouseObservable = createMouseInputObservable(stage);
         resizeObservable = createResizeObservable(stage, canvas);
+        mouseInput = FxMouseInputAdapter.fromStage(stage, ArrayList::new);
     }
 
-    private Observable<MouseInputEvent, Observer<MouseInputEvent>> createMouseInputObservable(Stage stage) {
-        final Observable<MouseInputEvent, Observer<MouseInputEvent>> mouseObservable;
-        mouseObservable = new CollectionObservable<>(new ArrayListFactory().create());
-        stage.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_MOVED, (e) -> {
-            Vector3f position = new Vector3f((float) e.getX(), (float) e.getY());
-            mouseObservable.notifyObservers(new MouseInputEvent(position, MouseInputEvent.MouseEventType.MOVE));
-        });
-        stage.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_DRAGGED, (e) -> {
-            Vector3f position = new Vector3f((float) e.getX(), (float) e.getY());
-            mouseObservable.notifyObservers(new MouseInputEvent(position, MouseInputEvent.MouseEventType.DRAG));
-        });
-        stage.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_PRESSED, (e) -> {
-            Vector3f position = new Vector3f((float) e.getX(), (float) e.getY());
-            mouseObservable.notifyObservers(new MouseInputEvent(position, MouseInputEvent.MouseEventType.PRESS));
-        });
-        stage.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_RELEASED, (e) -> {
-            Vector3f position = new Vector3f((float) e.getX(), (float) e.getY());
-            mouseObservable.notifyObservers(new MouseInputEvent(position, MouseInputEvent.MouseEventType.RELEASE));
-        });
-        return mouseObservable;
-    }
-
-    private Observable<Dimension, Observer<Dimension>> createResizeObservable(Stage stage, Canvas canvas) {
-        final Observable<Dimension, Observer<Dimension>> resizeObservable;
-        resizeObservable = new CollectionObservable<>(new ArrayListFactory().create());
+    private Observable<Dimension> createResizeObservable(Stage stage, Canvas canvas) {
+        final Observable<Dimension> resizeObservable;
+        resizeObservable = new ObservableCollection<>(new ArrayListFactory().create());
         ChangeListener<Number> resizeListener = (observable, oldValue, newValue) -> {
             resizeObservable.notifyObservers(getSize());
             canvas.resize(getSize().getWidth(), getSize().getHeight());
@@ -66,12 +44,12 @@ public class FxWindow implements Window<FxRenderer> {
     }
 
     @Override
-    public Observable<MouseInputEvent, Observer<MouseInputEvent>> getMouseObservable() {
-        return mouseObservable;
+    public MouseInput getMouseInput() {
+        return mouseInput;
     }
 
     @Override
-    public Observable<Dimension, Observer<Dimension>> getResizeObservable() {
+    public Observable<Dimension> getResizeObservable() {
         return resizeObservable;
     }
 
