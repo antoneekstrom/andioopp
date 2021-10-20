@@ -8,9 +8,13 @@ import andioopp.model.Model;
 import andioopp.view.View;
 import andioopp.view.util.ModelViewport;
 import andioopp.view.util.ViewCoordinate;
-
+/**
+ * A View for displaying Coins.
+ */
 public class DroppedCoinsView implements View<Model> {
-
+    /**
+     * String for sprite used for displaying Coins.
+     */
     public static final String COIN_SPRITE = "coin.png";
     private final ModelViewport viewport;
 
@@ -28,10 +32,16 @@ public class DroppedCoinsView implements View<Model> {
         }
     }
 
+    /**
+     * Returns position of a DroppedCoin as a ViewCoordinate.
+     */
     public ViewCoordinate getPosition(DroppedCoinEntity droppedCoin) {
         return viewport.getPosition(droppedCoin.getPosition());
     }
 
+    /**
+     * Returns the size of a DroppedCoin as a Dimension.
+     */
     public Dimension getSize(DroppedCoinEntity droppedCoin) {
         return viewport.getSize(droppedCoin.getSize());
     }
