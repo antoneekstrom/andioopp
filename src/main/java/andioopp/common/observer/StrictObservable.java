@@ -2,6 +2,15 @@ package andioopp.common.observer;
 
 import java.util.Collection;
 
+/**
+ * Represents an observable in the "observer pattern".
+ * An observable can be listened to by observers and broadcast events to its listeners.
+ *
+ * @param <T> type of the event
+ * @param <O> type of the observer
+ * @author Anton Ekström
+ * @see Observer
+ */
 public interface StrictObservable<T, O extends Observer<T>> {
 
     /**

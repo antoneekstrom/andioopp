@@ -135,7 +135,9 @@ public class Vector3f {
      *
      * @return the vector
      */
-    public static Vector3f random() { return random(new Random()); }
+    public static Vector3f random() {
+        return random(new Random());
+    }
 
 
     /**
@@ -166,14 +168,28 @@ public class Vector3f {
     }
 
 
+    /**
+     * Returns the sum of all components of the vector.
+     *
+     * @return the sum
+     */
     public float sum() {
         return getX() + getY() + getZ();
     }
 
+    /**
+     * Returns the magnitude of the vector squared.
+     *
+     * @return the squared magnitude
+     */
     public float magnitudeSquared() {
         return scale(this).sum();
     }
 
+    /**
+     * Returns the magnitude of the vector.
+     * @return the magnitude
+     */
     public float magnitude() {
         return (float) Math.sqrt(magnitudeSquared());
     }
@@ -208,7 +224,7 @@ public class Vector3f {
     /**
      * Linearly interpolate from this vector to the given vector.
      *
-     * @param to the vector to interpolate to
+     * @param to     the vector to interpolate to
      * @param amount the amount to interpolate by
      * @return the resulting vector
      */
@@ -219,7 +235,7 @@ public class Vector3f {
     /**
      * Interpolate from this vector to the given vector.
      *
-     * @param to the vector to interpolate to
+     * @param to     the vector to interpolate to
      * @param amount the amount to interpolate by
      * @return the resulting vector
      */
