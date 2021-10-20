@@ -15,7 +15,7 @@ public class FlashlightAttack extends Attack {
     private static final DamageSource DAMAGE_SOURCE = new BaseDamageSource(DamageType.LIGHT);
 
     public FlashlightAttack(float cooldown) {
-        super(cooldown, new SingleLaneForward(3.5f), DAMAGE_SOURCE);
+        super(cooldown, new SingleLaneForward(3f), DAMAGE_SOURCE);
     }
 
     @Override

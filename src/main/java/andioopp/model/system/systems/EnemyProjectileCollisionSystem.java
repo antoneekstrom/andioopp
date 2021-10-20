@@ -63,5 +63,6 @@ public class EnemyProjectileCollisionSystem implements System<Model> {
         if (enemy.canBeDamagedBy(projectile)) {
             enemy.getHealth().decrease(1);
         }
+
     }
 }

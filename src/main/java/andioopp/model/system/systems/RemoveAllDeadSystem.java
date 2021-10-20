@@ -18,12 +18,28 @@ public class RemoveDeadEnemiesSystem extends ObservableCollection<EnemyDeathEven
 
     @Override
     public void update(Model model, Time time) {
+        removeDeadEnemies(model);
+
+        removeDeadProjectiles(model);
+    }
+
+    private void removeDeadEnemies(Model model) {
         model.getWorld().getEnemies().removeIf(enemy -> {
             boolean isDead = enemy.isDead();
             if(isDead) {
                 notifyObservers(new EnemyDeathEvent(enemy));
             }
-            return enemy.isDead();
+            return isDead;
+        });
+    }
+
+    private void removeDeadProjectiles(Model model) {
+        model.getWorld().getProjectiles().removeIf(projectile -> {
+            boolean isDead = projectile.getHealth().isDead();
+            if(isDead) {
+
+            }
+            return isDead;
         });
     }
 }

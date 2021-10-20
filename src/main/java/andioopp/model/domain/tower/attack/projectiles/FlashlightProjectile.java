@@ -23,7 +23,7 @@ public class FlashlightProjectile extends Projectile {
             birthtime = time.getTime();
         }
         if(time.getTime() - birthtime > 0.7f ) {
-            getRectangle().setPosition(new ModelCoordinate(100));
+            getHealth().decrease(100);
         }
     }
 }

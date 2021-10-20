@@ -1,6 +1,5 @@
 package andioopp.model.domain.tower.attack.attacks;
 
-import andioopp.common.javafx.time.FxClock;
 import andioopp.common.math.vector.Vector3f;
 import andioopp.common.math.range.FloatRange;
 import andioopp.model.Model;
@@ -22,7 +21,7 @@ public class DigCoinAttack extends Attack {
     public DigCoinAttack(float cooldown, FloatRange moneyRange) {
         super(cooldown, new NonTargeting(), new BaseDamageSource(DamageType.ANY));
         this.moneyRange = moneyRange;
-        timeOfLastAttack = FxClock.nanosToSeconds(FxClock.getNowTimeNanos());
+
     }
 
     @Override
