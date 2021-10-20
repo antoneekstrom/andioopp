@@ -1,6 +1,5 @@
 package andioopp.model.system.systems;
 
-import andioopp.common.math.vector.Vector3f;
 import andioopp.common.time.Time;
 import andioopp.model.Model;
 import andioopp.model.domain.enemy.Enemy;
