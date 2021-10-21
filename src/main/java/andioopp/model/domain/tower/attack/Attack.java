@@ -21,6 +21,12 @@ public abstract class Attack implements DamageSource {
     private final DamageSource damageSource;
     protected float timeOfLastAttack;
 
+    /**
+     * Constructor for Attack.
+     * @param cooldown time you have to wait before an attack will be performed.
+     * @param targetArea area where the attack will hit.
+     * @param damageSource which DamageTypes the attack will attack.
+     */
     public Attack(float cooldown, AttackTargetArea targetArea, DamageSource damageSource) {
         this.cooldown = cooldown;
         this.targetArea = targetArea;
