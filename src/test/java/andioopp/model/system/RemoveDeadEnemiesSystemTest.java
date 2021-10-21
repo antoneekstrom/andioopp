@@ -90,7 +90,7 @@ public class RemoveDeadEnemiesSystemTest {
     public void DoesAKilledEnemyDropACoin() {
         model.getWorld().addEnemy(EnemyFactory.createGoomba(model.getWorld(), 0));
         for(Enemy enemy : model.getWorld().getEnemies()){
-            enemy.getHealth().decrease(500);
+            enemy.getHealth().decrease(enemy.getHealth().get());
         }
         removeDeadEnemiesSystem.update(model, new Time(1, 1));
         assertTrue(model.getWorld().getDroppedCoins().size() > 0);
