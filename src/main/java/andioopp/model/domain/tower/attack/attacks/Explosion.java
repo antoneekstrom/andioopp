@@ -10,6 +10,7 @@ import andioopp.model.domain.tower.attack.Attack;
 import andioopp.model.domain.tower.attack.strategies.NonTargeting;
 
 /**
+ * An explosion attack.
  * @author Arvid Svedberg
  */
 public class Explosion extends Attack {

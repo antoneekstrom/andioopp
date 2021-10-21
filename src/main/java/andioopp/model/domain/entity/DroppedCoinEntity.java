@@ -6,6 +6,9 @@ import andioopp.common.math.rectangle.ImmutableRectangle;
 import andioopp.model.domain.money.Money;
 import andioopp.model.util.ModelCoordinate;
 
+/**
+ * An entity of a dropped coin
+ */
 public class DroppedCoinEntity {
 
     private final Rectangle rectangle;
@@ -17,14 +20,23 @@ public class DroppedCoinEntity {
         this.value = value;
     }
 
+    /**
+     * Returns value of coin
+     */
     public Money getValue() {
         return value;
     }
 
+    /**
+     * Returns position of coin
+     */
     public ModelCoordinate getPosition() {
         return new ModelCoordinate(rectangle.getPosition());
     }
 
+    /**
+     * Returns size of coin
+     */
     public Dimension getSize() {
         return rectangle.getSize();
     }

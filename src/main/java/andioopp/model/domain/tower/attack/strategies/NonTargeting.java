@@ -4,6 +4,9 @@ import andioopp.common.math.vector.Vector3f;
 import andioopp.model.domain.tower.attack.AttackTargetArea;
 import andioopp.model.domain.world.World;
 
+/**
+ * An AttackTargetArea for non targeting attacks.
+ */
 public class NonTargeting implements AttackTargetArea {
 
     @Override

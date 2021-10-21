@@ -1,7 +1,5 @@
 package andioopp.model.domain.enemy.enemies;
 
-import andioopp.common.math.dimension.Dimension;
-import andioopp.common.math.rectangle.ImmutableRectangle;
 import andioopp.model.domain.damage.DamageFilter;
 import andioopp.model.domain.damage.targets.FilterGrounded;
 import andioopp.model.domain.enemy.Enemy;
@@ -9,6 +7,9 @@ import andioopp.model.domain.money.Money;
 import andioopp.model.domain.stats.Health;
 import andioopp.model.util.ModelCoordinate;
 
+/**
+ * An enemy of type Blooper
+ */
 public class Blooper extends Enemy {
 
     private static final String SPRITE_PATH = null;

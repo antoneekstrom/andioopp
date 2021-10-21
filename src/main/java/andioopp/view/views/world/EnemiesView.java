@@ -8,9 +8,13 @@ import andioopp.model.Model;
 import andioopp.model.domain.enemy.Enemy;
 import andioopp.view.View;
 import andioopp.view.util.ModelViewport;
-
+/**
+ * A View for displaying Lanes.
+ */
 public class EnemiesView implements View<Model> {
-
+    /**
+     * Floats used for adjusting the position and size of a Tower in a Cell.
+     */
     private static final float SIZE_PERCENTAGE_OF_CELL_HEIGHT = 1f;
     private static final float OFFSET_FROM_CELL_BOTTOM = 0.4f;
 
@@ -27,6 +31,9 @@ public class EnemiesView implements View<Model> {
         }
     }
 
+    /**
+     * Uses a renderer to render Enemies on the screen on the enemies current position.
+     */
     private <S extends Sprite<?>> void renderEnemy(Renderer<S> renderer, Enemy enemy) {
         S sprite = enemy.getSprite(renderer.getSpriteFactory());
 

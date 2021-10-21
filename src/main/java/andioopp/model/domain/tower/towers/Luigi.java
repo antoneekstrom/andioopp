@@ -9,12 +9,14 @@ import andioopp.model.util.ModelCoordinate;
 
 import java.util.Arrays;
 import java.util.List;
-
+/**
+ * Tower Luigi with specific properties. Luigi is used for defeating Enemy Boo's with his torch.
+ */
 public class Luigi extends Tower {
     private static final String SPRITE_PATH = "luigi.png";
 
     public Luigi(ModelCoordinate position) {
-        super(position, SPRITE_PATH, "Mario", new Money(200), new Health(5));
+        super(position, SPRITE_PATH, "Luigi", new Money(200), new Health(5));
     }
 
     @Override

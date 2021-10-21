@@ -5,6 +5,9 @@ import andioopp.model.Model;
 import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.system.System;
 
+/**
+ * A class that handles moving Enemies.
+ */
 public class MoveEnemySystem implements System<Model> {
     @Override
     public void update(Model model, Time time) {

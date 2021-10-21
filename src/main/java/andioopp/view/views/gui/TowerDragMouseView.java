@@ -12,6 +12,10 @@ import andioopp.controller.input.DragAndDrop;
 import andioopp.view.View;
 import andioopp.view.views.world.TowersView;
 
+/**
+ * A View for displaying a Tower while being dragged by mouse.
+ */
+
 public class TowerDragMouseView implements View<Model> {
 
     private final DragAndDrop<TowerCardDragEvent> dragAndDrop;

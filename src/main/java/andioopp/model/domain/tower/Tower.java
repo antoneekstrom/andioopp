@@ -34,26 +34,44 @@ public abstract class Tower {
 
     protected abstract List<Attack> createAttacks();
 
+    /**
+     * Returns List of Attacks of a Tower.
+     */
     public List<Attack> getAttacks() {
         return attacks;
     }
 
+    /**
+     * Returns Sprite of Tower.
+     */
     public String getSprite() {
         return sprite;
     }
 
+    /**
+     * Returns Health of Tower.
+     */
     public Health getHealth() {
         return health;
     }
 
+    /**
+     * Returns Cost of Tower.
+     */
     public Money getCost() {
         return cost;
     }
 
+    /**
+     * Returns name of Tower.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns position.
+     */
     public ModelCoordinate getPosition() {
         return getPosition();
     }

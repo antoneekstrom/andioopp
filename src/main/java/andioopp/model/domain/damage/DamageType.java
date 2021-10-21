@@ -1,5 +1,8 @@
 package andioopp.model.domain.damage;
 
+/**
+ * Enums of different DamageTypes
+ */
 public enum DamageType {
     FIRE,
     JUMP,

@@ -7,6 +7,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
+/**
+ * A WaveQueue consists of {@link Wave} and adds them to the world.
+ */
 public class WaveQueue {
 
     float timeSinceLastEnemy;
@@ -41,7 +44,6 @@ public class WaveQueue {
      * Returns wave at top of queue, does not remove it from queue
      */
     public Wave getWave() {
-
         Wave wave = queue.peek();
         return wave;
 
@@ -63,10 +65,14 @@ public class WaveQueue {
         return (this.deltaSeconds > delay);
 
     }
+
     public void setDeltaSeconds(float deltaSeconds) {
         this.deltaSeconds = deltaSeconds;
     }
 
+    /**
+     * Updates timeSinceLastEnemy with the current Time.
+     */
     public void updateTimeSinceLastEnemy(Time time) {
         this.timeSinceLastEnemy = time.getTime();
     }
@@ -74,7 +80,6 @@ public class WaveQueue {
     /**
      * Returns a random delay between 30 and 45.
      */
-
     public double getRandomDelay() {
         int randomDelay = rand.nextInt(15) + 30;
 

@@ -16,8 +16,15 @@ import andioopp.view.View;
 import andioopp.view.util.ModelViewport;
 import andioopp.view.util.ViewCoordinate;
 
+/**
+ * A View for displaying Towers.
+ */
+
 public class TowersView implements View<Model> {
 
+    /**
+     * Floats used for adjusting the position and size of a Tower in a Cell.
+     */
     private static final float SIZE_PERCENTAGE_OF_CELL_HEIGHT = 1f;
     private static final float TOWER_CELL_OFFSET_PERCENT = 0.4f;
 
@@ -37,6 +44,9 @@ public class TowersView implements View<Model> {
         }
     }
 
+    /**
+     * Renders a sprite of a Tower in a specific cell.
+     */
     private <S extends Sprite<?>> void renderTower(Renderer<S> renderer, World world, int col, int row) {
         Cell cell = world.getCell(col, row);
         if (!cell.hasTower()) {
@@ -49,6 +59,13 @@ public class TowersView implements View<Model> {
         renderer.drawSprite(sprite, getTowerRectangle(sprite, col, row));
     }
 
+    /**
+     * Uses a RectangleBuilder to build a rectangle with the same position and size as a sprite of a Tower.
+     * @param sprite sprite of a Tower.
+     * @param col the cells column for where the Tower is placed.
+     * @param row the cells row for where the Tower is placed.
+     * @return a Rectangle with the same position and size as a sprite of a Tower.
+     */
     private Rectangle getTowerRectangle(Sprite<?> sprite, int col, int row) {
         Rectangle cellRect = getCellRect(col, row);
         RectangleBuilder builder = new RectangleBuilder(cellRect);
@@ -60,6 +77,12 @@ public class TowersView implements View<Model> {
 
         return builder.build();
     }
+
+    /**
+     * Creates a Dimension for a Towers sprite when being placed in a cell.
+     * @param sprite the sprite used for displaying a tower.
+     * @return Dimension for Towers placed in a cell.
+     */
 
     public Dimension getTowerSizeFromSprite(Sprite<?> sprite) {
         Dimension spriteSize = sprite.getSize();

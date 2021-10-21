@@ -10,7 +10,9 @@ import andioopp.model.util.ModelCoordinate;
 
 import java.util.Arrays;
 import java.util.List;
-
+/**
+ * Tower Toad with specific properties. Toad is used for earning money in the game.
+ */
 public class Toad extends Tower {
     private static final String SPRITE_PATH = "toad.png";
 

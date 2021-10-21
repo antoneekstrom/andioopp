@@ -8,7 +8,9 @@ import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.money.Money;
 import andioopp.model.domain.stats.Health;
 import andioopp.model.util.ModelCoordinate;
-
+/**
+ * An enemy of type BuzzyBeetle
+ */
 public class BuzzyBeetle extends Enemy {
 
     private static final String SPRITE_PATH = "buzzybeetle.png";

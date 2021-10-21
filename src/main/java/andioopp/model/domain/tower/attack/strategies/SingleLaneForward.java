@@ -4,6 +4,9 @@ import andioopp.common.math.vector.Vector3f;
 import andioopp.model.domain.tower.attack.AttackTargetArea;
 import andioopp.model.domain.world.World;
 
+/**
+ * An AttackTargetArea for a single lane forward.
+ */
 public class SingleLaneForward implements AttackTargetArea {
 
     float enemyPosOffset = 0.4f;

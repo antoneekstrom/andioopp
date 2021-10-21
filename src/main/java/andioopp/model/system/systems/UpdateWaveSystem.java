@@ -5,6 +5,10 @@ import andioopp.model.Model;
 import andioopp.model.domain.waves.WaveQueue;
 import andioopp.model.system.System;
 
+/**
+ * A system that handles updating the Waves.
+ */
+
 public class UpdateWaveSystem implements System<Model> {
 
     private final WaveQueue waves;

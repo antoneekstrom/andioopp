@@ -19,10 +19,21 @@ import andioopp.view.util.ViewCoordinate;
 import andioopp.view.util.Viewport;
 import javafx.scene.text.Font;
 
+/**
+ * A View for displaying TowerCards.
+ */
 public class TowerCardView implements View<Model> {
-
+    /**
+     * Dimension for the size of a TowerCard.
+     */
     public final static Dimension CARD_SIZE = new Dimension(110, 170);
+    /**
+     * Color for the background of a TowerCard.
+     */
     public static final Color BACKGROUND_COLOR = new Color(150, 150, 150);
+    /**
+     * Dimension for the ratio of a TowerCard.
+     */
     public static final Dimension IMAGE_ASPECT_RATIO = new Dimension(1, 1.2f);
 
     private final Viewport viewport;
@@ -69,6 +80,9 @@ public class TowerCardView implements View<Model> {
         return bottom;
     }
 
+    /**
+     * Returns a ImmutableRectangle with the size and position of a TowerCard.
+     */
     public Rectangle getCardViewRectangle() {
         Vector3f cardPosition = viewport.getPositionOutside(Vector3f.ZERO);
         Dimension cardSize = viewport.getSizeOutside(Dimension.UNIT);

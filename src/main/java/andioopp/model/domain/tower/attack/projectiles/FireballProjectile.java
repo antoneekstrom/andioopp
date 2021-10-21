@@ -6,6 +6,9 @@ import andioopp.common.math.vector.Vector3f;
 import andioopp.common.time.Time;
 import andioopp.model.domain.damage.DamageSource;
 
+/**
+ * A projectile in form of a Fireball.
+ */
 public class FireballProjectile extends Projectile {
 
     private static final String SPRITE = "fireball.png";

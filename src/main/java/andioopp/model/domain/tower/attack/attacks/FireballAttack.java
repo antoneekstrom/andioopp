@@ -9,6 +9,9 @@ import andioopp.model.domain.damage.DamageType;
 import andioopp.model.domain.tower.attack.Attack;
 import andioopp.model.domain.tower.attack.strategies.SingleLaneForward;
 
+/**
+ * An attack using fireballs.
+ */
 public class FireballAttack extends Attack {
 
     private static final DamageSource DAMAGE_SOURCE = new BaseDamageSource(DamageType.FIRE, DamageType.GROUND);

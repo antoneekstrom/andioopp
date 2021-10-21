@@ -11,6 +11,10 @@ import andioopp.view.util.Viewport;
 
 import java.util.List;
 
+/**
+ * A View for displaying all TowerCards.
+ */
+
 public class CardsView implements View<Model> {
 
     private final static float CARD_OFFSET = 20;
@@ -31,6 +35,9 @@ public class CardsView implements View<Model> {
         }
     }
 
+    /**
+     * Returns a TowerCardView using a ViewPort.
+     */
     public TowerCardView getCardView(TowerCard<?> card, int i) {
         Viewport cardViewport = getCardViewport(i);
         return new TowerCardView(cardViewport, card);

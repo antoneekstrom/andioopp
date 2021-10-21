@@ -12,6 +12,9 @@ import andioopp.model.system.System;
 import java.util.Collection;
 import java.util.Iterator;
 
+/**
+ * A class that handles when Enemies and Projectiles collides.
+ */
 public class EnemyProjectileCollisionSystem implements System<Model> {
 
     @Override
