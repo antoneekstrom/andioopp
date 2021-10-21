@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * A base for all different Damage Sources.
+ */
 public class
 BaseDamageSource implements DamageSource {
 
