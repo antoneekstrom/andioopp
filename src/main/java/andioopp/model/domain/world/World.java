@@ -10,6 +10,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The game world which consists of lanes.
+ * The world is inhabited by enemies, projectiles and dropped coins.
+ */
 public class World {
 
     private final List<Lane> lanes;

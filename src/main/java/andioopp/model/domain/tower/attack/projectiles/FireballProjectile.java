@@ -7,6 +7,9 @@ import andioopp.common.time.Time;
 import andioopp.model.domain.damage.DamageSource;
 import andioopp.model.domain.stats.Health;
 
+/**
+ * A fireball projectile which moves forward until it hits one enemy
+ */
 public class FireballProjectile extends Projectile {
 
     private static final String SPRITE = "fireball.png";

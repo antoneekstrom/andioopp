@@ -12,6 +12,11 @@ import andioopp.model.domain.money.Money;
 import andioopp.model.domain.stats.Health;
 import andioopp.model.util.ModelCoordinate;
 
+/**
+ * Goomba enemy
+ *
+ * @author Jacob Bengtsson
+ */
 public class Goomba extends Enemy {
 
     private static final String SPRITE_PATH = "goomba.png";

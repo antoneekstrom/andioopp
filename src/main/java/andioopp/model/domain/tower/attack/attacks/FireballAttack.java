@@ -6,10 +6,12 @@ import andioopp.model.Model;
 import andioopp.model.domain.damage.BaseDamageSource;
 import andioopp.model.domain.damage.DamageSource;
 import andioopp.model.domain.damage.DamageType;
-import andioopp.model.domain.tower.attack.Attack;
 import andioopp.model.domain.tower.attack.strategies.SingleLaneForward;
-import andioopp.model.util.ModelCoordinate;
 
+/**
+ * Fireball attack
+ * A simple attack whichs creates a fireball projectile
+ */
 public class FireballAttack extends Attack {
 
     private static final DamageSource DAMAGE_SOURCE = new BaseDamageSource(DamageType.FIRE, DamageType.GROUND);

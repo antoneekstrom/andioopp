@@ -8,6 +8,9 @@ import java.util.Random;
 
 import java.util.LinkedList;
 
+/**
+ * A wave, which is a
+ */
 public class Wave {
 
     public LinkedList<Enemy> enemyWave;

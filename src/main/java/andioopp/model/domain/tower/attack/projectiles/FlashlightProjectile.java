@@ -8,6 +8,9 @@ import andioopp.model.domain.damage.DamageSource;
 import andioopp.model.domain.stats.Health;
 import andioopp.model.util.ModelCoordinate;
 
+/**
+ * A projectile which has a large hitbox that lasts for a short while
+ */
 public class FlashlightProjectile extends Projectile {
 
     private static Dimension SIZE = new Dimension(3 ,1);

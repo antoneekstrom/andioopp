@@ -1,17 +1,16 @@
 package andioopp.model.domain.tower.attack.attacks;
 
-import andioopp.common.javafx.time.FxClock;
 import andioopp.common.math.vector.Vector3f;
 import andioopp.model.Model;
 import andioopp.model.domain.damage.BaseDamageSource;
 import andioopp.model.domain.damage.DamageType;
 import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.tower.Tower;
-import andioopp.model.domain.tower.attack.Attack;
 import andioopp.model.domain.tower.attack.strategies.NonTargeting;
-import andioopp.model.util.ModelCoordinate;
 
 /**
+ * An explosion attack that eliminates all enemies within short range
+ *
  * @author Arvid Svedberg
  */
 public class Explosion extends Attack {

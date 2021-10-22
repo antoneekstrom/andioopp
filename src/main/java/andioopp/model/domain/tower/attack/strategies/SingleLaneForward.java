@@ -1,9 +1,11 @@
 package andioopp.model.domain.tower.attack.strategies;
 
 import andioopp.common.math.vector.Vector3f;
-import andioopp.model.domain.tower.attack.AttackTargetArea;
 import andioopp.model.domain.world.World;
 
+/**
+ * Targeting area that extends a certain range in a single lane infront of the tower.
+ */
 public class SingleLaneForward implements AttackTargetArea {
 
     float enemyPosOffset = 0.4f;
@@ -13,13 +15,6 @@ public class SingleLaneForward implements AttackTargetArea {
         this.maxRange = maxRange;
     }
 
-    /**
-     * Checks if the enemy is in front of the tower in the same lane.
-     * @param towerPosition the tower's cell's position
-     * @param enemyPosition the position of the enemy on the game grid
-     * @param world
-     * @return
-     */
     @Override
     public boolean enemyIsInRange(Vector3f towerPosition, Vector3f enemyPosition, World world) {
 

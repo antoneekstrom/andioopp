@@ -5,14 +5,13 @@ import andioopp.common.math.range.FloatRange;
 import andioopp.model.Model;
 import andioopp.model.domain.entity.DroppedCoinEntity;
 import andioopp.model.domain.money.Money;
-import andioopp.model.domain.tower.attack.Attack;
 import andioopp.model.domain.damage.BaseDamageSource;
 import andioopp.model.domain.damage.DamageType;
 import andioopp.model.domain.tower.attack.strategies.NonTargeting;
 import andioopp.model.util.ModelCoordinate;
 
 /**
- * An attack (sort of) which generates money
+ * An attack that drops a coin occasionally that can be collected
  */
 public class DigCoinAttack extends Attack {
 

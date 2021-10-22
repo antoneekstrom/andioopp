@@ -8,6 +8,10 @@ import andioopp.model.domain.money.Wallet;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * A player of the game.
+ * Keeps track of the money and cards availiable.
+ */
 public class Player {
 
     private final Wallet wallet;

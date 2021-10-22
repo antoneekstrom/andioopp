@@ -3,6 +3,9 @@ package andioopp.model.domain.entity;
 import andioopp.model.domain.money.Money;
 import andioopp.model.util.ModelCoordinate;
 
+/**
+ * A dropped coin entity
+ */
 public class DroppedCoinEntity {
 
     private ModelCoordinate position;

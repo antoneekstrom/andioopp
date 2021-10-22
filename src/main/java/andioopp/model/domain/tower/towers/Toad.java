@@ -2,7 +2,7 @@ package andioopp.model.domain.tower.towers;
 
 import andioopp.common.math.range.FloatRange;
 import andioopp.model.domain.stats.Health;
-import andioopp.model.domain.tower.attack.Attack;
+import andioopp.model.domain.tower.attack.attacks.Attack;
 import andioopp.model.domain.tower.Tower;
 import andioopp.model.domain.tower.attack.attacks.DigCoinAttack;
 import andioopp.model.util.ModelCoordinate;
@@ -10,6 +10,9 @@ import andioopp.model.util.ModelCoordinate;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * A Toad tower which occasionally creates a coin that can be picked up.
+ */
 public class Toad extends Tower {
     private static final String SPRITE_PATH = "toad.png";
 

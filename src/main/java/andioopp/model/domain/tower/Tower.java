@@ -1,7 +1,7 @@
 package andioopp.model.domain.tower;
 
 import andioopp.model.domain.stats.Health;
-import andioopp.model.domain.tower.attack.Attack;
+import andioopp.model.domain.tower.attack.attacks.Attack;
 import andioopp.model.util.ModelCoordinate;
 
 import java.util.List;
@@ -26,8 +26,18 @@ public abstract class Tower {
         this.attacks = createAttacks();
     }
 
+    /**
+     * Places a list of attacks in the towers list of attacks.
+     *
+     * @return a list of attacks.
+     */
     protected abstract List<Attack> createAttacks();
 
+    /**
+     * Returns the towers attacks
+     *
+     * @return a list of attacks
+     */
     public List<Attack> getAttacks() {
         return attacks;
     }
@@ -36,10 +46,20 @@ public abstract class Tower {
         return sprite;
     }
 
+    /**
+     * Returns the towers health
+     *
+     * @return health
+     */
     public Health getHealth() {
         return health;
     }
 
+    /**
+     * Returns the towers name
+     *
+     * @return a string of the name of the tower
+     */
     public String getName() {
         return name;
     }

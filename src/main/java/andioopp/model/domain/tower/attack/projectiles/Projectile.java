@@ -26,6 +26,14 @@ public abstract class Projectile implements DamageSource {
 
     public final List<Enemy> alreadyInteractedWith;
 
+    /**
+     * Creates a projectile
+     *
+     * @param sprite the projectiles sprite
+     * @param rectangle its hitbox
+     * @param damageSource the things the projectile can damage
+     * @param health the amount of enemies the projectile can hit
+     */
     public Projectile(String sprite, Rectangle rectangle, DamageSource damageSource, Health health) {
         this.sprite = sprite;
         this.rectangle = new MutableRectangle(rectangle);
@@ -57,6 +65,12 @@ public abstract class Projectile implements DamageSource {
         return rectangle;
     }
 
+    /**
+     * Returns the projectiles health.
+     * A projectiles health indicates how many enemies it can hit before it is consumed and dissappears
+     *
+     * @return
+     */
     public Health getHealth() {
         return health;
     }

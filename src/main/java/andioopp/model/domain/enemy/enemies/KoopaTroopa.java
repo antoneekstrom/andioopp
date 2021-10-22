@@ -13,6 +13,11 @@ import andioopp.model.domain.money.Money;
 import andioopp.model.domain.stats.Health;
 import andioopp.model.util.ModelCoordinate;
 
+/**
+ * Koopa Troopa enemy
+ *
+ * @author Jacob Bengtsson
+ */
 public class KoopaTroopa extends Enemy {
 
     private static final String SPRITE_PATH = "koopaTroopa.png";

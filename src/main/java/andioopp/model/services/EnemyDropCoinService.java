@@ -7,6 +7,9 @@ import andioopp.model.domain.money.Money;
 import andioopp.model.system.events.EnemyDeathEvent;
 import andioopp.model.util.ModelCoordinate;
 
+/**
+ * A service used to drop a coin when an enemy dies.
+ */
 public class EnemyDropCoinService implements Observer<EnemyDeathEvent> {
 
     private final Model model;

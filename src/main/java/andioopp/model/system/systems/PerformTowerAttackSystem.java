@@ -4,7 +4,7 @@ import andioopp.common.time.Time;
 import andioopp.model.Model;
 import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.tower.Tower;
-import andioopp.model.domain.tower.attack.Attack;
+import andioopp.model.domain.tower.attack.attacks.Attack;
 import andioopp.model.domain.world.Cell;
 import andioopp.model.domain.world.World;
 import andioopp.model.system.System;
