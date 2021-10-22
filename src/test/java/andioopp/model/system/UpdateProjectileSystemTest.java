@@ -8,6 +8,7 @@ import andioopp.model.domain.damage.BaseDamageSource;
 import andioopp.model.domain.damage.DamageType;
 import andioopp.model.domain.player.Player;
 import andioopp.model.domain.tower.attack.projectiles.FireballProjectile;
+import andioopp.model.domain.tower.attack.projectiles.FlashlightProjectile;
 import andioopp.model.domain.tower.attack.projectiles.Projectile;
 import andioopp.model.domain.world.LaneBuilder;
 import andioopp.model.domain.world.World;
@@ -23,6 +24,7 @@ public class UpdateProjectileSystemTest {
     private final BaseDamageSource fireDamageSource = new BaseDamageSource(DamageType.FIRE);
 
     Projectile p = new FireballProjectile(new Vector3f(2,2), fireDamageSource);
+
 
     UpdateProjectileSystem updateProjectileSystem = new UpdateProjectileSystem();
 

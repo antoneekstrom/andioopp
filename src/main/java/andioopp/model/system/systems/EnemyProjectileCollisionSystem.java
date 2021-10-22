@@ -31,8 +31,8 @@ public class EnemyProjectileCollisionSystem implements System<Model> {
                 Enemy enemy = enemyIterator.next();
                 Rectangle pr = projectile.getRectangle();
                 ModelCoordinate ep = enemy.getPosition();
-                boolean withinX = pr.getPosition().getX() < ep.getX() && pr.getPosition().getX() + pr.getSize().getWidth() > ep.getX();
-                boolean withinY = pr.getPosition().getY() < ep.getY() && pr.getPosition().getY() + pr.getSize().getHeight() > ep.getY();
+                boolean withinX = pr.getPosition().getX() <= ep.getX() && pr.getPosition().getX() + pr.getSize().getWidth() > ep.getX();
+                boolean withinY = pr.getPosition().getY() <= ep.getY() && pr.getPosition().getY() + pr.getSize().getHeight() > ep.getY();
 
                 if(withinX && withinY) {
                     evaluateProjectileHit(projectile, enemy, projectileIterator, enemyIterator, world);
