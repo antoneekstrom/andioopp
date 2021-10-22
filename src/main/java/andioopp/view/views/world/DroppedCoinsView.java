@@ -27,7 +27,7 @@ public class DroppedCoinsView implements View<Model> {
         for (DroppedCoinEntity droppedCoin : model.getWorld().getDroppedCoins()) {
             S sprite = renderer.getSpriteFactory().get(COIN_SPRITE);
             ViewCoordinate position = getPosition(droppedCoin);
-            Dimension size = getSize(droppedCoin);
+            Dimension size = getSize(sprite);
             renderer.drawSprite(sprite, position, size);
         }
     }
@@ -35,6 +35,10 @@ public class DroppedCoinsView implements View<Model> {
     /**
      * Returns position of a DroppedCoin as a ViewCoordinate.
      */
+    public <S extends Sprite<?>> Dimension getSize(S sprite) {
+        return viewport.getSize(sprite.getSize().setHeight(0.4f));
+    }
+
     public ViewCoordinate getPosition(DroppedCoinEntity droppedCoin) {
         return viewport.getPosition(droppedCoin.getPosition());
     }

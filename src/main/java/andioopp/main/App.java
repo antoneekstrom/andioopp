@@ -1,12 +1,11 @@
 package andioopp.main;
 
-import andioopp.common.graphics.Window;
 import andioopp.common.javafx.graphics.FxWindowBuilder;
 import andioopp.common.javafx.time.FxClock;
-import andioopp.common.observer.CollectionObservable;
+import andioopp.common.observer.ObservableCollection;
+import andioopp.common.observer.StrictObservableCollection;
 import andioopp.common.observer.Observable;
 import andioopp.common.observer.Observer;
-import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.storage.ListFactory;
 import andioopp.common.time.Clock;
 import andioopp.common.time.Time;
@@ -15,7 +14,6 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Application entrypoint.
@@ -32,7 +30,7 @@ public class App extends Application {
         FxWindowBuilder windowBuilder = new FxWindowBuilder(stage);
         MarioGame game = new MarioGame(windowBuilder, listFactory);
 
-        Observable<Time, Observer<Time>> observable = new CollectionObservable<>(listFactory.create());
+        Observable<Time> observable = new ObservableCollection<>(listFactory.create());
         Clock clock = new FxClock(observable);
         clock.addObserver(game::update);
         clock.addObserver(game::render);

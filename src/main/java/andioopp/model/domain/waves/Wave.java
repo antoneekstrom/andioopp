@@ -31,8 +31,12 @@ public class Wave {
         for (int i = 0; i < numEnemies; i++) {
             Enemy enemy = enemies.randomEnemy(world, rand.nextInt(world.getNumberOfLanes()));
             Enemy enemy2 = enemies.randomEnemy(world, rand.nextInt(world.getNumberOfLanes()));
+            Enemy enemy3 = enemies.randomEnemy(world, rand.nextInt(world.getNumberOfLanes()));
+            Enemy enemy4 = enemies.randomEnemy(world, rand.nextInt(world.getNumberOfLanes()));
             enemyWave.add(enemy);
             enemyWave.add(enemy2);
+            enemyWave.add(enemy3);
+            enemyWave.add(enemy4);
         }
     }
 }

@@ -9,7 +9,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * A class for the player of the game
+ * A player of the game.
+ * Keeps track of the money and cards availiable.
  */
 public class Player {
 

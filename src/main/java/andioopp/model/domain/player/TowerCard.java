@@ -1,5 +1,6 @@
 package andioopp.model.domain.player;
 
+import andioopp.controller.controllers.PlaceTowerController;
 import andioopp.model.domain.money.Money;
 import andioopp.model.domain.money.Transaction;
 import andioopp.model.domain.money.TransactionSupplier;
@@ -26,6 +27,10 @@ public class TowerCard<T extends Tower> implements TransactionSupplier<TowerSupp
     public TowerCard(Money cost, TowerSupplier<T> supplier) {
         this.cost = cost;
         this.supplier = supplier;
+    }
+
+    public void preventDrop(PlaceTowerController controller){
+
     }
 
     @Override

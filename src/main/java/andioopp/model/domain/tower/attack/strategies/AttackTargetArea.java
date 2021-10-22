@@ -1,4 +1,4 @@
-package andioopp.model.domain.tower.attack;
+package andioopp.model.domain.tower.attack.strategies;
 
 import andioopp.common.math.vector.Vector3f;
 import andioopp.model.domain.world.World;

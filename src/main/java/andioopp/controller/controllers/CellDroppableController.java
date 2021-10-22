@@ -30,7 +30,7 @@ public class CellDroppableController extends Droppable<TowerCardDragEvent> {
         return new ModelCoordinate(col, row);
     }
 
-    private Cell getCell() {
+    public Cell getCell() {
         return model.getWorld().getCell(col, row);
     }
 

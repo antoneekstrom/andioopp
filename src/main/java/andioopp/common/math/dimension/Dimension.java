@@ -1,8 +1,6 @@
 package andioopp.common.math.dimension;
 
 import andioopp.common.math.vector.Vector3f;
-import com.sun.jmx.interceptor.DefaultMBeanServerInterceptor;
-import sun.java2d.marlin.DMarlinRenderingEngine;
 
 import java.util.Objects;
 

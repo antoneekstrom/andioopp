@@ -7,8 +7,7 @@ import java.util.List;
 /**
  * A base for all different Damage Sources.
  */
-public class
-BaseDamageSource implements DamageSource {
+public class BaseDamageSource implements DamageSource {
 
     private final List<DamageType> types;
 

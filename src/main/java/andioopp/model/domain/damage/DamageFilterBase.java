@@ -16,6 +16,11 @@ public class DamageFilterBase implements DamageFilter {
     private final List<DamageType> immunities;
     private final List<DamageType> requirements;
 
+    public DamageFilterBase(List<DamageType> requirements, List<DamageType> immunities) {
+        this.immunities = immunities;
+        this.requirements = requirements;
+    }
+
     protected DamageFilterBase(ListFactory listFactory) {
         this.requirements = getRequirements(listFactory);
         this.immunities = getImmunities(listFactory);

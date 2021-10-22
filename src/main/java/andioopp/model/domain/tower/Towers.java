@@ -4,7 +4,7 @@ import andioopp.model.domain.tower.towers.*;
 import andioopp.model.util.ModelCoordinate;
 
 /**
- * All Towers that could exist in the game.
+ * A factory for creating the different towers.
  */
 public class Towers {
     public static Tower mario(ModelCoordinate position) {

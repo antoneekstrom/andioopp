@@ -1,8 +1,10 @@
 package andioopp.view.views.world;
 
+import andioopp.common.graphics.Color;
 import andioopp.common.graphics.Renderer;
 import andioopp.common.graphics.Sprite;
 import andioopp.common.math.dimension.Dimension;
+import andioopp.common.math.rectangle.ImmutableRectangle;
 import andioopp.common.math.vector.Vector3f;
 import andioopp.model.Model;
 import andioopp.model.domain.enemy.Enemy;
@@ -38,9 +40,9 @@ public class EnemiesView implements View<Model> {
         S sprite = enemy.getSprite(renderer.getSpriteFactory());
 
         Dimension cellSize = viewport.getCellSize();
-        Dimension size = cellSize.scale(SIZE_PERCENTAGE_OF_CELL_HEIGHT);
+        Dimension size = sprite.getSize().setHeight(cellSize.getHeight() * SIZE_PERCENTAGE_OF_CELL_HEIGHT);
         Vector3f position = viewport.getPosition(enemy.getPosition());
-        Vector3f alignedWithCellBottom = position.add(cellSize.toVector().sub(size.toVector()));
+        Vector3f alignedWithCellBottom = position.add(cellSize.toVector().fromY().sub(size.toVector().fromY()));
         Vector3f withAddedOffset = alignedWithCellBottom.sub(cellSize.toVector().fromY().scale(OFFSET_FROM_CELL_BOTTOM));
 
         renderer.drawSprite(sprite, withAddedOffset, size);

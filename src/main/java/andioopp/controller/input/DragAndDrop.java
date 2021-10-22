@@ -1,41 +1,40 @@
 package andioopp.controller.input;
 
 import andioopp.common.math.vector.Vector3f;
-import andioopp.common.observer.CollectionObservable;
-import andioopp.common.observer.Observable;
+import andioopp.common.observer.StrictObservableCollection;
 import andioopp.common.observer.Observer;
+import andioopp.common.observer.StrictObservable;
 import andioopp.common.storage.ListFactory;
 
-public class DragAndDrop<T> implements Observer<MouseInputEvent> {
+public class DragAndDrop<T> {
 
-    private final Observable<MouseInputEvent, Draggable<T>> draggableObservable;
-    private final Observable<T, Droppable<T>> droppableObservable;
+    private final StrictObservable<MouseInputEvent, Draggable<T>> draggableObservable;
+    private final StrictObservable<T, Droppable<T>> droppableObservable;
 
     private T dragData;
     private boolean isDragging = false;
-    private Vector3f mousePosition = Vector3f.zero();
+    private MouseMoveEvent mouseEvent;
 
     public DragAndDrop(ListFactory listFactory) {
-        this.draggableObservable = new CollectionObservable<>(listFactory.create());
-        this.droppableObservable = new CollectionObservable<>(listFactory.create());
+        this.draggableObservable = new StrictObservableCollection<>(listFactory.create());
+        this.droppableObservable = new StrictObservableCollection<>(listFactory.create());
     }
 
-    @Override
-    public void onEvent(MouseInputEvent e) {
-        if (e.getType().equals(MouseInputEvent.MouseEventType.RELEASE)) {
+    public void onClickEvent(MouseInputEvent e) {
+        if (e.getType().equals(MouseEventType.RELEASE)) {
             onMouseRelease(e);
-        } else if (e.getType().equals(MouseInputEvent.MouseEventType.PRESS)) {
+        } else if (e.getType().equals(MouseEventType.PRESS)) {
             onMouseDown(e);
-        } else if (e.getType().equals(MouseInputEvent.MouseEventType.DRAG)) {
-            mousePosition = e.getPosition();
-        } else if (e.getType().equals(MouseInputEvent.MouseEventType.MOVE)) {
-            mousePosition = e.getPosition();
         }
+    }
+
+    public void onMoveEvent(MouseMoveEvent e) {
+        mouseEvent = e;
     }
 
     private void onMouseDown(MouseInputEvent e) {
         for (Draggable<T> d : getDraggableObservable().getObservers()) {
-            boolean isBeingClicked = d.getArea().contains(e.getPosition());
+            boolean isBeingClicked = d.getArea().contains(e.getMousePosition());
             if (isBeingClicked) {
                 d.onEvent(e);
                 beginDragging(d.getDragData());
@@ -45,7 +44,7 @@ public class DragAndDrop<T> implements Observer<MouseInputEvent> {
 
     private void onMouseRelease(MouseInputEvent e) {
         for (Droppable<T> d : getDroppableObservable().getObservers()) {
-            boolean isBeingClicked = d.getArea().contains(e.getPosition());
+            boolean isBeingClicked = d.getArea().contains(e.getMousePosition());
             if (isBeingClicked && getDragData() != null) {
                 d.onEvent(getDragData());
             }
@@ -64,22 +63,22 @@ public class DragAndDrop<T> implements Observer<MouseInputEvent> {
     }
 
     public Vector3f getMousePosition() {
-        return mousePosition;
+        return mouseEvent.getMousePosition();
     }
 
     public boolean isDragging() {
-        return isDragging;
+        return isDragging && getDragData() != null;
     }
 
     public T getDragData() {
         return dragData;
     }
 
-    public Observable<MouseInputEvent, Draggable<T>> getDraggableObservable() {
+    public StrictObservable<MouseInputEvent, Draggable<T>> getDraggableObservable() {
         return draggableObservable;
     }
 
-    public Observable<T, Droppable<T>> getDroppableObservable() {
+    public StrictObservable<T, Droppable<T>> getDroppableObservable() {
         return droppableObservable;
     }
 }
