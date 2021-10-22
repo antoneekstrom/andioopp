@@ -13,6 +13,7 @@ import andioopp.model.domain.stats.Health;
 import andioopp.model.domain.world.LaneBuilder;
 import andioopp.model.domain.world.World;
 import andioopp.model.domain.world.WorldBuilder;
+import andioopp.model.services.EnemyDropCoinService;
 import andioopp.model.system.systems.RemoveDeadEnemiesSystem;
 import andioopp.model.util.ModelCoordinate;
 import org.junit.Before;
@@ -92,6 +93,7 @@ public class RemoveDeadEnemiesSystemTest {
         for(Enemy enemy : model.getWorld().getEnemies()){
             enemy.getHealth().decrease(enemy.getHealth().get());
         }
+        removeDeadEnemiesSystem.addObserver(new EnemyDropCoinService(model));
         removeDeadEnemiesSystem.update(model, new Time(1, 1));
         assertTrue(model.getWorld().getDroppedCoins().size() > 0);
     }
