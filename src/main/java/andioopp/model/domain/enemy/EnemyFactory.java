@@ -2,10 +2,7 @@ package andioopp.model.domain.enemy;
 
 import andioopp.common.math.range.IntRange;
 import andioopp.common.storage.ArrayListFactory;
-import andioopp.model.domain.enemy.enemies.Blooper;
-import andioopp.model.domain.enemy.enemies.BuzzyBeetle;
-import andioopp.model.domain.enemy.enemies.Goomba;
-import andioopp.model.domain.enemy.enemies.KoopaTroopa;
+import andioopp.model.domain.enemy.enemies.*;
 import andioopp.model.domain.world.World;
 import andioopp.model.util.ModelCoordinate;
 
@@ -23,7 +20,8 @@ public class EnemyFactory {
 
     private static final List<EnemySupplier> RANDOM_ENEMY_POOL = new ArrayListFactory().create(
             EnemyFactory::createGoomba,
-            EnemyFactory::createKoopaTroopa
+            EnemyFactory::createKoopaTroopa,
+            EnemyFactory::createBoo
     );
 
     /**
@@ -48,18 +46,10 @@ public class EnemyFactory {
         return new KoopaTroopa(new ModelCoordinate(world.getNumberOfCellsInLanes(), row));
     }
     /**
-     * Creates enemy Blooper
+     * Creates enemy Boo
      * @param row the lane where enemy will be
      */
-    public static Enemy createBlooper(World world, int row) {
-        return new Blooper(new ModelCoordinate(world.getNumberOfCellsInLanes(), row));
-    }
-
-    /**
-     * Creates enemy BuzzyBeetle
-     * @param row the lane where enemy will be
-     */
-    public static Enemy createBuzzyBeetle(World world, int row) {
-        return new BuzzyBeetle(new ModelCoordinate(world.getNumberOfCellsInLanes(), row));
+    public static Enemy createBoo(World world, int row) {
+        return new Boo(new ModelCoordinate(world.getNumberOfCellsInLanes(), row));
     }
 }

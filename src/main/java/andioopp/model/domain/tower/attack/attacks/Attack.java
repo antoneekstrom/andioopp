@@ -1,5 +1,6 @@
-package andioopp.model.domain.tower.attack;
+package andioopp.model.domain.tower.attack.attacks;
 
+import andioopp.common.javafx.time.FxClock;
 import andioopp.common.math.vector.Vector3f;
 import andioopp.common.storage.ArrayListFactory;
 import andioopp.common.time.Time;
@@ -7,7 +8,9 @@ import andioopp.model.Model;
 import andioopp.model.domain.damage.DamageSource;
 import andioopp.model.domain.damage.DamageType;
 import andioopp.model.domain.enemy.Enemy;
+import andioopp.model.domain.tower.attack.strategies.AttackTargetArea;
 import andioopp.model.domain.world.World;
+import andioopp.model.util.ModelCoordinate;
 
 import java.util.Collection;
 import java.util.List;
@@ -31,6 +34,7 @@ public abstract class Attack implements DamageSource {
         this.cooldown = cooldown;
         this.targetArea = targetArea;
         this.damageSource = damageSource;
+        timeOfLastAttack = FxClock.nanosToSeconds(FxClock.getNowTimeNanos());
     }
 
     @Override
@@ -38,7 +42,7 @@ public abstract class Attack implements DamageSource {
         return damageSource.getTypes();
     }
 
-    public void perform(Time time, Model model, Vector3f position) {
+    public void perform(Time time, Model model, ModelCoordinate position) {
         if (isAvailableForAttack(time)) {
             onAttack(model, position);
             updateTimeOfLastAttack(time);

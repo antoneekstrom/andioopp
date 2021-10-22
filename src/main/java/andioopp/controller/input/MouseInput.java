@@ -1,21 +1,43 @@
 package andioopp.controller.input;
 
-import andioopp.common.graphics.Window;
+import andioopp.common.math.vector.Vector3f;
 import andioopp.common.observer.Observable;
-import andioopp.common.observer.Observer;
+import andioopp.common.observer.ObservableCollection;
+import andioopp.common.storage.ListFactory;
 
-import java.util.Collection;
+public abstract class MouseInput {
 
-public class MouseInput implements Observable<MouseInputEvent, Observer<MouseInputEvent>> {
+    private final Observable<MouseMoveEvent> mouseMoveObservable;
+    private final Observable<MouseInputEvent> mouseClickObservable;
 
-    private final Window<?> window;
+    private Vector3f previousMousePosition = Vector3f.ZERO;
 
-    public MouseInput(Window<?> window) {
-        this.window = window;
+    public MouseInput(ListFactory listFactory) {
+        this.mouseMoveObservable = new ObservableCollection<>(listFactory.create());
+        this.mouseClickObservable = new ObservableCollection<>(listFactory.create());
     }
 
-    @Override
-    public Collection<Observer<MouseInputEvent>> getObservers() {
-        return window.getMouseObservable().getObservers();
+    public Observable<MouseMoveEvent> getMouseMoveObservable() {
+        return mouseMoveObservable;
     }
+
+    public Observable<MouseInputEvent> getMouseClickObservable() {
+        return mouseClickObservable;
+    }
+
+    protected void emitMouseClickEvent(MouseEventType type, Vector3f mousePosition) {
+        mouseClickObservable.notifyObservers(new MouseInputEvent(mousePosition, type));
+    }
+
+    protected void emitMouseMoveEvent(MouseEventType type, Vector3f mousePosition) {
+        Vector3f mouseDelta = getMouseDelta(mousePosition);
+        mouseMoveObservable.notifyObservers(new MouseMoveEvent(mousePosition, type, mouseDelta));
+    }
+
+    protected Vector3f getMouseDelta(Vector3f mousePosition) {
+        Vector3f delta = mousePosition.sub(previousMousePosition);
+        previousMousePosition = mousePosition;
+        return delta;
+    }
+
 }

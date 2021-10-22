@@ -46,6 +46,12 @@ public abstract class Enemy implements DamageFilter {
         return damageFilter.canBeDamagedBy(src);
     }
 
+    /**
+     * Enemy attacks a tower
+     *
+     * @param time time of attack
+     * @param tower tower being attacked
+     */
     public void attack(Time time, Tower tower) {
         setTimeOfLastAttack(time);
         tower.getHealth().decrease(1);
@@ -72,6 +78,10 @@ public abstract class Enemy implements DamageFilter {
         return (deltaTime > attackCooldown);
     }
 
+    /**
+     * Returns enemy's row/lane
+     * @return row of enemy
+     */
     public int getRow() {
         return (int) getPosition().getY();
     }

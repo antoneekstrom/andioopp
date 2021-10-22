@@ -6,7 +6,7 @@ import andioopp.common.observer.Observer;
 /**
  * Repeatedly emits events.
  */
-public interface Clock extends Observable<Time, Observer<Time>> {
+public interface Clock extends Observable<Time> {
 
     /**
      * Starts the clock so that it emits events.

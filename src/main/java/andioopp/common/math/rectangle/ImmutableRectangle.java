@@ -5,6 +5,9 @@ import andioopp.common.math.dimension.Dimension;
 
 import java.util.Objects;
 
+/**
+ * A {@link Rectangle} which is immutable
+ */
 public class ImmutableRectangle implements Rectangle {
 
     private final Vector3f position;

@@ -1,6 +1,12 @@
 package andioopp.common.math.vector;
 
+import andioopp.common.math.interpolation.InterpolationFunction;
+import andioopp.common.math.interpolation.Interpolations;
+
 import java.util.Objects;
+import java.util.Random;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * Represents a three-dimensional floating-point vector.
@@ -114,6 +120,25 @@ public class Vector3f {
         return new Vector3f(v, v, v);
     }
 
+    /**
+     * Creates a vector with random values in range [0, 1] for each component.
+     *
+     * @param r the random
+     * @return the vector
+     */
+    public static Vector3f random(Random r) {
+        return new Vector3f(r.nextFloat(), r.nextFloat(), r.nextFloat());
+    }
+
+    /**
+     * Creates a vector with random values in range [0, 1] for each component.
+     *
+     * @return the vector
+     */
+    public static Vector3f random() {
+        return random(new Random());
+    }
+
 
     /**
      * Creates another vector with the value of x from this one, and the other components set to zero.
@@ -144,6 +169,32 @@ public class Vector3f {
 
 
     /**
+     * Returns the sum of all components of the vector.
+     *
+     * @return the sum
+     */
+    public float sum() {
+        return getX() + getY() + getZ();
+    }
+
+    /**
+     * Returns the magnitude of the vector squared.
+     *
+     * @return the squared magnitude
+     */
+    public float magnitudeSquared() {
+        return scale(this).sum();
+    }
+
+    /**
+     * Returns the magnitude of the vector.
+     * @return the magnitude
+     */
+    public float magnitude() {
+        return (float) Math.sqrt(magnitudeSquared());
+    }
+
+    /**
      * Rounds the value of each component.
      *
      * @return the resulting vector
@@ -168,6 +219,51 @@ public class Vector3f {
      */
     public Vector3f inverse() {
         return new Vector3f(getX() == 0 ? 0 : 1.0f / getX(), getY() == 0 ? 0 : 1.0f / getY(), getZ() == 0 ? 0 : 1.0f / getZ());
+    }
+
+    /**
+     * Linearly interpolate from this vector to the given vector.
+     *
+     * @param to     the vector to interpolate to
+     * @param amount the amount to interpolate by
+     * @return the resulting vector
+     */
+    public Vector3f lerp(Vector3f to, float amount) {
+        return interpolate(to, Interpolations::linear, amount);
+    }
+
+    /**
+     * Interpolate from this vector to the given vector.
+     *
+     * @param to     the vector to interpolate to
+     * @param amount the amount to interpolate by
+     * @return the resulting vector
+     */
+    public Vector3f interpolate(Vector3f to, InterpolationFunction f, float amount) {
+        float x = f.interpolate(getX(), to.getX(), amount);
+        float y = f.interpolate(getY(), to.getY(), amount);
+        float z = f.interpolate(getZ(), to.getZ(), amount);
+        return new Vector3f(x, y, z);
+    }
+
+    /**
+     * Sets the magnitude of the vector.
+     *
+     * @param magnitude the magnitude to set
+     * @return the resulting vector
+     */
+    public Vector3f setMagnitude(float magnitude) {
+        return scale((1f / magnitude()) * magnitude);
+    }
+
+    /**
+     * Limits the magnitude of the vector to a given value.
+     *
+     * @param max the maximum magnitude
+     * @return the resulting vector
+     */
+    public Vector3f limitMagnitude(float max) {
+        return setMagnitude(Math.max(max, magnitude()));
     }
 
 

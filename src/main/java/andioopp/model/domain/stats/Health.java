@@ -15,6 +15,10 @@ public class Health {
         this.healthPoints = healthPoints;
     }
 
+    public Health(Health health) {
+        this.healthPoints = health.healthPoints;
+    }
+
     /**
      * Decreases health by the given amount, to a minimum value of zero.
      *

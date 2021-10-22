@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Controller for placing down towers
+ */
 public class PlaceTowerController implements Controller<Model> {
 
     private Model model;
@@ -95,6 +98,10 @@ public class PlaceTowerController implements Controller<Model> {
 
     private TowerCardDraggableController createCardDraggable(TowerCard<?> card, int i) {
         Rectangle rectangle = cardsView.getCardView(card, i).getCardViewRectangle();
-        return new TowerCardDraggableController(rectangle, card);
+        return new TowerCardDraggableController(rectangle, card, model);
+    }
+
+    public Collection<CellDroppableController> getDroppables() {
+        return droppables;
     }
 }

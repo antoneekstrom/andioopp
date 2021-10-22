@@ -5,9 +5,10 @@ import andioopp.common.math.rectangle.ImmutableRectangle;
 import andioopp.common.math.vector.Vector3f;
 import andioopp.common.time.Time;
 import andioopp.model.domain.damage.DamageSource;
+import andioopp.model.domain.stats.Health;
 
 /**
- * A projectile in form of a Fireball.
+ * A fireball projectile which moves forward until it hits one enemy
  */
 public class FireballProjectile extends Projectile {
 
@@ -18,7 +19,7 @@ public class FireballProjectile extends Projectile {
     private float timeAlive = 0;
 
     public FireballProjectile(Vector3f position, DamageSource damageSource) {
-        super(SPRITE, new ImmutableRectangle(position, SIZE), damageSource);
+        super(SPRITE, new ImmutableRectangle(position, SIZE), damageSource, new Health(1));
         this.origin = position;
     }
 

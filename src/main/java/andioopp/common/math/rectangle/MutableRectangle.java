@@ -3,6 +3,9 @@ package andioopp.common.math.rectangle;
 import andioopp.common.math.dimension.Dimension;
 import andioopp.common.math.vector.Vector3f;
 
+/**
+ * A {@link Rectangle} which is mutable
+ */
 public class MutableRectangle implements Rectangle {
 
     private Rectangle rectangle;
