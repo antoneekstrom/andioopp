@@ -1,4 +1,4 @@
-package andioopp.model.domain.tower.attack;
+package andioopp.model.domain.tower.attack.attacks;
 
 import andioopp.common.javafx.time.FxClock;
 import andioopp.common.math.vector.Vector3f;
@@ -8,6 +8,7 @@ import andioopp.model.Model;
 import andioopp.model.domain.damage.DamageSource;
 import andioopp.model.domain.damage.DamageType;
 import andioopp.model.domain.enemy.Enemy;
+import andioopp.model.domain.tower.attack.strategies.AttackTargetArea;
 import andioopp.model.domain.world.World;
 import andioopp.model.util.ModelCoordinate;
 
