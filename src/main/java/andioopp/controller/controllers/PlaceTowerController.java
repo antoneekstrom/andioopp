@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Controller for placing down towers
+ */
 public class PlaceTowerController implements Controller<Model> {
 
     private Model model;

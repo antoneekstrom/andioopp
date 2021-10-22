@@ -16,6 +16,9 @@ import andioopp.view.views.world.DroppedCoinsView;
 import java.util.Collection;
 import java.util.Iterator;
 
+/**
+ * Controller for picking up dropped coins
+ */
 public class DroppedCoinsController implements Controller<Model>, Observer<MouseInputEvent> {
 
     private final DroppedCoinsView droppedCoinsView;
