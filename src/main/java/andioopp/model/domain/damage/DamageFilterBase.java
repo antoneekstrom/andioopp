@@ -7,6 +7,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * A class that handles Damage Filters.
+ */
 public class DamageFilterBase implements DamageFilter {
 
     private static final ListFactory DEFAULT_LISTFACTORY = new ArrayListFactory();

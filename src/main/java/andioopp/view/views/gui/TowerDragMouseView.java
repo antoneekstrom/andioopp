@@ -15,6 +15,9 @@ import andioopp.controller.input.DragAndDrop;
 import andioopp.view.View;
 import andioopp.view.views.world.TowersView;
 
+/**
+ * A View for displaying a Tower while being dragged by mouse.
+ */
 public class TowerDragMouseView implements View<Model>, Observer<MouseMoveEvent> {
 
     public static final double MAX_ANGLE = Math.toRadians(70);

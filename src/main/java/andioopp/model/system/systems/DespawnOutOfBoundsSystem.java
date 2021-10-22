@@ -7,6 +7,9 @@ import andioopp.model.domain.world.World;
 import andioopp.model.system.System;
 import andioopp.model.util.ModelCoordinate;
 
+/**
+ * A class that handles when Objects move out of bounds.
+ */
 public class DespawnOutOfBoundsSystem implements System<Model> {
 
     private final MarioGame marioGame;
@@ -22,11 +25,16 @@ public class DespawnOutOfBoundsSystem implements System<Model> {
         despawnOutOfBoundsEnemies(world);
     }
 
+    /**
+     * Checks if a projectile is out of bounds and removes it if true.
+     */
     private void despawnOutOfBoundsProjectiles(World world) {
-        //Checks if a projectile is out of bounds and removes it if true.
         world.getProjectiles().removeIf(projectile -> projectile.getPosition().getX() > world.getNumberOfCellsInLanes());
     }
 
+    /**
+     * Checks if a enemy is out of bounds and removes it if true.
+     */
     private void despawnOutOfBoundsEnemies(World world) {
         //Checks if a projectile is out of bounds and removes it if true.
         world.getEnemies().removeIf(enemy -> {

@@ -5,7 +5,9 @@ import andioopp.model.domain.damage.DamageFilterBase;
 import andioopp.model.domain.damage.DamageType;
 
 import java.util.List;
-
+/**
+ * Filters DamageTypes considering Flying-type enemies.
+ */
 public class FilterFlying extends DamageFilterBase {
     @Override
     protected List<DamageType> getRequirements(ListFactory listFactory) {

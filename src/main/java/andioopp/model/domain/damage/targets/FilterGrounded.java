@@ -6,6 +6,9 @@ import andioopp.model.domain.damage.DamageType;
 
 import java.util.List;
 
+/**
+ * Filters DamageTypes considering Ground-type enemies.
+ */
 public class FilterGrounded extends DamageFilterBase {
     @Override
     protected List<DamageType> getRequirements(ListFactory listFactory) {

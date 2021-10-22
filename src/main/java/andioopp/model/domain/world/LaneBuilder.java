@@ -21,20 +21,35 @@ public class LaneBuilder {
         this.enemies = getListFactory().create();
     }
 
+    /**
+     * Builds a Lane.
+     */
     public Lane build() {
         return new Lane(getListFactory().create(getCells()));
     }
 
+    /**
+     * Returns LaneBuilder itself and sets the amount of Cells for the Lanes.
+     * @param numCells the amount of Cells.
+     */
     public LaneBuilder setCells(int numCells) {
         this.numCells = numCells;
         return this;
     }
 
+    /**
+     * Returns LaneBuilder itself and adds an enemy to the Collection enemies.
+     * @param enemy the enemy added to the Collection.
+     */
     public LaneBuilder addEnemy(Enemy enemy) {
         getEnemies().add(enemy);
         return this;
     }
 
+    /**
+     * Returns LaneBuilder itself and updates the Collection enemies.
+     * @param enemies
+     */
     public LaneBuilder setEnemies(Collection<Enemy> enemies) {
         this.enemies = enemies;
         return this;
@@ -44,10 +59,17 @@ public class LaneBuilder {
         return getListFactory().create(getNumCells(), this::getCell);
     }
 
+    /**
+     * Returns the Collection enemies consisting of Enemies.
+     * @return
+     */
     public Collection<Enemy> getEnemies() {
         return enemies;
     }
 
+    /**
+     * Returns a ListFactory.
+     */
     public ListFactory getListFactory() {
         return listFactory;
     }

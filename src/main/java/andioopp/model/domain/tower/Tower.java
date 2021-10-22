@@ -42,6 +42,9 @@ public abstract class Tower {
         return attacks;
     }
 
+    /**
+     * Returns Sprite of Tower.
+     */
     public String getSprite() {
         return sprite;
     }
@@ -64,6 +67,9 @@ public abstract class Tower {
         return name;
     }
 
+    /**
+     * Returns position.
+     */
     public ModelCoordinate getPosition() {
         return getPosition();
     }

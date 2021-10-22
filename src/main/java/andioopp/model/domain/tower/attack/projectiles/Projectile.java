@@ -49,14 +49,23 @@ public abstract class Projectile implements DamageSource {
         return damageSource.getTypes();
     }
 
+    /**
+     * Returns sprite as a String of projectile
+     */
     public String getSprite() {
         return sprite;
     }
 
+    /**
+     * Returns position of projectile
+     */
     public ModelCoordinate getPosition() {
         return new ModelCoordinate(rectangle.getPosition());
     }
 
+    /**
+     * Returns Dimension of projectile
+     */
     public Dimension getSize() {
         return rectangle.getSize();
     }

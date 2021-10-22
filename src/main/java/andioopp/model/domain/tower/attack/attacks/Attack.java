@@ -24,6 +24,12 @@ public abstract class Attack implements DamageSource {
     private final DamageSource damageSource;
     protected float timeOfLastAttack;
 
+    /**
+     * Constructor for Attack.
+     * @param cooldown time you have to wait before an attack will be performed.
+     * @param targetArea area where the attack will hit.
+     * @param damageSource which DamageTypes the attack will attack.
+     */
     public Attack(float cooldown, AttackTargetArea targetArea, DamageSource damageSource) {
         this.cooldown = cooldown;
         this.targetArea = targetArea;
@@ -53,7 +59,7 @@ public abstract class Attack implements DamageSource {
     protected abstract void onAttack(Model model, Vector3f position);
 
     /**
-     * Checks if the tower has waited long enough since its last attak.
+     * Checks if the tower has waited long enough since its last attack.
      *
      * @param time the current time
      * @return true if enough time has passed since the last attack.

@@ -9,7 +9,7 @@ import java.util.Random;
 import java.util.LinkedList;
 
 /**
- * A wave, which is a
+ * A Wave consists of {@link Enemy}.
  */
 public class Wave {
 
@@ -24,7 +24,7 @@ public class Wave {
     }
 
     /**
-     * Adds same amount as numEnemies of random enemies to Wave
+     * Adds same amount as numEnemies of random enemies to Wave.
      */
     public void addEnemyToWave(World world) {
         EnemyFactory enemies = new EnemyFactory();

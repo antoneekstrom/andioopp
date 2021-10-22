@@ -28,7 +28,6 @@ public class FireballAttack extends Attack {
      */
     @Override
     public void onAttack(Model model, Vector3f position) {
-        System.out.println("HEJ JAG SPAWNAR EN eldboll");
         model.getWorld().addProjectile(new FireballProjectile(position, DAMAGE_SOURCE));
     }
 }

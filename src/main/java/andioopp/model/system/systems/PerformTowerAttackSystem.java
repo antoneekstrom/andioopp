@@ -10,7 +10,11 @@ import andioopp.model.domain.world.World;
 import andioopp.model.system.System;
 import andioopp.model.util.ModelCoordinate;
 
+/**
+ * A class that handles performing attacks by Towers.
+ */
 public class PerformTowerAttackSystem implements System<Model> {
+
     @Override
     public void update(Model model, Time time) {
         World world = model.getWorld();
