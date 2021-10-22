@@ -44,7 +44,7 @@ public class EnemyFactory {
      */
     public static Enemy createKoopaTroopa(World world, int row) {
         return new KoopaTroopa(new ModelCoordinate(world.getNumberOfCellsInLanes(), row));
-
+    }
     /**
      * Creates enemy Boo
      * @param row the lane where enemy will be

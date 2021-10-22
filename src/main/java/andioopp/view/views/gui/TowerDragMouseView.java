@@ -15,12 +15,10 @@ import andioopp.controller.input.DragAndDrop;
 import andioopp.view.View;
 import andioopp.view.views.world.TowersView;
 
-public class TowerDragMouseView implements View<Model>, Observer<MouseMoveEvent> {
 /**
  * A View for displaying a Tower while being dragged by mouse.
  */
-
-public class TowerDragMouseView implements View<Model> {
+public class TowerDragMouseView implements View<Model>, Observer<MouseMoveEvent> {
 
     public static final double MAX_ANGLE = Math.toRadians(70);
     public static final float LERP_AMOUNT = 0.00003f;

@@ -44,14 +44,6 @@ public class ModelViewport {
      * @param modelCoordinate the position in the model
      * @return the corresponding position in the view
      */
-    public ViewCoordinate getCenterOfCell(int col, int row) {
-        throw new NotImplementedException();
-    }
-
-    /**
-     * Translates a coordinate from the model to the View.
-     * @return a ViewCoordinate translated from a ModelCoordinate.
-     */
     public ViewCoordinate getPosition(ModelCoordinate modelCoordinate) {
         return new ViewCoordinate(viewport.getPositionOutside(modelCoordinate));
     }
