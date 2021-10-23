@@ -1,4 +1,4 @@
-package andioopp.model.system;
+package andioopp.model.system.systems;
 
 import andioopp.common.math.vector.Vector3f;
 import andioopp.common.storage.ListFactory;
@@ -13,11 +13,10 @@ import andioopp.model.domain.enemy.enemies.KoopaTroopa;
 import andioopp.model.domain.player.Player;
 import andioopp.model.domain.stats.Health;
 import andioopp.model.domain.tower.Tower;
-import andioopp.model.domain.tower.Towers;
+import andioopp.model.domain.tower.TowerFactory;
 import andioopp.model.domain.tower.attack.projectiles.FireballProjectile;
 import andioopp.model.domain.tower.attack.projectiles.FlashlightProjectile;
 import andioopp.model.domain.tower.attack.projectiles.Projectile;
-import andioopp.model.domain.tower.towers.Bobomb;
 import andioopp.model.domain.world.LaneBuilder;
 import andioopp.model.domain.world.World;
 import andioopp.model.domain.world.WorldBuilder;
@@ -34,7 +33,7 @@ public class EnemyProjectileCollisionSystemTest {
     private final BaseDamageSource fireDamageSource = new BaseDamageSource(DamageType.FIRE, DamageType.GROUND);
     private final BaseDamageSource lightDamageSource = new BaseDamageSource(DamageType.LIGHT);
 
-    private final Tower bobomb = Towers.bobomb(new ModelCoordinate(new Vector3f(0,0)));
+    private final Tower bobomb = TowerFactory.createBobomb(new ModelCoordinate(new Vector3f(0,0)));
 
     Enemy goomba = new Goomba(new ModelCoordinate(new Vector3f(2,2)));
     Enemy boo = new Boo(new ModelCoordinate(new Vector3f(3,3)));

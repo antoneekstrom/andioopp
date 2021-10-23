@@ -23,7 +23,7 @@ public class Player {
     }
 
     public Player(List<TowerCard<?>> cards) {
-        this(cards, new Wallet(new Money(10)));
+        this(cards, new Wallet(new Money(0)));
     }
 
     /**
@@ -48,7 +48,7 @@ public class Player {
     }
 
     /**
-     * Returns the cards of Towers available in the game
+     * Returns the cards of TowerFactory available in the game
      */
     public List<TowerCard<?>> getCards() {
         return Collections.unmodifiableList(cards);

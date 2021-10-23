@@ -6,23 +6,23 @@ import andioopp.model.util.ModelCoordinate;
 /**
  * A factory for creating the different towers.
  */
-public class Towers {
-    public static Tower mario(ModelCoordinate position) {
+public class TowerFactory {
+    public static Tower createMario(ModelCoordinate position) {
         return new Mario(position);
     }
-    public static Tower toad(ModelCoordinate position) {
+    public static Tower createToad(ModelCoordinate position) {
         return new Toad(position);
     }
-    public static Tower luigi(ModelCoordinate position) {
+    public static Tower createLuigi(ModelCoordinate position) {
         return new Luigi(position);
     }
-    public static Tower yoshi(ModelCoordinate position) {
+    public static Tower createYoshi(ModelCoordinate position) {
         return new Yoshi(position);
     }
-    public static Tower rosalina(ModelCoordinate position) {
+    public static Tower createRosalina(ModelCoordinate position) {
         return new Rosalina(position);
     }
-    public static Tower bobomb(ModelCoordinate position) {
+    public static Tower createBobomb(ModelCoordinate position) {
         return new Bobomb(position);
     }
 }

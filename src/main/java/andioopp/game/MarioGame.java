@@ -3,6 +3,7 @@ package andioopp.game;
 import andioopp.common.graphics.Window;
 import andioopp.common.graphics.WindowBuilder;
 import andioopp.common.math.dimension.Dimension;
+import andioopp.common.math.range.IntRange;
 import andioopp.common.math.rectangle.ImmutableRectangle;
 import andioopp.common.math.rectangle.Rectangle;
 import andioopp.common.math.vector.Vector3f;
@@ -19,7 +20,7 @@ import andioopp.model.domain.money.Money;
 import andioopp.model.domain.money.Wallet;
 import andioopp.model.domain.player.Player;
 import andioopp.model.domain.player.TowerCard;
-import andioopp.model.domain.tower.Towers;
+import andioopp.model.domain.tower.TowerFactory;
 import andioopp.model.domain.waves.WaveQueue;
 import andioopp.model.domain.world.LaneBuilder;
 import andioopp.model.domain.world.World;
@@ -97,14 +98,13 @@ public class MarioGame extends Game<Model> {
 
     @Override
     protected List<System<Model>> initSystems() {
-        WaveQueue waves = new WaveQueue();
-        waves.addWaves(getModel().getWorld(), 7);
+        WaveQueue waves = new WaveQueue().addWaves(7, new IntRange(3, 5));
         removeDeadEnemiesSystem = new RemoveDeadEnemiesSystem(getListFactory().create());
 
         return getListFactory().create(
                 new PerformTowerAttackSystem(),
                 new MoveEnemySystem(),
-                new UpdateWaveSystem(waves),
+                new UpdateWaveSystem(waves, new IntRange(20, 35)),
                 new UpdateProjectileSystem(),
                 new EnemyProjectileCollisionSystem(),
                 new HandleEnemyAttackSystem(),
@@ -202,12 +202,12 @@ public class MarioGame extends Game<Model> {
 
     private List<TowerCard<?>> getCards() {
         return getListFactory().create(
-                new TowerCard<>(new Money(40), Towers::toad),
-                new TowerCard<>(new Money(60), Towers::mario),
-                new TowerCard<>(new Money(-1), Towers::rosalina),
-                new TowerCard<>(new Money(10), Towers::bobomb),
-                new TowerCard<>(new Money(-1), Towers::yoshi),
-                new TowerCard<>(new Money(2), Towers::luigi)
+                new TowerCard<>(new Money(40), TowerFactory::createToad),
+                new TowerCard<>(new Money(60), TowerFactory::createMario),
+                new TowerCard<>(new Money(-1), TowerFactory::createRosalina),
+                new TowerCard<>(new Money(10), TowerFactory::createBobomb),
+                new TowerCard<>(new Money(-1), TowerFactory::createYoshi),
+                new TowerCard<>(new Money(2), TowerFactory::createLuigi)
         );
     }
 

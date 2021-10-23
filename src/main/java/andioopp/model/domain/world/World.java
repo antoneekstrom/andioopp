@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 /**
  * The game world which consists of lanes.
  * The world is inhabited by enemies, projectiles and dropped coins.
+ *
+ * @author Anton Ekström, Jacob Bengtsson, Amanda Papacosta, Arvid Svedberg, Elin Nilsson
  */
 public class World {
 
@@ -22,20 +24,19 @@ public class World {
     private final Collection<Projectile> projectiles;
     private final Collection<DroppedCoinEntity> droppedCoins;
 
+    /**
+     * Creates a world.
+     *
+     * @param lanes the lanes
+     * @param enemies the enemies
+     * @param projectiles the projectiles
+     * @param droppedCoins the dropped coins
+     */
     World(List<Lane> lanes, Collection<Enemy> enemies, Collection<Projectile> projectiles, Collection<DroppedCoinEntity> droppedCoins) {
         this.lanes = lanes;
         this.enemies = enemies;
         this.projectiles = projectiles;
         this.droppedCoins = droppedCoins;
-    }
-
-    /**
-     * Adds the enemies of a wave to the world.
-     *
-     * @param wave the wave
-     */
-    public void addWave(Wave wave) {
-        getEnemies().addAll(wave.getEnemies());
     }
 
     /**
