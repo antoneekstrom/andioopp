@@ -81,7 +81,7 @@ public class WaveQueue {
      * Returns a random delay between 30 and 45.
      */
     public double getRandomDelay() {
-        int randomDelay = rand.nextInt(15) + 30;
+        int randomDelay = rand.nextInt(12) + 8;
 
         return randomDelay; // * Math.pow(10,6.5);
 
