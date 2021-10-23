@@ -25,8 +25,8 @@ public class UpdateWaveSystem implements System<Model> {
 
     private void updateWaves(Time time, Model model) {
         if (waves.delayEnemies(time, delay)) {
-            if (waves.getWave().enemyWave.size() != 0) {
-                waves.addWaveToWorld(model.getWorld());
+            if (waves.getWave().enemies.size() != 0) {
+                waves.releaseWave(model.getWorld());
                 waves.setDeltaSeconds(0);
                 this.delay = waves.getRandomDelay();
                 waves.updateTimeSinceLastEnemy(time);

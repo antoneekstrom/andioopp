@@ -1,42 +1,56 @@
 package andioopp.model.domain.waves;
 
+import andioopp.common.math.range.IntRange;
 import andioopp.model.domain.enemy.EnemyFactory;
 import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.world.World;
 
+import java.util.Queue;
 import java.util.Random;
 
 import java.util.LinkedList;
 
 /**
- * A Wave consists of {@link Enemy}.
+ * A Wave contains enemies which are to be spawned in the {@link World}.
+ *
+ * @author Elin Nilsson
+ * @see WaveQueue
+ * @see World
  */
 public class Wave {
 
-    public LinkedList<Enemy> enemyWave;
-    private final int numEnemies;
-    Random rand = new Random();
+    private final Queue<Enemy> enemies;
 
-
-    public Wave(int numEnemies) {
-        this.numEnemies = numEnemies;
-        this.enemyWave = new LinkedList<>();
+    /**
+     * Creates a wave.
+     *
+     * @param enemyCount number of enemies
+     */
+    public Wave(World world, int enemyCount) {
+        this.enemies = createEnemies(world, enemyCount);
     }
 
     /**
      * Adds same amount as numEnemies of random enemies to Wave.
+     *
+     * @param count the number of enemies
+     * @return the enemies
      */
-    public void addEnemyToWave(World world) {
-        EnemyFactory enemies = new EnemyFactory();
-        for (int i = 0; i < numEnemies; i++) {
-            Enemy enemy = enemies.randomEnemy(world, rand.nextInt(world.getNumberOfLanes()));
-            Enemy enemy2 = enemies.randomEnemy(world, rand.nextInt(world.getNumberOfLanes()));
-            Enemy enemy3 = enemies.randomEnemy(world, rand.nextInt(world.getNumberOfLanes()));
-            Enemy enemy4 = enemies.randomEnemy(world, rand.nextInt(world.getNumberOfLanes()));
-            enemyWave.add(enemy);
-            enemyWave.add(enemy2);
-            enemyWave.add(enemy3);
-            enemyWave.add(enemy4);
+    private Queue<Enemy> createEnemies(World world, int count) {
+        for (int i = 0; i < count; i++) {
+            Enemy enemy = EnemyFactory.randomEnemy(world, new IntRange(0, world.getNumberOfLanes()).getRandom());
+            enemies.add(enemy);
         }
+
+        return enemies;
+    }
+
+    /**
+     * Returns the enemies in the wave.
+     *
+     * @return the enemies
+     */
+    public Queue<Enemy> getEnemies() {
+        return enemies;
     }
 }

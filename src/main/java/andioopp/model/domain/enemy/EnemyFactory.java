@@ -27,7 +27,7 @@ public class EnemyFactory {
     /**
      * Returns a random Enemy out of all enemies
      */
-    public Enemy randomEnemy(World world, int row) {
+    public static Enemy randomEnemy(World world, int row) {
         return RANDOM_ENEMY_POOL.get(new IntRange(RANDOM_ENEMY_POOL).getRandom()).get(world, row);
     }
 
