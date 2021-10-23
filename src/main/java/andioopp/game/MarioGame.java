@@ -202,12 +202,10 @@ public class MarioGame extends Game<Model> {
 
     private List<TowerCard<?>> getCards() {
         return getListFactory().create(
-                new TowerCard<>(new Money(40), Towers::toad),
-                new TowerCard<>(new Money(60), Towers::mario),
-                new TowerCard<>(new Money(-1), Towers::rosalina),
-                new TowerCard<>(new Money(10), Towers::bobomb),
-                new TowerCard<>(new Money(-1), Towers::yoshi),
-                new TowerCard<>(new Money(2), Towers::luigi)
+                new TowerCard<>(new Money(50), Towers::mario),
+                new TowerCard<>(new Money(30), Towers::toad),
+                new TowerCard<>(new Money(40), Towers::luigi),
+                new TowerCard<>(new Money(40), Towers::bobomb)
         );
     }
 
