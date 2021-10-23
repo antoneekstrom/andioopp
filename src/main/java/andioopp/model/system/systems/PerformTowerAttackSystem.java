@@ -40,6 +40,11 @@ public class PerformTowerAttackSystem implements System<Model> {
         }
 
         ModelCoordinate position = new ModelCoordinate(col, row);
+
+        if (attack.getTargetArea().getClass().getSimpleName().equals("NonTargeting")) {
+            attack.perform(time, model, position);
+        }
+
         for (Enemy enemy : attack.getEnemiesInRange(world, position)) {
             if (enemy.canBeDamagedBy(attack)) {
                 attack.perform(time, model, position);
