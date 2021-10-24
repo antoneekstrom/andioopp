@@ -126,4 +126,8 @@ public abstract class Enemy implements DamageFilter {
     public Money getReward() {
         return reward;
     }
+
+    public DamageFilter getDamageFilter() {
+        return damageFilter;
+    }
 }

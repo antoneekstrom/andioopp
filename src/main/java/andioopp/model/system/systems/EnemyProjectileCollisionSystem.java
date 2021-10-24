@@ -38,7 +38,7 @@ public class EnemyProjectileCollisionSystem implements System<Model> {
                 boolean withinY = pr.getPosition().getY() <= ep.getY() && pr.getPosition().getY() + pr.getSize().getHeight() > ep.getY();
 
                 if(withinX && withinY) {
-                    evaluateProjectileHit(projectile, enemy, projectileIterator, enemyIterator, world);
+                    evaluateProjectileHit(projectile, enemy, world);
                 }
             }
         }
@@ -49,23 +49,20 @@ public class EnemyProjectileCollisionSystem implements System<Model> {
      *
      * @param projectile         to compare with enemy
      * @param enemy              to compare with projectile
-     * @param projectileIterator to edit list of projectiles
-     * @param enemyIterator      to edit list of enemies
      */
-    private void evaluateProjectileHit(Projectile projectile, Enemy enemy, Iterator<Projectile> projectileIterator, Iterator<Enemy> enemyIterator, World world) {
+    private void evaluateProjectileHit(Projectile projectile, Enemy enemy, World world) {
         if (projectile.alreadyInteractedWith.contains(enemy)) {
             return;
         }
 
         projectile.alreadyInteractedWith.add(enemy);
-        projectile.getHealth().decrease(1);
-        if(projectile.getHealth().isDead()){
-            projectileIterator.remove();
-        }
 
-        if (enemy.canBeDamagedBy(projectile)) {
-            enemy.getHealth().decrease(1);
-        }
+        if (enemy.meetsAllRequirements(projectile)) {
+            projectile.getHealth().decrease(1);
 
+            if (!enemy.isImmuneAgainst(projectile)) {
+                enemy.getHealth().decrease(1);
+            }
+        }
     }
 }

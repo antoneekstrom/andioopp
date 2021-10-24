@@ -104,7 +104,7 @@ public class MarioGame extends Game<Model> {
         return getListFactory().create(
                 new PerformTowerAttackSystem(),
                 new MoveEnemySystem(),
-                new UpdateWaveSystem(waves, new IntRange(20, 35)),
+                new UpdateWaveSystem(waves, new IntRange(8, 20)),
                 new UpdateProjectileSystem(),
                 new EnemyProjectileCollisionSystem(),
                 new HandleEnemyAttackSystem(),
