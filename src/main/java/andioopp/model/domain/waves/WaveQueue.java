@@ -57,37 +57,7 @@ public class WaveQueue {
         world.addEnemy(wave.enemyWave.remove());
     }
 
-    /**
-     * Delays enemies so they don't appear on screen at the same time.
-     */
-    public boolean delayEnemies(Time time, double delay) {
-        this.deltaSeconds = time.getTime() - timeSinceLastEnemy;
-        return (this.deltaSeconds > delay);
-
-    }
-
-    public void setDeltaSeconds(float deltaSeconds) {
-        this.deltaSeconds = deltaSeconds;
-    }
-
-    /**
-     * Updates timeSinceLastEnemy with the current Time.
-     */
-    public void updateTimeSinceLastEnemy(Time time) {
-        this.timeSinceLastEnemy = time.getTime();
-    }
-
-    /**
-     * Returns a random delay between 30 and 45.
-     */
-    public double getRandomDelay() {
-        int randomDelay = rand.nextInt(15) + 30;
-
-        return randomDelay; // * Math.pow(10,6.5);
-
-    }
 
 }
-
 
 

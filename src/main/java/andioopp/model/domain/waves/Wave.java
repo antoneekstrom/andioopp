@@ -40,9 +40,9 @@ public class Wave {
      * Adds same amount as numEnemies of random enemies to Wave.
      */
     public void addEnemyToWave(World world) {
-        EnemyFactory enemyFactory = new EnemyFactory();
+        EnemyFactory enemies = new EnemyFactory();
         for (int i = 0; i < numEnemies; i++) {
-            Enemy enemy = enemyFactory.randomEnemy(world, rand.nextInt(world.getNumberOfLanes()));
+            Enemy enemy = enemies.randomEnemy(world, rand.nextInt(world.getNumberOfLanes()));
             enemyWave.add(enemy);
 
         }
