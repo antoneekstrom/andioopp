@@ -7,8 +7,20 @@ import java.util.Collection;
  */
 public interface DamageFilter {
 
+    /**
+     * Returns true if this filter is immune against any damagetype in the source.
+     *
+     * @param src the damage source
+     * @return if the filter is immune
+     */
     boolean isImmuneAgainst(DamageSource src);
 
+    /**
+     * Returns true if the source has all required damagetypes for this filter.
+     *
+     * @param src the damage source
+     * @return if the source has all required types
+     */
     boolean meetsAllRequirements(DamageSource src);
 
     default boolean isRequirementMet(Collection<DamageType> types, DamageType requirement) {
