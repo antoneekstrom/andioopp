@@ -104,7 +104,7 @@ public class MarioGame extends Game<Model> {
         return getListFactory().create(
                 new PerformTowerAttackSystem(),
                 new MoveEnemySystem(),
-                new UpdateWaveSystem(waves, new IntRange(20, 35)),
+                new UpdateWaveSystem(waves, new IntRange(8, 20)),
                 new UpdateProjectileSystem(),
                 new EnemyProjectileCollisionSystem(),
                 new HandleEnemyAttackSystem(),
@@ -202,12 +202,10 @@ public class MarioGame extends Game<Model> {
 
     private List<TowerCard<?>> getCards() {
         return getListFactory().create(
-                new TowerCard<>(new Money(40), TowerFactory::createToad),
-                new TowerCard<>(new Money(60), TowerFactory::createMario),
-                new TowerCard<>(new Money(-1), TowerFactory::createRosalina),
-                new TowerCard<>(new Money(10), TowerFactory::createBobomb),
-                new TowerCard<>(new Money(-1), TowerFactory::createYoshi),
-                new TowerCard<>(new Money(2), TowerFactory::createLuigi)
+                new TowerCard<>(new Money(50), TowerFactory::createMario),
+                new TowerCard<>(new Money(30), TowerFactory::createToad),
+                new TowerCard<>(new Money(40), TowerFactory::createLuigi),
+                new TowerCard<>(new Money(40), TowerFactory::createBobomb)
         );
     }
 

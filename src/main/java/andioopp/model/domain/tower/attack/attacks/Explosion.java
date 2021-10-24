@@ -24,7 +24,7 @@ public class Explosion extends Attack {
     );
 
     public Explosion() {
-        super(1f, new NonTargeting(), DAMAGE_SOURCE);
+        super(2f, new NonTargeting(), DAMAGE_SOURCE);
     }
 
     @Override
@@ -34,9 +34,9 @@ public class Explosion extends Attack {
         for (Enemy e : model.getWorld().getEnemies()) {
             if (isInRange(e, position) && e.canBeDamagedBy(DAMAGE_SOURCE)) {
                 eliminateEnemy(e);
-                eliminateTower(tower);
             }
         }
+        eliminateTower(tower);
     }
 
     private boolean isInRange(Enemy e, Vector3f pos) {

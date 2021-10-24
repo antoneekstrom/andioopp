@@ -95,4 +95,13 @@ public abstract class Attack implements DamageSource {
         }
         return enemiesInRange;
     }
+
+    /**
+     * Returns the tower's targeting strategy
+     *
+     * @return the targeting strategy of the tower
+     */
+    public AttackTargetArea getTargetArea() {
+        return targetArea;
+    }
 }
