@@ -98,7 +98,7 @@ public class MarioGame extends Game<Model> {
     @Override
     protected List<System<Model>> initSystems() {
         WaveQueue waves = new WaveQueue();
-        waves.addWaves(getModel().getWorld(), 7);
+        waves.addWavesToWaveQueue(getModel().getWorld(), 7);
         removeDeadEnemiesSystem = new RemoveDeadEnemiesSystem(getListFactory().create());
 
         return getListFactory().create(

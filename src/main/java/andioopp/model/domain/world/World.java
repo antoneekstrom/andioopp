@@ -4,7 +4,6 @@ import andioopp.common.math.dimension.Dimension;
 import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.entity.DroppedCoinEntity;
 import andioopp.model.domain.tower.attack.projectiles.Projectile;
-import andioopp.model.domain.waves.Wave;
 import andioopp.model.util.ModelCoordinate;
 
 import java.util.Collection;
@@ -30,15 +29,6 @@ public class World {
     }
 
     /**
-     * Adds the enemies of a wave to the world.
-     *
-     * @param wave the wave
-     */
-    public void addWave(Wave wave) {
-        getEnemies().addAll(wave.getEnemies());
-    }
-
-    /**
      * Returns a Dimension of the grid as a ModelCoordinate.
      */
     public Dimension getGridSize() {
@@ -55,7 +45,7 @@ public class World {
 
     /**
      * Returns the Collection enemies consisting of enemies.
-     * @return the enemies
+     * @return
      */
     public Collection<Enemy> getEnemies() {
         return enemies;
