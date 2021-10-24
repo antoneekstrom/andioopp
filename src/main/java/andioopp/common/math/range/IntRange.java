@@ -2,6 +2,7 @@ package andioopp.common.math.range;
 
 import java.util.List;
 import java.util.Random;
+import java.util.function.Supplier;
 
 /**
  * A range between two integers.
@@ -9,15 +10,26 @@ import java.util.Random;
  *
  * @author Anton Ekström
  */
-public class IntRange {
+public class IntRange implements Supplier<Integer> {
 
     private final int min;
     private final int max;
 
     /**
-     * Creates and defines the range
-     * @param min lower bound
-     * @param max higher bound
+     * Creates a range with the given max value and a minimum value of 0, both inclusive.
+     *
+     * @param max the higher bound
+     */
+    public IntRange(int max) {
+        this.min = 0;
+        this.max = max;
+    }
+
+    /**
+     * Creates a range from the lower bound to the upper bound, both inclusive.
+     *
+     * @param min the lower bound
+     * @param max the higher bound
      */
     public IntRange(int min, int max) {
         this.min = min;
@@ -30,6 +42,11 @@ public class IntRange {
      */
     public IntRange(List<?> list) {
         this(0, list.size());
+    }
+
+    @Override
+    public Integer get() {
+        return getRandom();
     }
 
     /**

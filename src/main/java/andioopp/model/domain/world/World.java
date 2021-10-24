@@ -4,6 +4,7 @@ import andioopp.common.math.dimension.Dimension;
 import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.entity.DroppedCoinEntity;
 import andioopp.model.domain.tower.attack.projectiles.Projectile;
+import andioopp.model.domain.waves.Wave;
 import andioopp.model.util.ModelCoordinate;
 
 import java.util.Collection;
@@ -13,6 +14,8 @@ import java.util.stream.Collectors;
 /**
  * The game world which consists of lanes.
  * The world is inhabited by enemies, projectiles and dropped coins.
+ *
+ * @author Anton Ekström, Jacob Bengtsson, Amanda Papacosta, Arvid Svedberg, Elin Nilsson
  */
 public class World {
 
@@ -21,6 +24,14 @@ public class World {
     private final Collection<Projectile> projectiles;
     private final Collection<DroppedCoinEntity> droppedCoins;
 
+    /**
+     * Creates a world.
+     *
+     * @param lanes the lanes
+     * @param enemies the enemies
+     * @param projectiles the projectiles
+     * @param droppedCoins the dropped coins
+     */
     World(List<Lane> lanes, Collection<Enemy> enemies, Collection<Projectile> projectiles, Collection<DroppedCoinEntity> droppedCoins) {
         this.lanes = lanes;
         this.enemies = enemies;
@@ -45,7 +56,7 @@ public class World {
 
     /**
      * Returns the Collection enemies consisting of enemies.
-     * @return
+     * @return the enemies
      */
     public Collection<Enemy> getEnemies() {
         return enemies;

@@ -1,92 +1,100 @@
 package andioopp.model.domain.waves;
 
-import andioopp.common.time.Time;
+import andioopp.common.math.range.IntRange;
 import andioopp.model.domain.world.World;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Random;
+import java.util.function.Supplier;
 
 /**
  * A WaveQueue consists of {@link Wave} and adds them to the world.
  */
 public class WaveQueue {
 
-    float timeSinceLastEnemy;
-    float deltaSeconds;
     private final Queue<Wave> queue;
-    Random rand = new Random();
 
-
+    /**
+     * Creates an empty wave queue.
+     */
     public WaveQueue() {
         queue = new LinkedList<>();
     }
 
     /**
-     * Returns queue of Waves
+     * Adds the next enemy to the world at a random location.
+     *
+     * @param world the world
      */
-    public Queue<Wave> getWaves() {
-        return queue;
+    public void spawnNextEnemy(World world) {
+        spawnNextEnemy(world, new IntRange(world.getNumberOfLanes()).getRandom());
+    }
+
+    /**
+     * Adds the next enemy to the world.
+     *
+     * @param world the world
+     * @param row the on which to spawn the enemy
+     */
+    public void spawnNextEnemy(World world, int row) {
+        Wave wave = getCurrentWave();
+
+        while (wave.isDone()) {
+             wave = nextWave();
+        }
+
+        world.addEnemy(wave.spawnNextEnemy(world, row));
+    }
+
+    /**
+     * Returns the number of remaining waves.
+     *
+     * @return the number of waves left
+     */
+    public int getWavesRemaining() {
+        return queue.size();
     }
 
     /**
      * Adds a number of Waves to the WaveQueue
+     * @param numberOfWaves the number of waves to add
+     * @param enemyCountSupplier the random number of enemies in each wave
      */
-    public void addWavesToWaveQueue(World world, int numWaves) {
-        Wave wave = new Wave(rand.nextInt(8) + 3);
-        for (int i = 0; i < numWaves; i++) {
-            wave.addEnemyToWave(world);
+    public WaveQueue addWaves(int numberOfWaves, Supplier<Integer> enemyCountSupplier) {
+        for (int i = 0; i < numberOfWaves; i++) {
+            int enemyCount = enemyCountSupplier.get();
+            Wave wave = new Wave(enemyCount);
+            queue.add(wave);
         }
-        queue.add(wave);
+        return this;
+    }
+
+    /**
+     * Adds a number of Waves to the WaveQueue
+     * @param numberOfWaves the number of waves to add
+     * @param enemyCount the number of enemies in each wave
+     */
+    public WaveQueue addWaves(int numberOfWaves, int enemyCount) {
+        addWaves(numberOfWaves, () -> enemyCount);
+        return this;
+    }
+
+    /**
+     * Removes the current wave and returns the next.
+     *
+     * @return the next wave
+     */
+    private Wave nextWave() {
+        queue.poll();
+        return getCurrentWave();
     }
 
     /**
      * Returns wave at top of queue, does not remove it from queue
      */
-    public Wave getWave() {
-        Wave wave = queue.peek();
-        return wave;
-
+    private Wave getCurrentWave() {
+        return queue.peek();
     }
-
-    /**
-     * Adds wave of enemies to the world
-     */
-    public void addWaveToWorld(World world) {
-        Wave wave = queue.peek();
-        world.addEnemy(wave.enemyWave.remove());
-    }
-
-    /**
-     * Delays enemies so they don't appear on screen at the same time.
-     */
-    public boolean delayEnemies(Time time, double delay) {
-        this.deltaSeconds = time.getTime() - timeSinceLastEnemy;
-        return (this.deltaSeconds > delay);
-
-    }
-
-    public void setDeltaSeconds(float deltaSeconds) {
-        this.deltaSeconds = deltaSeconds;
-    }
-
-    /**
-     * Updates timeSinceLastEnemy with the current Time.
-     */
-    public void updateTimeSinceLastEnemy(Time time) {
-        this.timeSinceLastEnemy = time.getTime();
-    }
-
-    /**
-     * Returns a random delay between 30 and 45.
-     */
-    public double getRandomDelay() {
-        int randomDelay = rand.nextInt(12) + 8;
-
-        return randomDelay; // * Math.pow(10,6.5);
-
-    }
-
 }
 
 

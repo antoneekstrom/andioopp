@@ -7,7 +7,7 @@ import andioopp.model.domain.world.Cell;
 import andioopp.model.system.System;
 
 /**
- * A class that handles removal of defeated Towers.
+ * A class that handles removal of defeated TowerFactory.
  */
 public class RemoveDeadTowersSystem implements System<Model> {
 

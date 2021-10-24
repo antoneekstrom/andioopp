@@ -31,8 +31,17 @@ public class DamageFilterBase implements DamageFilter {
     }
 
     @Override
-    public boolean canBeDamagedBy(DamageSource src) {
-        return isRequirementMet(src.getTypes(), DamageType.ANY) || (!isImmuneAgainst(src) && meetsAllRequirements(src));
+    public boolean meetsAllRequirements(DamageSource src) {
+        return requirements.stream().allMatch((requirement) -> isRequirementMet(src.getTypes(), requirement));
+    }
+
+    @Override
+    public boolean isImmuneAgainst(DamageSource src) {
+        return src.getTypes().stream().anyMatch(this::isImmuneAgainst);
+    }
+
+    public boolean isImmuneAgainst(DamageType type) {
+        return immunities.contains(type);
     }
 
     protected List<DamageType> getImmunities(ListFactory listFactory) {
@@ -41,21 +50,5 @@ public class DamageFilterBase implements DamageFilter {
 
     protected List<DamageType> getRequirements(ListFactory listFactory) {
         return Collections.emptyList();
-    }
-
-    private boolean meetsAllRequirements(DamageSource src) {
-        return requirements.stream().allMatch((requirement) -> isRequirementMet(src.getTypes(), requirement));
-    }
-
-    private boolean isRequirementMet(Collection<DamageType> types, DamageType requirement) {
-        return types.contains(requirement);
-    }
-
-    private boolean isImmuneAgainst(DamageSource src) {
-        return src.getTypes().stream().anyMatch(this::isImmuneAgainst);
-    }
-
-    private boolean isImmuneAgainst(DamageType type) {
-        return immunities.contains(type);
     }
 }

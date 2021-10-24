@@ -42,8 +42,13 @@ public abstract class Enemy implements DamageFilter {
     }
 
     @Override
-    public boolean canBeDamagedBy(DamageSource src) {
-        return damageFilter.canBeDamagedBy(src);
+    public boolean isImmuneAgainst(DamageSource src) {
+        return damageFilter.isImmuneAgainst(src);
+    }
+
+    @Override
+    public boolean meetsAllRequirements(DamageSource src) {
+        return damageFilter.meetsAllRequirements(src);
     }
 
     /**
