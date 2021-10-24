@@ -12,10 +12,9 @@ import java.util.Random;
  */
 public class WaveQueue {
 
-    float timeSinceLastEnemy;
-    float deltaSeconds;
+
     private final Queue<Wave> queue;
-    Random rand = new Random();
+
 
 
     public WaveQueue() {
@@ -33,11 +32,12 @@ public class WaveQueue {
      * Adds a number of Waves to the WaveQueue
      */
     public void addWavesToWaveQueue(World world, int numWaves) {
-        Wave wave = new Wave(rand.nextInt(8) + 3);
+
         for (int i = 0; i < numWaves; i++) {
-            wave.addEnemyToWave(world);
+            Wave wave = new Wave(i);
+            wave.createWave(world);
+            queue.add(wave);
         }
-        queue.add(wave);
     }
 
     /**
@@ -81,7 +81,7 @@ public class WaveQueue {
      * Returns a random delay between 30 and 45.
      */
     public double getRandomDelay() {
-        int randomDelay = rand.nextInt(12) + 8;
+        int randomDelay = rand.nextInt(15) + 30;
 
         return randomDelay; // * Math.pow(10,6.5);
 
