@@ -1,5 +1,8 @@
-package andioopp.model.domain.damage;
+package andioopp.model.damage;
 
+import andioopp.model.domain.damage.DamageFilter;
+import andioopp.model.domain.damage.BaseDamageSource;
+import andioopp.model.domain.damage.DamageType;
 import andioopp.model.domain.damage.targets.FilterAny;
 import andioopp.model.domain.damage.targets.FilterFlying;
 import andioopp.model.domain.damage.targets.FilterGhost;

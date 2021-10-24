@@ -17,7 +17,7 @@ import andioopp.view.util.ModelViewport;
 import andioopp.view.util.ViewCoordinate;
 
 /**
- * A View for displaying TowerFactory.
+ * A View for displaying Towers.
  */
 
 public class TowersView implements View<Model> {
@@ -79,9 +79,9 @@ public class TowersView implements View<Model> {
     }
 
     /**
-     * Creates a Dimension for a TowerFactory sprite when being placed in a cell.
+     * Creates a Dimension for a Towers sprite when being placed in a cell.
      * @param sprite the sprite used for displaying a tower.
-     * @return Dimension for TowerFactory placed in a cell.
+     * @return Dimension for Towers placed in a cell.
      */
 
     public Dimension getTowerSizeFromSprite(Sprite<?> sprite) {

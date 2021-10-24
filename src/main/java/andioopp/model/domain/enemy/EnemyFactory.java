@@ -13,6 +13,11 @@ import java.util.List;
  */
 public class EnemyFactory {
 
+    @FunctionalInterface
+    private interface EnemySupplier {
+        Enemy get(World world, int row);
+    }
+
     private static final List<EnemySupplier> RANDOM_ENEMY_POOL = new ArrayListFactory().create(
             EnemyFactory::createGoomba,
             EnemyFactory::createKoopaTroopa,
@@ -22,8 +27,8 @@ public class EnemyFactory {
     /**
      * Returns a random Enemy out of all enemies
      */
-    public static EnemySupplier randomEnemySupplier() {
-        return RANDOM_ENEMY_POOL.get(new IntRange(RANDOM_ENEMY_POOL).getRandom());
+    public Enemy randomEnemy(World world, int row) {
+        return RANDOM_ENEMY_POOL.get(new IntRange(RANDOM_ENEMY_POOL).getRandom()).get(world, row);
     }
 
     /**
@@ -33,7 +38,6 @@ public class EnemyFactory {
     public static Enemy createGoomba(World world, int row) {
         return new Goomba(new ModelCoordinate(world.getNumberOfCellsInLanes(), row));
     }
-
     /**
      * Creates enemy KoopaTroopa
      * @param row the lane where enemy will be
@@ -41,7 +45,6 @@ public class EnemyFactory {
     public static Enemy createKoopaTroopa(World world, int row) {
         return new KoopaTroopa(new ModelCoordinate(world.getNumberOfCellsInLanes(), row));
     }
-
     /**
      * Creates enemy Boo
      * @param row the lane where enemy will be
