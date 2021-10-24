@@ -1,5 +1,9 @@
-package andioopp.model.domain.money;
+package andioopp.model.money;
 
+import andioopp.model.domain.money.Money;
+import andioopp.model.domain.money.Transaction;
+import andioopp.model.domain.money.TransactionSupplier;
+import andioopp.model.domain.money.Wallet;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

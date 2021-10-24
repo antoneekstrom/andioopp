@@ -1,5 +1,6 @@
-package andioopp.model.domain.money;
+package andioopp.model.money;
 
+import andioopp.model.domain.money.Money;
 import andioopp.model.domain.money.exceptions.SpendMoneyException;
 import org.junit.Test;
 

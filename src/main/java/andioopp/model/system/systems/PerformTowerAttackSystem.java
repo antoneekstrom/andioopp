@@ -12,7 +12,7 @@ import andioopp.model.system.System;
 import andioopp.model.util.ModelCoordinate;
 
 /**
- * A class that handles performing attacks by TowerFactory.
+ * A class that handles performing attacks by Towers.
  */
 public class PerformTowerAttackSystem implements System<Model> {
 

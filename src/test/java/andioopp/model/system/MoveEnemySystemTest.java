@@ -1,4 +1,4 @@
-package andioopp.model.system.systems;
+package andioopp.model.system;
 
 import andioopp.common.math.vector.Vector3f;
 import andioopp.common.storage.ListFactory;

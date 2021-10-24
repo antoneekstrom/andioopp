@@ -1,5 +1,6 @@
-package andioopp.model.domain.stats;
+package andioopp.model.stats;
 
+import andioopp.model.domain.stats.Health;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
