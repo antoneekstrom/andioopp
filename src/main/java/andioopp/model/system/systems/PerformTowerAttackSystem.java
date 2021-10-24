@@ -5,6 +5,7 @@ import andioopp.model.Model;
 import andioopp.model.domain.enemy.Enemy;
 import andioopp.model.domain.tower.Tower;
 import andioopp.model.domain.tower.attack.attacks.Attack;
+import andioopp.model.domain.tower.attack.strategies.NonTargeting;
 import andioopp.model.domain.world.Cell;
 import andioopp.model.domain.world.World;
 import andioopp.model.system.System;
@@ -41,8 +42,9 @@ public class PerformTowerAttackSystem implements System<Model> {
 
         ModelCoordinate position = new ModelCoordinate(col, row);
 
-        if (attack.getTargetArea().getClass().getSimpleName().equals("NonTargeting")) {
+        if (attack.getTargetArea().getClass().equals(NonTargeting.class)) {
             attack.perform(time, model, position);
+            return;
         }
 
         for (Enemy enemy : attack.getEnemiesInRange(world, position)) {
